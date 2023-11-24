@@ -1,0 +1,294 @@
+/*------------------------------------*\
+    MIXINS
+\*------------------------------------*/
+
+
+@mixin mq($width, $type: min) {
+    @if map_has_key($breakpoints, $width) {
+        $width: map_get($breakpoints, $width);
+        @if $type == max {
+            $width: $width - 1px;
+        }
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}
+
+// Max height based mq
+@mixin mqh($height, $type: min) {
+    @if $type == max {
+        $height: $height - 1px;
+    }
+    @media only screen and (#{$type}-height: $height) {
+        @content;
+    }
+}
+
+
+
+
+// DC Mixins
+@mixin dc_max_width($paddingLeft, $paddingRight) {
+	width: 100%;
+	max-width: $max-width;
+	margin: 0 auto !important;
+	padding-left: $paddingLeft;
+	padding-right: $paddingRight;
+	box-sizing: border-box;
+}
+
+@mixin dc_max_width_wide($paddingLeft, $paddingRight) {
+	width: 100%;
+	max-width: $max-width-wide;
+	margin: 0 auto !important;
+	padding-left: $paddingLeft;
+	padding-right: $paddingRight;
+	box-sizing: border-box;
+}
+
+@mixin dc_max_width_thin($paddingLeft, $paddingRight) {
+	width: 100%;
+	max-width: $max-width-thin;
+	margin: 0 auto !important;
+	padding-left: $paddingLeft;
+	padding-right: $paddingRight;
+	box-sizing: border-box;
+}
+
+						
+						
+
+
+
+// Animate
+
+@mixin effect($object, $time, $effect) {
+  @if $effect == "" { $effect : linear }
+  transition: $object $time $effect;
+}
+
+@mixin animation($str) {
+  animation: #{$str};      
+}
+
+
+
+
+
+// 	Placeholder content
+
+// input, textarea { @include placeholder { color: $body_color; } }
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+
+
+
+
+// 	Placeholder content
+@mixin full_size_before() {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+
+
+
+
+// 	pseudo default - Usage
+
+//	div::after { @include pseudo; }
+
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+
+
+
+// Responsive ration of images
+
+// div { @include responsive-ratio(16,9); }
+
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
+}
+
+
+
+
+// UNDERLINE
+
+
+//Font Awesome Arrow Right
+@mixin underline() {
+	position: relative;
+	
+    &:before{
+		content: "";
+	    position: absolute;
+	    left: 0;
+	    bottom: -1px;
+	    width: calc(100% - 30px);
+	    height: 1px;
+	    
+	    @include effect(all, 250ms, ease-in-out);
+					
+		@include mq('tablet', max) {
+			width: calc(100% - 30px);
+		}
+    }
+}
+
+
+
+// FONTAWESOME ARROWS + ICONS
+
+
+//Font Awesome Arrow Right
+@mixin arrow_right() {
+	position: relative;
+	
+    &:after{
+		@include fa-icon;
+		@extend .fas;
+		content: fa-content($fa-var-angle-right);
+	    position: relative;
+	    margin-left: 20px;
+	    vertical-align: 0;
+	    
+	    font-size: 1.1em;
+				
+		@include mq('tablet', max) {
+			margin-left: 12px;
+		}
+    }
+}
+
+//Font Awesome Arrow Down
+@mixin arrow_down() {
+	position: relative;
+	
+    &:after{
+		@include fa-icon;
+		@extend .fas;
+		content: fa-content($fa-var-angle-down);
+	    position: relative;
+	    margin-left: 14px;
+	    vertical-align: 0;
+	    
+	    font-size: 1.1em;
+				
+		@include mq('tablet', max) {
+			margin-left: 12px;
+		}
+    }
+}
+
+
+
+
+//LINK OVERLAY
+@mixin link_overlay() {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+.link-overlay a {
+	@include link_overlay();
+}
+
+
+
+
+	
+
+// VIDEO PLAY OVERLAY
+@mixin video_overlay() {
+	a.overlay {
+		position: absolute;
+		top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		
+		
+		
+		// PLAY BUTTON
+		
+		span.play-btn {
+			position: absolute;
+		    width: 90px;
+		    height: 90px;
+		    
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    
+		    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+		    background-color: rgba($black, .2);
+		    border-radius: 100%;
+		    border: 2px solid rgba(white, 1);
+	    
+			@include effect(all, 250ms, ease-in-out);
+					
+			@include mq('950', min) {
+			    width: 130px;
+			    height: 130px;
+			}
+		
+		    i {
+			    color: white;
+			    font-size: 55px;
+			    margin-left: 17px;
+			    transform: scaleX(1.5);
+	    
+				@include effect(all, 250ms, ease-in-out);
+						
+				@include mq('950', min) {
+				    font-size: 70px;
+				}
+		    }
+		}
+		
+		&:hover {
+		
+			span.play-btn {
+				background-color: rgba($black, .6);
+		
+				i {
+					color: $theme_color;
+				}
+			}
+		}
+	}
+}

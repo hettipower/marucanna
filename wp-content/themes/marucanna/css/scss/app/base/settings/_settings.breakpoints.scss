@@ -1,0 +1,42 @@
+/*------------------------------------*\
+	
+    SETTINGS - RESPONSIVE BREAK POINTS
+    
+\*------------------------------------*/
+
+$breakpoints: (    
+	"350":       	350px,
+	"phone":        400px,
+    "phone-wide":   480px,
+    "phablet":      560px,
+    "tablet-small": 640px,
+    "650":          651px,
+    "700":          700px,
+    "767":          767px,
+    "tablet":       768px,
+    "780":          781px,
+    "800":          800px,
+    "850":          850px,
+    "900":          900px,
+    "950":          950px,
+    "960":          960px,
+    "1000":         1000px,
+    "tablet-wide":  1024px,
+    "desktop":      1100px,
+    "1200":         1200px,
+    "1240":         1240px,
+    "1290":         1290px,
+    "1360":         1360px,
+    "desktop-wide": 1440px,
+    "1550": 		1550px,
+    "1750": 		1750px,
+    "1920": 		1920px,
+    
+    "break-large":  1440px,
+    "break-medium": 1100px,
+    "break-small":  850px,
+    "break-mobile": 560px,
+    
+    "responsive_menu_break":  		1200px,
+    "menu_responsive_menu_break":  	1200px   
+);

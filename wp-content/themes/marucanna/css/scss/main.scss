@@ -1,0 +1,51 @@
+/*------------------------------------*\
+	
+    SCSS COMPILE LIST
+    
+\*------------------------------------*/
+
+/* BOOTSTRAP */
+@import "bootstrap/bootstrap-reboot";
+@import "bootstrap/bootstrap";
+@import "bootstrap/bootstrap-grid";
+@import "bootstrap/bootstrap-utilities";
+
+/* FONTAWESOME */
+@import 'fontawesome/fontawesome';
+@import 'fontawesome/regular.scss';
+@import 'fontawesome/solid.scss';
+@import 'fontawesome/brands.scss';
+
+/* DEFAULT RESPONSIVE LAYOUTS */
+@import "default/_fonts";
+@import "default/_mixins";
+
+/* SETTINGS - GRID */
+@import "app/base/settings/_settings.breakpoints";
+
+/* SETTINGS - FONTS */
+@import "app/fonts/settings/_settings.font.family";
+@import "app/fonts/settings/_settings.font.sizes";
+
+/* SETTINGS - COLORS */
+@import "app/base/settings/_mc.settings.colors.theme";
+
+/* GLOBAL APP - BASE */
+@import "app/base/_base";
+@import "app/fonts/_base.fonts";
+@import "app/base/_base.links";
+@import "app/base/_base.buttons";
+@import "app/base/_base.images";
+
+/* GLOBAL APP - HEADER */
+@import "app/header/_header.base";
+@import "app/header/_header.logo";
+
+/* GLOBAL APP - MENU */
+@import "app/header/_header.menu";
+
+/* GLOBAL APP - FOOTER */
+//@import "app/footer/_footer";
+
+/* BLOCKS */
+@import "components/blocks/_mc-title-section";

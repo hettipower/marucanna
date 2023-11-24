@@ -1,0 +1,50 @@
+/*------------------------------------*\
+	
+    BASE - SITE WIDE
+    
+\*------------------------------------*/
+
+*{
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    
+    &:focus{
+        outline: none;
+    }
+}
+
+html{
+    overflow: auto;
+    // overflow-x: hidden;
+    background: #f2f2f2;
+}
+
+body{
+    @extend %base_font_family;
+    font-size: $base_font_size - 4px;
+    line-height: $base_line_height;
+    color: $body_color;
+    background: $body_bg_color;
+
+	overflow-x: hidden !important;
+	margin: 0 auto;
+	position: relative;
+	
+	@include mq('phablet', min) {
+		font-size: $base_font_size - 3px;
+	}
+	
+	@include mq('tablet', min) {
+		font-size: $base_font_size - 2px;
+	}
+	
+	@include mq('1000', min) {
+		font-size: $base_font_size - 1px;
+	}
+	
+	@include mq('1200', min) {
+		font-size: $base_font_size;
+	}
+}

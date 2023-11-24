@@ -1,0 +1,33 @@
+/*------------------------------------*\
+	
+    MENU
+    
+\*------------------------------------*/
+
+#mainMenuWrap {
+	justify-content: flex-end;
+
+	.navbar-nav {
+		> li {
+			> a {
+				@extend %frutiger;
+				
+				text-transform: uppercase;
+				font-size: 17px;
+				color: $white;
+			}
+		}
+	}
+
+	.btn {
+		margin-left: 20px;
+	}
+}
+
+
+/*------------------------------------*\
+	
+   DEFAULT DROPDOWN
+   
+\*------------------------------------*/
+

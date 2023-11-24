@@ -1,0 +1,48 @@
+/*------------------------------------*\
+	
+    BASE - BUTTONS
+    
+\*------------------------------------*/
+
+
+$btn_font_size:			16px;
+$btn_font_transform:	uppercase;
+
+$btn_border_radius:		40px;
+
+
+
+@mixin mc_button() {
+	@extend %frutiger;	
+	font-size: $btn_font_size;
+	text-transform: $btn_font_transform;
+
+	border-radius: $btn_border_radius;
+
+	padding: 6px 28px 9px;
+	
+	&.style_1 {
+		background-color: $white;
+		color: $theme_color;
+	}
+
+	&.style_2 {
+		color: $white;
+		background-color: $theme_color2;
+	}
+
+	&.style_3 {
+		background-color: $white;
+		color: $theme_color;
+		border: 1px solid $theme_color;
+	}
+
+	&.style_4 {
+		color: $white;
+		background-color: $theme_color;
+	}
+}
+
+.btn {
+	@include mc_button();
+}
