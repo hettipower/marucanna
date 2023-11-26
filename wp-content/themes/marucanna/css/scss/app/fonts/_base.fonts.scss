@@ -11,6 +11,8 @@ p{
 	
 	letter-spacing: .5px;
 	line-height: $base_line_height;
+
+	color: $grey;
 	
 	strong,
 	strong a {
@@ -36,9 +38,15 @@ h1, h2, h3, h4, h5, h6 {
     
 	margin: 0 0 25px;
 	width: 100%;
+
+	font-weight: 600;
 	
 	@include mq('phablet', max) {
 		margin-bottom: 16px;
+	}
+
+	span {
+		color: $theme_color2;
 	}
 }
 h1 {    
@@ -57,7 +65,7 @@ h2 {
 	@include mq('break-mobile', max) 	{ font-size: $h2_mobile; }
 }
 h3 {    
-    font-size: $h3_large;
+    font-size: $h3_medium;
 	    
 	@include mq('break-medium', max) 	{ font-size: $h3_medium; }
 	@include mq('break-small', max) 	{ font-size: $h3_small; }
