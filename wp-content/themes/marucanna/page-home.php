@@ -283,11 +283,92 @@ get_header(); ?>
 </section>
 
 <section class="section reviews-section">
-    <div class="container"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 content_wrap">
+                <h2>What our <span>patients</span> say about us</h2>
+                <p>See why our patients are happy to see their Marucanna medical cannabis doctor and why we are recommended throughout the UK.</p>
+                <div class="btn_wrap">
+                    <a href="#" class="btn style_4">VIEW ALL REVIEWS</a>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-12 reviews">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="quote">"I have nothing but the highest regard for the folks at Marucanna. They are incredibly kind, professional, kind, and quick to answer any questions. Really, you're lucky if the phone rings more than twice before someone answers. Every interaction has been easy and enjoyable thanks to them. It is evident from the quality of care they give patients that this is more than just a job for them and their team. Go with Marucanna if you need a referral; you're doing the proper thing there."</div>
+                        <div class="author">
+                            <div class="image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/img/home/review-thumb.webp" alt="">
+                            </div>
+                            <div class="detail">
+                                <span class="name">James Jonas</span>
+                                <span class="type">Patient</span>
+                            </div>
+                            <div class="star">
+                                <img src="<?php echo get_template_directory_uri(); ?>/img/home/img2.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="section our-team-section">
-    <div class="container"></div>
+    <div class="container">
+        <div class="title_wrap text-center">
+            <h2>Our <span>experienced</span> doctors</h2>
+            <p>Our highly qualified team has significant experience prescribing cannabis-based medicines in the UK. We can track the success of your care over time with regular check-ins with your specialised medical cannabis doctor.</p>
+        </div>
+        <div class="team_slider">
+            <div class="item">
+                <div class="image">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor1.webp" alt="">
+                </div>
+                <div class="name">Dr Jimmy Larsen</div>
+                <div class="position">Cardiologist</div>
+            </div>
+            <div class="item">
+                <div class="image">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor2.webp" alt="">
+                </div>
+                <div class="name">Dr Jimmy Larsen</div>
+                <div class="position">Cardiologist</div>
+            </div>
+            <div class="item">
+                <div class="image">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor3.webp" alt="">
+                </div>
+                <div class="name">Dr Jimmy Larsen</div>
+                <div class="position">Cardiologist</div>
+            </div>
+            <div class="item">
+                <div class="image">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor4.webp" alt="">
+                </div>
+                <div class="name">Dr Jimmy Larsen</div>
+                <div class="position">Cardiologist</div>
+            </div>
+            <div class="item">
+                <div class="image">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor1.webp" alt="">
+                </div>
+                <div class="name">Dr Jimmy Larsen</div>
+                <div class="position">Cardiologist</div>
+            </div>
+            <div class="item">
+                <div class="image">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor3.webp" alt="">
+                </div>
+                <div class="name">Dr Jimmy Larsen</div>
+                <div class="position">Cardiologist</div>
+            </div>
+        </div>
+        <div class="btn_wrap text-center">
+            <a href="#" class="btn style_4">VIEW ALL DOCTORS</a>
+        </div>
+    </div>
 </section>
 
 <section class="section cta-section text-center">
@@ -302,11 +383,67 @@ get_header(); ?>
 </section>
 
 <section class="section blog-section">
-    <div class="container"></div>
+    <div class="container">
+        <div class="title_wrap text-center">
+            <h2><span>Updates</span> from MARUCANNA</h2>
+            <p>Read about the most recent advancements in clinical research, patient stories, and medical cannabis news from Marucanna.</p>
+        </div>
+        <div class="row blog-items">
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/blog.webp" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">What are the new trends in cannabis treatments</h5>
+                        <div class="date">2023.10.23</div>
+                        <p class="card-text">Aenean volutpat, sem sit amet ullamcoer gravida, molestie risus enim nulla. Pellentesqu velit faucibus kodale dolor rhoncu.</p>
+                    </div>
+                    <a href="#" class="overlay"></a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/blog2.webp" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">What are the new trends in cannabis treatments</h5>
+                        <div class="date">2023.10.23</div>
+                        <p class="card-text">Aenean volutpat, sem sit amet ullamcoer gravida, molestie risus enim nulla. Pellentesqu velit faucibus kodale dolor rhoncu.</p>
+                    </div>
+                    <a href="#" class="overlay"></a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/blog3.webp" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">What are the new trends in cannabis treatments</h5>
+                        <div class="date">2023.10.23</div>
+                        <p class="card-text">Aenean volutpat, sem sit amet ullamcoer gravida, molestie risus enim nulla. Pellentesqu velit faucibus kodale dolor rhoncu.</p>
+                    </div>
+                    <a href="#" class="overlay"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn_wrap text-center">
+            <a href="#" class="btn style_4">VIEW ALL BLOGS</a>
+        </div>
+    </div>
 </section>
 
 <section class="section our-partners">
-    <div class="container"></div>
+    <div class="container">
+        <div class="title_wrap text-center">
+            <h2>Our <span>trusted</span> partners</h2>
+            <p>We are happy to have creative collaborations to improve the way patients receive prescriptions for medical cannabis.</p>
+        </div>
+        <div class="partners_logo">
+            <img src="<?php echo get_template_directory_uri(); ?>/img/home/yardly.webp" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/img/home/logo.webp" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/img/home/can.webp" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/img/home/mccs.webp" alt="">
+            <img src="<?php echo get_template_directory_uri(); ?>/img/home/CIS.webp" alt="">
+        </div>
+    </div>
 </section>
 
 <?php get_footer(); ?>

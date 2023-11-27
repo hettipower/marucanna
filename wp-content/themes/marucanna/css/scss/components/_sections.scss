@@ -191,7 +191,7 @@ section.section {
         content: "";
         width: 100%;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
     }
 
     &::before {
@@ -205,7 +205,6 @@ section.section {
         bottom: -1px;
         height: 68px;
         background-position: center;
-        background-size: cover;
     }
 
     .title-wrap {
@@ -265,7 +264,7 @@ section.section {
 .reviews-section {
     background-color: #e3f6e9;
     padding-top: 40px;
-    padding-bottom: 100px;
+    padding-bottom: 200px;
 
     &::after {
         position: absolute;
@@ -277,6 +276,121 @@ section.section {
         height: 109px;
         background-position: center;
         background-size: cover;
+    }
+
+    .content_wrap {
+        position: relative;
+
+        &::before {
+            content: "REVIEWS";
+            text-transform: uppercase;
+            position: absolute;
+            font-weight: 800;
+            color: #ddf0e3;
+            font-size: 130px;
+            line-height: 0.8;
+            z-index: 0;
+            left: 0;
+            top: 77px;
+            width: 100%;
+            text-align: center;
+        }
+
+        > * {
+            position: relative;
+            z-index: 1;
+        }
+    }
+
+    .reviews {
+        .card {
+            border: none;
+            border-radius: 15px;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -ms-border-radius: 15px;
+            -o-border-radius: 15px;
+
+            .quote {
+                font-size: 16px;
+                line-height: 1.5;
+                color: $grey;
+            }
+
+            .author {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+
+                .image {
+                    border-radius: 100%;
+                    overflow: hidden;
+                    width: 50px;
+                    margin-right: 11px;
+                }
+
+                .detail {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: 1;
+                    margin-right: 11px;
+
+                    .name {
+                        font-weight: 600;
+                        color: #000;
+                        font-size: 17px;
+                    }
+
+                    .type {
+                        font-size: 14px;
+                        text-transform: uppercase;
+                        margin-top: 2px;
+                        color: $theme_color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.our-team-section {
+    padding-top: 50px;
+    padding-bottom: 100px;
+
+    .title_wrap {
+        padding: 0 50px;
+        margin-bottom: 40px;
+    }
+
+    .team_slider {
+        .item {
+            text-align: center;
+
+            .image {
+                margin-bottom: 15px;
+
+                img {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+
+            .name {
+                color: #22412e;
+                font-weight: 600;
+            }
+
+            .position {
+                color: $theme_color2;
+                font-weight: 300;
+                font-size: 15px;
+            }
+        }
+    }
+
+    .btn_wrap {
+        margin-top: 60px;
     }
 }
 
@@ -310,5 +424,61 @@ section.section {
 
     h2 , p {
         color: $white;
+    }
+}
+
+.blog-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .title_wrap {
+        padding: 0 100px;
+        margin-bottom: 30px;
+    }
+
+    .blog-items {
+        .card {
+            border: none;
+            position: relative;
+
+            .card-img-top {
+                border-radius: 10px;
+            }
+
+            .date {
+                font-weight: 600;
+                font-size: 16px;
+                color: $theme_color;
+            }
+
+            .card-text {
+                font-size: 16px;
+            }
+        }
+    }
+    
+    .btn_wrap {
+        margin-top: 30px;
+    }
+}
+
+.our-partners {
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .title_wrap {
+        padding: 0 100px;
+        margin-bottom: 30px;
+    }
+
+    .partners_logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        
+        img {
+            max-width: 150px;
+        }
     }
 }

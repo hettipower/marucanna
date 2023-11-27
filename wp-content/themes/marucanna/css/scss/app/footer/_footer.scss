@@ -13,6 +13,9 @@ footer {
 	position: relative;
 	min-height: 550px;
 
+    padding-top: 150px;
+    padding-bottom: 20px;
+
 	&::before {
 		position: absolute;
         content: "";
@@ -23,5 +26,82 @@ footer {
         background-image: url('../img/wave8.svg)');
         top: 0;
         height: 75px;
+    }
+
+    address , p {
+        color: $white;
+        font-size: 16px;
+
+        a {
+            color: $white;
+
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+
+    .footer_bottom_wrap {
+        margin-top: 40px;
+    }
+
+    .nav {
+        li {
+            a {
+                color: $white;
+                font-size: 16px;
+                font-weight: 400;
+                padding: 0;
+
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    h6 {
+        color: #fff;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .newsletter {
+        margin-bottom: 30px;
+
+        .input-group {
+            background-color: #fff;
+            border-radius: 33px;
+            overflow: hidden;
+            padding: 5px 5px;
+
+            .form-control {
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
+
+            .btn {
+                background-color: #0b6128;
+                color: #fff;
+                border-radius: 33px !important;
+                -webkit-border-radius: 33px !important;
+                -moz-border-radius: 33px !important;
+                -ms-border-radius: 33px !important;
+                -o-border-radius: 33px !important;
+            }
+        }
+    }
+
+    .social {
+        .nav {
+            li {
+                margin-right: 20px;
+
+                a {
+                    font-size: 20px;
+                }
+            }
+        }
     }
 }

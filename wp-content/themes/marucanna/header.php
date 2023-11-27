@@ -52,19 +52,29 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pain Relief</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">Something else here</a></li>
+							<li><a class="dropdown-item" href="#">Pain relief</a></li>
+							<li><a class="dropdown-item" href="#">Check eligibility</a></li>
+							<li><a class="dropdown-item" href="#">Prescriptions</a></li>
+							<li><a class="dropdown-item" href="#">Pain relief</a></li>
+							<li><a class="dropdown-item" href="#">Check eligibility</a></li>
+							<li><a class="dropdown-item" href="#">Prescriptions</a></li>
+							<li><a class="dropdown-item" href="#">Pain relief</a></li>
+							<li><a class="dropdown-item" href="#">Check eligibility</a></li>
+							<li><a class="dropdown-item" href="#">Prescriptions</a></li>
+							<li><a class="dropdown-item" href="#">Pain relief</a></li>
+							<li><a class="dropdown-item" href="#">Check eligibility</a></li>
+							<li><a class="dropdown-item" href="#">Prescriptions</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">PRESCRIPTIONS</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">Something else here</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 1</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 2</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 3</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 4</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 5</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 6</a></li>
 						</ul>
 					</li>
 					<li class="nav-item">
@@ -73,10 +83,12 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">Something else here</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 1</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 2</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 3</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 4</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 5</a></li>
+							<li><a class="dropdown-item" href="#">Drop Down 6</a></li>
 						</ul>
 					</li>
 				</ul>

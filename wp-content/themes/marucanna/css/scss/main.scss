@@ -30,6 +30,10 @@
 /* SETTINGS - COLORS */
 @import "app/base/settings/_mc.settings.colors.theme";
 
+/* SLICK */
+@import 'slick/slick.scss';
+@import 'slick/slick-theme.scss';
+
 /* GLOBAL APP - BASE */
 @import "app/base/_base";
 @import "app/fonts/_base.fonts";
