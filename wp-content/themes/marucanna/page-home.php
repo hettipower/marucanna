@@ -21,7 +21,7 @@ get_header(); ?>
                 <p>We are proud to be an established medical cannabis clinic in the UK. You will receive top-notch care from skilled clinicians who are knowledgeable in the most recent medical cannabis and manage a large medical cannabis patient registry. Clinical data support the use of medical cannabis for a wide spectrum of diseases for which we see patients. Not everyone will be a good fit for medical cannabis. To guarantee that patients are receiving the best care possible, whether or not that care includes medical cannabis, we, as professionals in the field, make use of the most recent research and recommendations.</p>
 
                 <div class="btn-wrapper">
-                    <a href="#" class="btn style_3">READ MORE</a>
+                    <a href="#" class="btn style_3">READ MORE About Us</a>
                     <a href="#" class="btn style_4">BOOK AN APPOINTMENT</a>
                 </div>
             </div>

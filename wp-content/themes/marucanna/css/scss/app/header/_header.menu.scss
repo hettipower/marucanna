@@ -6,8 +6,18 @@
 
 #mainMenuWrap {
 	justify-content: flex-end;
+	transition: 0.5s all ease;
+
+	@include media-breakpoint-down(md) {
+		margin-top: 115px
+	}
 
 	.navbar-nav {
+
+		@include media-breakpoint-down(md) {
+			margin-bottom: 20px;
+		}
+
 		> li {
 			> a {
 				@extend %frutiger;
@@ -24,8 +34,25 @@
 				}
 
 				&.dropdown-toggle {
+					padding-right: 25px;
+
 					&.show {
 						background-color: $theme_color2;
+					}
+
+					&:after {
+						border: none;
+						@include pseudo;
+						@extend %fa-icon;
+						@extend .fa-solid;
+						content: fa-content($fa-var-chevron-down);
+						right: 7px;
+						top: 16px;
+						font-size: 12px;
+
+						@include media-breakpoint-down(md) {
+							top: 12px;
+						}
 					}
 				}
 			}
@@ -38,6 +65,10 @@
 				padding: 6px 30px;
 				flex-wrap: wrap;
 				justify-content: space-between;
+
+				@include media-breakpoint-down(md) {
+					width: 100%;
+				}
 
 				&.show {
 					display: flex;
@@ -61,6 +92,10 @@
 						color: $white;
 						background-color: transparent !important;
 						padding: 8px 0;
+
+						&:hover , &:focus {
+							color: $theme_color;
+						}
 					}
 				}
 			}

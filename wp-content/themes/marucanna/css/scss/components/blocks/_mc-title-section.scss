@@ -15,12 +15,16 @@
 
     position: relative;
 
+    @include media-breakpoint-down(md) {
+        text-align: center;
+    }
+
     &::after {
         position: absolute;
         content: "";
         background-image: url('../img/wave1.svg');
 
-        left: 0;
+        left: 1px;
         bottom: -1px;
         z-index: 1;
         width: 100%;

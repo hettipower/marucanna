@@ -16,6 +16,11 @@ footer {
     padding-top: 150px;
     padding-bottom: 20px;
 
+    @include media-breakpoint-down(md) {
+        background-position: center;
+        text-align: center;
+    }
+
 	&::before {
 		position: absolute;
         content: "";
@@ -66,6 +71,21 @@ footer {
         margin-bottom: 10px;
     }
 
+    @include media-breakpoint-down(md) {
+        .footer_top_wrap {
+            .col-md-4 {
+                margin-bottom: 25px;
+            }
+        }
+
+        .footer_bottom_wrap {
+            .col-md-8 {
+                margin-top: 25px;
+                margin-bottom: 25px;
+            }
+        }
+    }
+
     .newsletter {
         margin-bottom: 30px;
 
@@ -95,6 +115,11 @@ footer {
 
     .social {
         .nav {
+
+            @include media-breakpoint-down(md) {
+                justify-content: center;
+            }
+
             li {
                 margin-right: 20px;
 

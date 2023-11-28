@@ -13,4 +13,22 @@
 	height: 166px;
 	display: flex;
 	align-items: center;
+	position: absolute;
+	left: 0;
+	top: -50px;
+	transition: 0.5s all ease;
+
+	@include media-breakpoint-down(md) {
+		top: -14px;
+		height: 150px;
+		max-width: 150px;
+	}
+}
+
+.sticky-header {
+	.navbar-brand {
+		top: -14px;
+		height: 150px;
+		max-width: 150px;
+	}
 }

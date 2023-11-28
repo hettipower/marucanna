@@ -59,10 +59,20 @@ $slick-opacity-not-active: 0.25 !default;
 
 .slick-prev {
     left: -50px;
+
+    @include media-breakpoint-down(md) {
+        left: 0;
+    }
+
     [dir="rtl"] & {
         left: auto;
         right: -50px;
+
+        @include media-breakpoint-down(md) {
+            right: 0;
+        }
     }
+
     &:before {
         content: fa-content($fa-var-angle-left);
         [dir="rtl"] & {
@@ -73,9 +83,18 @@ $slick-opacity-not-active: 0.25 !default;
 
 .slick-next {
     right: -50px;
+
+    @include media-breakpoint-down(md) {
+        right: 0;
+    }
+
     [dir="rtl"] & {
         left: -50px;
         right: auto;
+
+        @include media-breakpoint-down(md) {
+            left: 0;
+        }
     }
     &:before {
         content: fa-content($fa-var-angle-right);
