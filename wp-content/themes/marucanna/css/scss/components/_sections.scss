@@ -28,6 +28,14 @@ section.section {
     position: relative;
     padding-bottom: 150px;
 
+    @include media-breakpoint-up(xxl) {
+        padding-top: 11vw;
+    }
+
+    @include media-breakpoint-down(md) {
+        padding-top: 20vw;
+    }
+
     &::after , &::before {
         position: absolute;
         content: "";
@@ -40,12 +48,28 @@ section.section {
         background-image: url('../img/wave2.svg)');
         top: 0;
         height: 106px;
+
+        @include media-breakpoint-up(xxl) {
+            height: 8vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 6vw;
+        }
     }
 
     &::after {
         background-image: url('../img/wave3.svg)');
         bottom: 0;
         height: 30px;
+
+        @include media-breakpoint-up(xxl) {
+            height: 2vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 3vw;
+        }
     }
 
     .content_wrap {
@@ -229,6 +253,16 @@ section.section {
 
     background-blend-mode: soft-light;
 
+    @include media-breakpoint-up(xxl) {
+        padding-top: 11vw;
+        padding-bottom: 7vw;
+    }
+
+    @include media-breakpoint-down(md) {
+        padding-top: 24vw;
+        padding-bottom: 15vw;
+    }
+
     &::after , &::before {
         position: absolute;
         content: "";
@@ -241,6 +275,14 @@ section.section {
         background-image: url('../img/wave4.svg)');
         top: 0;
         height: 30vh;
+
+        @include media-breakpoint-up(xxl) {
+            height: 9vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 9vw;
+        }
     }
 
     &::after {
@@ -248,6 +290,14 @@ section.section {
         bottom: -1px;
         height: 68px;
         background-position: center;
+
+        @include media-breakpoint-up(xxl) {
+            height: 5vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 6vw;
+        }
     }
 
     .title-wrap {
@@ -273,6 +323,10 @@ section.section {
             top: 0;
             width: 100%;
             text-align: center;
+
+            @include media-breakpoint-down(md) {
+                font-size: 26vw;
+            }
         }
 
         h2 {
@@ -320,6 +374,14 @@ section.section {
     padding-top: 90px;
     padding-bottom: 200px;
 
+    @include media-breakpoint-up(xxl) {
+        padding-bottom: 11vw;
+    }
+
+    @include media-breakpoint-down(md) {
+        padding-bottom: 25vw;
+    }
+
     &::after {
         position: absolute;
         content: "";
@@ -330,6 +392,14 @@ section.section {
         height: 109px;
         background-position: center;
         background-size: cover;
+
+        @include media-breakpoint-up(xxl) {
+            height: 8vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 8vw;
+        }
     }
 
     .content_wrap {
@@ -352,6 +422,10 @@ section.section {
             top: 77px;
             width: 100%;
             text-align: center;
+
+            @include media-breakpoint-down(md) {
+                font-size: 24vw;
+            }
         }
 
         > * {
@@ -467,6 +541,16 @@ section.section {
     padding-top: 150px;
     padding-bottom: 200px;
 
+    @include media-breakpoint-up(xxl) {
+        padding-top: 10vw;
+        padding-bottom: 10vw;
+    }
+
+    @include media-breakpoint-down(md) {
+        padding-top: 20vw;
+        padding-bottom: 20vw;
+    }
+
     &::after , &::before {
         position: absolute;
         content: "";
@@ -480,6 +564,14 @@ section.section {
         background-image: url('../img/wave6.svg)');
         top: 0;
         height: 135px;
+
+        @include media-breakpoint-up(xxl) {
+            height: 10vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 10vw;
+        }
     }
 
     &::after {
@@ -488,6 +580,14 @@ section.section {
         height: 71px;
         background-position: center;
         background-size: cover;
+
+        @include media-breakpoint-up(xxl) {
+            height: 5vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 5vw;
+        }
     }
 
     h2 , p {

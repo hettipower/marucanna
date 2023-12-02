@@ -78,6 +78,10 @@
 					width: 50%;
 					position: relative;
 
+					@include media-breakpoint-down(md) {
+						width: 100%;
+					}
+
 					&::after {
 						content: "";
 						position: absolute;

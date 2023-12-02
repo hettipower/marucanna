@@ -16,9 +16,14 @@ footer {
     padding-top: 150px;
     padding-bottom: 20px;
 
+    @include media-breakpoint-up(xxl) {
+        padding-top: 9vw;
+    }
+
     @include media-breakpoint-down(md) {
         background-position: center;
         text-align: center;
+        padding-top: 15vw;
     }
 
 	&::before {
@@ -31,6 +36,14 @@ footer {
         background-image: url('../img/wave8.svg)');
         top: 0;
         height: 75px;
+
+        @include media-breakpoint-up(xxl) {
+            height: 6vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 6vw;
+        }
     }
 
     address , p {
