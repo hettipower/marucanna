@@ -33427,6 +33427,9 @@ section.section {
   position: relative;
   z-index: 1;
 }
+.why-select .cards_wrap .card {
+  height: 100%;
+}
 @media (max-width: 767.98px) {
   .why-select .cards_wrap .card {
     margin-bottom: 15px;

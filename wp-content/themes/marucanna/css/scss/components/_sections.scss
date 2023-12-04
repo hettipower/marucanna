@@ -345,8 +345,10 @@ section.section {
 
     .cards_wrap {
 
-        @include media-breakpoint-down(md) {
-            .card {
+        .card {
+            height: 100%;
+
+            @include media-breakpoint-down(md) {
                 margin-bottom: 15px;
             }
         }
