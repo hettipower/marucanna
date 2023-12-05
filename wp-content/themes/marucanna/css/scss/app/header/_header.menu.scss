@@ -12,9 +12,17 @@
 		margin-top: 115px
 	}
 
+	@include media-breakpoint-down(lg) {
+		margin-top: 115px
+	}
+
 	.navbar-nav {
 
 		@include media-breakpoint-down(md) {
+			margin-bottom: 20px;
+		}
+
+		@include media-breakpoint-down(lg) {
 			margin-bottom: 20px;
 		}
 
@@ -108,6 +116,12 @@
 
 	.btn {
 		margin-left: 20px;
+
+		@include media-breakpoint-down(md) {
+			margin-left: 0px;
+			margin-bottom: 10px;
+			width: 100%;
+		}
 	}
 }
 

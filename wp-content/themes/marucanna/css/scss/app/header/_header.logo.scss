@@ -23,6 +23,12 @@
 		height: 150px;
 		max-width: 150px;
 	}
+
+	@include media-breakpoint-down(lg) {
+		top: -14px;
+		height: 150px;
+		max-width: 150px;
+	}
 }
 
 .sticky-header {

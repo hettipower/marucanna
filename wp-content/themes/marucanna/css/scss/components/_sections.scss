@@ -14,10 +14,41 @@ section.section {
         .btn {
             margin-right: 16px;
 
+            @include media-breakpoint-down(lg) {
+                margin-right: 0;
+                margin-bottom: 16px;
+            }
+
             @include media-breakpoint-down(md) {
                 margin-right: 0;
                 margin-bottom: 16px;
             }
+
+        }
+    }
+
+    .content_wrapper {
+        position: relative;
+
+        &::before {
+            content: "ABOUT";
+            text-transform: uppercase;
+            position: absolute;
+            font-weight: 800;
+            color: #eaeaea;
+            opacity: 0.47;
+            font-size: 200px;
+            line-height: 0.8;
+            z-index: 0;
+
+            @include media-breakpoint-down(md) {
+                font-size: 130px;
+            }
+        }
+
+        > * {
+            position: relative;
+            z-index: 1;
         }
     }
 }
@@ -47,21 +78,21 @@ section.section {
     &::before {
         background-image: url('../img/wave2.svg)');
         top: 0;
-        height: 106px;
+        height: 8vw;
 
         @include media-breakpoint-up(xxl) {
             height: 8vw;
         }
 
         @include media-breakpoint-down(md) {
-            height: 6vw;
+            height: 8vw;
         }
     }
 
     &::after {
         background-image: url('../img/wave3.svg)');
         bottom: 0;
-        height: 30px;
+        height: 2vw;
 
         @include media-breakpoint-up(xxl) {
             height: 2vw;
@@ -75,6 +106,10 @@ section.section {
     .content_wrap {
         position: relative;
 
+        @include media-breakpoint-down(lg) {
+            width: 100%;
+        }
+
         &::before {
             content: "HOW IT WORKS";
             text-transform: uppercase;
@@ -85,6 +120,12 @@ section.section {
             font-size: 200px;
             line-height: 0.8;
             z-index: 0;
+
+            @include media-breakpoint-down(md) {
+                width: 100%;
+                left: 0;
+                font-size: 130px;
+            }
         }
 
         > h2 {
@@ -115,6 +156,12 @@ section.section {
         position: relative;
         margin-top: auto;
         margin-bottom: auto;
+
+        @include media-breakpoint-down(lg) {
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
         .image {
             width: 350px;
@@ -153,9 +200,33 @@ section.section {
     .title-wrap {
         padding: 0 60px;
         margin-bottom: 40px;
+        position: relative;
 
         @include media-breakpoint-down(md) {
             padding: 0;
+        }
+
+        &::before {
+            content: "CONDITIONS";
+            text-transform: uppercase;
+            position: absolute;
+            font-weight: 800;
+            color: #eaeaea;
+            opacity: 0.47;
+            font-size: 200px;
+            line-height: 0.8;
+            z-index: 0;
+            left: 0;
+            width: 100%;
+
+            @include media-breakpoint-down(md) {
+                font-size: 75px;
+            }
+        }
+
+        > * {
+            position: relative;
+            z-index: 1;
         }
     }
 
@@ -223,6 +294,12 @@ section.section {
             .item {
                 position: relative;
                 margin-bottom: 10px;
+
+                @include media-breakpoint-down(md) {
+                    -ms-flex: 0 0 auto;
+                    flex: 0 0 auto;
+                    width: 50%;
+                }
                 
                 &::after {
                     content: "";
@@ -274,7 +351,7 @@ section.section {
     &::before {
         background-image: url('../img/wave4.svg)');
         top: 0;
-        height: 30vh;
+        height: 9vw;
 
         @include media-breakpoint-up(xxl) {
             height: 9vw;
@@ -288,7 +365,7 @@ section.section {
     &::after {
         background-image: url('../img/wave5.svg)');
         bottom: -1px;
-        height: 68px;
+        height: 5vw;
         background-position: center;
 
         @include media-breakpoint-up(xxl) {
@@ -345,22 +422,33 @@ section.section {
 
     .cards_wrap {
 
+        @include media-breakpoint-down(lg) {
+            > div {
+                -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+
         .card {
             height: 100%;
 
             @include media-breakpoint-down(md) {
                 margin-bottom: 15px;
+                height: auto;
             }
         }
 
         .card-body {
             .image {
                 margin-bottom: 20px;
+                min-height: 80px;
             }
 
             h4 {
                 font-size: 17px;
-                margin-bottom: 0;
+                margin-bottom: 15px;
             }
 
             p {
@@ -391,7 +479,7 @@ section.section {
         background-repeat: no-repeat;
         background-image: url('../img/wave9.svg)');
         bottom: -1px;
-        height: 109px;
+        height: 8vw;
         background-position: center;
         background-size: cover;
 
@@ -501,9 +589,33 @@ section.section {
     .title_wrap {
         padding: 0 50px;
         margin-bottom: 40px;
+        position: relative;
 
         @include media-breakpoint-down(md) {
             padding: 0;
+        }
+
+        &::before {
+            content: "DOCTORS";
+            text-transform: uppercase;
+            position: absolute;
+            font-weight: 800;
+            color: #eaeaea;
+            opacity: 0.47;
+            font-size: 200px;
+            line-height: 0.8;
+            z-index: 0;
+            left: 0;
+            width: 100%;
+
+            @include media-breakpoint-down(md) {
+                font-size: 80px;
+            }
+        }
+
+        > * {
+            position: relative;
+            z-index: 1;
         }
     }
 
@@ -565,7 +677,7 @@ section.section {
     &::before {
         background-image: url('../img/wave6.svg)');
         top: 0;
-        height: 135px;
+        height: 10vw;
 
         @include media-breakpoint-up(xxl) {
             height: 10vw;
@@ -573,13 +685,14 @@ section.section {
 
         @include media-breakpoint-down(md) {
             height: 10vw;
+            top: -1px;
         }
     }
 
     &::after {
         background-image: url('../img/wave7.svg)');
         bottom: -1px;
-        height: 71px;
+        height: 5vw;
         background-position: center;
         background-size: cover;
 
@@ -604,9 +717,33 @@ section.section {
     .title_wrap {
         padding: 0 100px;
         margin-bottom: 30px;
+        position: relative;
 
         @include media-breakpoint-down(md) {
             padding: 0;
+        }
+
+        &::before {
+            content: "BLOG";
+            text-transform: uppercase;
+            position: absolute;
+            font-weight: 800;
+            color: #eaeaea;
+            opacity: 0.47;
+            font-size: 166px;
+            line-height: 0.8;
+            z-index: 0;
+            left: 0;
+            width: 100%;
+
+            @include media-breakpoint-down(md) {
+                font-size: 130px;
+            }
+        }
+
+        > * {
+            position: relative;
+            z-index: 1;
         }
     }
 
@@ -647,9 +784,33 @@ section.section {
     .title_wrap {
         padding: 0 100px;
         margin-bottom: 30px;
+        position: relative;
 
         @include media-breakpoint-down(md) {
             padding: 0;
+        }
+
+        &::before {
+            content: "PARTNERS";
+            text-transform: uppercase;
+            position: absolute;
+            font-weight: 800;
+            color: #eaeaea;
+            opacity: 0.47;
+            font-size: 166px;
+            line-height: 0.8;
+            z-index: 0;
+            left: 0;
+            width: 100%;
+
+            @include media-breakpoint-down(md) {
+                font-size: 80px;
+            }
+        }
+
+        > * {
+            position: relative;
+            z-index: 1;
         }
     }
 
@@ -658,9 +819,15 @@ section.section {
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
+        position: relative;
+        z-index: 2;
         
         img {
             max-width: 150px;
+
+            @include media-breakpoint-down(lg) {
+                max-width: 100px;
+            }
 
             @include media-breakpoint-down(md) {
                 max-width: 65px;

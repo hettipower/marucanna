@@ -17,6 +17,7 @@
 
     @include media-breakpoint-down(md) {
         text-align: center;
+        background-position: center;
     }
 
     &::after {
@@ -28,7 +29,7 @@
         bottom: -1px;
         z-index: 1;
         width: 100%;
-        height: 161px;
+        height: 12vw;
         background-size: cover;
 
         @include media-breakpoint-up(xxl) {

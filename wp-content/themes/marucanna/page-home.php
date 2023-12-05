@@ -118,16 +118,16 @@ get_header(); ?>
                         <p>Chronic pain is the most common reason for which medical cannabis is given in the UK, with over 7 million people estimated to be affected. We can offer consultations with medical specialists regarding a wide range of qualifying pain conditions. To learn more, click on any of the categories below.</p>
                         
                         <div class="row">
-                            <div class="col-md-6 col-sm-12 item">Arthritis</div>
-                            <div class="col-md-6 col-sm-12 item">Endometriosis</div>
-                            <div class="col-md-6 col-sm-12 item">Back pain and Sciatica</div>
-                            <div class="col-md-6 col-sm-12 item">Fibromyalgia</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic Pain</div>
-                            <div class="col-md-6 col-sm-12 item">Migraines</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic regional pain syndrome</div>
-                            <div class="col-md-6 col-sm-12 item">Musculoskeletal pain</div>
-                            <div class="col-md-6 col-sm-12 item">Ehlers Danlos syndromes</div>
-                            <div class="col-md-6 col-sm-12 item">Neuropathic pain</div>
+                            <div class="col-md-6 item">Arthritis</div>
+                            <div class="col-md-6 item">Endometriosis</div>
+                            <div class="col-md-6 item">Back pain and Sciatica</div>
+                            <div class="col-md-6 item">Fibromyalgia</div>
+                            <div class="col-md-6 item">Chronic Pain</div>
+                            <div class="col-md-6 item">Migraines</div>
+                            <div class="col-md-6 item">Chronic regional pain syndrome</div>
+                            <div class="col-md-6 item">Musculoskeletal pain</div>
+                            <div class="col-md-6 item">Ehlers Danlos syndromes</div>
+                            <div class="col-md-6 item">Neuropathic pain</div>
                         </div>
 
                     </div>
