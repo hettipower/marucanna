@@ -21,12 +21,6 @@ header {
 			background-color: $theme_color;
 			padding: 15px 0;
 		}
-
-		@include media-breakpoint-down(lg) {
-			margin-top: 0;
-			background-color: $theme_color;
-			padding: 15px 0;
-		}
 		
 		.container-fluid {
 			max-width: 1300px;

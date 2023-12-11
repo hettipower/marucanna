@@ -35,7 +35,7 @@ footer {
         left: 0;
         background-image: url('../img/wave8.svg)');
         top: 0;
-        height: 6vw;
+        height: 75px;
 
         @include media-breakpoint-up(xxl) {
             height: 6vw;
@@ -43,7 +43,6 @@ footer {
 
         @include media-breakpoint-down(md) {
             height: 6vw;
-            top: -1px;
         }
     }
 
@@ -74,7 +73,6 @@ footer {
 
                 &:hover {
                     color: $white;
-                    text-decoration: underline;
                 }
             }
         }
@@ -84,21 +82,6 @@ footer {
         color: #fff;
         font-size: 16px;
         margin-bottom: 10px;
-    }
-
-    @include media-breakpoint-down(lg) {
-        .footer_top_wrap {
-            > .row {
-                > .col-md-8 {
-                    width: 100%;
-                }
-    
-                > .col-md-4 {
-                    width: 100%;
-                    margin-top: 25px;
-                }
-            }
-        }
     }
 
     @include media-breakpoint-down(md) {
@@ -154,7 +137,7 @@ footer {
                 margin-right: 20px;
 
                 a {
-                    font-size: 30px;
+                    font-size: 20px;
                 }
             }
         }

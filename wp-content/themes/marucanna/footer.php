@@ -1,5 +1,5 @@
 </div>
-<footer style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/home/footer-bg.webp)">
+<footer style="<?php if ( get_field( 'footer_bg', 'option' ) ) { ?>background-image: url(<?php the_field( 'footer_bg', 'option' ); ?>);<?php } else { ?> background-image: url(<?php echo get_template_directory_uri(); ?>/img/home/footer-bg.webp);<?php } ?> ">
     <div class="container">
         <div class="footer_top_wrap">
             <div class="row">
@@ -7,66 +7,53 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
                             <address>
-                            Marucanna Ltd<br/>
-                            Hilton Hall<br/>
-                            Hilton Ln<br/>
-                            Wolverhampton<br/>
-                            WV11 2BQ
+							<?php the_field( 'address', 'option' ); ?>
+                           
                             </address>
-                            <p>Monday - Friday*<br/>10am - 5.30pm</p>
-                            <p>T: +44 1902 863031<br/>E: <a href="mailto:contact@marucanna.co.uk">contact@marucanna.co.uk</a></p>
+                            <p><?php the_field( 'business_hours', 'option' ); ?></p>
+                            <p>T: <a href="tel:<?php the_field( 'phone', 'option' ); ?>"><?php the_field( 'phone', 'option' ); ?></a><br/>E: <a href="mailto:<?php the_field( 'email', 'option' ); ?>"><?php the_field( 'email', 'option' ); ?></a></p>
                         </div>
 
                         <div class="col-md-4 col-sm-12">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Pain relief</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Check eligibility</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Prescriptions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">About us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Conctact us</a>
-                                </li>
-                            </ul>
+						
+			<?php 
+
+                 wp_nav_menu( array(
+
+            'theme_location' => 'footer-menu-1', 
+
+           'items_wrap'      => '<ul class="nav flex-column mc-footer-menu">%3$s</ul>',
+		   
+	   'container'       => '',
+
+            ));
+
+          
+
+            ?>
+						
+						
+                           
                         </div>
 
                         <div class="col-md-4 col-sm-12">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Frequently asked questions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Medicinal cannabis glossary</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Medicinal cannabis education</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Zero tolerance policy</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Governance & complaints</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Terms & conditions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Cookie policy</a>
-                                </li>
-                            </ul>
+						<?php 
+
+                 wp_nav_menu( array(
+
+            'theme_location' => 'footer-menu-2', 
+
+           'items_wrap'      => '<ul class="nav flex-column mc-footer-menu">%3$s</ul>',
+		   
+	   'container'       => '',
+
+            ));
+
+          
+
+            ?>
+						
+	
                         </div>
                     </div>
                 </div>
@@ -84,24 +71,36 @@
                     <div class="social">
                         <h6>FOLLOW US</h6>
                         <ul class="nav">
+						<?php if ( get_field( 'twitter','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa-brands fa-twitter"></i></a>
+                                <a class="nav-link" href="<?php the_field('twitter','option'); ?>"><i class="fa-brands fa-twitter"></i></a>
                             </li>
+							<?php endif; ?>
+							<?php if ( get_field( 'linkedin','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa-brands fa-linkedin"></i></a>
+                                <a class="nav-link" href="<?php the_field('linkedin','option'); ?>"><i class="fa-brands fa-linkedin"></i></a>
                             </li>
+							<?php endif; ?>
+							<?php if ( get_field( 'youtube','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa-brands fa-youtube"></i></a>
+                                <a class="nav-link" href="<?php the_field('youtube','option'); ?>"><i class="fa-brands fa-youtube"></i></a>
                             </li>
+							<?php endif; ?>
+							<?php if ( get_field( 'instagram','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a class="nav-link" href="<?php the_field('instagram','option'); ?>"><i class="fa-brands fa-instagram"></i></a>
                             </li>
+							<?php endif; ?>
+							<?php if ( get_field( 'facebook','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a class="nav-link" href="<?php the_field('facebook','option'); ?>"><i class="fa-brands fa-facebook-f"></i></a>
                             </li>
+							<?php endif; ?>
+							<?php if ( get_field( 'pinterest','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa-brands fa-pinterest"></i></a>
+                                <a class="nav-link" href="<?php the_field('pinterest','option'); ?>"><i class="fa-brands fa-pinterest"></i></a>
                             </li>
+							<?php endif; ?>
                         </ul>
                     </div>
                 </div>
@@ -110,13 +109,21 @@
         <div class="footer_bottom_wrap">
             <div class="row">
                 <div class="col-md-2 col-sm-12">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.webp" alt="">
+				<?php if ( get_field( 'footer_logo', 'option' ) ) { ?>
+                    <img src="<?php the_field( 'footer_logo', 'option' ); ?>"/>
+					<?php } else { ?>
+					<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.webp"/>
+					<?php } ?>
                 </div>
                 <div class="col-md-8 col-sm-12">
+				<?php if ( get_field( 'footer_logo', 'option' ) ) { ?>
+				<p><small><?php the_field( 'copyright', 'option' ); ?></small></p>
+				<?php } else { ?>
                     <p><small>Marucanna.co.uk is a trading style of The Yardley Clinic, registered with the Care Quality Commission (CQC), and offers reasonably priced consultations and, in appropriate cases, will recommend our line of full-spectrum medical cannabis sourced in the UK.</small></p>
+					<?php } ?>
                 </div>
                 <div class="col-md-2 col-sm-12">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo2.webp" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo2.webp"/>
                 </div>
             </div>
         </div>
@@ -133,5 +140,10 @@
     </svg>
 </div>
 <?php wp_footer(); ?>
+<script>
+jQuery( ".mc-blog-text p" ).addClass( "card-text" );
+jQuery( ".mc-footer-menu li" ).addClass( "nav-item" );
+jQuery( ".mc-footer-menu a" ).addClass( "nav-link" );
+</script>
 </body>
 </html>

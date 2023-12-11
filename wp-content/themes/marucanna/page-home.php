@@ -3,26 +3,32 @@
 
 get_header(); ?>
 
-<section class="section mc-title-section" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/home/header.webp)">
+<section class="section mc-title-section" style="<?php if ( get_field( 'hm_sec1_header_image' ) ) { ?>background-image: url(<?php the_field( 'hm_sec1_header_image' ); ?>);<?php } else { ?>background-image: url(<?php echo get_template_directory_uri(); ?>/img/home/header.webp); <?php } ?> ">
     <div class="container">
-        <h1>MARUCANNA<br/> Medical cannabis<br/> treatments</h1>
-        <a href="#" class="btn style_1">CHECK ELIGIBILITY</a>
+        <h1><?php the_field( 'hm_sec1_title' ); ?></h1>
+        <a href="<?php the_field( 'hm_sec1_button_link' ); ?>" class="btn style_1"><?php the_field( 'hm_sec1_button_text' ); ?></a>
     </div>
 </section>
 
 <section class="section mc-image-text-block">
     <div class="container">
         <div class="row">
+		
             <div class="col-md-6 col-sm-12 image_wrapper">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/home/about-image.webp" alt="">
+			<?php if ( get_field( 'hm_sec2_bg_image' ) ) { ?>
+                <img src="<?php the_field( 'hm_sec2_bg_image' ); ?>"/>
+				<?php } else {  ?>
+				<img src="<?php echo get_template_directory_uri(); ?>/img/home/about-image.webp"/>
+				<?php } ?>
             </div>
+			
             <div class="col-md-6 col-sm-12 content_wrapper">
-                <h2>Leading medical <span>cannabis treatment</span> clinic</h2>
-                <p>We are proud to be an established medical cannabis clinic in the UK. You will receive top-notch care from skilled clinicians who are knowledgeable in the most recent medical cannabis and manage a large medical cannabis patient registry. Clinical data support the use of medical cannabis for a wide spectrum of diseases for which we see patients. Not everyone will be a good fit for medical cannabis. To guarantee that patients are receiving the best care possible, whether or not that care includes medical cannabis, we, as professionals in the field, make use of the most recent research and recommendations.</p>
+                <h2><?php echo do_shortcode(get_field('hm_sec2_title')); ?></h2>
+				<?php the_field( 'hm_sec2_content' ); ?>
 
                 <div class="btn-wrapper">
-                    <a href="#" class="btn style_3">READ MORE About Us</a>
-                    <a href="#" class="btn style_4">BOOK AN APPOINTMENT</a>
+                    <a href="<?php the_field( 'hm_sec2_button1_link' ); ?>" class="btn style_3"><?php the_field( 'hm_sec2_button1_text' ); ?></a>
+                    <a href="<?php the_field( 'hm_sec2_button2_link' ); ?>" class="btn style_4"><?php the_field( 'hm_sec2_button2_text' ); ?></a>
                 </div>
             </div>
         </div>
@@ -33,37 +39,47 @@ get_header(); ?>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-sm-12 content_wrap">
-                <h2>How it <span>works</span></h2>
+                <h2><?php echo do_shortcode(get_field('hm_sec3_title')); ?></h2>
                 <div class="steps_wrap">
                     <div class="row">
+					<?php
+
+// check if the repeater field has rows of data
+if( have_rows('steps_rep') ):
+$i=0;
+ 	// loop through the rows of data
+    while ( have_rows('steps_rep') ) : the_row(); $i++;
+?>
                         <div class="col-md-6 col-sm-12 step">
-                            <div class="num">STEP 01</div>
-                            <h3>Eligibility check</h3>
-                            <p>By responding to a brief questionnaire and sharing your appropriate medical information, you can determine your eligibility.</p>
+                            <div class="num">STEP 0<?php echo $i; ?></div>
+                            <h3><?php the_sub_field( 'title' ); ?></h3>
+                           <?php the_sub_field( 'content' ); ?>
                         </div>
-                        <div class="col-md-6 col-sm-12 step">
-                            <div class="num">STEP 02</div>
-                            <h3>Book a consultation</h3>
-                            <p>If you are qualified, we will provide you a link so you can schedule and pay for your appointment with a specialised doctor.</p>
-                        </div>
-                        <div class="col-md-6 col-sm-12 step">
-                            <div class="num">STEP 03</div>
-                            <h3>Initial consultation</h3>
-                            <p>You will be given clear instructions on the day of your consultation on how to get online help from one of our medical specialists.</p>
-                        </div>
-                        <div class="col-md-6 col-sm-12 step">
-                            <div class="num">STEP 04</div>
-                            <h3>Start your treatment</h3>
-                            <p>Once the doctor has provided your medical cannabis prescription, you can schedule delivery to your home.</p>
-                        </div>
+						
+<?php
+
+    endwhile;
+
+else :
+
+    // no rows found
+
+endif;
+
+?>						
+						
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-12 image_wrap">
                 <div class="image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/how-it-work.webp" alt="">
+				<?php if ( get_field( 'hm_sec3_bg_image' ) ) { ?>
+                    <img src="<?php the_field( 'hm_sec3_bg_image' ); ?>"/>
+					<?php } else {?>
+					 <img src="<?php echo get_template_directory_uri(); ?>/img/home/how-it-work.webp"/>
+					 <?php } ?>
                 </div>
-                <a href="#" class="btn style_4">Check <br/>Eligibility</a>
+                <a href="<?php the_field( 'hm_sec3_button1_link' ); ?>" class="btn style_4"><?php the_field( 'hm_sec3_button1_text' ); ?></a>
             </div>
         </div>
     </div>
@@ -72,8 +88,9 @@ get_header(); ?>
 <section class="section treating-section">
     <div class="container">
         <div class="title-wrap text-center">
-            <h2>Treating pain with medicinal cannabis</h2>
-            <p>Not everyone will be a good fit for medical cannabis prescriptions. To guarantee that patients are receiving the best care possible, whether or not that care includes medical cannabis, we, as professionals in the field, make use of the most recent research and recommendations.</p>
+            <h2><?php the_field( 'hm_sec4_title' ); ?></h2>
+			<?php the_field( 'hm_sec4_content' ); ?>
+            
         </div>
         <ul class="nav nav-pills mb-5" id="treating-tab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -237,47 +254,38 @@ get_header(); ?>
     </div>
 </section>
 
-<section class="section why-select" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/home/why-select-bg.webp)">
+<section class="section why-select" style="<?php if ( get_field( 'hm_sec5_bg_image' ) ) { ?>background-image: url(<?php the_field( 'hm_sec5_bg_image' ); ?>);<?php } else { ?> background-image: url(<?php echo get_template_directory_uri(); ?>/img/home/why-select-bg.webp);<?php } ?>">
     <div class="container">
         <div class="title-wrap text-center">
-            <h2>Why select Marucanna</h2>
-            <p>We pair up qualified patients with medical professionals that specialise in their illness, so you get top-notch support. In order to track the advancement of your care over time, you will have frequent check-ins with your specialised physician or clinic, as our highly qualified team has vast experience prescribing cannabis-based medications in the UK.</p>
+            <h2><?php the_field( 'hm_sec5_title' ); ?></h2>
+			<?php the_field( 'hm_sec5_content' ); ?>
+            
         </div>
 
         <div class="row cards_wrap">
+		<?php if ( have_rows( 'hm_sec5_content_boxes_rep' ) ) : ?>
+	<?php while ( have_rows( 'hm_sec5_content_boxes_rep' ) ) : the_row(); ?>
             <div class="col-md-4 col-sm-12">
                 <div class="card">
                     <div class="card-body text-center">
+					<?php if ( get_sub_field( 'icon' ) ) { ?>
                         <div class="image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/home/experince-doctos.webp" alt="">
+                            <img src="<?php the_sub_field( 'icon' ); ?>"/>
                         </div>
-                        <h4>Experienced doctors</h4>
-                        <p>We care for patients with a wide range of diseases and diagnoses while collaborating with skilled doctors from a variety of professions. All clinicians employ customised, disease- specific clinical and prescription guidelines that are generated using patient data, and they are all highly qualified and experienced in prescribing medicinal cannabis.</p>
+						<?php } ?>
+                        <h4><?php the_sub_field( 'title' ); ?></h4>
+                       <?php the_sub_field( 'content' ); ?>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div class="image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/home/100_.webp" alt="">
-                        </div>
-                        <h4>100% Confidentiality</h4>
-                        <p>All information is handled transparently, equitably, and in accordance with the law. Your information is kept completely private and is never disclosed to any parties without your consent or knowledge. It is our responsibility to prove that we have complied with the six GDPR guidelines for handling personal data.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div class="image">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/home/patient-support.webp" alt="">
-                        </div>
-                        <h4>Dedicated patient support</h4>
-                        <p>We see a lot of patients with different conditions. Some people feel alone, while others battle a terrible condition. Each and every one of our patients should be able to assist and benefit from one another. We provide standard exams with a doctor who specialises in medical cannabis and are readily available to support you every step of the way.</p>
-                    </div>
-                </div>
-            </div>
+				<?php endwhile; ?>
+<?php else : ?>
+	<?php // no rows found ?>
+<?php endif; ?>
+			
+           
+         
+			
         </div>
     </div>
 </section>
@@ -286,30 +294,52 @@ get_header(); ?>
     <div class="container">
         <div class="row">
             <div class="col-md-5 col-sm-12 content_wrap">
-                <h2>What our <span>patients</span> say about us</h2>
-                <p>See why our patients are happy to see their Marucanna medical cannabis doctor and why we are recommended throughout the UK.</p>
+                <h2><?php echo do_shortcode(get_field('hm_sec6_title')); ?></h2>
+                <?php the_field( 'hm_sec6_content' ); ?>
                 <div class="btn_wrap">
-                    <a href="#" class="btn style_4">VIEW ALL REVIEWS</a>
+                    <a href="<?php the_field( 'hm_sec6_button_link' ); ?>" class="btn style_4"><?php the_field( 'hm_sec6_button_text' ); ?></a>
                 </div>
             </div>
             <div class="col-md-7 col-sm-12 reviews">
+			<?php 
+	$args = array( 'post_type' => 'marucanna-reviews', 'posts_per_page' => '1','meta_key' => 'meta-checkbox','meta_value' => 'yes');
+	$loop = new WP_Query( $args );
+	while ( $loop->have_posts() ) : $loop->the_post();
+	
+?>
+<?php
+$thumb_id = get_post_thumbnail_id();
+$thumb_url = wp_get_attachment_image_src($thumb_id,'reviews-thumb', true);
+?>
                 <div class="card">
                     <div class="card-body">
-                        <div class="quote">"I have nothing but the highest regard for the folks at Marucanna. They are incredibly kind, professional, kind, and quick to answer any questions. Really, you're lucky if the phone rings more than twice before someone answers. Every interaction has been easy and enjoyable thanks to them. It is evident from the quality of care they give patients that this is more than just a job for them and their team. Go with Marucanna if you need a referral; you're doing the proper thing there."</div>
+                        <div class="quote"><?php the_content(); ?></div>
                         <div class="author">
+						<?php if ( has_post_thumbnail() ) {?>
                             <div class="image">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/home/review-thumb.webp" alt="">
+                                <img src="<?php echo $thumb_url[0]; ?>"/>
                             </div>
+							<?php
+ }
+?>
                             <div class="detail">
-                                <span class="name">James Jonas</span>
-                                <span class="type">Patient</span>
+                                <span class="name"><?php the_title(); ?></span>
+                                <span class="type"><?php the_field( 'designation' ); ?></span>
                             </div>
                             <div class="star">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/home/img2.png" alt="">
+                                <img src="<?php echo get_template_directory_uri(); ?>/img/home/img2.png"/>
                             </div>
                         </div>
                     </div>
                 </div>
+				
+				<?php
+endwhile;
+wp_reset_query();
+
+?>
+
+				
             </div>
         </div>
     </div>
@@ -318,66 +348,53 @@ get_header(); ?>
 <section class="section our-team-section">
     <div class="container">
         <div class="title_wrap text-center">
-            <h2>Our <span>experienced</span> doctors</h2>
-            <p>Our highly qualified team has significant experience prescribing cannabis-based medicines in the UK. We can track the success of your care over time with regular check-ins with your specialised medical cannabis doctor.</p>
+            <h2><?php echo do_shortcode(get_field('hm_sec7_title')); ?></h2>
+			 <?php the_field( 'hm_sec7_content' ); ?>
+           
         </div>
         <div class="team_slider">
-            <div class="item">
+		<?php 
+	$args = array( 'post_type' => 'marucanna-doctors', 'posts_per_page' => '-1');
+	$loop = new WP_Query( $args );
+	while ( $loop->have_posts() ) : $loop->the_post();
+	
+?>
+<?php
+$thumb_id = get_post_thumbnail_id();
+$thumb_url = wp_get_attachment_image_src($thumb_id,'doc-home-thumb', true);
+?>
+
+<?php if( get_field('show_on_home_page') == 'Yes' ): ?>
+		<div class="item">
+		<?php if ( has_post_thumbnail() ) {?>
                 <div class="image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor1.webp" alt="">
+                    <img src="<?php echo $thumb_url[0]; ?>"/>
                 </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
+		<?php } ?>
+                <div class="name"><?php the_title(); ?></div>
+                <div class="position"><?php the_field( 'specialization' ); ?></div>
             </div>
-            <div class="item">
-                <div class="image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor2.webp" alt="">
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-            </div>
-            <div class="item">
-                <div class="image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor3.webp" alt="">
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-            </div>
-            <div class="item">
-                <div class="image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor4.webp" alt="">
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-            </div>
-            <div class="item">
-                <div class="image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor1.webp" alt="">
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-            </div>
-            <div class="item">
-                <div class="image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/doctor3.webp" alt="">
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-            </div>
+			<?php endif; ?>
+							<?php
+endwhile;
+wp_reset_query();
+
+?>
         </div>
         <div class="btn_wrap text-center">
-            <a href="#" class="btn style_4">VIEW ALL DOCTORS</a>
+            <a href="<?php the_field( 'hm_sec7_button_link' ); ?>" class="btn style_4"><?php the_field( 'hm_sec7_button_text' ); ?></a>
         </div>
     </div>
 </section>
 
 <section class="section cta-section text-center">
     <div class="container">
-        <h2>Improve your life with <br/>medical cannabis</h2>
-        <p>New studies show that more and more patients receiving treatment with medical cannabis<br/> have had their quality of life improve significantly..</p>
+        <h2><?php the_field( 'hm_sec8_title' ); ?></h2>
+       <?php the_field( 'hm_sec8_content' ); ?>
+
 
         <div class="btn-wrap">
-            <a href="#" class="btn style_1">BOOK AN APPOINTMENT</a>
+            <a href="<?php the_field( 'hm_sec8_button_link' ); ?>" class="btn style_1"><?php the_field( 'hm_sec8_button_text' ); ?></a>
         </div>
     </div>
 </section>
@@ -385,47 +402,47 @@ get_header(); ?>
 <section class="section blog-section">
     <div class="container">
         <div class="title_wrap text-center">
-            <h2><span>Updates</span> from MARUCANNA</h2>
-            <p>Read about the most recent advancements in clinical research, patient stories, and medical cannabis news from Marucanna.</p>
+            <h2><?php echo do_shortcode(get_field('hm_sec9_title')); ?></h2>
+            <?php the_field( 'hm_sec9_content' ); ?>
+
         </div>
         <div class="row blog-items">
+		<?php 
+	$args = array( 'post_type' => 'post', 'posts_per_page' => '3');
+	$loop = new WP_Query( $args );
+	while ( $loop->have_posts() ) : $loop->the_post();
+	
+?>
+<?php
+$thumb_id = get_post_thumbnail_id();
+$thumb_url = wp_get_attachment_image_src($thumb_id,'blog-home-thumb', true);
+?>
             <div class="col-md-4 col-sm-12">
                 <div class="card">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/blog.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">What are the new trends in cannabis treatments</h5>
-                        <div class="date">2023.10.23</div>
-                        <p class="card-text">Aenean volutpat, sem sit amet ullamcoer gravida, molestie risus enim nulla. Pellentesqu velit faucibus kodale dolor rhoncu.</p>
+				<?php if ( has_post_thumbnail() ) {?>
+                    <img src="<?php echo $thumb_url[0]; ?>" class="card-img-top" alt="<?php the_title(); ?>"/>
+				<?php } ?>
+                    <div class="card-body mc-blog-text">
+                        <h5 class="card-title"><?php the_title(); ?></h5>
+                        <div class="date"><?php echo get_the_date('Y'); ?>.<?php echo get_the_date('m'); ?>.<?php echo get_the_date('j'); ?></div>
+						<?php my_excerpt(17); ?>
+                        
                     </div>
-                    <a href="#" class="overlay"></a>
+                    <a href="<?php the_permalink(); ?>" class="overlay"></a>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="card">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/blog2.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">What are the new trends in cannabis treatments</h5>
-                        <div class="date">2023.10.23</div>
-                        <p class="card-text">Aenean volutpat, sem sit amet ullamcoer gravida, molestie risus enim nulla. Pellentesqu velit faucibus kodale dolor rhoncu.</p>
-                    </div>
-                    <a href="#" class="overlay"></a>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="card">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/blog3.webp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">What are the new trends in cannabis treatments</h5>
-                        <div class="date">2023.10.23</div>
-                        <p class="card-text">Aenean volutpat, sem sit amet ullamcoer gravida, molestie risus enim nulla. Pellentesqu velit faucibus kodale dolor rhoncu.</p>
-                    </div>
-                    <a href="#" class="overlay"></a>
-                </div>
-            </div>
+			
+	<?php
+endwhile;
+wp_reset_query();
+
+?>			
+			
+         
         </div>
 
         <div class="btn_wrap text-center">
-            <a href="#" class="btn style_4">VIEW ALL BLOGS</a>
+            <a href="<?php the_field( 'hm_sec9_button_link' ); ?>" class="btn style_4"><?php the_field( 'hm_sec9_button_text' ); ?></a>
         </div>
     </div>
 </section>
@@ -433,15 +450,17 @@ get_header(); ?>
 <section class="section our-partners">
     <div class="container">
         <div class="title_wrap text-center">
-            <h2>Our <span>trusted</span> partners</h2>
-            <p>We are happy to have creative collaborations to improve the way patients receive prescriptions for medical cannabis.</p>
+            <h2><?php echo do_shortcode(get_field('hm_sec10_title')); ?></h2>
+            <?php the_field( 'hm_sec10_content' ); ?>
+
         </div>
         <div class="partners_logo">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/home/yardly.webp" alt="">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/home/logo.webp" alt="">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/home/can.webp" alt="">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/home/mccs.webp" alt="">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/home/CIS.webp" alt="">
+		<?php $logos_images = get_field( 'logos' ); ?>
+<?php if ( $logos_images ) :  ?>
+	<?php foreach ( $logos_images as $logos_image ): ?>
+            <img src="<?php echo $logos_image['url']; ?>"/>
+           <?php endforeach; ?>
+<?php endif; ?>
         </div>
     </div>
 </section>
