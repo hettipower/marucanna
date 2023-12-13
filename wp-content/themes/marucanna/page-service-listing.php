@@ -3,19 +3,25 @@
 
 get_header(); ?>
 
-<section class="section mc-title-section style_1" style="background-image: url(<?php the_post_thumbnail_url( 'full' ); ?>);">
+<section class="section mc-title-section style_1" style="<?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);<?php } ?>">
     <div class="container">
+	
+	<?php if ( get_field( 'page_title' ) ) { ?>
+	<h1><?php the_field( 'page_title' ); ?></h1>
+	<?php } else { ?>
+		<?php if ( have_posts() ) : ?>
+<?php while ( have_posts() ) : the_post(); ?>   
         <h1><?php the_title(); ?></h1>
+		<?php endwhile; ?>
+<?php endif; ?>
+		<?php }  ?>
     </div>
 </section>
 
 <section class="section breadcrumb_wrap">
     <div class="container">
         <nav style="--bs-breadcrumb-divider: '->';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?php the_title(); ?></li>
-            </ol>
+		    <?php the_breadcrumb(); ?> 
         </nav>
     </div>
 </section>
@@ -32,95 +38,49 @@ get_header(); ?>
         </div>
 
         <div class="text">
-            <p>Many diseases can cause pain, and medicinal cannabis can help reduce that agony. Pain from injuries, migraines, and other chronic pains are a few types of pain that cannabis can help with. Strong opioid medicines like codeine are frequently thought to be less effective at relieving pain than medical cannabis</p>
+		<?php if ( have_posts() ) : ?>
+<?php while ( have_posts() ) : the_post(); ?>   
+<?php the_content(); ?>
+<?php endwhile; ?>
+<?php endif; ?>
+           
         </div>
 
         <div class="condition_listing_wrap">
             <div class="condition_listing">
                 <div class="row">
+<?php $additional_loop = new WP_Query("post_type=marucanna-conditions&paged=$paged"); ?>
+		
+		
+<?php while ($additional_loop->have_posts()) : $additional_loop->the_post(); ?>
 
+<?php
+$thumb_id = get_post_thumbnail_id();
+$thumb_url = wp_get_attachment_image_src($thumb_id,'full', false);
+?>	
                     <div class="col-md-4 col-sm-12 mb-4">
                         <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition1.webp" alt="">
-                            <h4>Cancer Pain</h4>
-                            <a href="#" class="overlay"></a>
+						<?php if ( has_post_thumbnail() ) {?>
+                            <img src="<?php echo $thumb_url[0]; ?>" alt="<?php the_title(); ?> "/>
+							<?php } ?>
+                            <h4><?php the_title(); ?></h4>
+                            <a href="<?php the_permalink(); ?>" class="overlay"></a>
                         </div>
                     </div>
+					
+<?php endwhile; ?>
+<?php wp_reset_postdata(); ?>				
 
-                    <div class="col-md-4 col-sm-12 mb-4">
-                        <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition2.webp" alt="">
-                            <h4>Chronic Pain</h4>
-                            <a href="#" class="overlay"></a>
-                        </div>
-                    </div>
+                 
 
-                    <div class="col-md-4 col-sm-12 mb-4">
-                        <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition3.webp" alt="">
-                            <h4>Crohns</h4>
-                            <a href="#" class="overlay"></a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-12 mb-4">
-                        <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition4.webp" alt="">
-                            <h4>Headaches</h4>
-                            <a href="#" class="overlay"></a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-12 mb-4">
-                        <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition5.webp" alt="">
-                            <h4>Inflammatory Arthritis</h4>
-                            <a href="#" class="overlay"></a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-12 mb-4">
-                        <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition6.webp" alt="">
-                            <h4>Migraine</h4>
-                            <a href="#" class="overlay"></a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-12 mb-4">
-                        <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition7.webp" alt="">
-                            <h4>Palliative Care</h4>
-                            <a href="#" class="overlay"></a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-12 mb-4">
-                        <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition8.webp" alt="">
-                            <h4>Neuropathic Pain</h4>
-                            <a href="#" class="overlay"></a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-12 mb-4">
-                        <div class="condition">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition9.webp" alt="">
-                            <h4>Musculoskeletal pain</h4>
-                            <a href="#" class="overlay"></a>
-                        </div>
-                    </div>
 
                 </div>
             </div>
 
             <div class="pagination_wrap">
                 <nav>
-                    <ul class="pagination">
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    </ul>
+				 <?php  kriesi_pagination($additional_loop->max_num_pages);?>
+                   
                 </nav>
             </div>
         </div>
@@ -131,34 +91,19 @@ get_header(); ?>
 <section class="section pain-symptoms-wrap">
     <div class="container">
         <div class="title_wrap">
-            <h3>Pain symptoms</h3>
+            <h3><?php the_field( 'rf_sec1_title' ); ?></h3>
         </div>
         
         <div class="row g-2 symptoms">
-
+<?php if ( have_rows( 'rf_sec1_content_boxes_rep' ) ) : ?>
+	<?php while ( have_rows( 'rf_sec1_content_boxes_rep' ) ) : the_row(); ?>
             <div class="col-md-4 col-sm-12">
-                <div class="symptom">Fatigue</div>
+                <div class="symptom"><?php the_sub_field( 'title' ); ?></div>
             </div>
-
-            <div class="col-md-4 col-sm-12">
-                <div class="symptom">Joint pain</div>
-            </div>
-
-            <div class="col-md-4 col-sm-12">
-                <div class="symptom">Sleeping problems</div>
-            </div>
-
-            <div class="col-md-4 col-sm-12">
-                <div class="symptom">Constant pain</div>
-            </div>
-
-            <div class="col-md-4 col-sm-12">
-                <div class="symptom">Lack of relief from over-the-counter painkillers</div>
-            </div>
-
-            <div class="col-md-4 col-sm-12">
-                <div class="symptom">Burning sensations</div>
-            </div>
+				<?php endwhile; ?>
+<?php else : ?>
+	<?php // no rows found ?>
+<?php endif; ?>
 
             
         </div>
@@ -169,10 +114,11 @@ get_header(); ?>
 <section class="section text-block-section text-center">
     <div class="container">
         <div class="title_wrap">
-            <h3>Find out how medicinal cannabis can effectively relieve pain.</h3>
+            <h3><?php the_field( 'rf_sec1_title2' ); ?></h3>
         </div>
         <div class="description">
-            <p>Even if medications are recommended to patients, they often discover that they do not effectively relieve their pain. These medications have the potential to be very potent analgesics with extensive adverse effects. Patients may look into alternative options if even these are unable to help them control their discomfort. Phytocannabinoids, a class of lipophilic chemicals that interact with the body's endocannabinoid system (ECS), are one way that medicinal cannabis can be used to control pain. The body's peripheral and central nervous systems communicate with each other through the endocannabinoid system. Put succinctly, this indicates the enormous medicinal potential of phytocannabinoids.</p>
+		<?php the_field( 'rf_sec1_content2' ); ?>
+           
         </div>
     </div>
 </section>
@@ -180,113 +126,30 @@ get_header(); ?>
 <section class="section pain-management">
     <div class="container">
         <div class="title_wrap text-center">
-            <h3>Lifestyle <span>pain</span> management </h3>
+            <h3><?php echo do_shortcode(get_field('rf_sec2_title')); ?></h3>
         </div>
         
         <div class="row g-3 management_wrap">
-
+<?php if ( have_rows( 'rf_sec2_content_boxes_rep' ) ) : ?>
+	<?php while ( have_rows( 'rf_sec2_content_boxes_rep' ) ) : the_row(); ?>
             <div class="col-md-6 col-sm-12">
                 <div class="management">
-                    <span class="number">01</span>
+                    <span class="number"><?php the_sub_field( 'no' ); ?></span>
                     <div class="content">
-                        <h4>MARUCANNA introduction</h4>
-                        <div class="description">Improve your knowledge of suffering and discover how to make attainable, meaningful objectives for yourself. </div>
+                        <h4><?php the_sub_field( 'title' ); ?></h4>
+                        <div class="description"><?php the_sub_field( 'content' ); ?></div>
                     </div>
                 </div>
             </div>
+	<?php endwhile; ?>
+<?php else : ?>
+	<?php // no rows found ?>
+<?php endif; ?>
+           
 
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">02</span>
-                    <div class="content">
-                        <h4>Coping with Pain </h4>
-                        <div class="description">Learn how to live well with pain by communicating your needs effectively and creating a supportive network around you. </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">03</span>
-                    <div class="content">
-                        <h4>Movement techniques </h4>
-                        <div class="description">Discover techniques for gaining movement confidence and improving activities required throughout the day.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">04</span>
-                    <div class="content">
-                        <h4>Medication for pain </h4>
-                        <div class="description">Learn about different drugs and how to collaborate with your healthcare team to discover the best strategy for you. </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">05</span>
-                    <div class="content">
-                        <h4>Activity management </h4>
-                        <div class="description">Learn how to manage your time so you can get back to doing what you love. Every bit helps when it comes to pain relief.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">06</span>
-                    <div class="content">
-                        <h4>Pain flare-ups </h4>
-                        <div class="description">Get advice on pain flare-ups and how to deal with them in challenging situations when you need support.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">07</span>
-                    <div class="content">
-                        <h4>Sleep better </h4>
-                        <div class="description">Learn about the difficulties of sleeping properly when living with pain and how to enhance your sleep.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">08</span>
-                    <div class="content">
-                        <h4>Coping with pain</h4>
-                        <div class="description">Learn more about tools and assistance for pain management in various parts of daily life to improve your lifestyle.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">09</span>
-                    <div class="content">
-                        <h4>Experience advice </h4>
-                        <div class="description">Get guidance and resources provided by our doctors, who will support you throughout the treatment.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-12">
-                <div class="management">
-                    <span class="number">10</span>
-                    <div class="content">
-                        <h4>Completion plan</h4>
-                        <div class="description">Take some time to enjoy your accomplishments, reflect on what you've learned, and plan your future moves.</div>
-                    </div>
-                </div>
-            </div>
 
             <div class="col-12 btn-wrap text-center mt-5">
-                <a href="#" class="btn style_4">CHECK ELIGIBILITY</a>
+                <a href="<?php the_field( 'rf_sec2_button_link' ); ?>" class="btn style_4"><?php the_field( 'rf_sec2_button_text' ); ?></a>
             </div>
 
         </div>
@@ -298,24 +161,23 @@ get_header(); ?>
 <section class="section faq-section">
     <div class="container">
         <div class="title_wrap text-center">
-            <h2>Frequently asked questions about chronic pain</h2>
+            <h2><?php the_field( 'faq_title' ); ?></h2>
         </div>
 
         <div class="faqs row g-3">
+		<?php if ( have_rows( 'faq_rep' ) ) : ?>
+	<?php while ( have_rows( 'faq_rep' ) ) : the_row(); ?>
             <div class="faq-item">
-                <h3>What is chronic pain ?</h3>
-                <div class="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa </div>
+                <h3><?php the_sub_field( 'question' ); ?></h3>
+                <div class="content"><?php the_sub_field( 'answer' ); ?></div>
             </div>
+<?php endwhile; ?>
+<?php else : ?>
+	<?php // no rows found ?>
+<?php endif; ?>
+           
 
-            <div class="faq-item">
-                <h3>How does medical cannibas help with chronic pain?</h3>
-                <div class="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa </div>
-            </div>
-
-            <div class="faq-item">
-                <h3>How do i start treatments ?</h3>
-                <div class="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa </div>
-            </div>
+           
         </div>
 
     </div>

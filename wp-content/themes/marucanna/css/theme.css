@@ -34182,6 +34182,26 @@ a:hover {
 .btn.style_4:hover {
   background-color: #9cc52b;
 }
+.btn.btn_link {
+  background-color: #FFFFFF;
+  color: #0c8e36;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border: none;
+}
+.btn.style_5 {
+  color: #FFFFFF;
+  background-color: #000;
+}
+.btn.style_5:hover {
+  color: #000;
+  background-color: #FFFFFF;
+}
 
 /*------------------------------------*\
     BASE - IMAGES
@@ -34577,7 +34597,7 @@ footer .social .nav li a {
   }
 }
 .mc-title-section.style_1 {
-  min-height: 407px;
+  min-height: 472px;
   text-align: center;
   background-color: #016f25;
   background-blend-mode: hard-light;
@@ -34638,6 +34658,26 @@ section.section {
     margin-right: 0;
     margin-bottom: 16px;
   }
+}
+@media (max-width: 767.98px) {
+  .mc-image-text-block .content_wrapper {
+    margin-top: 30px;
+  }
+}
+.mc-image-text-block .content_wrapper .numbered_list {
+  margin-bottom: 30px;
+}
+.mc-image-text-block .content_wrapper .numbered_list .item {
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.mc-image-text-block .content_wrapper .numbered_list .item .number {
+  display: inline-block;
+  width: 30px;
+  font-size: 26px;
+  color: #0c8e36;
 }
 
 .how-it-works {
@@ -35272,6 +35312,7 @@ section.section {
 }
 .breadcrumb_wrap .breadcrumb-item {
   font-size: 16px;
+  text-transform: uppercase;
 }
 .breadcrumb_wrap .breadcrumb-item::before {
   color: #949494;
@@ -35543,4 +35584,111 @@ section.section {
 
 .single-marucanna-conditions .text-block-section {
   margin-top: 40px;
+}
+.single-marucanna-conditions .text-block-section .collapse_detail {
+  font-size: 17px;
+}
+
+/*------------------------------------*\
+
+    Pricing Page
+
+\*------------------------------------*/
+.pricing_section_wrap {
+  background-color: #f6f4f3;
+  padding-top: 60px;
+  padding-bottom: 120px;
+}
+.pricing_section_wrap::after, .pricing_section_wrap::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  left: 0;
+}
+.pricing_section_wrap::before {
+  background-image: url("../img/wave12.svg)");
+  top: 0;
+  height: 2vw;
+}
+@media (min-width: 1400px) {
+  .pricing_section_wrap::before {
+    height: 2vw;
+  }
+}
+@media (max-width: 767.98px) {
+  .pricing_section_wrap::before {
+    height: 2vw;
+  }
+}
+.pricing_section_wrap::after {
+  background-image: url("../img/wave7.svg)");
+  bottom: -1px;
+  height: 71px;
+  background-position: center;
+  background-size: cover;
+}
+@media (min-width: 1400px) {
+  .pricing_section_wrap::after {
+    height: 5vw;
+  }
+}
+@media (max-width: 767.98px) {
+  .pricing_section_wrap::after {
+    height: 5vw;
+  }
+}
+.pricing_section_wrap .title_wrap .description {
+  font-size: 17px;
+}
+.pricing_section_wrap .pricing {
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+.pricing_section_wrap .pricing .card {
+  --bs-card-inner-border-radius: 10px;
+  --bs-card-border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 5px -2px #7D7D7D;
+  height: 100%;
+}
+.pricing_section_wrap .pricing .card .card-header {
+  color: #fff;
+  background-color: #0c8e36;
+  padding: 17px 20px;
+}
+.pricing_section_wrap .pricing .card .card-header .title {
+  margin-bottom: 0;
+  color: #fff;
+  font-size: 20px;
+}
+.pricing_section_wrap .pricing .card .card-header .subtitle {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+.pricing_section_wrap .pricing .card .card-header .price_wrap {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+}
+.pricing_section_wrap .pricing .card .card-header .price_wrap .price {
+  font-weight: 600;
+  line-height: 1;
+  font-size: 43px;
+}
+.pricing_section_wrap .pricing .card .list-group {
+  height: calc(100% - 68px);
+  font-size: 17px;
+  color: #424242;
+}
+
+.timeline_wrap {
+  padding-top: 20px;
+  padding-bottom: 60px;
 }

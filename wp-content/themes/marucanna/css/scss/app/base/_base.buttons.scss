@@ -64,6 +64,30 @@ $btn_border_radius:		40px;
 			background-color: $theme_color2
 		}
 	}
+
+	&.btn_link {
+		background-color: $white;
+		color: $theme_color;
+		padding-left: 0;
+		padding-right: 0;
+		border-radius: 0;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		-ms-border-radius: 0;
+		-o-border-radius: 0;
+
+		border: none;
+	}
+
+	&.style_5 {
+		color: $white;
+		background-color: $black;
+
+		&:hover {
+			color: $black;
+			background-color: $white;
+		}
+	}
 }
 
 .btn {
