@@ -3,7 +3,7 @@
 
 get_header(); ?>
 
-<section class="section mc-title-section" style="<?php if ( get_field( 'hm_sec1_header_image' ) ) { ?>background-image: url(<?php the_field( 'hm_sec1_header_image' ); ?>);<?php } else { ?>background-image: url(<?php echo get_template_directory_uri(); ?>/img/home/header.webp); <?php } ?> ">
+<section class="section mc-title-section style_2" style="<?php if ( get_field( 'hm_sec1_header_image' ) ) { ?>background-image: url(<?php the_field( 'hm_sec1_header_image' ); ?>);<?php } else { ?>background-image: url(<?php echo get_template_directory_uri(); ?>/img/home/header.webp); <?php } ?> ">
     <div class="container">
         <h1><?php the_field( 'hm_sec1_title' ); ?></h1>
         <a href="<?php the_field( 'hm_sec1_button_link' ); ?>" class="btn style_1"><?php the_field( 'hm_sec1_button_text' ); ?></a>

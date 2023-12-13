@@ -49,3 +49,34 @@ header {
 		}
 	}
 }
+
+
+
+body {
+	&:not(.home) {
+		header {
+			.navbar {
+				&::before {
+					position: absolute;
+					content: "";
+					width: 100%;
+					top: -6vw;
+					background-color: #000;
+					height: 9vw;
+					filter: blur(42px);
+					opacity: 0.9;
+				}
+			}
+		}
+
+		&.sticky-header {
+			header {
+				.navbar {
+					&::before {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}

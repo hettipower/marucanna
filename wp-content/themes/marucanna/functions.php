@@ -4,6 +4,7 @@ include 'includes/functions/theme_styles.php';
 include 'includes/functions/theme_acf_functions.php';
 include 'includes/shortcodes.php';
 include 'includes/custom-posts.php';
+include 'includes/functions/mc_api.php';
 
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'reviews-thumb', 50, 49,true);
@@ -113,3 +114,11 @@ function my_excerpt($length = 55) {
   Excerpt::length($length);
 }
 
+function api_url()
+{
+  $protocols = array('http://', 'http://www.', 'www.', 'https://', 'https://www.');
+  $url = str_replace($protocols, '', get_bloginfo('wpurl'));
+  if ($url) {
+    return '//' . $url . '/wp-json/mcapi/';
+  }
+}

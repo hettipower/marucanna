@@ -668,3 +668,346 @@ section.section {
         }
     }
 }
+
+/*------------------------------------*\
+	
+    Service Listing Page
+    
+\*------------------------------------*/
+
+.page-template-page-service-listing , 
+.single-marucanna-conditions  {
+    footer{
+        &::before{
+            background-image: url('../img/wave11.svg');
+        }
+    }
+}
+
+.breadcrumb_wrap {
+    margin-top: 10px;
+
+    .breadcrumb-item {
+        font-size: 16px;
+
+        &::before {
+            color: #949494;
+        }
+
+        &.active {
+            color: #404040;
+            font-weight: 600;
+        }
+
+        a {
+            text-transform: uppercase;
+            color: #949494;
+        }
+    }
+}
+
+.condition-listing-block {
+    margin-top: -56px;
+
+    @include media-breakpoint-down(md) {
+        margin-top: 0;
+    }
+
+    .search_wrap {
+        display: flex;
+        justify-content: flex-end;
+
+        .input-group {
+            max-width: 600px;
+            background-color: #c6c6c6;
+            padding: 3px;
+            border-radius: 10px;
+        
+            @include media-breakpoint-down(md) {
+                max-width: 100%;
+            }
+
+            .form-control {
+                padding: 0 22px;
+                text-transform: uppercase;
+                font-size: 14px;
+                border: none;
+                background-color: transparent;
+            }
+
+            .input-group-text {
+                padding: 0;
+                border: 0;
+                border-radius: 0;
+                -webkit-border-radius: 0;
+                -moz-border-radius: 0;
+                -ms-border-radius: 0;
+                -o-border-radius: 0;
+                background-color: transparent;
+            }
+
+            .btn {
+                background-color: #2ab17e;
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -ms-border-radius: 10px;
+                -o-border-radius: 10px;
+
+                padding: 13px 33px;
+                font-size: 15px;
+            }
+        }
+    }
+
+    .text {
+        margin-top: 28px;
+        margin-bottom: 45px;
+        font-size: 17px;
+    }
+
+    .condition_listing_wrap {
+        .condition_listing {
+            .condition {
+                position: relative;
+                background-color: #f5f5f5;
+                text-align: center;
+                border-radius: 10px;
+                padding: 64px 40px;
+                height: 100%;
+                box-shadow: 0 0 8px -1px #9C9C9C;
+
+                h4 {
+                    color: #232323;
+                    font-weight: 800;
+                    margin-top: 15px;
+                    margin-bottom: 0;
+                    font-size: 18px;
+                }
+            }
+        }
+
+        .pagination_wrap {
+            margin-top: 25px;
+
+            .pagination {
+                margin: 0;
+                justify-content: center;
+
+                .page-item {
+                    margin: 0 6px;
+                    border-radius: 0;
+
+                    .page-link {
+                        background-color: #0b8e36;
+                        color: #fff;
+                        padding: 5px 15px;
+                        border: none;
+                        border-radius: 0;
+                    }
+
+                    &.active {
+                        .page-link {
+                            background-color: #bad66c;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pain-symptoms-wrap {
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    .title_wrap {
+        h3 {
+            color: #232323;
+            font-weight: 800;
+            font-size: 26px;
+        }
+    }
+
+    .symptoms {
+        .symptom {
+            text-align: center;
+            color: #fff;
+            background-color: #0b8e36;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.5;
+            padding: 10px 20px;
+            min-height: 70px;
+            font-size: 16px;
+            text-transform: uppercase;
+            border-radius: 10px;
+        }
+    }
+}
+
+.text-block-section {
+    padding-bottom: 60px;
+
+    .description {
+        font-size: 17px;
+    }
+}
+
+.pain-management {
+    padding-bottom: 60px;
+
+    .management_wrap {
+        margin-top: 25px;
+
+        .management {
+            background-color: #edf0e6;
+            display: flex;
+            padding: 20px 28px;
+            height: 100%;
+
+            .number {
+                color: $theme_color;
+                font-size: 45px;
+                font-weight: 300;
+                margin-right: 20px;
+            }
+
+            .content {
+                h4 {
+                    color: $theme_color;
+                    margin-bottom: 6px;
+                    font-weight: 800;
+                    font-size: 27px;
+                }
+
+                .description {
+                    font-size: 17px;
+                    line-height: 1.5;
+                    color: #232323;
+                }
+            }
+        }
+    }
+}
+
+.faq-section {
+    background-color: #d5dcc5;
+    padding-top: 140px;
+    padding-bottom: 50px;
+
+    &:before {
+        background-image: url("../img/wave8.svg)");
+        position: absolute;
+        content: "";
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        left: 0;
+        top: 0;
+        height: 6vw;
+    }
+
+    .title_wrap {
+        background-color: #2ab07e;
+        padding: 9px 20px 13px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+
+        h2 {
+            margin-bottom: 0;
+            font-size: 35px;
+            color: #fff;
+
+            @include media-breakpoint-down(md) {
+                font-size: 21px;
+            }
+        }
+    }
+
+    .faqs {
+        .faq-item {
+            background-color: #fff;
+            border-radius: 10px;
+            font-size: 17px;
+            line-height: 1.5;
+            padding: 20px 40px 30px;
+            text-align: center;
+            color: #515050;
+
+            > h3 {
+                margin-bottom: 14px;
+                color: $theme_color;
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+/*------------------------------------*\
+	
+    Single Service Page
+    
+\*------------------------------------*/
+.single-content-wrap {
+    .sidebar_wrap {
+        .img_wrap {
+            overflow: hidden;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+        }
+
+        .box_content {
+            background-color: #18a86b;
+            border-radius: 10px;
+            margin-top: 40px;
+            padding: 24px 20px;
+            font-size: 17px;
+
+            p {
+                color: #fff;
+            }
+
+            > h3 {
+                color: #fff;
+            }
+        }
+    }
+
+    .content_wrap {
+        ul {
+            padding: 0;
+            list-style: none;
+            
+            li {
+                position: relative;
+                color: #515050;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    height: 3px;
+                    width: 31px;
+                    border-radius: 3px;
+
+                    background-color: $theme_color2;
+                }
+            }
+        }
+    }
+}
+
+.single-marucanna-conditions {
+    .text-block-section {
+        margin-top: 40px;
+    }
+}
