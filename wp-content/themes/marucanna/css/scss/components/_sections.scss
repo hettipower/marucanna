@@ -992,6 +992,10 @@ section.section {
 \*------------------------------------*/
 .single-content-wrap {
     .sidebar_wrap {
+        @include media-breakpoint-down(md) {
+            margin-bottom: 20px;
+        }
+
         .img_wrap {
             overflow: hidden;
             border-radius: 10px;
@@ -1018,7 +1022,10 @@ section.section {
         }
     }
 
-    .content_wrap {
+    .single_content {
+        overflow: hidden;
+        margin-bottom: 18px;
+
         ul {
             padding: 0;
             list-style: none;

@@ -34070,6 +34070,11 @@ section.section {
     Single Service Page
 
 \*------------------------------------*/
+@media (max-width: 767.98px) {
+  .single-content-wrap .sidebar_wrap {
+    margin-bottom: 20px;
+  }
+}
 .single-content-wrap .sidebar_wrap .img_wrap {
   overflow: hidden;
   border-radius: 10px;
@@ -34091,15 +34096,19 @@ section.section {
 .single-content-wrap .sidebar_wrap .box_content > h3, .single-content-wrap .sidebar_wrap .box_content > .h3 {
   color: #fff;
 }
-.single-content-wrap .content_wrap ul {
+.single-content-wrap .single_content {
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.single-content-wrap .single_content ul {
   padding: 0;
   list-style: none;
 }
-.single-content-wrap .content_wrap ul li {
+.single-content-wrap .single_content ul li {
   position: relative;
   color: #515050;
 }
-.single-content-wrap .content_wrap ul li::after {
+.single-content-wrap .single_content ul li::after {
   content: "";
   position: absolute;
   left: 0;
