@@ -46,15 +46,19 @@ function get_condition_list($name = "", $offset = 0, $posts_to_show = 9){
 
         <?php
             while ( $items->have_posts() ) : $items->the_post();
+                $thumb_id = get_post_thumbnail_id();
+                $thumb_url = wp_get_attachment_image_src($thumb_id,'full', false);
         ?>
 
-            <div class="col-md-4 col-sm-12 mb-4">
-                <div class="condition">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/conditions/condition1.webp" alt="">
-                    <h4>Cancer Pain</h4>
-                    <a href="#" class="overlay"></a>
+                <div class="col-md-4 col-sm-12 mb-4">
+                    <div class="condition">
+                    <?php if ( has_post_thumbnail() ) {?>
+                        <img src="<?php echo $thumb_url[0]; ?>" alt="<?php the_title(); ?> "/>
+                        <?php } ?>
+                        <h4><?php the_title(); ?></h4>
+                        <a href="<?php the_permalink(); ?>" class="overlay"></a>
+                    </div>
                 </div>
-            </div>
         <?php
         endwhile;
         wp_reset_postdata();

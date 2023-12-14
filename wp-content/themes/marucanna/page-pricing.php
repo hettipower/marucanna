@@ -88,7 +88,7 @@ get_header(); ?>
 
         <div class="row g-3 pricing">
 
-            <div class="col-md-3 col-sm-12">
+            <div class=" col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="title">Initial Consultation</h4>
@@ -114,7 +114,7 @@ get_header(); ?>
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-12">
+            <div class=" col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="title">First Follow Up</h4>
@@ -140,7 +140,7 @@ get_header(); ?>
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-12">
+            <div class=" col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="title">Initial Consultation</h4>
@@ -166,7 +166,7 @@ get_header(); ?>
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-12">
+            <div class=" col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="title">Initial Consultation</h4>
@@ -200,6 +200,12 @@ get_header(); ?>
     <div class="container">
         <div class="title_wrap text-center">
             <h3>Appointment <span>timeline</span></h3>
+        </div>
+        <div class="timeline">
+            <img src="<?php bloginfo( 'template_url' ); ?>/img/pricing-timeline.webp" class="img-fluid" alt="">
+        </div>
+        <div class="btn_wrap mt-3 text-center">
+            <a href="#" class="btn style_4">REPEAT ORDER</a>
         </div>
     </div>
 </section>

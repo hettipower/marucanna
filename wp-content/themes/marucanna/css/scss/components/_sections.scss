@@ -734,6 +734,10 @@ section.section {
 .condition-listing-block {
     margin-top: -56px;
 
+    @include media-breakpoint-down(lg) {
+        margin-top: 0;
+    }
+
     @include media-breakpoint-down(md) {
         margin-top: 0;
     }
@@ -747,6 +751,10 @@ section.section {
             background-color: #c6c6c6;
             padding: 3px;
             border-radius: 10px;
+
+            @include media-breakpoint-down(lg) {
+                max-width: 100%;
+            }
         
             @include media-breakpoint-down(md) {
                 max-width: 100%;
@@ -803,6 +811,10 @@ section.section {
                 padding: 64px 40px;
                 height: 100%;
                 box-shadow: 0 0 8px -1px #9C9C9C;
+
+                @include media-breakpoint-down(lg) {
+                    padding: 40px 40px;
+                }
 
                 h4 {
                     color: #232323;
@@ -1142,6 +1154,12 @@ section.section {
                 height: calc(100% - 68px);
                 font-size: 17px;
                 color: #424242;
+
+                .list-group-item {
+                    &:last-child {
+                        border-bottom-width: 1px;
+                    }
+                }
             }
         }
     }
@@ -1150,4 +1168,8 @@ section.section {
 .timeline_wrap {
     padding-top: 20px;
     padding-bottom: 60px;
+
+    .title_wrap {
+        margin-bottom: 50px;
+    }
 }
