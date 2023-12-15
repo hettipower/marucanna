@@ -148,7 +148,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'full', false);
            
 
 
-            <div class="col-12 btn-wrap text-center mt-5">
+            <div class="col-12 btn-wrap text-center">
                 <a href="<?php the_field( 'rf_sec2_button_link' ); ?>" class="btn style_4"><?php the_field( 'rf_sec2_button_text' ); ?></a>
             </div>
 

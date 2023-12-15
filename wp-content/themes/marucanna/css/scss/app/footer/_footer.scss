@@ -143,3 +143,14 @@ footer {
         }
     }
 }
+
+.page-template-page-service-listing , 
+.single-marucanna-conditions , 
+.page-template-page-pricing , 
+.page-template-page-prescription  {
+    footer{
+        &::before{
+            background-image: url('../img/wave11.svg');
+        }
+    }
+}

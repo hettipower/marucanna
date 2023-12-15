@@ -699,15 +699,6 @@ section.section {
     
 \*------------------------------------*/
 
-.page-template-page-service-listing , 
-.single-marucanna-conditions  {
-    footer{
-        &::before{
-            background-image: url('../img/wave11.svg');
-        }
-    }
-}
-
 .breadcrumb_wrap {
     margin-top: 10px;
 
@@ -929,6 +920,10 @@ section.section {
                 }
             }
         }
+
+        .btn-wrap {
+            margin-top: 4rem;
+        }
     }
 }
 
@@ -980,6 +975,12 @@ section.section {
                 margin-bottom: 14px;
                 color: $theme_color;
                 font-size: 20px;
+            }
+
+            .content {
+                ul {
+                    text-align: left;
+                }
             }
         }
     }
@@ -1046,6 +1047,10 @@ section.section {
                     background-color: $theme_color2;
                 }
             }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 30px;
         }
     }
 }
@@ -1178,5 +1183,153 @@ section.section {
 
     .title_wrap {
         margin-bottom: 50px;
+    }
+}
+
+/*------------------------------------*\
+	
+    Prescription Page
+    
+\*------------------------------------*/
+.conditions-list-section {
+    background-color: #f6f4f3;
+    padding-top: 60px;
+    padding-bottom: 120px;
+    margin-bottom: 40px;
+
+    &::after , &::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        left: 0;
+    }
+
+    &::before {
+        background-image: url('../img/wave12.svg)');
+        top: 0;
+        height: 2vw;
+
+        @include media-breakpoint-up(xxl) {
+            height: 2vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 2vw;
+        }
+    }
+
+    &::after {
+        background-image: url('../img/wave7.svg)');
+        bottom: -1px;
+        height: 71px;
+        background-position: center;
+        background-size: cover;
+
+        @include media-breakpoint-up(xxl) {
+            height: 5vw;
+        }
+
+        @include media-breakpoint-down(md) {
+            height: 5vw;
+        }
+    }
+
+    .condition_list_wrap {
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            li {
+                width: 33.33%;
+                font-size: 17px;
+                margin-bottom: 10px;
+                position: relative;
+                padding-bottom: 5px;
+
+                @include media-breakpoint-down(lg) {
+                    width: 50%;
+                }
+
+                @include media-breakpoint-down(md) {
+                    width: 100%;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    height: 3px;
+                    width: 31px;
+                    border-radius: 3px;
+
+                    background-color: $theme_color;
+                }
+            }
+        }
+    }
+
+}
+
+.image_text_block {
+    margin-bottom: 50px;
+
+    .row {
+        align-items: center;
+    }
+
+    .image_wrapper {
+        aspect-ratio: 1/1.1;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: bottom;
+        }
+    }
+
+    .content_wrapper {
+        font-size: 17px;
+
+        p {
+            color: #515050;
+        }
+    }
+
+    &.style_1 {
+        .image_wrapper {
+            img {
+                mask-image: url(../img/mask1.svg);
+            }
+        }
+    }
+
+    &.style_2 {
+        .image_wrapper {
+            order: 2;
+
+            @include media-breakpoint-down(lg) {
+                order: 1;
+            }
+
+            img {
+                mask-image: url(../img/mask2.svg);
+            }
+        }
+
+        .content_wrapper {
+            order: 1;
+
+            @include media-breakpoint-down(lg) {
+                order: 2;
+            }
+        }
     }
 }
