@@ -36042,3 +36042,7 @@ section.section {
 .compare_table_wrap .table_container table tbody tr td h5, .compare_table_wrap .table_container table tbody tr td .h5 {
   color: #fff;
 }
+
+.blog_wrap {
+  padding-bottom: 50px;
+}
