@@ -1333,3 +1333,215 @@ section.section {
         }
     }
 }
+
+.compare_table_wrap {
+    padding-bottom: 50px;
+    .table_container {
+
+        @media (max-width: 1000px ) {
+            overflow-x: auto;
+        }
+
+        table {
+            min-width: calc(200vw + 1rem);
+
+            @media (min-width: 1000px ) {
+                width: 100%;
+                min-width: 0;
+            }
+    
+            .table_grid {
+                display: grid;
+                flex-direction: column;
+                grid-template-columns: minmax(300px, 1fr) repeat(auto-fit,minmax(50px,1fr));
+            }
+    
+            thead {
+                tr {
+    
+                    th {
+                        color: #113c1f;
+                        text-align: center;
+                        font-weight: 600;
+                        padding: 10px 10px;
+                        line-height: 1.2;
+                        font-size: 17px;
+                        border-radius: 10px 10px 0 0;
+                        position: relative;
+                        overflow: hidden;
+                        display: grid;
+                        place-content: center;
+    
+                        &:empty {
+                            background-color: transparent;
+                            padding: 0;
+
+                            @media (max-width: 1000px ) {
+                                display: none;
+                            }
+                        }
+    
+                        &.logo {
+                            background-color: #cbe8bb;
+    
+                            img {
+                                max-width: 93px;
+                            }
+                        }
+    
+                        &.odd {
+                            background-color: #e5e5e5;
+                        }
+    
+                        &.even {
+                            background-color: #dbdbdb;
+                        }
+                    }
+                }
+            }
+    
+            tbody {
+                tr {
+                    
+                    &:first-child {
+                        .table_left_thead {
+                            border-radius: 5px 5px 0 0;
+                            -webkit-border-radius: 5px 5px 0 0;
+                            -moz-border-radius: 5px 5px 0 0;
+                            -ms-border-radius: 5px 5px 0 0;
+                            -o-border-radius: 5px 5px 0 0;
+                        }
+                    }
+    
+                    &:last-child {
+                        td {
+                            border-radius: 0 0 5px 5px;
+                            -webkit-border-radius: 0 0 5px 5px;
+                            -moz-border-radius: 0 0 5px 5px;
+                            -ms-border-radius: 0 0 5px 5px;
+                            -o-border-radius: 0 0 5px 5px;
+                        }
+                    }
+    
+                    &.tr_odd {
+                        td {
+                            &:nth-child(2n + 1) {
+                                background-color: #d1ded4;
+                            }
+    
+                            &:nth-child(2n) {
+                                background-color: #c9d7cd;
+                            }
+    
+                            &.table_left_thead {
+                                background-color: #2e9d51;
+                            }
+    
+                            &.table_leva {
+                                background-color: #bde0b5;
+                            }
+                        }
+                    }
+    
+                    &.tr_even {
+                        td {
+                            &:nth-child(2n + 1) {
+                                background-color: #e5e5e5;
+                            }
+    
+                            &:nth-child(2n) {
+                                background-color: #dbdbdb;
+                            }
+    
+                            &.table_leva {
+                                background-color: #cbe8bb;
+                            }
+    
+                            &.table_left_thead {
+                                background-color: #0b8e36;
+                            }
+                        }
+                    }
+
+                    @media (min-width: 1000px ) {
+                        &.table_row-mobile {
+                            display: none;
+                        }
+                    }
+                    
+                    &.table_row-mobile {
+                        td {
+                            max-width: calc(95vw);
+                            position: sticky;
+                            top: 0;
+                            left: 0;
+                            text-align: center;
+                            padding: 20px 20px;
+
+                            @media (min-width: 576px) {
+                                max-width: calc(540px - 24px);
+                            }
+
+                            @media (min-width: 768px) {
+                                max-width: calc(720px - 24px);
+                            }
+                        }
+
+                        &.tr_odd {
+                            td {
+                                background-color: #2e9d51;
+                            }
+                        }
+
+                        &.tr_even {
+                            td {
+                                background-color: #0b8e36;
+                            }
+                        }
+                    }
+    
+                    td {
+                        text-align: center;
+                        place-content: center;
+                        display: grid;
+                        padding: 14px 0;
+                        color: #113c1f;
+                        line-height: 1.1;
+                        font-size: 17px;
+    
+                        &.table_left_thead {
+                            padding: 10px 20px;
+                            text-align: left;
+                            font-size: 15px;
+                            line-height: 1.1;
+                            display: flex;
+                            align-items: center;
+
+                            @media (max-width: 1000px ) {
+                                display: none;
+                            }
+                        }
+    
+                        &.table_other {
+                            place-content: center;
+                            display: grid;
+                        }
+    
+                        p {
+                            margin-bottom: 0;
+                            color: #fff;
+                        }
+    
+                        h3 , h5 {
+                            margin-bottom: 0;
+                        }
+    
+                        h5 {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
