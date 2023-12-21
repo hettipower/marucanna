@@ -231,6 +231,7 @@
                 text-transform: capitalize;
                 font-size: 18px;
                 position: relative;
+                border: none;
 
                 &:after {
                     @include pseudo;

@@ -34741,6 +34741,7 @@ section.section {
   text-transform: capitalize;
   font-size: 18px;
   position: relative;
+  border: none;
 }
 .blog_item .blog_content .btn_wrap .btn:after {
   content: "";
