@@ -45,53 +45,13 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="mainMenuWrap">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Home</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pain Relief</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Pain relief</a></li>
-							<li><a class="dropdown-item" href="#">Check eligibility</a></li>
-							<li><a class="dropdown-item" href="#">Prescriptions</a></li>
-							<li><a class="dropdown-item" href="#">Pain relief</a></li>
-							<li><a class="dropdown-item" href="#">Check eligibility</a></li>
-							<li><a class="dropdown-item" href="#">Prescriptions</a></li>
-							<li><a class="dropdown-item" href="#">Pain relief</a></li>
-							<li><a class="dropdown-item" href="#">Check eligibility</a></li>
-							<li><a class="dropdown-item" href="#">Prescriptions</a></li>
-							<li><a class="dropdown-item" href="#">Pain relief</a></li>
-							<li><a class="dropdown-item" href="#">Check eligibility</a></li>
-							<li><a class="dropdown-item" href="#">Prescriptions</a></li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">PRESCRIPTIONS</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Drop Down 1</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 2</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 3</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 4</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 5</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 6</a></li>
-						</ul>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Pricing</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Drop Down 1</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 2</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 3</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 4</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 5</a></li>
-							<li><a class="dropdown-item" href="#">Drop Down 6</a></li>
-						</ul>
-					</li>
-				</ul>
+				<?php
+					wp_nav_menu( array(
+						'theme_location' => 'header-menu',
+						'items_wrap'      => '<ul class="navbar-nav">%3$s</ul>',
+						'walker'       => new MC_Header_Menu_Walker(),
+					));
+				?>
 				<a href="#" class="btn style_1">CHECK ELIGIBILITY</a>
 				<a href="#" class="btn style_2">REPEAT ORDER</a>
 			</div>

@@ -5,6 +5,7 @@ include 'includes/functions/theme_acf_functions.php';
 include 'includes/shortcodes.php';
 include 'includes/custom-posts.php';
 include 'includes/functions/mc_api.php';
+include 'includes/functions/menus.php';
 
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'reviews-thumb', 50, 49,true);
@@ -12,9 +13,6 @@ add_image_size( 'doc-home-thumb', 243, 297,true);
 add_image_size( 'blog-home-thumb', 416, 276,true);
 add_image_size( 'siderbar-thumb', 526, 9999);
 //add_image_size( 'custom-thumb', 360, 182,true);
-
-register_nav_menu( 'footer-menu-1', __( 'Footer Menu #1') );
-register_nav_menu( 'footer-menu-2', __( 'Footer Menu #2') );
 
 //Meta box to show reviews on home page
 function sm_custom_meta() {
