@@ -68,7 +68,7 @@
         </div>
 
         <div class="btn_wrap">
-            <a href="#" class="btn btn_link show_single_content">READ MORE</a>
+            <a href="#" class="btn style_4">READ MORE</a>
         </div>
 
     </div>

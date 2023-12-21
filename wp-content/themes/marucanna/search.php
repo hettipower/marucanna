@@ -9,12 +9,8 @@ get_header(); ?>
 	<?php if ( get_field( 'page_title' ) ) { ?>
 	<h1><?php the_field( 'page_title' ); ?></h1>
 	<?php } else { ?>
-		<?php if ( have_posts() ) : ?>
-<?php while ( have_posts() ) : the_post(); ?>   
-        <h1><?php the_title(); ?></h1>
-		<?php endwhile; ?>
-<?php endif; ?>
-		<?php }  ?>
+        <h1>Search</h1>
+	<?php }  ?>
     </div>
 </section>
 
@@ -30,16 +26,9 @@ get_header(); ?>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-sm-12 order-md-2 blog_listing">
-
-                <?php
-                    $the_query = new WP_Query(array(
-                        'post_type' => 'post',
-                        'posts_per_page' => -1
-                    ));
-                    if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post();
-                ?>
+                <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?> 
                     <?php get_template_part( 'template-part/blog', 'item' ); ?>
-	            <?php endwhile; wp_reset_postdata(); endif; ?>
+		        <?php endwhile; endif; ?>
             </div>
             
             <?php get_template_part( 'template-part/blog', 'sidebar' ); ?>

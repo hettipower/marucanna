@@ -196,3 +196,11 @@ function the_breadcrumb() {
 	elseif (is_search()) {echo"<li class='breadcrumb-item'>Search Results"; echo'</li>';}
 	echo '</ol>';
 }
+
+/**
+ * Add HTML5 theme support.
+ */
+function mc_after_setup_theme() {
+	add_theme_support( 'html5', array( 'search-form' ) );
+}
+add_action( 'after_setup_theme', 'mc_after_setup_theme' );

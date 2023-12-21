@@ -20,8 +20,8 @@
 
 	@include media-breakpoint-down(md) {
 		top: -14px;
-		height: 150px;
-		max-width: 150px;
+		height: 110px;
+		max-width: 110px;
 	}
 }
 
@@ -30,5 +30,10 @@
 		top: -14px;
 		height: 150px;
 		max-width: 150px;
+
+		@include media-breakpoint-down(md) {
+			height: 110px;
+			max-width: 110px;
+		}
 	}
 }

@@ -1,13 +1,19 @@
+<?php
+    $thumb_id = get_post_thumbnail_id();
+    $thumb_url = wp_get_attachment_image_src($thumb_id,'full', true);
+?>
 <div class="blog_item mb-5">
     <div class="blog-img">
-        <img src="<?php bloginfo( 'template_url' ); ?>/img/header.jpg" class="rounded img-fluid" alt="...">
+        <?php if ( has_post_thumbnail() ) : ?>
+            <img src="<?php echo $thumb_url[0]; ?>" class="rounded img-fluid" alt="<?php the_title(); ?>">
+        <?php endif; ?>
     </div>
     <div class="blog_content">
-        <div class="date">2023 Desember 10</div>
-        <h3>Blog Title</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique nec leo eget aliquet. Maecenas eu orci ipsum. Ut fermentum nunc erat, vitae ornare lectus placerat at. Vivamus eu nunc purus. </p>
+        <div class="date"><?php echo get_the_date('Y'); ?> <?php echo get_the_date('F'); ?> <?php echo get_the_date('j'); ?></div>
+        <h3><?php the_title(); ?></h3>
+        <?php my_excerpt(17); ?>
         <div class="btn_wrap">
-            <a href="#" class="btn">Read More</a>
+            <a href="<?php the_permalink(); ?>" class="btn">Read More</a>
         </div>
     </div>
 </div>
