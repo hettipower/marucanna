@@ -57,14 +57,28 @@
 				}
 			}
 
+			&.dropdown {
+				&:hover {
+
+					.dropdown-toggle {
+						background-color: $theme_color2;
+					}
+
+					.dropdown-menu {
+						display: flex;
+					}
+				}
+			}
+
 			.dropdown-menu {
 				width: 500px;
-				top: 114%;
+				top: 100%;
 				background-color: $theme_color2;
 				border: none;
 				padding: 6px 30px;
 				flex-wrap: wrap;
 				justify-content: space-between;
+				margin-top: 0;
 
 				@include media-breakpoint-down(md) {
 					width: 100%;

@@ -32,14 +32,21 @@ get_header(); ?>
             <div class="col-md-8 col-sm-12 order-md-2 blog_listing">
 
                 <?php
-                    $the_query = new WP_Query(array(
+                    $blog_query = new WP_Query(array(
                         'post_type' => 'post',
-                        'posts_per_page' => -1
+                        'paged' => $paged
                     ));
-                    if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post();
+                    if ( $blog_query->have_posts() ) : while ( $blog_query->have_posts() ) : $blog_query->the_post();
                 ?>
                     <?php get_template_part( 'template-part/blog', 'item' ); ?>
 	            <?php endwhile; wp_reset_postdata(); endif; ?>
+
+                <div class="pagination_wrap">
+                    <nav>
+                        <?php kriesi_pagination($blog_query->max_num_pages); ?>
+                    </nav>
+                </div>
+                
             </div>
             
             <?php get_template_part( 'template-part/blog', 'sidebar' ); ?>

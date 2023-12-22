@@ -144,6 +144,19 @@
 jQuery( ".mc-blog-text p" ).addClass( "card-text" );
 jQuery( ".mc-footer-menu li" ).addClass( "nav-item" );
 jQuery( ".mc-footer-menu a" ).addClass( "nav-link" );
+jQuery('.mc-tab-title h3').each(function(){
+
+    var text = jQuery(this).text().split(' ');
+	var n = 1; // specify which word we're wrapping. remember that the count starts from 0
+	var t = 'span'; // which HTML tag are we going to use as wrapper?
+	
+    if(n>=text.length){return;}
+
+    text[n] = '<'+t+'>'+text[n]+' </'+t+'>';
+
+    jQuery(this).html( text.join(' ') );
+
+});	
 </script>
 </body>
 </html>

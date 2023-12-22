@@ -816,34 +816,6 @@ section.section {
                 }
             }
         }
-
-        .pagination_wrap {
-            margin-top: 25px;
-
-            .pagination {
-                margin: 0;
-                justify-content: center;
-
-                .page-item {
-                    margin: 0 6px;
-                    border-radius: 0;
-
-                    .page-link {
-                        background-color: #0b8e36;
-                        color: #fff;
-                        padding: 5px 15px;
-                        border: none;
-                        border-radius: 0;
-                    }
-
-                    &.active {
-                        .page-link {
-                            background-color: #bad66c;
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 

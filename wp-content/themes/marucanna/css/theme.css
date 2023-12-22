@@ -34369,9 +34369,16 @@ body:not(.home).sticky-header header .navbar::before {
     top: 12px;
   }
 }
+#mainMenuWrap .navbar-nav > li.dropdown:hover .dropdown-toggle {
+  background-color: #9cc52b;
+}
+#mainMenuWrap .navbar-nav > li.dropdown:hover .dropdown-menu {
+  display: -ms-flexbox;
+  display: flex;
+}
 #mainMenuWrap .navbar-nav > li .dropdown-menu {
   width: 500px;
-  top: 114%;
+  top: 100%;
   background-color: #9cc52b;
   border: none;
   padding: 6px 30px;
@@ -34379,6 +34386,7 @@ body:not(.home).sticky-header header .navbar::before {
       flex-wrap: wrap;
   -ms-flex-pack: justify;
       justify-content: space-between;
+  margin-top: 0;
 }
 @media (max-width: 767.98px) {
   #mainMenuWrap .navbar-nav > li .dropdown-menu {
@@ -35431,28 +35439,6 @@ section.section {
   margin-bottom: 0;
   font-size: 18px;
 }
-.condition-listing-block .condition_listing_wrap .pagination_wrap {
-  margin-top: 25px;
-}
-.condition-listing-block .condition_listing_wrap .pagination_wrap .pagination {
-  margin: 0;
-  -ms-flex-pack: center;
-      justify-content: center;
-}
-.condition-listing-block .condition_listing_wrap .pagination_wrap .pagination .page-item {
-  margin: 0 6px;
-  border-radius: 0;
-}
-.condition-listing-block .condition_listing_wrap .pagination_wrap .pagination .page-item .page-link {
-  background-color: #0b8e36;
-  color: #fff;
-  padding: 5px 15px;
-  border: none;
-  border-radius: 0;
-}
-.condition-listing-block .condition_listing_wrap .pagination_wrap .pagination .page-item.active .page-link {
-  background-color: #bad66c;
-}
 
 .pain-symptoms-wrap {
   padding-top: 60px;
@@ -36276,4 +36262,27 @@ section.section {
   width: 15px;
   height: 15px;
   font-size: 9px;
+}
+
+.pagination_wrap {
+  margin-top: 25px;
+}
+.pagination_wrap .pagination {
+  margin: 0;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+.pagination_wrap .pagination .page-item {
+  margin: 0 6px;
+  border-radius: 0;
+}
+.pagination_wrap .pagination .page-item .page-link {
+  background-color: #0b8e36;
+  color: #fff;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 0;
+}
+.pagination_wrap .pagination .page-item.active .page-link {
+  background-color: #bad66c;
 }

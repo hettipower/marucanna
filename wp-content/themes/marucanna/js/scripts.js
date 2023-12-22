@@ -1,8 +1,9 @@
-/*! css 1.0.0 filename.js 2023-12-13 10:24:21 PM */
+/*! css 1.0.0 filename.js 2023-12-22 9:32:52 PM */
 
 jQuery(document).ready(function($) {
     our_team_slider();
     sticky_header();
+    menu_dropdown();
 });
 
 function sticky_header() {
@@ -13,6 +14,18 @@ function sticky_header() {
         } else {
             jQuery("body").removeClass("sticky-header");
         }
+    });
+}
+
+function menu_dropdown() {
+    jQuery(".nav-item.dropdown").hover(function() {
+        jQuery(this).find(".dropdown-menu").addClass("show");
+    }, function() {
+        jQuery(this).find(".dropdown-menu").removeClass("show");
+    });
+    jQuery(".nav-item.dropdown .dropdown-toggle").on("click", function() {
+        var link = jQuery(this).attr("href");
+        window.location.href = link;
     });
 }
 

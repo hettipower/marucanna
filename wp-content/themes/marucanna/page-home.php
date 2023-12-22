@@ -93,163 +93,137 @@ endif;
             
         </div>
         <ul class="nav nav-pills mb-5" id="treating-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-cancer-tab" data-bs-toggle="pill" data-bs-target="#pills-cancer" type="button" role="tab" aria-controls="pills-cancer" aria-selected="false">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/cancer.webp" alt="">
-                    <span>Cancer</span>
+		<?php
+
+// check if the repeater field has rows of data
+if( have_rows('hm_sec4_content_tabs') ):
+$i=0;
+ 	// loop through the rows of data
+    while ( have_rows('hm_sec4_content_tabs') ) : the_row(); $i++;
+?>
+		<?php if($i==2) { ?>
+		<li class="nav-item" role="presentation">
+                <button class="nav-link active" id="conditions-tab-<?php echo $i; ?>" data-bs-toggle="pill" data-bs-target="#cn-tab-<?php echo $i; ?>" type="button" role="tab" aria-controls="conditions-tab-<?php echo $i; ?>" aria-selected="true">
+				<?php if ( get_sub_field( 'icon' ) ) { ?>
+                    <img src="<?php the_sub_field( 'icon' ); ?>"/>
+					<?php } ?>
+                    <span><?php the_sub_field( 'title' ); ?></span>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-pain-tab" data-bs-toggle="pill" data-bs-target="#pills-pain" type="button" role="tab" aria-controls="pills-pain" aria-selected="true">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/pain.webp" alt="">
-                    <span>Chronic pain</span>
+		
+	<?php } else { ?>	
+		
+		
+		   <li class="nav-item" role="presentation">
+                <button class="nav-link" id="conditions-tab-<?php echo $i; ?>" data-bs-toggle="pill" data-bs-target="#cn-tab-<?php echo $i; ?>" type="button" role="tab" aria-controls="conditions-tab-<?php echo $i; ?>" aria-selected="false">
+                    <?php if ( get_sub_field( 'icon' ) ) { ?>
+                    <img src="<?php the_sub_field( 'icon' ); ?>"/>
+					<?php } ?>
+                    <span><?php the_sub_field( 'title' ); ?></span>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-chrons-tab" data-bs-toggle="pill" data-bs-target="#pills-chrons" type="button" role="tab" aria-controls="pills-chrons" aria-selected="false">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/chrons.webp" alt="">
-                    <span>Crohns</span>
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-headache-tab" data-bs-toggle="pill" data-bs-target="#pills-headache" type="button" role="tab" aria-controls="pills-headache" aria-selected="false">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/headache.webp" alt="">
-                    <span>Headaches</span>
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-Palliative-care-tab" data-bs-toggle="pill" data-bs-target="#pills-Palliative-care" type="button" role="tab" aria-controls="pills-Palliative-care" aria-selected="false">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/home/Palliative-care.webp" alt="">
-                    <span>Palliative care</span>
-                </button>
-            </li>
+			
+			<?php }  ?>	
+			
+<?php
+
+    endwhile;
+
+else :
+
+    // no rows found
+
+endif;
+
+?>		
+			
         </ul>
+		
         <div class="tab-content" id="treating-tapContent">
-            <div class="tab-pane fade show active" id="pills-pain" role="tabpanel" aria-labelledby="pills-pain-tab" tabindex="0">
+		
+		
+		<?php
+
+// check if the repeater field has rows of data
+if( have_rows('hm_sec4_content_tabs') ):
+$i=0;
+ 	// loop through the rows of data
+    while ( have_rows('hm_sec4_content_tabs') ) : the_row(); $i++;
+?>
+		<?php if($i==2) { ?>
+            <div class="tab-pane fade show active" id="cn-tab-<?php echo $i; ?>" role="tabpanel" aria-labelledby="conditions-tab-<?php echo $i; ?>" tabindex="0">
                 <div class="row">
+				<?php if ( get_sub_field( 'main_image' ) ) { ?>
                     <div class="col-md-4 col-sm-12 image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/home/chronic-pain.webp" alt="">
+                        <img src="<?php the_sub_field( 'main_image' ); ?>"/>
                     </div>
-                    <div class="col-md-8 col-sm-12 content-wrap">
-                        <h3>Chronic <span>Pain</span></h3>
-                        <p>Chronic pain is the most common reason for which medical cannabis is given in the UK, with over 7 million people estimated to be affected. We can offer consultations with medical specialists regarding a wide range of qualifying pain conditions. To learn more, click on any of the categories below.</p>
+					<?php } ?>
+                    <div class="col-md-8 col-sm-12 content-wrap mc-tab-title">
+                        <h3><?php the_sub_field( 'title' ); ?></h3>
+                       <?php the_sub_field( 'content' ); ?>
                         
                         <div class="row">
-                            <div class="col-md-6 item">Arthritis</div>
-                            <div class="col-md-6 item">Endometriosis</div>
-                            <div class="col-md-6 item">Back pain and Sciatica</div>
-                            <div class="col-md-6 item">Fibromyalgia</div>
-                            <div class="col-md-6 item">Chronic Pain</div>
-                            <div class="col-md-6 item">Migraines</div>
-                            <div class="col-md-6 item">Chronic regional pain syndrome</div>
-                            <div class="col-md-6 item">Musculoskeletal pain</div>
-                            <div class="col-md-6 item">Ehlers Danlos syndromes</div>
-                            <div class="col-md-6 item">Neuropathic pain</div>
+						<?php if ( have_rows( 'list_rep' ) ) : ?>
+			<?php while ( have_rows( 'list_rep' ) ) : the_row(); ?>
+                            <div class="col-md-6 item"><a href="<?php the_sub_field( 'link' ); ?>"><?php the_sub_field( 'topic' ); ?></a></div>
+							<?php endwhile; ?>
+		<?php else : ?>
+			<?php // no rows found ?>
+		<?php endif; ?>
+                           
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="pills-cancer" role="tabpanel" aria-labelledby="pills-cancer-tab" tabindex="0">
+				<?php } else { ?>	
+			
+            <div class="tab-pane fade" id="cn-tab-<?php echo $i; ?>" role="tabpanel" aria-labelledby="conditions-tab-<?php echo $i; ?>" tabindex="0">
                 <div class="row">
+                  <?php if ( get_sub_field( 'main_image' ) ) { ?>
                     <div class="col-md-4 col-sm-12 image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/home/chronic-pain.webp" alt="">
+                        <img src="<?php the_sub_field( 'main_image' ); ?>"/>
                     </div>
-                    <div class="col-md-8 col-sm-12 content-wrap">
-                        <h3>Chronic <span>Pain</span></h3>
-                        <p>Chronic pain is the most common reason for which medical cannabis is given in the UK, with over 7 million people estimated to be affected. We can offer consultations with medical specialists regarding a wide range of qualifying pain conditions. To learn more, click on any of the categories below.</p>
+					<?php } ?>
+                    <div class="col-md-8 col-sm-12 content-wrap mc-tab-title">
+                        <h3><?php the_sub_field( 'title' ); ?></h3>
+                       <?php the_sub_field( 'content' ); ?>
                         
                         <div class="row">
-                            <div class="col-md-6 col-sm-12 item">Arthritis</div>
-                            <div class="col-md-6 col-sm-12 item">Endometriosis</div>
-                            <div class="col-md-6 col-sm-12 item">Back pain and Sciatica</div>
-                            <div class="col-md-6 col-sm-12 item">Fibromyalgia</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic Pain</div>
-                            <div class="col-md-6 col-sm-12 item">Migraines</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic regional pain syndrome</div>
-                            <div class="col-md-6 col-sm-12 item">Musculoskeletal pain</div>
-                            <div class="col-md-6 col-sm-12 item">Ehlers Danlos syndromes</div>
-                            <div class="col-md-6 col-sm-12 item">Neuropathic pain</div>
+                           <?php if ( have_rows( 'list_rep' ) ) : ?>
+			<?php while ( have_rows( 'list_rep' ) ) : the_row(); ?>
+                            <div class="col-md-6 item"><a href="<?php the_sub_field( 'link' ); ?>"><?php the_sub_field( 'topic' ); ?></a></div>
+							<?php endwhile; ?>
+		<?php else : ?>
+			<?php // no rows found ?>
+		<?php endif; ?>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="pills-chrons" role="tabpanel" aria-labelledby="pills-chrons-tab" tabindex="0">
-                <div class="row">
-                    <div class="col-md-4 col-sm-12 image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/home/chronic-pain.webp" alt="">
-                    </div>
-                    <div class="col-md-8 col-sm-12 content-wrap">
-                        <h3>Chronic <span>Pain</span></h3>
-                        <p>Chronic pain is the most common reason for which medical cannabis is given in the UK, with over 7 million people estimated to be affected. We can offer consultations with medical specialists regarding a wide range of qualifying pain conditions. To learn more, click on any of the categories below.</p>
-                        
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12 item">Arthritis</div>
-                            <div class="col-md-6 col-sm-12 item">Endometriosis</div>
-                            <div class="col-md-6 col-sm-12 item">Back pain and Sciatica</div>
-                            <div class="col-md-6 col-sm-12 item">Fibromyalgia</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic Pain</div>
-                            <div class="col-md-6 col-sm-12 item">Migraines</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic regional pain syndrome</div>
-                            <div class="col-md-6 col-sm-12 item">Musculoskeletal pain</div>
-                            <div class="col-md-6 col-sm-12 item">Ehlers Danlos syndromes</div>
-                            <div class="col-md-6 col-sm-12 item">Neuropathic pain</div>
-                        </div>
+			
+			
+			<?php }  ?>	
+			
+			<?php
 
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="pills-headache" role="tabpanel" aria-labelledby="pills-headache-tab" tabindex="0">
-                <div class="row">
-                    <div class="col-md-4 col-sm-12 image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/home/chronic-pain.webp" alt="">
-                    </div>
-                    <div class="col-md-8 col-sm-12 content-wrap">
-                        <h3>Chronic <span>Pain</span></h3>
-                        <p>Chronic pain is the most common reason for which medical cannabis is given in the UK, with over 7 million people estimated to be affected. We can offer consultations with medical specialists regarding a wide range of qualifying pain conditions. To learn more, click on any of the categories below.</p>
-                        
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12 item">Arthritis</div>
-                            <div class="col-md-6 col-sm-12 item">Endometriosis</div>
-                            <div class="col-md-6 col-sm-12 item">Back pain and Sciatica</div>
-                            <div class="col-md-6 col-sm-12 item">Fibromyalgia</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic Pain</div>
-                            <div class="col-md-6 col-sm-12 item">Migraines</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic regional pain syndrome</div>
-                            <div class="col-md-6 col-sm-12 item">Musculoskeletal pain</div>
-                            <div class="col-md-6 col-sm-12 item">Ehlers Danlos syndromes</div>
-                            <div class="col-md-6 col-sm-12 item">Neuropathic pain</div>
-                        </div>
+    endwhile;
 
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="pills-Palliative-care" role="tabpanel" aria-labelledby="pills-Palliative-care-tab" tabindex="0">
-                <div class="row">
-                    <div class="col-md-4 col-sm-12 image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/home/chronic-pain.webp" alt="">
-                    </div>
-                    <div class="col-md-8 col-sm-12 content-wrap">
-                        <h3>Chronic <span>Pain</span></h3>
-                        <p>Chronic pain is the most common reason for which medical cannabis is given in the UK, with over 7 million people estimated to be affected. We can offer consultations with medical specialists regarding a wide range of qualifying pain conditions. To learn more, click on any of the categories below.</p>
-                        
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12 item">Arthritis</div>
-                            <div class="col-md-6 col-sm-12 item">Endometriosis</div>
-                            <div class="col-md-6 col-sm-12 item">Back pain and Sciatica</div>
-                            <div class="col-md-6 col-sm-12 item">Fibromyalgia</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic Pain</div>
-                            <div class="col-md-6 col-sm-12 item">Migraines</div>
-                            <div class="col-md-6 col-sm-12 item">Chronic regional pain syndrome</div>
-                            <div class="col-md-6 col-sm-12 item">Musculoskeletal pain</div>
-                            <div class="col-md-6 col-sm-12 item">Ehlers Danlos syndromes</div>
-                            <div class="col-md-6 col-sm-12 item">Neuropathic pain</div>
-                        </div>
+else :
 
-                    </div>
-                </div>
-            </div>
+    // no rows found
+
+endif;
+
+?>	
+			
+			
+			
+			
+          
+
+			
         </div>
     </div>
 </section>
