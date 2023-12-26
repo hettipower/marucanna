@@ -29,7 +29,12 @@ get_header(); ?>
 <section class="section text-block-section">
     <div class="container">
         <div class="description">
-            <p>Patients obtaining private medical cannabis therapy are responsible for covering the cost of both consultations and medicinal cannabis prescriptions. Medication may be gradually raised at the beginning of treatment while the best product and dosage are determined. After the initial consultation, patients usually need to wait a month to schedule a follow-up appointment to talk about how well they are managing their cannabis medication. After your doctor is satisfied that your cannabis treatment is stabilising, you might not need to see them for three months.</p>
+            <?php if ( have_posts() ) : ?>
+<?php while ( have_posts() ) : the_post(); ?>  
+<?php the_content(); ?>
+<?php endwhile; ?>
+<?php endif; ?>
+           
         </div>
     </div>
 </section>
@@ -39,37 +44,46 @@ get_header(); ?>
         <div class="row">
 		
             <div class="col-md-6 col-sm-12 image_wrapper">
+                <?php if ( get_field( 'pr_sec1_main_image' ) ) { ?>
+                	<img src="<?php the_field( 'pr_sec1_main_image' ); ?>"/>
+                <?php } else { ?>
 				<img src="<?php echo get_template_directory_uri(); ?>/img/pricing.webp"/>
+				 <?php }  ?>
             </div>
 			
             <div class="col-md-6 col-sm-12 content_wrapper">
-                <h2>MARUCANNA clinic <span>promises</span></h2>
+                <h2><?php echo do_shortcode(get_field('pr_sec1_title')); ?></h2>
                 
                 <div class="numbered_list">
+                    <?php
+
+// check if the repeater field has rows of data
+if( have_rows('pr_sec1_list_rep') ):
+$i=0;
+ 	// loop through the rows of data
+    while ( have_rows('pr_sec1_list_rep') ) : the_row(); $i++;
+?>
                     <div class="item">
-                        <span class="number">01</span>
-                        <div class="text">to verify your eligibility before collecting any fees.</div>
+                        <span class="number">0<?php echo $i; ?></span>
+                        <div class="text"><?php the_sub_field( 'title' ); ?></div>
                     </div>
-                    <div class="item">
-                        <span class="number">02</span>
-                        <div class="text">to listen, learn and understand your health needs.</div>
-                    </div>
-                    <div class="item">
-                        <span class="number">03</span>
-                        <div class="text">to create you a personalised treatment plan.</div>
-                    </div>
-                    <div class="item">
-                        <span class="number">04</span>
-                        <div class="text">to use patient feedback to improve our service.</div>
-                    </div>
-                    <div class="item">
-                        <span class="number">05</span>
-                        <div class="text">to create a caring, compassionate and respectful environment for our patients. </div>
-                    </div>
+ <?php
+
+    endwhile;
+
+else :
+
+    // no rows found
+
+endif;
+
+?>                   
+                    
+
                 </div>
 
                 <div class="btn-wrapper">
-                    <a href="#" class="btn style_4">BOOK NOW</a>
+                    <a href="<?php the_field( 'pr_sec1_button_link' ); ?>" class="btn style_4"><?php the_field( 'pr_sec1_button_text' ); ?></a>
                 </div>
             </div>
         </div>
@@ -80,116 +94,62 @@ get_header(); ?>
 <section class="section pricing_section_wrap">
     <div class="container">
         <div class="title_wrap text-center">
-            <h3>Medical <span>cannabis</span> cost</h3>
+            <h3><?php echo do_shortcode(get_field('pr_sec2_title')); ?></h3>
             <div class="description">
-                <p>As medical cannabis is a customised medicine, prices can differ greatly depending on the kind of cannabis and how much is prescribed. You can determine which items are a good fit for you by talking about the cost with your doctor and sharing your financial situation with them. Initially, people receiving medicinal cannabis treatment are typically prescribed a modest dosage. Gradually increasing the dose is done until the symptoms subside. By going "low and slow," adverse consequences are less likely to occur.</p>
+                <?php the_field( 'pr_sec2_content' ); ?>
+
             </div>
         </div>
 
         <div class="row g-3 pricing">
 
+            <?php if ( have_rows( 'pricing_table_fc' ) ): ?>
+	<?php while ( have_rows( 'pricing_table_fc' ) ) : the_row(); ?>
+		<?php if ( get_row_layout() == 'single_table_lo' ) : ?>
+            
             <div class=" col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="title">Initial Consultation</h4>
-                        <h5 class="subtitle">Specialist</h5>
+                        <h4 class="title"><?php the_sub_field( 'table_heading' ); ?></h4>
+                        <h5 class="subtitle"><?php the_sub_field( 'heading_2' ); ?></h5>
                         <div class="price_wrap">
-                            <a href="#" class="btn style_5">BOOK NOW</a>
-                            <div class="price">£110</div>
+                            <a href="<?php the_sub_field( 'booking_button_link' ); ?>" class="btn style_5"><?php the_sub_field( 'booking_button_text' ); ?></a>
+                            <div class="price"><?php the_sub_field( 'price' ); ?></div>
                         </div>
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Microalbuminuria</li>
-                            <li class="list-group-item">Direct Bilirubin</li>
-                            <li class="list-group-item">Indirect Bilirubin</li>
-                            <li class="list-group-item">Total Bilirubin</li>
-                            <li class="list-group-item">Clearance Creatinine</li>
-                            <li class="list-group-item">Microalbuminuria</li>
+                            <?php if ( have_rows( 'features_rep' ) ) : ?>
+				<?php while ( have_rows( 'features_rep' ) ) : the_row(); ?>
+                            <li class="list-group-item"><?php the_sub_field( 'feature' ); ?></li>
+                            	<?php endwhile; ?>
+			<?php else : ?>
+				<?php // no rows found ?>
+			<?php endif; ?>
+                            
                         </ul>
                         <div class="btn_wrap text-center mt-4">
-                            <a href="#" class="btn style_2">Contact Us</a>
+                            <a href="<?php the_sub_field( 'contact_button_link' ); ?>" class="btn style_2"><?php the_sub_field( 'contact_button_text' ); ?></a>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <?php
 
-            <div class=" col-lg-3 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="title">First Follow Up</h4>
-                        <h5 class="subtitle">Specialist</h5>
-                        <div class="price_wrap">
-                            <a href="#" class="btn style_5">BOOK NOW</a>
-                            <div class="price">£50</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Microalbuminuria</li>
-                            <li class="list-group-item">Direct Bilirubin</li>
-                            <li class="list-group-item">Indirect Bilirubin</li>
-                            <li class="list-group-item">Total Bilirubin</li>
-                            <li class="list-group-item">Clearance Creatinine</li>
-                            <li class="list-group-item">Microalbuminuria</li>
-                        </ul>
-                        <div class="btn_wrap text-center mt-4">
-                            <a href="#" class="btn style_2">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  endif;
 
-            <div class=" col-lg-3 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="title">Initial Consultation</h4>
-                        <h5 class="subtitle">Specialist</h5>
-                        <div class="price_wrap">
-                            <a href="#" class="btn style_5">BOOK NOW</a>
-                            <div class="price">£110</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Microalbuminuria</li>
-                            <li class="list-group-item">Direct Bilirubin</li>
-                            <li class="list-group-item">Indirect Bilirubin</li>
-                            <li class="list-group-item">Total Bilirubin</li>
-                            <li class="list-group-item">Clearance Creatinine</li>
-                            <li class="list-group-item">Microalbuminuria</li>
-                        </ul>
-                        <div class="btn_wrap text-center mt-4">
-                            <a href="#" class="btn style_2">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    endwhile;
 
-            <div class=" col-lg-3 col-md-6 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="title">Initial Consultation</h4>
-                        <h5 class="subtitle">Specialist</h5>
-                        <div class="price_wrap">
-                            <a href="#" class="btn style_5">BOOK NOW</a>
-                            <div class="price">£110</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Microalbuminuria</li>
-                            <li class="list-group-item">Direct Bilirubin</li>
-                            <li class="list-group-item">Indirect Bilirubin</li>
-                            <li class="list-group-item">Total Bilirubin</li>
-                            <li class="list-group-item">Clearance Creatinine</li>
-                        </ul>
-                        <div class="btn_wrap text-center mt-4">
-                            <a href="#" class="btn style_2">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+else :
+
+    // no layouts found
+
+endif;
+
+?>
+            
+           
 
         </div>
 
@@ -199,13 +159,17 @@ get_header(); ?>
 <section class="section timeline_wrap">
     <div class="container">
         <div class="title_wrap text-center">
-            <h3>Appointment <span>timeline</span></h3>
+            <h3><?php echo do_shortcode(get_field('pr_sec3_title')); ?></h3>
         </div>
         <div class="timeline">
-            <img src="<?php bloginfo( 'template_url' ); ?>/img/pricing-timeline.webp" class="img-fluid" alt="">
+            <?php if ( get_field( 'pr_sec3_main_image' ) ) { ?>
+            <img src="<?php the_field( 'pr_sec3_main_image' ); ?>" />
+            <?php } else { ?>
+            <img src="<?php bloginfo( 'template_url' ); ?>/img/pricing-timeline.webp" class="img-fluid"/>
+             <?php }  ?>
         </div>
         <div class="btn_wrap mt-3 text-center">
-            <a href="#" class="btn style_4">REPEAT ORDER</a>
+            <a href="<?php the_field( 'pr_sec3_button_link' ); ?>" class="btn style_4"><?php the_field( 'pr_sec3_button_text' ); ?></a>
         </div>
     </div>
 </section>
@@ -213,9 +177,11 @@ get_header(); ?>
 <section class="section text-block-section">
     <div class="container">
         <div class="title_wrap text-center">
-            <h3>Multiple forms of <span>medicinal</span> cannabis</h3>
+            <h3><?php echo do_shortcode(get_field('pr_sec3_title_2')); ?></h3>
             <div class="description">
-                <p>Products made from cannabis come in a variety of forms and dosages, such as oils, pills, and vaporizer-ready dry flowers. In order to guarantee that medical cannabis is suitable for each patient, a specialised expert must prescribe it in the UK following a thorough consultation. It's crucial to remember that some CBD products are marketed as therapeutic cannabis in order to increase sales. We specialise in the flower form of medical cannabis.</p>
+                <?php the_field( 'pr_sec3_content' ); ?>
+
+                
             </div>
         </div>
     </div>
@@ -224,28 +190,23 @@ get_header(); ?>
 <section class="section faq-section">
     <div class="container">
         <div class="title_wrap text-center">
-            <h2>Frequently asked questions about chronic pain</h2>
+            <h2><?php the_field( 'faq_title' ); ?></h2>
         </div>
 
         <div class="faqs row g-3">
-			            <div class="faq-item">
-                <h3>What is chronic pain ?</h3>
-                <div class="content"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa</p>
-</div>
-            </div>
+			<?php if ( have_rows( 'faq_rep' ) ) : ?>
+	<?php while ( have_rows( 'faq_rep' ) ) : the_row(); ?>
             <div class="faq-item">
-                <h3>How does medical cannibas help with chronic pain?</h3>
-                <div class="content"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa</p>
-</div>
+                <h3><?php the_sub_field( 'question' ); ?></h3>
+                <div class="content"><?php the_sub_field( 'answer' ); ?> </div>
             </div>
-            <div class="faq-item">
-                <h3>How do i start treatments ?</h3>
-                <div class="content"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa</p>
-</div>
-            </div>
-           
+<?php endwhile; ?>
+<?php else : ?>
+	<?php // no rows found ?>
+<?php endif; ?>
+          
 
-           
+        
         </div>
 
     </div>
