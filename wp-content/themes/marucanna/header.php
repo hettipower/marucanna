@@ -52,7 +52,7 @@
 						'walker'       => new MC_Header_Menu_Walker(),
 					));
 				?>
-				<a href="#" class="btn style_1">CHECK ELIGIBILITY</a>
+				<a href="<?php echo home_url('check-eligibility'); ?>" class="btn style_1">CHECK ELIGIBILITY</a>
 				<a href="#" class="btn style_2">REPEAT ORDER</a>
 			</div>
 		</div>

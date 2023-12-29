@@ -6,6 +6,7 @@ include 'includes/shortcodes.php';
 include 'includes/custom-posts.php';
 include 'includes/functions/mc_api.php';
 include 'includes/functions/menus.php';
+include_once __DIR__ . '/includes/acf/acf-hidden-field/init.php';    
 
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'reviews-thumb', 50, 49,true);
@@ -204,3 +205,59 @@ function mc_after_setup_theme() {
 	add_theme_support( 'html5', array( 'search-form' ) );
 }
 add_action( 'after_setup_theme', 'mc_after_setup_theme' );
+
+add_action( 'admin_post_mc_eligibility_checker', 'admin_mc_eligibility_checker' );
+add_action( 'admin_post_nopriv_mc_eligibility_checker', 'admin_mc_eligibility_checker' );
+function admin_mc_eligibility_checker() {
+
+  $fname = isset($_POST['fname']) ? $_POST['fname'] : '';
+  $email = isset($_POST['email']) ? $_POST['email'] : '';
+  $contact_no = isset($_POST['contact_no']) ? $_POST['contact_no'] : '';
+  $eligibility_q1 = isset($_POST['eligibility_q1']) ? $_POST['eligibility_q1'] : false;
+  $eligibility_q2 = isset($_POST['eligibility_q2']) ? $_POST['eligibility_q2'] : false;
+  $eligibility_q3 = isset($_POST['eligibility_q3']) ? $_POST['eligibility_q3'] : false;
+  $eligibility_q4 = isset($_POST['eligibility_q4']) ? $_POST['eligibility_q4'] : false;
+  $eligibility_q5 = isset($_POST['eligibility_q5']) ? $_POST['eligibility_q5'] : false;
+
+  // Create Patient Object
+  $patient = array(
+    'post_title'    => wp_strip_all_tags("Patient $fname"),
+    'post_status'   => 'publish',
+    'post_type' => 'marucanna-patients',
+  );
+
+  $patient_post_id = wp_insert_post($patient);
+
+  if(!is_wp_error($patient_post_id)) {
+
+    $patient_ID = "MP-$patient_post_id";
+
+    update_post_meta( $patient_post_id, 'eligibility_q1', wp_slash( $eligibility_q1 ) );
+    update_post_meta( $patient_post_id, 'eligibility_q2', wp_slash( $eligibility_q2 ) );
+    update_post_meta( $patient_post_id, 'eligibility_q3', wp_slash( $eligibility_q3 ) );
+    update_post_meta( $patient_post_id, 'eligibility_q4', wp_slash( $eligibility_q4 ) );
+    update_post_meta( $patient_post_id, 'eligibility_q5', wp_slash( $eligibility_q5 ) );
+
+    update_field('name', $fname , $patient_post_id);
+    update_field('email', $fname , $patient_post_id);
+    update_field('phone', $contact_no , $patient_post_id);
+    update_field('patient_id', $patient_ID , $patient_post_id);
+
+    if($eligibility_q1 && !$eligibility_q5) {
+      $eligibility = 'Eligible';
+      $return_url = get_field('booking_page' , 'option');
+    }else{
+      $eligibility = 'Unqualified Patients';
+      $return_url = get_field('check_eligibility_page' , 'option').'?status=2&mgs=You are not Eligible.';
+    }
+
+    update_field('eligibility', $eligibility , $patient_post_id);
+
+  } else {
+    $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$patient_post_id->get_error_message();
+  }
+  
+  wp_redirect( $return_url );
+  exit;
+  
+}

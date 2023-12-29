@@ -33926,7 +33926,7 @@ html {
 }
 
 body {
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.5em;
   color: #000;
   background: #FFFFFF;
@@ -33936,22 +33936,22 @@ body {
 }
 @media only screen and (min-width: 560px) {
   body {
-    font-size: 17px;
+    font-size: 14px;
   }
 }
 @media only screen and (min-width: 768px) {
   body {
-    font-size: 18px;
+    font-size: 15px;
   }
 }
 @media only screen and (min-width: 1000px) {
   body {
-    font-size: 19px;
+    font-size: 16px;
   }
 }
 @media only screen and (min-width: 1200px) {
   body {
-    font-size: 20px;
+    font-size: 17px;
   }
 }
 
@@ -36045,6 +36045,10 @@ section.section {
   padding-bottom: 50px;
 }
 
+.eligibility_wrap {
+  padding-bottom: 50px;
+}
+
 @media (max-width: 767.98px) {
   .blog_wrap .sidebar {
     margin-top: 40px;
@@ -36285,4 +36289,83 @@ section.section {
 }
 .pagination_wrap .pagination .page-item.active .page-link {
   background-color: #bad66c;
+}
+
+/*------------------------------------*\
+
+    FORMS CUSTOM STYLES
+
+\*------------------------------------*/
+.form-item {
+  display: -ms-flexbox;
+  display: flex;
+}
+.form-item .form-yesno {
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  position: relative;
+  cursor: pointer;
+  width: 55px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
+.form-item .form-yesno label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: #cd3c3c;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #FFF;
+  transition: background 0.3s, text-indent 0.3s;
+  text-indent: 27px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4) inset;
+}
+.form-item .form-yesno label:after {
+  content: "NO";
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  font-size: 12px;
+  color: #591717;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.35);
+  z-index: 1;
+}
+.form-item .form-yesno label:before {
+  content: "";
+  width: 15px;
+  height: 24px;
+  border-radius: 3px;
+  background: #FFF;
+  position: absolute;
+  z-index: 2;
+  top: 3px;
+  left: 3px;
+  display: block;
+  transition: left 0.3s;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+}
+.form-item .form-yesno input:checked + label {
+  background: #378b2c;
+  text-indent: 8px;
+}
+.form-item .form-yesno input:checked + label:after {
+  content: "YES";
+  color: #091707;
+}
+.form-item .form-yesno input:checked + label:before {
+  left: 37px;
+}
+.form-item p {
+  margin-bottom: 0;
+  -ms-flex: 1;
+      flex: 1;
+  padding-right: 2rem;
 }
