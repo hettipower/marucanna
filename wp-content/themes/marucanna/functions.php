@@ -206,6 +206,23 @@ function mc_after_setup_theme() {
 }
 add_action( 'after_setup_theme', 'mc_after_setup_theme' );
 
+/**
+ * Create Custom User Roles
+ */
+add_action('init', 'add_mc_user_roles');
+function add_mc_user_roles() {
+  add_role(
+    'patient',
+    __('Patient'),
+    array(
+      // Define capabilities here
+      'read'         => true,
+      'edit_posts'   => true,
+      'delete_posts' => false,
+    )
+  );
+}
+
 add_action( 'admin_post_mc_eligibility_checker', 'admin_mc_eligibility_checker' );
 add_action( 'admin_post_nopriv_mc_eligibility_checker', 'admin_mc_eligibility_checker' );
 function admin_mc_eligibility_checker() {
@@ -239,19 +256,47 @@ function admin_mc_eligibility_checker() {
     update_post_meta( $patient_post_id, 'eligibility_q5', wp_slash( $eligibility_q5 ) );
 
     update_field('name', $fname , $patient_post_id);
-    update_field('email', $fname , $patient_post_id);
+    update_field('email', $email , $patient_post_id);
     update_field('phone', $contact_no , $patient_post_id);
     update_field('patient_id', $patient_ID , $patient_post_id);
 
     if($eligibility_q1 && !$eligibility_q5) {
       $eligibility = 'Eligible';
-      $return_url = get_field('booking_page' , 'option');
     }else{
       $eligibility = 'Unqualified Patients';
-      $return_url = get_field('check_eligibility_page' , 'option').'?status=2&mgs=You are not Eligible.';
     }
 
     update_field('eligibility', $eligibility , $patient_post_id);
+
+    if($eligibility_q1 && !$eligibility_q5) {
+
+      //Create User
+      $password = wp_generate_password();
+      $user_data = array(
+        'user_login' => $patient_ID,
+        'user_pass'  => $password,
+        'user_email' => $email,
+        'role'       => 'patient',
+      );
+
+      // Insert the user into the database
+      $user_id = wp_insert_user($user_data);
+
+      if( !is_wp_error($user_id) ) {
+        
+        // Add user meta data
+        add_user_meta($user_id, 'patient_password', $password);
+        update_field('patient', $user_id , $patient_post_id);
+
+        $return_url = get_field('booking_page' , 'option').'?patient='.$user_id.'&booking='.$patient_post_id;
+
+      } else {
+        $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$user_id->get_error_message();
+      }
+
+    }else{
+      $return_url = get_field('check_eligibility_page' , 'option').'?status=2&mgs=You are not Eligible.';
+    }
 
   } else {
     $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$patient_post_id->get_error_message();
@@ -260,4 +305,76 @@ function admin_mc_eligibility_checker() {
   wp_redirect( $return_url );
   exit;
   
+}
+
+add_action( 'admin_post_mc_patient_booking', 'admin_mc_patient_booking' );
+add_action( 'admin_post_nopriv_mc_patient_booking', 'admin_mc_patient_booking' );
+function admin_mc_patient_booking() {
+
+  $patient = isset($_POST['patient']) ? $_POST['patient'] : false;
+  $booking = isset($_POST['booking']) ? $_POST['booking'] : false;
+  $gender = isset($_POST['gender']) ? $_POST['gender'] : false;
+  $address = isset($_POST['address']) ? $_POST['address'] : false;
+  $address_2 = isset($_POST['address_2']) ? $_POST['address_2'] : false;
+  $town = isset($_POST['town']) ? $_POST['town'] : false;
+  $country = isset($_POST['country']) ? $_POST['country'] : false;
+  $postcode = isset($_POST['postcode']) ? $_POST['postcode'] : false;
+  $dob = isset($_POST['dob']) ? $_POST['dob'] : false;
+  $treatment = isset($_POST['treatment']) ? $_POST['treatment'] : false;
+  $additional_note = isset($_POST['additional_note']) ? $_POST['additional_note'] : false;
+  $medical_history_1 = isset($_POST['medical_history_1']) ? $_POST['medical_history_1'] : false;
+  $medical_history_2 = isset($_POST['medical_history_2']) ? $_POST['medical_history_2'] : false;
+  $medical_history_3 = isset($_POST['medical_history_3']) ? $_POST['medical_history_3'] : false;
+  $medical_history_4 = isset($_POST['medical_history_4']) ? $_POST['medical_history_4'] : false;
+  $current_medical_condition_1 = isset($_POST['current_medical_condition_1']) ? $_POST['current_medical_condition_1'] : false;
+  $current_medical_condition_2 = isset($_POST['current_medical_condition_2']) ? $_POST['current_medical_condition_2'] : false;
+  $current_medical_condition_3 = isset($_POST['current_medical_condition_3']) ? $_POST['current_medical_condition_3'] : false;
+  $referred_clinic = isset($_POST['referred_clinic']) ? $_POST['referred_clinic'] : false;
+  $clinic_name = isset($_POST['clinic_name']) ? $_POST['clinic_name'] : false;
+  $clinic_postcode = isset($_POST['clinic_postcode']) ? $_POST['clinic_postcode'] : false;
+  $clinic_phone_number = isset($_POST['clinic_phone_number']) ? $_POST['clinic_phone_number'] : false;
+  $gp_name = isset($_POST['gp_name']) ? $_POST['gp_name'] : false;
+  $practice_name = isset($_POST['practice_name']) ? $_POST['practice_name'] : false;
+  $gp_address_line_1 = isset($_POST['gp_address_line_1']) ? $_POST['gp_address_line_1'] : false;
+  $gp_address_line_2 = isset($_POST['gp_address_line_2']) ? $_POST['gp_address_line_2'] : false;
+  $gp_town = isset($_POST['gp_town']) ? $_POST['gp_town'] : false;
+  $gp_country = isset($_POST['gp_country']) ? $_POST['gp_country'] : false;
+  $gp_postal_code = isset($_POST['gp_postal_code']) ? $_POST['gp_postal_code'] : false;
+  $gp_phone = isset($_POST['gp_phone']) ? $_POST['gp_phone'] : false;
+  $csr_file = isset($_POST['csr_file']) ? $_POST['csr_file'] : false;
+  $photo_id = isset($_POST['photo_id']) ? $_POST['photo_id'] : false;
+  
+  if( $patient && $booking ) {
+    update_field('gender', $gender , $booking);
+    update_field('address_line_1', $address , $booking);
+    update_field('address_line_2', $address_2 , $booking);
+    update_field('town', $town , $booking);
+    update_field('country', $country , $booking);
+    update_field('postcode', $postcode , $booking);
+    update_field('dob', $dob , $booking);
+    update_field('treatment', $treatment , $booking);
+    update_field('additional_note', $additional_note , $booking);
+    update_field('medical_history_1', $medical_history_1 , $booking);
+    update_field('medical_history_2', $medical_history_2 , $booking);
+    update_field('medical_history_3', $medical_history_3 , $booking);
+    update_field('medical_history_4', $medical_history_4 , $booking);
+    update_field('current_medical_condition_1', $current_medical_condition_1 , $booking);
+    update_field('current_medical_condition_2', $current_medical_condition_2 , $booking);
+    update_field('current_medical_condition_3', $current_medical_condition_3 , $booking);
+    update_field('referred_clinic', $referred_clinic , $booking);
+    update_field('clinic_name', $clinic_name , $booking);
+    update_field('clinic_postcode', $clinic_postcode , $booking);
+    update_field('clinic_phone_number', $clinic_phone_number , $booking);
+    update_field('gp_name', $gp_name , $booking);
+    update_field('practice_name', $practice_name , $booking);
+    update_field('gp_address_line_1', $gp_address_line_1 , $booking);
+    update_field('gp_address_line_2', $gp_address_line_2 , $booking);
+    update_field('gp_town', $gp_town , $booking);
+    update_field('gp_country', $gp_country , $booking);
+    update_field('gp_postal_code', $gp_postal_code , $booking);
+    update_field('gp_phone', $gp_phone , $booking);
+    update_field('csr_file', $csr_file , $booking);
+    update_field('photo_id', $photo_id , $booking);
+  }
+
 }

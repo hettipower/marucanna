@@ -68,3 +68,36 @@ function get_condition_list($name = "", $offset = 0, $posts_to_show = 9){
 
 <?php return ob_get_clean();
 }
+
+add_action('wp_ajax_mc_handle_file_upload', 'mc_handle_file_upload');
+function mc_handle_file_upload() {
+
+    status_header(200);
+	
+    $upload_dir = wp_upload_dir();
+    $upload_path = $upload_dir['path'] . DIRECTORY_SEPARATOR;
+    $num_files = count($_FILES['file']['tmp_name']);
+
+    $newupload = 0;
+
+    if ( !empty($_FILES) ) {
+        $files = $_FILES;
+        foreach($files as $file) {
+            $newfile = array (
+                'name' => $file['name'],
+                'type' => $file['type'],
+                'tmp_name' => $file['tmp_name'],
+                'error' => $file['error'],
+                'size' => $file['size']
+            );
+
+            $_FILES = array('upload'=>$newfile);
+            foreach($_FILES as $file => $array) {
+                $newupload = media_handle_upload( $file, 0 );
+            }
+        }
+    }
+
+    echo $newupload;    
+    die();
+}

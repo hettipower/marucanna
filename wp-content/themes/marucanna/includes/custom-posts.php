@@ -179,7 +179,7 @@ function patients_post_type() {
 	$labels = array(
 		'name'                  => _x( 'Patients', 'Post Type General Name', 'text_domain' ),
 		'singular_name'         => _x( 'Patients', 'Post Type Singular Name', 'text_domain' ),
-		'menu_name'             => __( 'Patients', 'text_domain' ),
+		'menu_name'             => __( 'Manage Patients', 'text_domain' ),
 		'name_admin_bar'        => __( 'Patients', 'text_domain' ),
 		'archives'              => __( 'Item Archives', 'text_domain' ),
 		'attributes'            => __( 'Item Attributes', 'text_domain' ),

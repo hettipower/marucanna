@@ -9,12 +9,15 @@
 @import "bootstrap/bootstrap";
 @import "bootstrap/bootstrap-grid";
 @import "bootstrap/bootstrap-utilities";
+@import "bootstrap/bootstrap-datepicker";
 
 /* FONTAWESOME */
 @import 'fontawesome/fontawesome';
 @import 'fontawesome/regular.scss';
 @import 'fontawesome/solid.scss';
 @import 'fontawesome/brands.scss';
+
+@import 'dropzone/dropzone.scss';
 
 /* DEFAULT RESPONSIVE LAYOUTS */
 @import "default/_fonts";

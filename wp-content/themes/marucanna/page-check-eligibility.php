@@ -29,7 +29,7 @@ get_header(); ?>
 <section class="section eligibility_wrap">
     <div class="container">
         
-        <form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
+        <form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" class="needs-validation" novalidate>
 
             <input type="hidden" name="action" value="mc_eligibility_checker">
 
@@ -37,17 +37,17 @@ get_header(); ?>
 
             <div class="mb-3">
                 <label for="fname" class="form-label">Full Name</label>
-                <input type="text" name="fname" class="form-control" id="fname">
+                <input type="text" name="fname" class="form-control" id="fname" required>
             </div>
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email Address</label>
-                <input type="email" name="email" class="form-control" id="email">
+                <input type="email" name="email" class="form-control" id="email" required>
             </div>
 
             <div class="mb-3">
                 <label for="contact_no" class="form-label">Phone</label>
-                <input type="tel" name="contact_no" class="form-control" id="contact_no">
+                <input type="tel" name="contact_no" class="form-control" id="contact_no" required>
             </div>
 
             <h5>Eligibility Check</h5>
@@ -101,5 +101,26 @@ get_header(); ?>
     
     </div>
 </section>
+
+<script>
+(() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
 
 <?php get_footer(); ?>
