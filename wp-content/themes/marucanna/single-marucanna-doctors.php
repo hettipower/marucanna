@@ -17,19 +17,27 @@
 <section class="section doctor_details">
     <div class="container">
         <div class="row">
+            <?php if ( have_posts() ) : ?>
+<?php while ( have_posts() ) : the_post(); ?>
+<?php
+$thumb_id = get_post_thumbnail_id();
+$thumb_url = wp_get_attachment_image_src($thumb_id,'full');
+?>
+         <?php if ( has_post_thumbnail() ) {?>
             <div class="col-12 col-md-6 image">
-                <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
+                <div class="img_wrap">
+                    <img src="<?php echo $thumb_url[0]; ?>"/>
+                </div>
             </div>
+            	<?php } ?>
             <div class="col-12 col-md-6 content_wrap">
-                <h2 class="dr_name">Dr Jimmy Larsen</h2>
-                <div class="position">Cardiologist</div>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,</p>
-
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,</p>
-
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,</p>
+                <h2 class="dr_name"><?php the_title(); ?></h2>
+                <div class="position"><?php the_field( 'specialization' ); ?></div>
+               <?php the_content(); ?>
             </div>
         </div>
+        <?php endwhile; ?>
+<?php endif; ?>
     </div>
 </section>
 

@@ -1545,6 +1545,12 @@ section.section {
 
                 .image {
                     margin-bottom: 15px;
+                    text-align: center;
+                    background: rgb(209,200,77);
+                    background: -moz-linear-gradient(-171deg, rgba(209,200,77,1) 0%, rgba(63,168,123,1) 100%);
+                    background: -webkit-linear-gradient(-171deg, rgba(209,200,77,1) 0%, rgba(63,168,123,1) 100%);
+                    background: linear-gradient(-171deg, rgba(209,200,77,1) 0%, rgba(63,168,123,1) 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d1c84d",endColorstr="#3fa87b",GradientType=1); 
                 }
 
                 .position {
@@ -1558,6 +1564,15 @@ section.section {
 .single-marucanna-doctors {
     .doctor_details {
         .image {
+            .img_wrap {
+                text-align: center;
+                margin-bottom: auto;
+                background: rgb(209,200,77);
+                background: -moz-linear-gradient(-171deg, rgba(209,200,77,1) 0%, rgba(63,168,123,1) 100%);
+                background: -webkit-linear-gradient(-171deg, rgba(209,200,77,1) 0%, rgba(63,168,123,1) 100%);
+                background: linear-gradient(-171deg, rgba(209,200,77,1) 0%, rgba(63,168,123,1) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d1c84d",endColorstr="#3fa87b",GradientType=1);
+            }
 
             @include media-breakpoint-down(md) {
                 margin-bottom: 15px;

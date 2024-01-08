@@ -29,86 +29,54 @@ get_header(); ?>
 <section class="section team_wrapper">
     <div class="container">
         <div class="title_wrap text-center">
-            <h3>Meet the Doctors and staff behind <span>MARUCANNA</span></h3>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,</p>
+            	<?php if ( have_posts() ) : ?>
+<?php while ( have_posts() ) : the_post(); ?>   
+        <h1><?php the_content(); ?></h1>
+		<?php endwhile; ?>
+<?php endif; ?>
+            
         </div>
+        <?php if ( have_rows( 'team_fc' ) ): ?>
+	<?php while ( have_rows( 'team_fc' ) ) : the_row(); ?>
+		<?php if ( get_row_layout() == 'profiles_lo' ) : ?>
         <div class="grid team_wrap">
-            <h4 class="g-col-12 title text-center">Specialists</h4>
+            
+            <h4 class="g-col-12 title text-center"><?php the_sub_field( 'heading' ); ?></h4>
+            <?php $post_objects = get_sub_field( 'profiles' ); ?>
+			<?php if ( $post_objects ): ?>
+				<?php foreach ( $post_objects as $post ):  ?>
+				<?php setup_postdata( $post ); ?>
+				<?php
+$thumb_id = get_post_thumbnail_id();
+$thumb_url = wp_get_attachment_image_src($thumb_id,'doc-home-thumb', true);
+?>
             <div class="item g-col-md-4 g-col-6">
+                <?php if ( has_post_thumbnail() ) {?>
                 <div class="image">
-                    <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
+                    <img src="<?php echo $thumb_url[0]; ?>"/>
                 </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-                <a href="#" class="overlay"></a>
+                	<?php } ?>
+                <div class="name"><?php the_title(); ?></div>
+                <div class="position"><?php the_field( 'specialization' ); ?></div>
+                <a href="<?php the_permalink(); ?>" class="overlay"></a>
             </div>
+            <?php endforeach; ?>
+				<?php wp_reset_postdata(); ?>
+			<?php endif; ?>
 
-            <div class="item g-col-md-4 g-col-6">
-                <div class="image">
-                    <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-                <a href="#" class="overlay"></a>
-            </div>
+           
 
-            <div class="item g-col-md-4 g-col-6">
-                <div class="image">
-                    <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-                <a href="#" class="overlay"></a>
-            </div>
+           
+            
         </div>
+        <?php endif; ?>
+	<?php endwhile; ?>
+<?php else: ?>
+	<?php // no layouts found ?>
+<?php endif; ?>
 
-        <div class="grid team_wrap">
-            <h4 class="g-col-12 title text-center">Clininc Team</h4>
-            <div class="item g-col-md-4 g-col-6">
-                <div class="image">
-                    <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-                <a href="#" class="overlay"></a>
-            </div>
-
-            <div class="item g-col-md-4 g-col-6">
-                <div class="image">
-                    <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-                <a href="#" class="overlay"></a>
-            </div>
-
-            <div class="item g-col-md-4 g-col-6">
-                <div class="image">
-                    <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-                <a href="#" class="overlay"></a>
-            </div>
-
-            <div class="item g-col-md-4 g-col-6">
-                <div class="image">
-                    <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-                <a href="#" class="overlay"></a>
-            </div>
-
-            <div class="item g-col-md-4 g-col-6">
-                <div class="image">
-                    <img src="http://localhost/marucanna/wp-content/uploads/doctor2.webp"/>
-                </div>
-                <div class="name">Dr Jimmy Larsen</div>
-                <div class="position">Cardiologist</div>
-                <a href="#" class="overlay"></a>
-            </div>
-        </div>
+       
+        
     </div>
 </section>
 

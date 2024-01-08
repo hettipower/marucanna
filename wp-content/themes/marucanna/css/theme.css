@@ -35937,7 +35937,7 @@ body:not(.home) header .navbar::before {
   content: "";
   width: 100%;
   top: -6vw;
-  background-color: #000;
+  background-color: #236f3a;
   height: 9vw;
   filter: blur(42px);
   opacity: 0.9;
@@ -37734,11 +37734,22 @@ section.section {
 }
 .page-template-page-team-php .team_wrapper .team_wrap .item .image {
   margin-bottom: 15px;
+  text-align: center;
+  background: rgb(209, 200, 77);
+  background: linear-gradient(-171deg, rgb(209, 200, 77) 0%, rgb(63, 168, 123) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d1c84d",endColorstr="#3fa87b",GradientType=1);
 }
 .page-template-page-team-php .team_wrapper .team_wrap .item .position {
   color: #0b8e36;
 }
 
+.single-marucanna-doctors .doctor_details .image .img_wrap {
+  text-align: center;
+  margin-bottom: auto;
+  background: rgb(209, 200, 77);
+  background: linear-gradient(-171deg, rgb(209, 200, 77) 0%, rgb(63, 168, 123) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d1c84d",endColorstr="#3fa87b",GradientType=1);
+}
 @media (max-width: 767.98px) {
   .single-marucanna-doctors .doctor_details .image {
     margin-bottom: 15px;
