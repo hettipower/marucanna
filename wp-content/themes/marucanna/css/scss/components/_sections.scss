@@ -1525,3 +1525,63 @@ section.section {
 .eligibility_wrap {
     padding-bottom: 50px;
 }
+
+.page-template-page-team-php {
+    .team_wrapper {
+        padding-bottom: 40px;
+
+        .team_wrap {
+            margin-top: 50px;
+
+            h4 {
+                &.title {
+                    margin-bottom: 20px;
+                }
+            }
+
+            .item {
+                position: relative;
+                margin-bottom: 25px;
+
+                .image {
+                    margin-bottom: 15px;
+                }
+
+                .position {
+                    color: #0b8e36;
+                }
+            }
+        }
+    }
+}
+
+.single-marucanna-doctors {
+    .doctor_details {
+        .image {
+
+            @include media-breakpoint-down(md) {
+                margin-bottom: 15px;
+            }
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .content_wrap {
+            .dr_name {
+                font-size: 37px;
+                margin-bottom: 0;
+
+                @include media-breakpoint-down(md) {
+                    font-size: 30px;
+                }
+            }
+
+            .position {
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
