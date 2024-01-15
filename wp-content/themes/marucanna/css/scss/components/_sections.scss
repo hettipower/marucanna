@@ -965,8 +965,11 @@ section.section {
 \*------------------------------------*/
 .single-content-wrap {
     .sidebar_wrap {
+        margin-left: 30px;
+
         @include media-breakpoint-down(md) {
             margin-bottom: 20px;
+            margin-left: 0;
         }
 
         .img_wrap {
@@ -976,6 +979,11 @@ section.section {
             -moz-border-radius: 10px;
             -ms-border-radius: 10px;
             -o-border-radius: 10px;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
         }
 
         .box_content {
@@ -1522,8 +1530,45 @@ section.section {
     padding-bottom: 50px;
 }
 
-.eligibility_wrap {
+.eligibility_wrap {  
     padding-bottom: 50px;
+    padding-top: 40px;
+
+    @include media-breakpoint-down(md) {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .container {
+        > .row {
+            overflow: hidden;
+        }
+    }
+
+    .box-content-wrap {
+        background-color: #18a86b;
+        display: flex;
+
+        .box_content {
+            padding: 0 50px;
+            font-size: 17px;
+            text-align: center;
+            margin-top: 48%;
+
+            @include media-breakpoint-down(md) {
+                margin-top: 0;
+                padding: 50px 20px;
+            }
+                        
+            h3 , p {
+                color: #fff;
+            }
+        }
+    }
+
+    .form-wrapper {
+        padding: 30px 30px;
+    }
 }
 
 .page-template-page-team-php {

@@ -115,8 +115,6 @@ function doctors_post_type() {
 }
 add_action( 'init', 'doctors_post_type', 0 );
 
-
-
 // Register Custom Category - Doctord
 function custom_taxonomy_marucanna_gp_taxonomy() {
 
@@ -155,13 +153,6 @@ function custom_taxonomy_marucanna_gp_taxonomy() {
 
 }
 add_action( 'init', 'custom_taxonomy_marucanna_gp_taxonomy', 0 );
-
-
-
-
-
-
-
 
 // Register Custom Post Type - Conditions
 function conditions_post_type() {
@@ -276,3 +267,49 @@ function patients_post_type() {
 
 }
 add_action( 'init', 'patients_post_type', 0 );
+
+// Add custom column header
+function mc_booking_column_header($columns) {
+
+	$columns = array(
+		'title' => "Title",
+		'patient_id' => "Patient ID",
+		'eligibility' => "Eligibility",
+		'gp' => "GP",
+		'payment_id' => "Payment ID",
+		'date' => "Date"
+	);
+
+    return $columns;
+}
+add_filter('manage_marucanna-patients_posts_columns', 'mc_booking_column_header');
+
+// Display content for custom column
+function mc_booking_column_content($column, $post_id) {
+    if ($column == 'patient_id') {
+        echo get_field('patient_id' , $post_id);
+    }
+
+	if ($column == 'eligibility') {
+        echo get_field('eligibility' , $post_id);
+    }
+
+	if ($column == 'gp') {
+        echo get_field('gp_name' , $post_id);
+    }
+
+	if ($column == 'payment_id') {
+        echo get_field('paypal_transaction_id' , $post_id);
+    }
+}
+add_action('manage_marucanna-patients_posts_custom_column', 'mc_booking_column_content', 10, 2);
+
+function remove_view_link($actions, $post) {
+	
+    if ($post->post_type == 'marucanna-patients') {
+        unset($actions['view']);
+    }
+
+    return $actions;
+}
+add_filter('post_row_actions', 'remove_view_link', 10, 2);

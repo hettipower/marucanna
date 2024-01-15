@@ -4,23 +4,26 @@
 $patient = isset($_GET['patient']) ? $_GET['patient'] : false;
 $booking = isset($_GET['booking']) ? $_GET['booking'] : false;
 
-?>
+//if( $patient && $booking ):
 
-<?php //if( $patient ): ?>
+$patient_ID = get_field('patient_id' , $booking);
+$password = get_user_meta( $patient, 'patient_password', true );
+
+?>
 
 <?php get_header(); ?>
 
-<section class="section mc-title-section style_1" style="<?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);<?php } ?>">
+<section class="section mc-title-section style_1" style="<?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);  <?php } ?>">
     <div class="container">
 	
 	<?php if ( get_field( 'page_title' ) ) { ?>
 	<h1><?php the_field( 'page_title' ); ?></h1>
 	<?php } else { ?>
 		<?php if ( have_posts() ) : ?>
-<?php while ( have_posts() ) : the_post(); ?>   
+    <?php while ( have_posts() ) : the_post(); ?>   
         <h1><?php the_title(); ?></h1>
 		<?php endwhile; ?>
-<?php endif; ?>
+    <?php endif; ?>
 		<?php }  ?>
     </div>
 </section>
@@ -35,35 +38,23 @@ $booking = isset($_GET['booking']) ? $_GET['booking'] : false;
 
 <section class="section eligibility_wrap">
     <div class="container">
-        
-        <form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" class="needs-validation" novalidate>
 
-            <?php
-                $patient_ID = get_field('patient_id' , $booking);
-                $password = get_user_meta( $patient, 'patient_password', true );
-                $countries = array(
-                    'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria',
-                    'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia',
-                    'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia',
-                    'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo', 'Costa Rica',
-                    'Cote d\'Ivoire', 'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador',
-                    'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France',
-                    'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana',
-                    'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica',
-                    'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, North', 'Korea, South', 'Kosovo', 'Kuwait', 'Kyrgyzstan',
-                    'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar',
-                    'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia',
-                    'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal',
-                    'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau',
-                    'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia',
-                    'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe',
-                    'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia',
-                    'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan',
-                    'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda',
-                    'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela',
-                    'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'
-                );
-            ?>
+        <div class="row rounded-3 border">
+            <div class="box-content-wrap col-12 col-md-5">
+                <div class="box_content">
+                    <h3>Appointment Booking</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis erat eget ligula porta ornare. Fusce nec odio non eros tincidunt lobortis. Sed vitae congue urna.</p>
+                    <p>Integer id turpis nec nibh lobortis pellentesque. Aliquam luctus porta lorem a bibendum. Vestibulum mollis, lacus sit amet tincidunt ullamcorper, turpis metus eleifend quam, sit amet condimentum orci ligula non orci.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-7 form-wrapper" >
+                <?php echo do_shortcode( '[gravityform id="1" title="false" field_values="patient='.$patient.'&booking='.$booking.'&patient_id='.$patient_ID.'&password='.$password.'"]' ); ?>
+            </div>
+
+        </div>
+        
+        <!-- <form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" class="needs-validation" novalidate>  
             
             <input type="hidden" name="action" value="mc_patient_booking">
             <input type="hidden" name="patient" value="<?php echo $patient; ?>">
@@ -341,7 +332,7 @@ $booking = isset($_GET['booking']) ? $_GET['booking'] : false;
                 </div>
             </div>
 
-        </form>
+        </form> -->
     
     </div>
 </section>
@@ -375,7 +366,16 @@ function scrollToTop() {
             form.classList.add('was-validated')
         }, false)
     })
-})()
+})();
+jQuery(document).ready(function($) {
+
+    var readOnlyField1 = $("#input_1_78");
+    var readOnlyField2 = $("#input_1_79");
+
+    // Make the field read-only
+    readOnlyField1.prop('readonly', true);
+    readOnlyField2.prop('readonly', true);
+});
 </script>
 
 <?php get_footer(); ?>

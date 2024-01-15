@@ -62,7 +62,8 @@
             ?>
 
             <div class="btn_wrap">
-                <a href="#" class="btn style_4">CHECK ELIGIBILITY</a>
+                <a href="<?php the_field( 'eligibility_link', 'option' ); ?>
+" class="btn style_4">CHECK ELIGIBILITY</a>
             </div>
 
         </div>
