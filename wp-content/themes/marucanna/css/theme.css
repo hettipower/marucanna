@@ -37227,7 +37227,8 @@ section.section {
   font-size: 20px;
 }
 .faq-section .faqs .faq-item .content ul {
-  text-align: left;
+  text-align: center;
+  list-style-position: inside;
 }
 
 /*------------------------------------*\
