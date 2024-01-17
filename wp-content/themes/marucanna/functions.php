@@ -402,3 +402,48 @@ function get_last_user_ID(){
     return false;
   }
 }
+
+//prioritize pagination over displaying custom post type content (Used this to fix conditions page pagination 404 issue #LWP)
+add_action('init', function() {
+  add_rewrite_rule(
+    '(.?.+?)/page/?([0-9]{1,})/?$',
+    'index.php?pagename=$matches[1]&paged=$matches[2]',
+    'top'
+  );
+});
+
+function get_patient_ids() {
+  $patients = get_users( array(
+		'role__in' => array( 'patient' )
+	));
+  $options = array();
+
+  foreach ($patients as $patient) {
+    $item = array('text' => $patient->data->user_login, 'value' => $patient->data->user_login);
+    array_push($options , $item);
+  }
+
+  return $options;
+}
+
+add_filter('gform_pre_render', 'populate_patient_ids_field');
+function populate_patient_ids_field($form) {
+  // Specify the form ID and the field ID of the dropdown you want to populate
+  $form_id = 2; // Change to your form ID
+  $field_id = 51; // Change to your field ID
+
+  // Check if the current form matches the specified form ID
+  if ($form['id'] == $form_id) {
+    $dynamic_options = get_patient_ids();
+    
+    // Find the target field by its ID
+    foreach ($form['fields'] as &$field) {
+      if ($field['id'] == $field_id && $field['type'] == 'select') {
+        $field['choices'] = $dynamic_options;
+        break;
+      }
+    }
+  }
+  
+  return $form;
+}

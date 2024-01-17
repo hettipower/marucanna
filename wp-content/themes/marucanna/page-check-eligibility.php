@@ -59,6 +59,11 @@ $mgs = isset($_GET['mgs']) ? $_GET['mgs'] : false;
                     <?php endif; ?>
                 <?php endif; ?>
 
+                <div class="section-title text-center">
+                    <h3>Stage 01</h3>
+                    <p>Check your eligibility for an appointment.</p>
+                </div>
+
                 <input type="hidden" name="action" value="mc_eligibility_checker">
 
                 <div class="row">

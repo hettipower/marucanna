@@ -65,31 +65,31 @@
 					}
 
 					.dropdown-menu {
-						display: flex;
+						display: grid;
 					}
 				}
 			}
 
 			.dropdown-menu {
-				width: 500px;
+				width: 800px;
 				top: 100%;
 				background-color: $theme_color2;
 				border: none;
-				padding: 6px 30px;
-				flex-wrap: wrap;
-				justify-content: space-between;
+				padding: 6px 20px;
+				grid-template-rows: repeat(6, 1fr);
+				grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 				margin-top: 0;
+				gap: 5px;
 
 				@include media-breakpoint-down(md) {
 					width: 100%;
 				}
 
 				&.show {
-					display: flex;
+					display: grid;
 				}
 
 				li {
-					width: 50%;
 					position: relative;
 
 					@include media-breakpoint-down(md) {
@@ -110,6 +110,7 @@
 						color: $white;
 						background-color: transparent !important;
 						padding: 8px 0;
+						white-space: normal;
 
 						&:hover , &:focus {
 							color: $theme_color;
