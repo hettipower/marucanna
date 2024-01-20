@@ -1,5 +1,9 @@
 section.section {
     position: relative;
+
+    &.bg_gray {
+        background-color: #f4f4f4;
+    }
 }
 
 .mc-image-text-block {
@@ -700,7 +704,12 @@ section.section {
 \*------------------------------------*/
 
 .breadcrumb_wrap {
-    margin-top: 10px;
+    padding-top: 10px;
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding-bottom: var(--bs-breadcrumb-margin-bottom);
+    }
 
     .breadcrumb-item {
         font-size: 16px;
@@ -1642,6 +1651,175 @@ section.section {
             .position {
                 font-weight: 600;
                 margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+.faq-link  {
+    color:#fff !important ;   
+    
+    a {
+        color:#fff !important ;
+        margin-bottom:14px;
+
+        &:hover {
+            text-decoration: underline !important;   
+        }
+    }
+}
+
+.page-template-page-partners , 
+.page-template-page-coming-soon , 
+.page-template-page-clinic , 
+.page-template-page-feedback {
+    .mc-title-section{
+        &.style_1 {
+            &::after {
+                background-image: url("../img/wave14.svg");
+            }
+        }
+    }
+}
+
+.coming_soon_wrapper , 
+.clinic_wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.partners_wrapper {
+    padding-top: 40px;
+    padding-bottom: 60px;
+
+    .partners {
+        margin-top: 50px;
+
+        .icon-box {
+            @include media-breakpoint-down(md) {
+                margin-bottom: 15px;
+            }
+
+            .icon-box-inner {
+                display: flex;
+                border-radius: 10px;
+                border: 1px solid #0c8e36;
+                position: relative;
+                height: 100%;
+                background-color: #fff;
+                padding: 15px;
+
+                .icon {
+                    width: 75px;
+                }
+
+                .content {
+                    flex: 1;
+                    padding-left: 18px;
+                    font-size: 15px;
+
+                    h3 {
+                        margin-bottom: 4px;
+                        color: #18a86b;
+                        font-size: 24px;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.partnership_wrap {
+    padding-top: 160px;
+    padding-bottom: 60px;
+
+    @include media-breakpoint-down(md) {
+        padding-top: 70px;
+    }
+
+    &::before {
+        background-image: url("../img/wave13.svg)");
+        position: absolute;
+        content: "";
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        left: 0;
+        top: 0;
+        height: 7vw;
+    }
+
+    .box-content-wrap {
+        .box_content {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+}
+
+.clinic_wrapper {
+    .clinics {
+        @include media-breakpoint-down(md) {
+            .col-12 {
+                margin-bottom: 15px;
+            }
+        }
+
+        .clinic-inner {
+            position: relative;
+            height: 100%;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #0c8e36;
+            border-radius: 10px;
+        }
+    }
+}
+
+.feedback_wrapper {
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    @include media-breakpoint-down(md) {
+        .col-12 {
+            margin-bottom: 15px;
+        }
+    }
+
+    .feedback-inner {
+        background-color: #fff;
+        padding: 16px 20px;
+        border: 1px solid #0c8e36;
+        border-radius: 10px;
+        font-size: 16px;
+        height: 100%;
+
+        .feedback-item {
+            h3 {
+                font-weight: 400;
+                color: #0c8e36;
+                margin-bottom: 2px;
+            }
+        }
+
+        .feedback-quote {
+            font-size: 18px;
+
+            h4 {
+                font-size: 21px;
+                font-weight: 400;
+                margin-bottom: 6px;
+                color: #0b8e36;
+            }
+
+            &.after-feedback {
+                h4 {
+                    color: #9cc52b;
+                }
             }
         }
     }

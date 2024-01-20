@@ -34836,7 +34836,7 @@ body:not(.home).sticky-header header .navbar::before {
   padding: 6px 20px;
   grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  margin-top: 0;
+  margin-top: 3px;
   gap: 5px;
 }
 @media (max-width: 767.98px) {
@@ -35115,6 +35115,9 @@ footer .social .nav li a {
 
 section.section {
   position: relative;
+}
+section.section.bg_gray {
+  background-color: #f4f4f4;
 }
 
 .mc-image-text-block {
@@ -35756,7 +35759,11 @@ section.section {
 
 \*------------------------------------*/
 .breadcrumb_wrap {
-  margin-top: 10px;
+  padding-top: 10px;
+}
+.breadcrumb_wrap .breadcrumb {
+  margin-bottom: 0;
+  padding-bottom: var(--bs-breadcrumb-margin-bottom);
 }
 .breadcrumb_wrap .breadcrumb-item {
   font-size: 16px;
@@ -36544,6 +36551,143 @@ section.section {
 .single-marucanna-doctors .doctor_details .content_wrap .position {
   font-weight: 600;
   margin-bottom: 20px;
+}
+
+.faq-link {
+  color: #fff !important;
+}
+.faq-link a {
+  color: #fff !important;
+  margin-bottom: 14px;
+}
+.faq-link a:hover {
+  text-decoration: underline !important;
+}
+
+.page-template-page-partners .mc-title-section.style_1::after,
+.page-template-page-coming-soon .mc-title-section.style_1::after,
+.page-template-page-clinic .mc-title-section.style_1::after,
+.page-template-page-feedback .mc-title-section.style_1::after {
+  background-image: url("../img/wave14.svg");
+}
+
+.coming_soon_wrapper,
+.clinic_wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.partners_wrapper {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+.partners_wrapper .partners {
+  margin-top: 50px;
+}
+@media (max-width: 767.98px) {
+  .partners_wrapper .partners .icon-box {
+    margin-bottom: 15px;
+  }
+}
+.partners_wrapper .partners .icon-box .icon-box-inner {
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid #0c8e36;
+  position: relative;
+  height: 100%;
+  background-color: #fff;
+  padding: 15px;
+}
+.partners_wrapper .partners .icon-box .icon-box-inner .icon {
+  width: 75px;
+}
+.partners_wrapper .partners .icon-box .icon-box-inner .content {
+  flex: 1;
+  padding-left: 18px;
+  font-size: 15px;
+}
+.partners_wrapper .partners .icon-box .icon-box-inner .content h3, .partners_wrapper .partners .icon-box .icon-box-inner .content .h3 {
+  margin-bottom: 4px;
+  color: #18a86b;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.partnership_wrap {
+  padding-top: 160px;
+  padding-bottom: 60px;
+}
+@media (max-width: 767.98px) {
+  .partnership_wrap {
+    padding-top: 70px;
+  }
+}
+.partnership_wrap::before {
+  background-image: url("../img/wave13.svg)");
+  position: absolute;
+  content: "";
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  left: 0;
+  top: 0;
+  height: 7vw;
+}
+.partnership_wrap .box-content-wrap .box_content {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+@media (max-width: 767.98px) {
+  .clinic_wrapper .clinics .col-12 {
+    margin-bottom: 15px;
+  }
+}
+.clinic_wrapper .clinics .clinic-inner {
+  position: relative;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #0c8e36;
+  border-radius: 10px;
+}
+
+.feedback_wrapper {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+@media (max-width: 767.98px) {
+  .feedback_wrapper .col-12 {
+    margin-bottom: 15px;
+  }
+}
+.feedback_wrapper .feedback-inner {
+  background-color: #fff;
+  padding: 16px 20px;
+  border: 1px solid #0c8e36;
+  border-radius: 10px;
+  font-size: 16px;
+  height: 100%;
+}
+.feedback_wrapper .feedback-inner .feedback-item h3, .feedback_wrapper .feedback-inner .feedback-item .h3 {
+  font-weight: 400;
+  color: #0c8e36;
+  margin-bottom: 2px;
+}
+.feedback_wrapper .feedback-inner .feedback-quote {
+  font-size: 18px;
+}
+.feedback_wrapper .feedback-inner .feedback-quote h4, .feedback_wrapper .feedback-inner .feedback-quote .h4 {
+  font-size: 21px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  color: #0b8e36;
+}
+.feedback_wrapper .feedback-inner .feedback-quote.after-feedback h4, .feedback_wrapper .feedback-inner .feedback-quote.after-feedback .h4 {
+  color: #9cc52b;
 }
 
 @media (max-width: 767.98px) {

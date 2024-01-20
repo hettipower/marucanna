@@ -447,3 +447,96 @@ function populate_patient_ids_field($form) {
   
   return $form;
 }
+
+add_action( 'gform_after_submission_2', 'mc_consultant_post_type_update', 10, 2 );
+function mc_consultant_post_type_update( $entry, $form ) {
+
+  $patient = rgar( $entry, '51' );
+  $full_name = rgar( $entry, '3' );
+  $date_of_birth = rgar( $entry, '5' );
+  $address_line_1 = rgar( $entry, '7.1' );
+  $address_line_2 = rgar( $entry, '7.2' );
+  $phone = rgar( $entry, '8' );
+  $information_1 = rgar( $entry, '9' );
+  $medical_history_1 = rgar( $entry, '11' );
+  $medical_history_2 = rgar( $entry, '12' );
+  $medical_history_3 = rgar( $entry, '13' );
+  $medical_history_4 = rgar( $entry, '14' );
+  $medical_history_5 = rgar( $entry, '15' );
+  $medical_condition_1 = rgar( $entry, '17' );
+  $medical_condition_2 = rgar( $entry, '18' );
+  $medical_condition_3 = rgar( $entry, '19' );
+  $previous_treatments_1 = rgar( $entry, '20' );
+  $previous_treatments_2 = rgar( $entry, '22' );
+  $previous_treatments_3 = rgar( $entry, '23' );
+  $expectations_1 = rgar( $entry, '24' );
+  $expectations_2 = rgar( $entry, '26' );
+  $expectations_3 = rgar( $entry, '27' );
+  $allergies_1 = rgar( $entry, '29' );
+  $allergies_2 = rgar( $entry, '30' );
+  $family_medical_history_1 = rgar( $entry, '32' );
+  $family_medical_history_2 = rgar( $entry, '33' );
+  $habits_1 = rgar( $entry, '35' );
+  $habits_2 = rgar( $entry, '36' );
+  $habits_3 = rgar( $entry, '37' );
+  $psychosocial_assessment_1 = rgar( $entry, '39' );
+  $psychosocial_assessment_2 = rgar( $entry, '40' );
+  $psychosocial_assessment_3 = rgar( $entry, '41' );
+  $legal_1 = rgar( $entry, '43' );
+  $legal_2 = rgar( $entry, '44' );
+  $complementary_medicines_1 = rgar( $entry, '46' );
+  $complementary_medicines_2 = rgar( $entry, '47' );
+  $patient_preferences_1 = rgar( $entry, '49' );
+  $additional_notes = rgar( $entry, '50' );
+
+  // Create Patient Object
+  $title = "$patient : $full_name";
+  $consultant_arg = array(
+    'post_title'    => wp_strip_all_tags($title),
+    'post_status'   => 'publish',
+    'post_type' => 'consultation',
+  );
+
+  $consultant_post_id = wp_insert_post($consultant_arg);
+  
+  if(!is_wp_error($consultant_post_id)) {
+    update_field('patient', $patient , $consultant_post_id);
+    update_field('full_name', $full_name , $consultant_post_id);
+    update_field('date_of_birth', $date_of_birth , $consultant_post_id);
+    update_field('address_line_1', $address_line_1 , $consultant_post_id);
+    update_field('address_line_2', $address_line_2 , $consultant_post_id);
+    update_field('phone', $phone , $consultant_post_id);
+    update_field('information_1', $information_1 , $consultant_post_id);
+    update_field('medical_history_1', $medical_history_1 , $consultant_post_id);
+    update_field('medical_history_2', $medical_history_2 , $consultant_post_id);
+    update_field('medical_history_3', $medical_history_3 , $consultant_post_id);
+    update_field('medical_history_4', $medical_history_4 , $consultant_post_id);
+    update_field('medical_history_5', $medical_history_5 , $consultant_post_id);
+    update_field('medical_condition_1', $medical_condition_1 , $consultant_post_id);
+    update_field('medical_condition_2', $medical_condition_2 , $consultant_post_id);
+    update_field('medical_condition_3', $medical_condition_3 , $consultant_post_id);
+    update_field('previous_treatments_1', $previous_treatments_1 , $consultant_post_id);
+    update_field('previous_treatments_2', $previous_treatments_2 , $consultant_post_id);
+    update_field('previous_treatments_3', $previous_treatments_3 , $consultant_post_id);
+    update_field('expectations_1', $expectations_1 , $consultant_post_id);
+    update_field('expectations_2', $expectations_2 , $consultant_post_id);
+    update_field('expectations_3', $expectations_3 , $consultant_post_id);
+    update_field('allergies_1', $allergies_1 , $consultant_post_id);
+    update_field('allergies_2', $allergies_2 , $consultant_post_id);
+    update_field('family_medical_history_1', $family_medical_history_1 , $consultant_post_id);
+    update_field('family_medical_history_2', $family_medical_history_2 , $consultant_post_id);
+    update_field('habits_1', $habits_1 , $consultant_post_id);
+    update_field('habits_2', $habits_2 , $consultant_post_id);
+    update_field('habits_3', $habits_3 , $consultant_post_id);
+    update_field('psychosocial_assessment_1', $psychosocial_assessment_1 , $consultant_post_id);
+    update_field('psychosocial_assessment_2', $psychosocial_assessment_2 , $consultant_post_id);
+    update_field('psychosocial_assessment_3', $psychosocial_assessment_3 , $consultant_post_id);
+    update_field('legal_1', $legal_1 , $consultant_post_id);
+    update_field('legal_2', $legal_2 , $consultant_post_id);
+    update_field('complementary_medicines_1', $complementary_medicines_1 , $consultant_post_id);
+    update_field('complementary_medicines_2', $complementary_medicines_2 , $consultant_post_id);
+    update_field('patient_preferences_1', $patient_preferences_1 , $consultant_post_id);
+    update_field('additional_notes', $additional_notes , $consultant_post_id);
+  }
+  
+}
