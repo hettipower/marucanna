@@ -29,8 +29,12 @@ get_header(); ?>
 <section class="section coming_soon_wrapper bg_gray">
     <div class="container">
         <div class="title-wrap text-center">
-            <h2>Coming <span>Soon</span></h2>
-			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec</p>
+<?php if ( have_posts() ) : ?>
+<?php while ( have_posts() ) : the_post(); ?>  
+ <?php the_content(); ?>
+<?php endwhile; ?>
+<?php endif; ?>
+          
         </div>
     </div>
 </section>
@@ -41,9 +45,9 @@ get_header(); ?>
         <div class="row rounded-3 border">
             <div class="box-content-wrap col-12 col-md-5">
                 <div class="box_content">
-                    <h3>Join our Partnership Scheme to deliver the future of Medical Cannabis</h3>
-                    <p>LLorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, </p>
-                    <p>ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
+                    <h3><?php the_field( 'pt_form_box_title' ); ?></h3>
+					<?php the_field( 'pt_form_box_content' ); ?>
+
                 </div>
             </div>
 
