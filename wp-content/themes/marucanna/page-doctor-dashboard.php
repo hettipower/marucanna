@@ -48,8 +48,7 @@ if (is_user_logged_in()):
                 <tbody> 
                     <?php 
                         foreach( $patients as $patient ): 
-                            //$patient_post_id = get_user_meta( $patient->ID, 'patient_info', true );
-                            $patient_post_id = 479;
+                            $patient_post_id = get_user_meta( $patient->ID, 'patient_info', true );
                             $name = get_field('name', $patient_post_id);
                             $phone = get_field('phone', $patient_post_id);
                             $consultant = get_user_meta( $patient->ID, 'consultant', true );
