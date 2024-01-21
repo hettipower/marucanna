@@ -1,4 +1,6 @@
-/*! css 1.0.0 filename.js 2024-01-21 2:24:51 PM */
+/*! css 1.0.0 filename.js 2024-01-21 11:47:03 PM */
+
+Fancybox.bind("[data-fancybox]", {});
 
 jQuery(document).ready(function($) {
     our_team_slider();

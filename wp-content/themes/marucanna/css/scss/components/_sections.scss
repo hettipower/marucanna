@@ -1673,7 +1673,8 @@ section.section {
 .page-template-page-coming-soon , 
 .page-template-page-clinic , 
 .page-template-page-feedback , 
-.page-template-page-login {
+.page-template-page-login , 
+.page-template-page-patient-dashboard {
     .mc-title-section{
         &.style_1 {
             &::after {
@@ -1891,4 +1892,51 @@ section.section {
 .dashboard_wrapper {
     padding-top: 50px;
     padding-bottom: 50px;
+
+    .profile-detail-wrap {
+        border: 1px solid #0b8e36;
+        background-color: #fff;
+        padding: 15px;
+
+        .profile-pic {
+            max-height: 290px;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                width: 100%;
+            }
+        }
+
+        .profile-detail {
+
+            > h3 {
+                font-weight: 400;
+                font-size: 26px;
+                color: #0b8e36;
+                border-bottom: 1px solid #d9d9d9;
+                padding-bottom: 6px;
+            }
+
+            .profile-item {
+                margin-bottom: 15px;
+
+                .label {
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    color: #7b7b7b;
+                }
+
+                .value {
+                    font-size: 18px;
+                    color: #000;
+
+                    p {
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
 }

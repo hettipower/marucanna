@@ -155,7 +155,8 @@ footer {
         }
     }
 }
-.page-template-page-login  {
+.page-template-page-login , 
+.page-template-page-patient-dashboard  {
     footer{
         &::before{
             background-image: url('../img/wave15.svg');

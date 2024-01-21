@@ -8,6 +8,7 @@ include 'includes/functions/mc_api.php';
 include 'includes/functions/menus.php';
 include 'includes/functions/forms_func.php';
 include 'includes/functions/login_func.php';
+include 'includes/functions/helpers.php';
 include_once __DIR__ . '/includes/acf/acf-hidden-field/init.php';    
 include_once __DIR__ . '/includes/payments/payment.php'; 
 
@@ -260,17 +261,3 @@ add_action('init', function() {
     'top'
   );
 });
-
-function get_patient_ids() {
-  $patients = get_users( array(
-		'role__in' => array( 'patient' )
-	));
-  $options = array();
-
-  foreach ($patients as $patient) {
-    $item = array('text' => $patient->data->user_login, 'value' => $patient->data->user_login);
-    array_push($options , $item);
-  }
-
-  return $options;
-}

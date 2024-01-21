@@ -31,8 +31,11 @@ function html5blank_header_scripts()
     wp_register_script('sq-card-pay', get_template_directory_uri() . '/includes/payments/public/js/sq-card-pay.js', array('jquery'), false, true);
     wp_register_script('sq-payment-flow', get_template_directory_uri() . '/includes/payments/public/js/sq-payment-flow.js', array('jquery'), false, true);
 
-    wp_register_script('datatable', get_template_directory_uri() . '/vendor/datatable/datatables.min.js', array('jquery'), false, true); // Custom scripts
+    wp_register_script('datatable', get_template_directory_uri() . '/vendor/datatable/datatables.min.js', array('jquery'), false, true);
     wp_enqueue_script('datatable');
+
+    wp_register_script('fancybox', get_template_directory_uri() . '/vendor/fancybox/fancybox.umd.js', array('jquery'), false, true);
+    wp_enqueue_script('fancybox');
     
     wp_register_script('themescript', get_template_directory_uri() . '/js/scripts.js', array('jquery'), false, true); // Custom scripts
     wp_enqueue_script('themescript'); // Enqueue it! 
