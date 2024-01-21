@@ -1,14 +1,17 @@
-Dropzone.autoDiscover = false;
-
 jQuery(document).ready(function ($) {
     our_team_slider();
     sticky_header();
     menu_dropdown();
-    mc_datepicker();
-    mc_dropZones();
+	patients_datatable();
+    //mc_datepicker();
+    //mc_dropZones();
 });
 
-function mc_datepicker() {
+function patients_datatable() {
+	new DataTable('#patients_details');
+}
+
+/* function mc_datepicker() {
     jQuery('.mc-datepicker').datepicker({
         format: "dd/mm/yy"
     });
@@ -100,4 +103,4 @@ function mc_dropZones() {
 		}
 	});
 
-}
+} */
