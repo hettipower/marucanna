@@ -17,7 +17,8 @@
 @import 'fontawesome/solid.scss';
 @import 'fontawesome/brands.scss';
 
-@import 'dropzone/dropzone.scss';
+//@import 'dropzone/dropzone.scss';
+@import 'datatable/_datatable';
 
 /* DEFAULT RESPONSIVE LAYOUTS */
 @import "default/_fonts";
@@ -59,3 +60,5 @@
 @import "components/_sections";
 @import "components/_blog";
 @import "components/blocks/_form_styles";
+
+@import "square/_sq-payment";

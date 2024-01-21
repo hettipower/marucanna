@@ -1672,7 +1672,8 @@ section.section {
 .page-template-page-partners , 
 .page-template-page-coming-soon , 
 .page-template-page-clinic , 
-.page-template-page-feedback {
+.page-template-page-feedback , 
+.page-template-page-login {
     .mc-title-section{
         &.style_1 {
             &::after {
@@ -1823,4 +1824,71 @@ section.section {
             }
         }
     }
+}
+
+.login_wrapper {
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    #loginform {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        border: 1px solid #0b8e36;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #fff;
+
+        label {
+            text-transform: uppercase;
+            font-size: 16px;
+            color: #4a4a4a;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .input {
+            width: 100%;
+            background-color: #e4e4e4;
+            color: #000;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+
+            height: 55px;
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+
+        #wp-submit {
+            @extend %frutiger;
+            border-radius: $btn_border_radius;
+            -webkit-border-radius: $btn_border_radius;
+            -moz-border-radius: $btn_border_radius;
+            -ms-border-radius: $btn_border_radius;
+            -o-border-radius: $btn_border_radius;
+            text-transform: $btn_font_transform;
+            color: $white;
+            background-color: $theme_color;
+            padding: 6px 40px 9px;
+    
+            font-size: 20px;
+            height: 50px;
+    
+            width: 100%;
+            border: none;
+    
+            &:hover{
+                background-color: $theme_color2;
+            }
+        }
+    }
+}
+
+.dashboard_wrapper {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }

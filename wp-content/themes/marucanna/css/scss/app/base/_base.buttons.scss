@@ -88,6 +88,11 @@ $btn_border_radius:		40px;
 			background-color: $white;
 		}
 	}
+
+	&.small {
+		padding: 2px 18px 3px;
+		font-size: 13px;
+	}
 }
 
 .btn {
