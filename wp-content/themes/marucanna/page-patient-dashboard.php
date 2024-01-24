@@ -7,8 +7,8 @@ if (is_user_logged_in()):
     $user = wp_get_current_user();
     $allowed_roles = array( 'patient', 'administrator' );
     if ( array_intersect( $allowed_roles, $user->roles ) ) :
-        //$user_id = $user->ID;
-        $user_id = 3;
+        $user_id = $user->ID;
+        //$user_id = 3;
         $patient_post_id = get_user_meta( $user_id, 'patient_info', true );
         $patient_password = get_user_meta( $user_id, 'patient_password', true );
         $photo_id = get_field('photo_id' , $patient_post_id);
@@ -47,18 +47,6 @@ if (is_user_logged_in()):
         $gp_postal_code = get_field('gp_postal_code' , $patient_post_id);
         $gp_phone = get_field('gp_phone' , $patient_post_id);
         $csr_file = get_field('csr_file' , $patient_post_id);
-
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
-        $patient_id = get_field('patient_id' , $patient_post_id);
 ?>
 
 <section class="section mc-title-section style_1" style="<?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);<?php } ?>">
@@ -89,9 +77,13 @@ if (is_user_logged_in()):
         
         <div class="row profile-detail-wrap rounded mb-3">
             <div class="col-12 col-sm-3 profile-pic">
-                <?php if( isImageUrl($photo_id) ): ?>
-                    <img src="<?php echo $photo_id; ?>" class="img-fluid rounded" alt="">
-                <?php else: ?>
+				<?php if( $photo_id ): ?>
+					<?php if( isImageUrl($photo_id) ): ?>
+						<img src="<?php echo $photo_id; ?>" class="img-fluid rounded" alt="">
+					<?php else: ?>
+						<img src="<?php bloginfo( 'template_url' ); ?>/img/profile-pic.webp" class="img-fluid rounded" alt="">
+					<?php endif; ?>
+				<?php else: ?>
                     <img src="<?php bloginfo( 'template_url' ); ?>/img/profile-pic.webp" class="img-fluid rounded" alt="">
                 <?php endif; ?>
             </div>

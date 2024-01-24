@@ -220,6 +220,16 @@
                         }
                     }
                 }
+
+                &.payment-message {
+                    p {
+                        margin-bottom: 0;
+
+                        img {
+                            margin-left: 10px;
+                        }
+                    }
+                }
             }
 
             .readonly-field {
@@ -321,5 +331,15 @@
         border: 1px solid var(--bs-success-border-subtle);
         padding: 1rem;
         border-radius: var(--bs-border-radius);
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 0;
+            color: var(--bs-success-text-emphasis);
+        }
+
+        p {
+            color: var(--bs-success-text-emphasis);
+        }
     }
 }

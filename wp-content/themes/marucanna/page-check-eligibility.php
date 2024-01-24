@@ -97,7 +97,7 @@ $mgs = isset($_GET['mgs']) ? $_GET['mgs'] : false;
                 </div>
 
                 <div class="form-item mb-3">
-                    <p>Is the medical condition you intend to use the Medicinal cannabis for affect your quality of life?</p>
+                    <p>Is the medical condition you intend to use the Medicinal cannabis for affecting your quality of life?</p>
                     <div class="form-yesno">
                         <input type="checkbox" value="1" name="eligibility_q2" id="eligibility_q2">
                         <label for="eligibility_q2"></label>

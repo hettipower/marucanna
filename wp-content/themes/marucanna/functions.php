@@ -10,7 +10,7 @@ include 'includes/functions/forms_func.php';
 include 'includes/functions/login_func.php';
 include 'includes/functions/helpers.php';
 include_once __DIR__ . '/includes/acf/acf-hidden-field/init.php';    
-include_once __DIR__ . '/includes/payments/payment.php'; 
+include_once __DIR__ . '/includes/payments/payment.php';
 
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'reviews-thumb', 50, 49,true);
@@ -236,21 +236,6 @@ function add_mc_user_roles() {
       'delete_posts' => false,
     )
   );
-}
-
-function get_last_user_ID(){
-  $last_user = get_users(array(
-    'number' => 1,
-    'orderby' => 'registered',
-    'order' => 'DESC',
-  ));
-
-  // Check if there is any user
-  if (!empty($last_user)) {
-    return $last_user[0]->ID;
-  } else {
-    return false;
-  }
 }
 
 //prioritize pagination over displaying custom post type content (Used this to fix conditions page pagination 404 issue #LWP)

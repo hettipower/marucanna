@@ -64,7 +64,7 @@ $i=0;
     while ( have_rows('pr_sec1_list_rep') ) : the_row(); $i++;
 ?>
                     <div class="item">
-                        <span class="number">0<?php echo $i; ?></span>
+                        <span class="number"><?php echo $i; ?></span>
                         <div class="text"><?php the_sub_field( 'title' ); ?></div>
                     </div>
  <?php

@@ -7,8 +7,10 @@ $booking = isset($_GET['booking']) ? $_GET['booking'] : false;
 if( $patient && $booking ):
 
 $patient_ID = get_field('patient_id' , $booking);
-$password = get_user_meta( $patient, 'patient_password', true );
-
+$patient_data = get_userdata($patient);
+$patient_password = get_user_meta( $patient_data->ID, 'patient_password', true );
+$patient_email = $patient_data->user_email;
+$patient_name = get_field('name' , $booking);
 ?>
 
 <?php get_header(); ?>
@@ -49,7 +51,7 @@ $password = get_user_meta( $patient, 'patient_password', true );
             </div>
 
             <div class="col-12 col-md-7 form-wrapper" >
-                <?php echo do_shortcode( '[gravityform id="1" title="false" field_values="patient='.$patient.'&booking='.$booking.'&patient_id='.$patient_ID.'&password='.$password.'"]' ); ?>
+                <?php echo do_shortcode( '[gravityform id="1" title="false" field_values="patient='.$patient.'&booking='.$booking.'&patient_id='.$patient_ID.'&password='.$patient_password.'&patient_email='.$patient_email.'&patient_name='.$patient_name.'"]' ); ?>
             </div>
 
         </div>

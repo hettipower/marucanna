@@ -11,11 +11,16 @@ function admin_mc_eligibility_checker() {
     $eligibility_q3 = isset($_POST['eligibility_q3']) ? $_POST['eligibility_q3'] : false;
     $eligibility_q4 = isset($_POST['eligibility_q4']) ? $_POST['eligibility_q4'] : false;
     $eligibility_q5 = isset($_POST['eligibility_q5']) ? $_POST['eligibility_q5'] : false;
-    $last_user_ID = get_last_user_ID();
-    $new_user_ID = intval($last_user_ID) + 1;
+    $new_user_ID = get_next_user_id();
+    $patient_id_num = $new_user_ID.time();
 
-    $patient_ID = "MP-".$new_user_ID;
-    $password = wp_generate_password();
+    if( !check_patient_id_exist($patient_id_num) ) {
+        $patient_ID = "MP-".$patient_id_num;
+    } else {
+        $patient_ID = "MP-".$new_user_ID.time();
+    }
+    
+    $password = wp_generate_password(15 , false);
 
     if($fname && $email && $contact_no) {
         if(email_exists($email)) {
@@ -41,12 +46,11 @@ function admin_mc_eligibility_checker() {
                 update_field('name', $fname , $patient_post_id);
                 update_field('email', $email , $patient_post_id);
                 update_field('phone', $contact_no , $patient_post_id);
-                update_field('patient_id', $patient_ID , $patient_post_id);
         
                 if($eligibility_q1 && !$eligibility_q5) {
                     $eligibility = 'Eligible';
                 }else{
-                    $eligibility = 'Unqualified Patients';
+                    $eligibility = 'Unqualified';
                 }
         
                 update_field('eligibility', $eligibility , $patient_post_id);
@@ -72,6 +76,7 @@ function admin_mc_eligibility_checker() {
                         add_user_meta($user_id, 'consultant', false);
 
                         update_field('patient', $user_id , $patient_post_id);
+                        update_field('patient_id', $patient_ID , $patient_post_id);
             
                         $return_url = get_field('booking_page' , 'option').'?patient='.$user_id.'&booking='.$patient_post_id;
             
@@ -131,6 +136,9 @@ function mc_patient_booking_post_type_update( $entry, $form ) {
     $gp_phone = rgar( $entry, '109' );
     $csr_file = rgar( $entry, '110' );
     $photo_id = rgar( $entry, '111' );
+	
+	$payment_date_1 = rgar( $entry, 'payment_date' );
+	$transaction_id_1 = rgar( $entry, 'transaction_id' );
 
     if( $patient && $booking ) {
         update_field('gender', $gender , $booking);
@@ -163,6 +171,9 @@ function mc_patient_booking_post_type_update( $entry, $form ) {
         update_field('gp_phone', $gp_phone , $booking);
         update_field('csr_file', $csr_file , $booking);
         update_field('photo_id', $photo_id , $booking);
+		
+		update_field('payment_date_1', $payment_date_1 , $booking);
+		update_field('transaction_id_1', $transaction_id_1 , $booking);
     }
   
 }
@@ -259,24 +270,14 @@ function mc_consultant_data_update( $entry, $form ) {
     
 }
 
-//add_filter('gform_pre_render', 'populate_patient_ids_field');
-function populate_patient_ids_field($form) {
-    // Specify the form ID and the field ID of the dropdown you want to populate
-    $form_id = 2; // Change to your form ID
-    $field_id = 51; // Change to your field ID
-  
-    // Check if the current form matches the specified form ID
-    if ($form['id'] == $form_id) {
-        $dynamic_options = get_patient_ids();
-        
-        // Find the target field by its ID
-        foreach ($form['fields'] as &$field) {
-            if ($field['id'] == $field_id && $field['type'] == 'select') {
-                $field['choices'] = $dynamic_options;
-                break;
-            }
-        }
-    }
-    
-    return $form;
+add_filter( 'gform_phone_formats', 'uk_phone_format' );
+function uk_phone_format( $phone_formats ) {
+    $phone_formats['uk'] = array(
+        'label'       => 'UK',
+        'mask'        => false,
+        'regex'       => '/^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/',
+        'instruction' => false,
+    );
+ 
+    return $phone_formats;
 }

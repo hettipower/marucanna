@@ -123,6 +123,15 @@
 
 	.btn {
 		margin-left: 20px;
+
+		@include media-breakpoint-down(md) {
+			margin-left: 0;
+
+			&.style_1 {
+				margin-right: 5px;
+			}
+		}
+
 	}
 }
 

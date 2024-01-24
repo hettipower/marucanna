@@ -51,7 +51,7 @@ $i=0;
     while ( have_rows('steps_rep') ) : the_row(); $i++;
 ?>
                         <div class="col-md-6 col-sm-12 step">
-                            <div class="num">STEP 0<?php echo $i; ?></div>
+                            <div class="num">STEP <?php echo $i; ?></div>
                             <h3><?php the_sub_field( 'title' ); ?></h3>
                            <?php the_sub_field( 'content' ); ?>
                         </div>

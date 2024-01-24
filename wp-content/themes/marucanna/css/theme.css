@@ -38175,6 +38175,14 @@ body:not(.home).sticky-header header .navbar::before {
 #mainMenuWrap .btn {
   margin-left: 20px;
 }
+@media (max-width: 767.98px) {
+  #mainMenuWrap .btn {
+    margin-left: 0;
+  }
+  #mainMenuWrap .btn.style_1 {
+    margin-right: 5px;
+  }
+}
 
 /*------------------------------------*\
 
@@ -38460,7 +38468,7 @@ section.section.bg_gray {
 }
 .mc-image-text-block .content_wrapper .numbered_list .item .number {
   display: inline-block;
-  width: 30px;
+  width: 24px;
   font-size: 26px;
   color: #0c8e36;
 }
@@ -40562,6 +40570,12 @@ section.section.bg_gray {
   font-size: 16px;
   color: #4a4a4a;
 }
+.gform_wrapper .gform-body .gform_fields .gfield.payment-message p {
+  margin-bottom: 0;
+}
+.gform_wrapper .gform-body .gform_fields .gfield.payment-message p img {
+  margin-left: 10px;
+}
 .gform_wrapper .gform-body .gform_fields .readonly-field {
   border: 1px solid #64c59c;
   border-radius: 5px;
@@ -40652,6 +40666,14 @@ section.section.bg_gray {
   border: 1px solid var(--bs-success-border-subtle);
   padding: 1rem;
   border-radius: var(--bs-border-radius);
+}
+.gform_confirmation_wrapper .gform_confirmation_message h2, .gform_confirmation_wrapper .gform_confirmation_message .h2 {
+  font-size: 28px;
+  margin-bottom: 0;
+  color: var(--bs-success-text-emphasis);
+}
+.gform_confirmation_wrapper .gform_confirmation_message p {
+  color: var(--bs-success-text-emphasis);
 }
 
 .payment-form {
