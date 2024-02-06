@@ -313,3 +313,13 @@ function remove_view_link($actions, $post) {
     return $actions;
 }
 add_filter('post_row_actions', 'remove_view_link', 10, 2);
+
+// Filter to hide the permalink in the post editor
+add_filter('get_sample_permalink_html', 'hide_custom_post_type_permalink', 10, 5);
+function hide_custom_post_type_permalink($return, $id, $new_title, $new_slug, $post) {
+	
+    if ($post->post_type === 'marucanna-patients') {
+        return '';
+    }
+    return $return;
+}

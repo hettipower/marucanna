@@ -41,27 +41,46 @@ if (is_user_logged_in()):
                     <th>Patient ID</th>
                     <th>Patient Name</th>
                     <th>Phone</th>
-                    <th style="width: 200px;">Actions</th>
+                    <th style="width: 350px;">Actions</th>
                 </tr>
             </thead>
             <?php if( $patients ): ?>
                 <tbody> 
                     <?php 
                         foreach( $patients as $patient ): 
+
+                            $is_valid_patient = check_valid_patinet($patient->ID);
+
+                            if( !$is_valid_patient ) {
+                                continue;
+                            }
+
                             $patient_post_id = get_user_meta( $patient->ID, 'patient_info', true );
                             $name = get_field('name', $patient_post_id);
                             $phone = get_field('phone', $patient_post_id);
                             $consultant = get_user_meta( $patient->ID, 'consultant', true );
+
+                            $patient_url = get_author_posts_url($patient->ID);
                     ?>
                         <tr>
-                            <td><?php echo $patient->user_login; ?></td>
-                            <td><?php echo $name; ?></td>
+                            <td>
+                                <a href="<?php echo $patient_url; ?>" target="_blank" rel="noopener noreferrer">
+                                    <?php echo $patient->user_login; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<?php echo $patient_url; ?>" target="_blank" rel="noopener noreferrer">
+                                    <?php echo $name; ?>
+                                </a>
+                            </td>
                             <td><?php echo $phone; ?></td>
-                            <td style="width: 200px;">
+                            <td style="width: 350px;">
                                 <?php if( !$consultant ): ?>
                                     <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id); ?>" class="btn style_4 small">Consultant</a>
                                 <?php endif; ?>
-                                <a href="#" class="btn style_2 small">Follow Up</a>
+                                <a href="<?php echo home_url('about-us/patient-feedback/?patient='.$patient->ID.'&patient_post='.$patient_post_id); ?>" class="btn style_2 small">Follow Up</a>
+
+                                <a href="<?php echo admin_url( 'admin-post.php?action=create_patient_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_3 small">Export Patient File</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

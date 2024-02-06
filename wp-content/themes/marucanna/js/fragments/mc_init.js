@@ -10,5 +10,9 @@ jQuery(document).ready(function ($) {
 });
 
 function patients_datatable() {
-	new DataTable('#patients_details');
+	new DataTable('#patients_details' , {
+        "language": {
+          "emptyTable": "No patients available."
+        }
+    });
 }

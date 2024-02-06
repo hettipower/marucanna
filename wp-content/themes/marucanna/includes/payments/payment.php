@@ -1,5 +1,4 @@
 <?php
-require 'vendor/autoload.php';
 include __DIR__ . '/location-info.php';
 
 use Square\Environment;

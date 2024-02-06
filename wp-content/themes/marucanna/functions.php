@@ -1,4 +1,5 @@
 <?php
+require 'includes/vendor/autoload.php';
 include 'includes/functions/theme_scripts.php';
 include 'includes/functions/theme_styles.php';
 include 'includes/functions/theme_acf_functions.php';
@@ -246,3 +247,12 @@ add_action('init', function() {
     'top'
   );
 });
+
+// Change the patient base
+add_action('init', 'custom_patient_base');
+function custom_patient_base() {
+  global $wp_rewrite;
+
+  // Change 'author' to your desired custom slug
+  $wp_rewrite->author_base = 'patient';
+}

@@ -8,13 +8,17 @@
 	justify-content: flex-end;
 	transition: 0.5s all ease;
 
+	@include media-breakpoint-down(lg) {
+		margin-top: 65px
+	}
+
 	@include media-breakpoint-down(md) {
-		margin-top: 115px
+		margin-top: 80px
 	}
 
 	.navbar-nav {
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 			margin-bottom: 20px;
 		}
 
@@ -50,7 +54,7 @@
 						top: 16px;
 						font-size: 12px;
 
-						@include media-breakpoint-down(md) {
+						@include media-breakpoint-down(lg) {
 							top: 12px;
 						}
 					}
@@ -124,12 +128,16 @@
 	.btn {
 		margin-left: 20px;
 
-		@include media-breakpoint-down(md) {
+		@include media-breakpoint-down(lg) {
 			margin-left: 0;
 
 			&.style_1 {
 				margin-right: 5px;
 			}
+		}
+
+		@include media-breakpoint-down(md) {
+			padding: 6px 24px 9px;
 		}
 
 	}

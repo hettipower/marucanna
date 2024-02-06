@@ -230,6 +230,19 @@
                         }
                     }
                 }
+
+                table {
+                    width: 100%;
+
+                    .text-box {
+                        width: 210px;
+                        vertical-align: middle;
+                    }
+
+                    .datepicker_wrap {
+                        width: 200px;
+                    }
+                }
             }
 
             .readonly-field {

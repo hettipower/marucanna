@@ -1862,6 +1862,7 @@ section.section {
             border: none;
             outline: none;
             box-shadow: none;
+            padding: 0 20px;
         }
 
         #wp-submit {
@@ -1938,5 +1939,35 @@ section.section {
                 }
             }
         }
+
+        &.repeat_order_wrap {
+            .btn {
+                width: auto;
+            }
+        }
     }
+
+    .nav-pills {
+        .nav-item {
+            margin-right: 5px;
+
+            .nav-link {
+                color: #000;
+                border-radius: 33px;
+                -webkit-border-radius: 33px;
+                -moz-border-radius: 33px;
+                -ms-border-radius: 33px;
+                -o-border-radius: 33px;
+                
+                &.active {
+                    color: #fff;
+                }
+            }        
+        }
+    }
+}
+
+.payment_wrapper {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }

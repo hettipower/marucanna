@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-01-21 11:47:03 PM */
+/*! css 1.0.0 filename.js 2024-02-03 12:32:39 AM */
 
 Fancybox.bind("[data-fancybox]", {});
 
@@ -10,7 +10,11 @@ jQuery(document).ready(function($) {
 });
 
 function patients_datatable() {
-    new DataTable("#patients_details");
+    new DataTable("#patients_details", {
+        language: {
+            emptyTable: "No patients available."
+        }
+    });
 }
 
 function sticky_header() {

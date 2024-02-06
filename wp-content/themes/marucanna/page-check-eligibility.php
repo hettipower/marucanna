@@ -5,6 +5,9 @@ get_header();
 
 $status = isset($_GET['status']) ? $_GET['status'] : false;
 $mgs = isset($_GET['mgs']) ? $_GET['mgs'] : false;
+$fname = isset($_GET['fname']) ? $_GET['fname'] : '';
+$email = isset($_GET['email']) ? $_GET['email'] : '';
+$contact = isset($_GET['contact']) ? $_GET['contact'] : '';
 
 ?>
 
@@ -70,19 +73,19 @@ $mgs = isset($_GET['mgs']) ? $_GET['mgs'] : false;
 
                     <div class="mb-3">
                         <label for="fname" class="form-label">Full Name <span class="req">*</span></label>
-                        <input type="text" name="fname" class="form-control" id="fname" required>
+                        <input type="text" name="fname" class="form-control" id="fname" required value="<?php echo $fname; ?>">
                         <div class="invalid-feedback">This field is required.</div>
                     </div>
 
                     <div class="mb-3 col-12 col-md-6">
                         <label for="email" class="form-label">Email Address <span class="req">*</span></label>
-                        <input type="email" name="email" class="form-control" id="email" required>
+                        <input type="email" name="email" class="form-control" id="email" required value="<?php echo $email; ?>">
                         <div class="invalid-feedback">This field is required.</div>
                     </div>
                     
                     <div class="mb-3 col-12 col-md-6">
                         <label for="contact_no" class="form-label">Phone <span class="req">*</span></label>
-                        <input type="tel" name="contact_no" class="form-control" id="contact_no" required>
+                        <input type="tel" name="contact_no" class="form-control" id="contact_no" required value="<?php echo $contact; ?>">
                         <div class="invalid-feedback">This field is required.</div>
                     </div>
 
