@@ -1,0 +1,27 @@
+/*------------------------------------*\
+	
+    BASE - LINKS
+    
+\*------------------------------------*/
+
+
+$link_underline:			none;  // underline or none
+$link_content_underline:	underline;  // underline or none
+
+$link_content_color:		$body_color;
+$link_content_color_hover:	$theme_color;
+
+
+
+a{
+    text-decoration: $link_underline;
+    color: $link_content_color;
+
+	outline: none !important;
+	
+    @include effect(all, 250ms, ease-in-out);
+	
+    &:hover{
+		color: $link_content_color_hover;
+    }
+}
