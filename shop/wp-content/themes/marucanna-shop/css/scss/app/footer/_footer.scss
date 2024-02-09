@@ -3,3 +3,95 @@
     FOOTER - SITE WIDE
     
 \*------------------------------------*/
+.footer_top_wrapper {
+    background-color: #031a0a;
+
+    .item {
+        display: flex;
+        align-items: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+        .logo
+        {
+            color: #d8d5ae;
+            font-size: 35px;
+            margin-right: 20px;
+        }
+
+        .content {
+            h4 , p {
+                margin: 0;
+                color: #fff;
+            }
+
+            h4 {
+                text-transform: uppercase;
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+footer {
+    background-color: #000;
+    padding: 30px 0;
+
+    .footer_top_wrap {
+        padding-bottom: 25px;
+
+        a {
+            color: #fff;
+        }
+
+        h6 {
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .two-column-list {
+            column-count: 2;
+
+            li {
+                break-inside: avoid-column;
+            }
+        }
+
+        .newsletter {
+            .input-group {
+                border-radius: 33px;
+                -webkit-border-radius: 33px;
+                -moz-border-radius: 33px;
+                -ms-border-radius: 33px;
+                -o-border-radius: 33px;
+                overflow: hidden;
+                padding: 2px;
+                background-color: #fff;
+
+                .form-control {
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+                }
+
+                .btn {
+                    border-radius: 33px !important;
+                    -webkit-border-radius: 33px !important;
+                    -moz-border-radius: 33px !important;
+                    -ms-border-radius: 33px !important;
+                    -o-border-radius: 33px !important;
+                }
+            }
+        }
+    }
+
+    .footer_bottom_wrap {
+        p {
+            color: #fff;
+        }
+    }
+}

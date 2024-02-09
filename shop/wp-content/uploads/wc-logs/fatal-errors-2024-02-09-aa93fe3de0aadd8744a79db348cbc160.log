@@ -1,0 +1,8 @@
+2024-02-09T16:20:37+00:00 CRITICAL Uncaught Error: Call to undefined function my_excerpt() in E:\xampp\htdocs\marucanna\shop\wp-content\themes\marucanna-shop\page-home.php:402
+Stack trace:
+#0 E:\xampp\htdocs\marucanna\shop\wp-includes\template-loader.php(106): include()
+#1 E:\xampp\htdocs\marucanna\shop\wp-blog-header.php(19): require_once('E:\\xampp\\htdocs...')
+#2 E:\xampp\htdocs\marucanna\shop\index.php(17): require('E:\\xampp\\htdocs...')
+#3 {main}
+  thrown in E:\xampp\htdocs\marucanna\shop\wp-content\themes\marucanna-shop\page-home.php on line 402
+

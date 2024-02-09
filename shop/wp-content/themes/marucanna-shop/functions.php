@@ -5,6 +5,8 @@ include 'includes/functions/theme_styles.php';
 include 'includes/functions/theme_acf_functions.php';
 include 'includes/shortcodes.php';
 include 'includes/custom-posts.php';
+include 'includes/functions/menus.php';
+include 'includes/functions/woo_func.php';
 
 add_image_size( 'reviews-thumb', 50, 49,true);
 add_image_size( 'doc-home-thumb', 243, 297,true);

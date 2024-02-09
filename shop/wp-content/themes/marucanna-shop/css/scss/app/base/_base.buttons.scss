@@ -9,6 +9,8 @@ $btn_font_size:			16px;
 $btn_font_transform:	uppercase;
 
 $btn_border_radius:		40px;
+$button_color: 			#083b18;
+$button_hover_color: 	$theme_color;
 
 
 
@@ -20,49 +22,11 @@ $btn_border_radius:		40px;
 	border-radius: $btn_border_radius;
 
 	padding: 6px 28px 9px;
-	
-	&.style_1 {
-		background-color: $white;
-		color: $theme_color;
+	background-color: $button_color;
+	color: $white;
 
-		&:hover {
-			color: $white;
-			background-color: $theme_color;
-		}
-	}
-
-	&.style_2 {
-		color: $white;
-		background-color: $theme_color2;
-		border: 1px solid transparent;
-
-		&:hover {
-			background-color: transparent;
-			border-color: $theme_color2;
-			color: $theme_color2;
-		}
-	}
-
-	&.style_3 {
-		background-color: $white;
-		color: $theme_color;
-		border: 1px solid $theme_color;
-		padding: 6px 40px 9px;
-
-		&:hover {
-			background-color: $theme_color;
-			color: $white;
-		}
-	}
-
-	&.style_4 {
-		color: $white;
+	&:hover {
 		background-color: $theme_color;
-		padding: 6px 40px 9px;
-
-		&:hover {
-			background-color: $theme_color2;
-		}
 	}
 
 	&.btn_link {
@@ -79,20 +43,14 @@ $btn_border_radius:		40px;
 		border: none;
 	}
 
-	&.style_5 {
-		color: $white;
-		background-color: $black;
-
-		&:hover {
-			color: $black;
-			background-color: $white;
-		}
+	&.add_to_cart_button {
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-ms-border-radius: 5px;
+		-o-border-radius: 5px;
 	}
 
-	&.small {
-		padding: 2px 18px 3px;
-		font-size: 13px;
-	}
 }
 
 .btn {
