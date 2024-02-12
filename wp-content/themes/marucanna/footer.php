@@ -156,7 +156,10 @@ jQuery('.mc-tab-title h3').each(function(){
 
     jQuery(this).html( text.join(' ') );
 
-});	
+});
+
+const cssPhone = 'input[name="contact_no"';
+(new phoneMask()).init(cssPhone); 	
 </script>
 </body>
 </html>

@@ -8,6 +8,7 @@ module.exports = function(grunt) {
         },
       	files: {
       		'css/main.css' : 'scss/main.scss',
+          'css/main-admin.css' : 'scss/main-admin.scss',
       	}
       }
     },
@@ -29,6 +30,10 @@ module.exports = function(grunt) {
         src: 'css/main.css',
         dest: 'theme.css'
       },
+      single_admin: {
+        src: 'css/main-admin.css',
+        dest: 'theme-admin.css'
+      },
     },
     uglify: {
       dist: {
@@ -38,8 +43,8 @@ module.exports = function(grunt) {
         },
         files: {
             '../js/scripts.min.js' : [
-                '../js/fragments/mc_init.js',
-                '../js/fragments/**/*.js'
+              '../js/fragments/mc_init.js',
+              '../js/fragments/**/*.js'
             ]
         }
       },
@@ -52,8 +57,8 @@ module.exports = function(grunt) {
         },
         files: {
             '../js/scripts.js' : [
-                '../js/fragments/mc_init.js',
-                '../js/fragments/**/*.js'
+              '../js/fragments/mc_init.js',
+              '../js/fragments/**/*.js'
             ]
         }
       }

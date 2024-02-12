@@ -308,6 +308,12 @@ function remove_view_link($actions, $post) {
 	
     if ($post->post_type == 'marucanna-patients') {
         unset($actions['view']);
+		unset($actions['trash']);
+
+		$patient = get_field('patient' , $post->ID);
+		$delete_patinet_url = admin_url( 'admin-post.php?action=delete_patient&patient='.$patient );
+        $actions['delete_patinet'] = '<a href="#" data-patient="'.$patient.'">' . __('Delete Patient', 'textdomain') . '</a>';
+
     }
 
     return $actions;
@@ -322,4 +328,67 @@ function hide_custom_post_type_permalink($return, $id, $new_title, $new_slug, $p
         return '';
     }
     return $return;
+}
+
+add_action('wp_ajax_mc_patient_delete_action', 'mc_patient_delete_handler');
+function mc_patient_delete_handler() {
+	
+	require_once( ABSPATH.'wp-admin/includes/user.php' );
+
+	$results = array();
+	$patient = isset($_REQUEST['patient']) ? $_REQUEST['patient'] : false ;
+
+	if( $patient ) {
+		$patient_post_id = get_user_meta( $patient, 'patient_info', true );
+
+		$response = wp_delete_user( $patient );
+
+		if( $response ) {
+			wp_delete_post($patient_post_id, true);
+
+			$results['status'] = true;
+			$results['msg'] = 'Patinet file has been deleted.';
+		} else {
+			$results['status'] = false;
+			$results['msg'] = 'Patinet file not deleted.';
+		}
+
+		$results['test'] = $patient_post_id;
+	} else {
+		$results['status'] = false;
+		$results['msg'] = 'Somethings went wrong. Please try again.';
+	}
+
+    echo json_encode($results);
+    wp_die();
+}
+
+
+function mc_patient_consent_sidebar_metabox() {
+    add_meta_box(
+        'mc_patient_consent_button',
+        'Patient Consent',
+        'mc_patient_consent_button_content',
+        'marucanna-patients', // Replace with your custom post type slug
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'mc_patient_consent_sidebar_metabox');
+
+function mc_patient_consent_button_content($post) {
+
+	$consent_url = admin_url( 'admin-post.php?action=sent_consent_form&patient='.get_the_ID() );
+	$send_consent = get_post_meta( get_the_ID(), 'send_consent', true );
+	$consent_date = get_field('consent_date' , get_the_ID());
+
+	if( $send_consent ) {
+		if( $consent_date ) {
+			echo '<p><strong>The patient has given consent.</strong></p>';
+		} else {
+			echo '<p><strong>The Patient Consent email has been sent.</strong></p><p><a href="'.$consent_url.'" class="button action">Resend</a></p>';
+		}
+	} else {
+		echo '<a href="'.$consent_url.'" class="button action">Send Consent</a>';
+	}
 }

@@ -40,9 +40,7 @@ $contact = isset($_GET['contact']) ? $_GET['contact'] : '';
         <div class="row rounded-3 border">
             <div class="box-content-wrap col-12 col-md-5">
                 <div class="box_content">
-                    <h3>Check Eligibility</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis erat eget ligula porta ornare. Fusce nec odio non eros tincidunt lobortis. Sed vitae congue urna.</p>
-                    <p>Integer id turpis nec nibh lobortis pellentesque. Aliquam luctus porta lorem a bibendum. Vestibulum mollis, lacus sit amet tincidunt ullamcorper, turpis metus eleifend quam, sit amet condimentum orci ligula non orci.</p>
+                    <?php the_field( 'stage_1_content' ); ?>
                 </div>
             </div>
 
@@ -85,7 +83,8 @@ $contact = isset($_GET['contact']) ? $_GET['contact'] : '';
                     
                     <div class="mb-3 col-12 col-md-6">
                         <label for="contact_no" class="form-label">Phone <span class="req">*</span></label>
-                        <input type="tel" name="contact_no" class="form-control" id="contact_no" required value="<?php echo $contact; ?>">
+                        <input type="tel" name="contact_no" class="form-control uk_mask" id="contact_no" required value="___ ____ ____" mask="___ ____ ____" placeholder="___ ____ ____">
+                        <div class="form-text">ex:- 020 7946 0958</div>
                         <div class="invalid-feedback">This field is required.</div>
                     </div>
 

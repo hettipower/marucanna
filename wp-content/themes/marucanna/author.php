@@ -92,12 +92,18 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-documents-tab" data-bs-toggle="pill" data-bs-target="#pills-documents" type="button" role="tab" aria-controls="pills-documents" aria-selected="false">Documents</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-payments-tab" data-bs-toggle="pill" data-bs-target="#pills-payments" type="button" role="tab" aria-controls="pills-payments" aria-selected="false">Payments</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-prescriptions-tab" data-bs-toggle="pill" data-bs-target="#pills-prescriptions" type="button" role="tab" aria-controls="pills-prescriptions" aria-selected="false">Prescriptions</button>
-            </li>
+            
+            <?php if( $payment_date_1 || $payment_date_2 || $payment_date_3 || $other_payments ): ?>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-payments-tab" data-bs-toggle="pill" data-bs-target="#pills-payments" type="button" role="tab" aria-controls="pills-payments" aria-selected="false">Payments</button>
+                </li>
+            <?php endif; ?>
+            
+            <?php if( $prescription_date_1 || $prescription_date_2 || $prescription_date_3 || $other_prescription_data ): ?>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-prescriptions-tab" data-bs-toggle="pill" data-bs-target="#pills-prescriptions" type="button" role="tab" aria-controls="pills-prescriptions" aria-selected="false">Prescriptions</button>
+                </li>
+            <?php endif; ?>
         </ul>
 
         <div class="tab-content" id="pills-tabContent">

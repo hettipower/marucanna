@@ -1,0 +1,50 @@
+/*------------------------------------*\
+	
+    SCSS COMPILE LIST
+    
+\*------------------------------------*/
+
+@import 'sweetalert2/sweetalert2';
+
+.delete_patinet {
+    a {
+        color: #b32d2e;
+    }
+}
+
+.swal2-cancel {
+    &.btn-danger {
+        margin-right: 10px;
+        background-color: #dc3545;
+        color: #fff;
+        border-color: #dc3545;
+        box-shadow: none;
+        outline: none;
+
+        &:hover {
+            background-color: #dc3545;
+            color: #fff;
+            border-color: #dc3545;
+            box-shadow: none;
+            outline: none;
+        }
+    }
+}
+
+.swal2-confirm {
+    &.btn-success {
+        background-color: #28a745;
+        color: #fff;
+        border-color: #28a745;
+        box-shadow: none;
+        outline: none;
+
+        &:hover{
+            background-color: #28a745;
+            color: #fff;
+            border-color: #28a745;
+            box-shadow: none;
+            outline: none;
+        }
+    }
+}

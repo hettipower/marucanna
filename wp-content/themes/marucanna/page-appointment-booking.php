@@ -44,9 +44,34 @@ $patient_name = get_field('name' , $booking);
         <div class="row rounded-3 border">
             <div class="box-content-wrap col-12 col-md-5">
                 <div class="box_content">
-                    <h3>Appointment Booking</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis erat eget ligula porta ornare. Fusce nec odio non eros tincidunt lobortis. Sed vitae congue urna.</p>
-                    <p>Integer id turpis nec nibh lobortis pellentesque. Aliquam luctus porta lorem a bibendum. Vestibulum mollis, lacus sit amet tincidunt ullamcorper, turpis metus eleifend quam, sit amet condimentum orci ligula non orci.</p>
+                    <?php
+                        $stage_2_content = get_field('stage_2_content');
+                        $stage_3_content = get_field('stage_3_content');
+                        $stage_4_content = get_field('stage_4_content');
+
+                        if (class_exists('GFForms')) {
+                            $form_id = 1;
+                            $current_page = GFFormDisplay::get_current_page($form_id);
+
+                            switch ($current_page) {
+                                case '1':
+                                    echo $stage_2_content;
+                                    break;
+
+                                case '2':
+                                    echo $stage_3_content;
+                                    break;
+                                    
+                                case '3':
+                                    echo $stage_4_content;
+                                    break;
+                                
+                                default:
+                                    echo $stage_2_content;
+                                    break;
+                            }
+                        }
+                    ?>
                 </div>
             </div>
 

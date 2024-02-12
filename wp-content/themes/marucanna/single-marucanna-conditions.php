@@ -112,7 +112,7 @@ jQuery(document).ready(function($) {
     });
 
     var sidebarHeight = $('#single_sidebar').outerHeight(true);
-    var containerHeight = sidebarHeight + 120;
+    var containerHeight = sidebarHeight + 100;
     var windowWidth = $(window).width();
 
     if( windowWidth > 767 ) {
