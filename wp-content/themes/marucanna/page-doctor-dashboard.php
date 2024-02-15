@@ -34,6 +34,8 @@ if (is_user_logged_in()):
 
 <section class="section dashboard_wrapper">
     <div class="container">
+
+        <?php get_template_part( 'template-part/doctor', 'dashbord-nav' ); ?>
         
         <table id="patients_details" class="table" style="width:100%">
             <thead>
@@ -76,7 +78,9 @@ if (is_user_logged_in()):
                             <td><?php echo $phone; ?></td>
                             <td style="width: 350px;">
                                 <?php if( !$consultant ): ?>
-                                    <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id); ?>" class="btn style_4 small">Consultant</a>
+                                    <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id); ?>" class="btn style_4 small">Consultation</a>
+                                <?php else: ?>
+                                    <button class="btn style_4 small" disabled data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No Consultation Available">Consultation</button>
                                 <?php endif; ?>
                                 <a href="<?php echo home_url('about-us/patient-feedback/?patient='.$patient->ID.'&patient_post='.$patient_post_id); ?>" class="btn style_2 small">Follow Up</a>
 

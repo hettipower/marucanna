@@ -1,7 +1,5 @@
 jQuery(document).ready(function ($) {
 
-    console.log('MC_ADMIN_PARAMS' , MC_ADMIN_PARAMS);
-
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "button action btn-success",

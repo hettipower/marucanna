@@ -9,6 +9,7 @@ $patient_post = (isset($_GET['patient_post'])) ? $_GET['patient_post'] : false;
 if ($patient && $patient_post):
     $name = get_field('name' , $patient_post);
     $dob = get_field('dob' , $patient_post);
+    $patient_id = get_field('patient_id' , $patient_post);
 ?>
 
 <section class="section mc-title-section style_1" style="<?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);<?php } ?>">
@@ -37,8 +38,10 @@ if ($patient && $patient_post):
 <section class="section eligibility_wrap">
     <div class="container">
 
+        <?php get_template_part( 'template-part/doctor', 'dashbord-nav' ); ?>
+
         <div class="form-wrapper" >
-            <?php echo do_shortcode( '[gravityform id="7" title="false" field_values="patient='.$patient.'&patient_post='.$patient_post.'&name='.$name.'&dob='.$dob.'"]' ); ?>
+            <?php echo do_shortcode( '[gravityform id="7" title="false" field_values="patient='.$patient.'&patient_post='.$patient_post.'&name='.$name.'&dob='.$dob.'&patient_id='.$patient_id.'"]' ); ?>
         </div>
     
     </div>

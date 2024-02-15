@@ -7,8 +7,7 @@ if (is_user_logged_in()):
     $user = wp_get_current_user();
     $allowed_roles = array( 'patient', 'administrator' );
     if ( array_intersect( $allowed_roles, $user->roles ) ) :
-        //$user_id = $user->ID;
-        $user_id = 3;
+        $user_id = $user->ID;
         $patient_post_id = get_user_meta( $user_id, 'patient_info', true );
         $patient_password = get_user_meta( $user_id, 'patient_password', true );
         $photo_id = get_field('photo_id' , $patient_post_id);
@@ -119,6 +118,19 @@ if (is_user_logged_in()):
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
+
+            <?php if( $form == 'rep' && $status ): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Repeat Prescription Request send successfully.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div class="row profile-detail-wrap rounded mb-4 navi_wrap">
+            <div class="col-12 text-end">
+                <a href="<?php echo wp_logout_url( get_permalink() ); ?>" class="btn btn-dark">Logout</a>
+            </div>
         </div>
         
         <div class="row profile-detail-wrap rounded mb-4 repeat_order_wrap">
@@ -726,11 +738,11 @@ if (is_user_logged_in()):
 
 <?php
     else:
-        wp_redirect( home_url() );
+        wp_redirect( home_url('login') );
         die();
     endif; 
 else:
-    wp_redirect( home_url() );
+    wp_redirect( home_url('login') );
     die();
 endif;
 ?>

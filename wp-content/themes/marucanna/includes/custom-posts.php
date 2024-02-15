@@ -392,3 +392,37 @@ function mc_patient_consent_button_content($post) {
 		echo '<a href="'.$consent_url.'" class="button action">Send Consent</a>';
 	}
 }
+
+function filter_posts_by_meta_field() {
+    global $typenow;
+
+    // Ensure this is the correct post type
+    if ($typenow == 'marucanna-patients') {
+        $meta_field = 'patient_id'; // Replace with your actual meta field key
+
+        // Display the input field for filtering
+        echo '<input type="text" id="' . $meta_field . '" name="' . $meta_field . '" value="' . esc_attr($_GET[$meta_field]) . '" class="postform" placeholder="Patient ID" />';
+
+        // Add the submit button
+        echo '<input type="submit" name="filter_action" class="button" value="Filter by Patient ID" style="margin-right: 15px;">';
+    }
+}
+add_action('restrict_manage_posts', 'filter_posts_by_meta_field');
+
+// Step 4: Modify the main query to filter posts based on the entered meta field value
+function filter_posts_by_meta_value($query) {
+    global $pagenow;
+    $meta_field = 'patient_id'; // Replace with your actual meta field key
+
+    // Check if it's the admin and the main query
+    if (is_admin() && $pagenow == 'edit.php' && isset($_GET[$meta_field]) && $_GET[$meta_field] != '') {
+        $query->query_vars['meta_query'] = array(
+            array(
+                'key'     => $meta_field,
+                'value'   => esc_attr($_GET[$meta_field]),
+                'compare' => 'LIKE',
+            ),
+        );
+    }
+}
+add_action('pre_get_posts', 'filter_posts_by_meta_value');

@@ -347,8 +347,8 @@ add_filter( 'gform_phone_formats', 'uk_phone_format' );
 function uk_phone_format( $phone_formats ) {
     $phone_formats['uk'] = array(
         'label'       => 'UK',
-        'mask'        => '(999) 9999 9999',
-        'regex'       => '/^(?:(?:\+44)|(?:0))(?:(?:(?:20|21|22|23|24|25|26|27|28|29)|(?:(?:11|12|13|14|15|16|17|18|19)(?:[0-9])))(?:[1-9](?:\d{0,8}))?)$/',
+        'mask'        => '999 9999 9999',
+        'regex'       => '/^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/',
         'instruction' => false,
     );
  
@@ -620,7 +620,7 @@ function mc_create_follow_up_pdf( $entry, $form ) {
 
     // Create a Dompdf instance
     $options = new Options();
-    $options->setDefaultFont('Courier');
+    $options->setDefaultFont('Helvetica');
     $options->set('isHtml5ParserEnabled', true);
     $options->set('isRemoteEnabled', true);
     $dompdf = new Dompdf($options);
@@ -1115,122 +1115,134 @@ function mc_create_patient_file_pdf() {
         <p><strong>Do you have any preferences regarding the type of medicinal cannabis product (e.g., oil, capsules, inhalation) you would prefer? :</strong><br/>'.$mc_patient_preferences_1.'</p>
         <p><strong>Additional notes :</strong><br/>'.$mc_additional_notes.'</p>
 
-        <hr/>
+        <hr/>';
 
-        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Follow Ups</h3>
-        <table style="width: 100%;">
-            <thead>
-                <tr>
-                    <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Follow Up Date</th>
-                    <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Follow Up File</th>
-                </tr>
-            </thead>
-            <tbody>';
-            foreach( $follow_up_appointments as $follow_up ) {
-                $appointment_date = $follow_up['appointment_date'];
-                $appointment_file = $follow_up['appointment_file'];
-                $html .= '<tr>
-                    <td>'.$appointment_date.'</td>
-                    <td>'.$appointment_file.'</td>
-                </tr>';
-            }
-        $html .= '</tbody>
-        </table>
+        if( $follow_up_appointments ) {
+            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Follow Ups</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Follow Up Date</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Follow Up File</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                foreach( $follow_up_appointments as $follow_up ) {
+                    $appointment_date = $follow_up['appointment_date'];
+                    $appointment_file = $follow_up['appointment_file'];
 
-        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Prescription Info</h3>
-        <table style="width: 100%;">
-            <thead>
-                <tr>
-                    <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Prescription Date</th>
-                    <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Prescription Note</th>
-                </tr>
-            </thead>
-            <tbody>';
+                    if( $appointment_file ) {
+                        $html .= '<tr>
+                            <td>'.$appointment_date.'</td>
+                            <td><a href="'.$appointment_file.'" download>View file</a></td>
+                        </tr>';
+                    }
 
-            if( $prescription_date_1 ) {
-                $html .= '<tr>
-                    <td>'.$prescription_date_1.'</td>
-                    <td>'.$prescription_note_1.'</td>
-                </tr>';
-            }
+                }
+            $html .= '</tbody>
+            </table>';
+        }
 
-            if( $prescription_date_2 ) {
-                $html .= '<tr>
-                    <td>'.$prescription_date_2.'</td>
-                    <td>'.$prescription_note_2.'</td>
-                </tr>';
-            }
-
-            if( $prescription_date_3 ) {
-                $html .= '<tr>
-                    <td>'.$prescription_date_3.'</td>
-                    <td>'.$prescription_note_3.'</td>
-                </tr>';
-            }
-
-            if( $other_prescription_data ) {
-                foreach( $other_prescription_data as $prescription ) {
-                    $prescription_date = $prescription['prescription_date'];
-                    $prescription_note = $prescription['prescription_note'];
+        if( $prescription_date_1 || $prescription_date_2 || $prescription_date_3 ||$other_prescription_data ) {
+            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Prescription Info</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Prescription Date</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Prescription Note</th>
+                    </tr>
+                </thead>
+                <tbody>';
+    
+                if( $prescription_date_1 ) {
                     $html .= '<tr>
-                        <td>'.$prescription_date.'</td>
-                        <td>'.$prescription_note.'</td>
+                        <td>'.$prescription_date_1.'</td>
+                        <td>'.$prescription_note_1.'</td>
                     </tr>';
                 }
-            }
-        $html .= '</tbody>
-        </table>
-
-        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Payment Info</h3>
-        <table style="width: 100%;">
-            <thead>
-                <tr>
-                    <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Payment Date</th>
-                    <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Transaction ID</th>
-                </tr>
-            </thead>
-            <tbody>';
-
-            if( $payment_date_1 ) {
-                $html .= '<tr>
-                    <td>'.$payment_date_1.'</td>
-                    <td>'.$transaction_id_1.'</td>
-                </tr>';
-            }
-
-            if( $payment_date_2 ) {
-                $html .= '<tr>
-                    <td>'.$payment_date_2.'</td>
-                    <td>'.$transaction_id_2.'</td>
-                </tr>';
-            }
-
-            if( $payment_date_3 ) {
-                $html .= '<tr>
-                    <td>'.$payment_date_3.'</td>
-                    <td>'.$transaction_id_3.'</td>
-                </tr>';
-            }
-
-            if( $other_payments ) {
-                foreach( $other_payments as $payment ) {
-                    $payment_date = $payment['payment_date'];
-                    $transaction_id = $payment['transaction_id'];
+    
+                if( $prescription_date_2 ) {
                     $html .= '<tr>
-                        <td>'.$payment_date.'</td>
-                        <td>'.$transaction_id.'</td>
+                        <td>'.$prescription_date_2.'</td>
+                        <td>'.$prescription_note_2.'</td>
                     </tr>';
                 }
-            }
-        $html .= '</tbody>
-        </table>
-        </body>
+    
+                if( $prescription_date_3 ) {
+                    $html .= '<tr>
+                        <td>'.$prescription_date_3.'</td>
+                        <td>'.$prescription_note_3.'</td>
+                    </tr>';
+                }
+    
+                if( $other_prescription_data ) {
+                    foreach( $other_prescription_data as $prescription ) {
+                        $prescription_date = $prescription['prescription_date'];
+                        $prescription_note = $prescription['prescription_note'];
+                        $html .= '<tr>
+                            <td>'.$prescription_date.'</td>
+                            <td>'.$prescription_note.'</td>
+                        </tr>';
+                    }
+                }
+            $html .= '</tbody>
+            </table>';
+        }
+
+        if( $payment_date_1 || $payment_date_2 || $payment_date_3 || $other_payments ) {
+            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Payment Info</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Payment Date</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Transaction ID</th>
+                    </tr>
+                </thead>
+                <tbody>';
+    
+                if( $payment_date_1 ) {
+                    $html .= '<tr>
+                        <td>'.$payment_date_1.'</td>
+                        <td>'.$transaction_id_1.'</td>
+                    </tr>';
+                }
+    
+                if( $payment_date_2 ) {
+                    $html .= '<tr>
+                        <td>'.$payment_date_2.'</td>
+                        <td>'.$transaction_id_2.'</td>
+                    </tr>';
+                }
+    
+                if( $payment_date_3 ) {
+                    $html .= '<tr>
+                        <td>'.$payment_date_3.'</td>
+                        <td>'.$transaction_id_3.'</td>
+                    </tr>';
+                }
+    
+                if( $other_payments ) {
+                    foreach( $other_payments as $payment ) {
+                        $payment_date = $payment['payment_date'];
+                        $transaction_id = $payment['transaction_id'];
+                        $html .= '<tr>
+                            <td>'.$payment_date.'</td>
+                            <td>'.$transaction_id.'</td>
+                        </tr>';
+                    }
+                }
+            $html .= '</tbody>
+            </table>';
+        }
+
+        $html .= '</body>
         </html>';
 
         // Create a Dompdf instance
         $options = new Options();
-        $options->setDefaultFont('Courier');
+        $options->setDefaultFont('Helvetica');
         $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
 
@@ -1281,6 +1293,9 @@ function mc_repeat_prescription() {
         wp_mail( $patient_email, $subjectPatient, $htmlPatient, $headers );
     }
 
+    wp_redirect( home_url("patient-dashboard?form=rep&status=1") );
+    die();
+
 }
 
 add_action( 'admin_post_sent_consent_form', 'mc_sent_consent_form' );
@@ -1323,7 +1338,7 @@ function mc_patient_consent_details( $entry, $form ) {
   
     $patient = rgar( $entry, '8' );
     $patient_post_id = rgar( $entry, '9' );
-    $date = rgar( $entry, '3' );
+    $date = rgar( $entry, '11' );
     
     if($patient_post_id) {
 

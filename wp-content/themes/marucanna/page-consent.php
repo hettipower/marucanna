@@ -9,6 +9,7 @@ $patient_post = (isset($_GET['patient_post'])) ? $_GET['patient_post'] : false;
 if ($patient && $patient_post):
     $full_name = get_field('name' , $patient_post);
     $current_date = date('m/d/Y');
+    $patient_id = get_field('patient_id' , $patient_post);
 ?>
 
 <section class="section mc-title-section style_1" style=" <?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);<?php } ?>">
@@ -37,11 +38,20 @@ if ($patient && $patient_post):
     <div class="container">
 
         <div class="form-wrapper" >
-            <?php echo do_shortcode( '[gravityform id="11" title="false" field_values="patient='.$patient.'&patient_post='.$patient_post.'&full_name='.$full_name.'&current_date='.$current_date.'"]' ); ?>
+            <?php echo do_shortcode( '[gravityform id="11" title="false" field_values="patient='.$patient.'&patient_post='.$patient_post.'&full_name='.$full_name.'&current_date='.$current_date.'&patient_id='.$patient_id.'"]' ); ?>
         </div>
     
     </div>
 </section>
+<script>
+jQuery(document).ready(function($) {
+
+    var readOnlyField1 = $("#input_11_12");
+
+    // Make the field read-only
+    readOnlyField1.prop('readonly', true);
+});
+</script>
 
 <?php get_footer(); ?>
 
