@@ -20,9 +20,15 @@ header {
 
         .container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+
+            .logo_shadow {
+                width: 176px;
+            }
 
             .search_wrap {
+                margin-left: 6vw;
+
                 .input-group {
                     border-radius: 33px;
                     border: 1px solid var(--bs-border-color);
@@ -87,7 +93,6 @@ header {
 
             #mainNavbar {
                 flex-grow: unset;
-                margin-right: 60px;
 
                 .menu-item {
                     margin: 0 25px;

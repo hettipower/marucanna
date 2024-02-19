@@ -6,6 +6,16 @@
 	<title><?php wp_title('|',true,'right');?><?php bloginfo('name');?></title>
 
 	<link href="//www.google-analytics.com" rel="dns-prefetch">
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/img/favs/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/img/favs/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>/img/favs/favicon-16x16.png">
+	<link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/img/favs/site.webmanifest">
+	<link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/img/favs/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#0c8e35">
+	<meta name="theme-color" content="#ffffff">
+
+
 	<link href="<?php echo get_template_directory_uri(); ?>/img/favs/favicon.png" rel="shortcut icon">
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,6 +59,8 @@
 	<div class="middle_navbar">
 		<div class="container">
 
+			<div class="logo_shadow"></div>
+
 			<div class="search_wrap">
 				<form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
 					<input type="hidden" value="product" name="post_type" id="post_type" />
@@ -70,17 +82,13 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<?php echo wc_get_page_permalink( 'whishlist' ) ?>">
-							<i class="far fa-heart"></i>
-							<span>Whishlist</span>
-							<span id="whishlist_count" class="count">0</span>
-						</a>
+						<?php echo do_shortcode('[yith_wcwl_items_count]'); ?>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<?php echo wc_get_cart_url() ?>">
+						<a class="nav-link" id="sliding_cart" href="#">
 							<i class="fas fa-shopping-cart"></i>
 							<span>Cart</span>
-							<span id="cart_count" class="count">0</span>
+							<span id="cart_count" class="count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
 						</a>
 					</li>
 				</ul>
@@ -103,30 +111,6 @@
 					));
 				?>
 			</div>
-
-			<?php 
-				$facebook = get_field( 'facebook', 'option' ); 
-				$instagram = get_field( 'instagram', 'option' ); 
-				$youtube = get_field( 'youtube', 'option' ); 
-			?>
-			<ul class="navbar-nav social-media">
-				<?php if( $youtube ): ?>
-					<li class="nav-item">
-						<a class="nav-link" href="<?php echo $youtube; ?>" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-					</li>
-				<?php endif; ?>
-				<?php if( $instagram ): ?>
-					<li class="nav-item">
-						<a class="nav-link" href="<?php echo $instagram; ?>" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-					</li>
-				<?php endif; ?>
-				<?php if( $facebook ): ?>
-					<li class="nav-item">
-						<a class="nav-link" href="<?php echo $facebook; ?>" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-					</li>
-				<?php endif; ?>
-			</ul>
-
 
 		</div>
 	</nav>

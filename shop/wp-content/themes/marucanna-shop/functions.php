@@ -31,5 +31,6 @@ function api_url()
 function mc_after_setup_theme() {
 	add_theme_support( 'html5', array( 'search-form' ) );
   add_theme_support( 'post-thumbnails' ); 
+  add_theme_support( 'woocommerce' );
 }
 add_action( 'after_setup_theme', 'mc_after_setup_theme' );

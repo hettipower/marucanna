@@ -22,4 +22,12 @@ section.section {
             width: 100%;
         }
     }
+
+    &.breadcrumb_wrap {
+        padding: 15px 0;
+
+        .woocommerce-breadcrumb {
+            margin: 0;
+        }
+    }
 }

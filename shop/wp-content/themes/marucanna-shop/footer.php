@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-md-8 col-sm-12">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <h6>QUICK LINKS</h6>
                             <?php 
                                 wp_nav_menu( array(
@@ -44,7 +44,7 @@
                             ?>
                         </div>
 
-                        <div class="col-md-3 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <h6>CATEGORIES</h6>
                             <?php 
                                 wp_nav_menu( array(
@@ -55,7 +55,7 @@
                             ?>
                         </div>
 
-                        <div class="col-md-3 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <h6>USEFUL LINKS</h6>
                             <?php 
                                 wp_nav_menu( array(
@@ -125,20 +125,25 @@
 					    <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.webp"/>
 					<?php } ?>
                 </div>
-                <div class="col-md-8 col-sm-12">
+                <div class="col-md-8 col-sm-12 pe-md-5">
 				    <?php if ( get_field( 'copyright', 'option' ) ) { ?>
 				        <p><small><?php the_field( 'copyright', 'option' ); ?></small></p>
 				    <?php } else { ?>
                         <p><small>Marucanna.co.uk is a trading style of The Yardley Clinic, registered with the Care Quality Commission (CQC), and offers reasonably priced consultations and, in appropriate cases, will recommend our line of full-spectrum medical cannabis sourced in the UK.</small></p>
 					<?php } ?>
                 </div>
-                <div class="col-md-2 col-sm-12">
+                <div class="col-md-2 col-sm-12 text-end">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo2.webp"/>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+<div id="mp-minicart-wrap">
+    <a href="#" id="minicart-close"><i class="fas fa-times"></i></a>
+    <?php woocommerce_mini_cart(); ?>
+</div>
 
 <?php wp_footer(); ?>
 
