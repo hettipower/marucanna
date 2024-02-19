@@ -43,9 +43,9 @@ add_action('init', 'html5blank_header_scripts');
 
 function mc_enqueue_custom_admin_style( $hook ) {
 
-    if ( 'edit.php' != $hook ) {
+    /* if ( 'edit.php' != $hook ) {
         return;
-    }
+    } */
     
     wp_register_script('sweetalert2', get_template_directory_uri() . '/vendor/sweetalert2/sweetalert2.min.js', array('jquery'), false, true);
     wp_enqueue_script('sweetalert2');

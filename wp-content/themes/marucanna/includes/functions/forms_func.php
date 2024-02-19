@@ -1298,11 +1298,11 @@ function mc_repeat_prescription() {
 
 }
 
-add_action( 'admin_post_sent_consent_form', 'mc_sent_consent_form' );
+add_action( 'wp_ajax_sent_consent_form_action', 'mc_sent_consent_form' );
 function mc_sent_consent_form() {
 
+    $results = array();
     $patient = (isset($_REQUEST['patient'])) ? $_REQUEST['patient'] : false;
-    $admin_email = get_admin_email();
 
     if( $patient ) {
 
@@ -1326,10 +1326,16 @@ function mc_sent_consent_form() {
             update_post_meta ( $patient, 'send_consent', true );
         }
 
-        wp_redirect( home_url("wp-admin/post.php?post=$patient&action=edit") );
-        die();
+        $results['status'] = true;
+		$results['msg'] = 'Consent email has been sent.';
 
+    } else {
+        $results['status'] = false;
+		$results['msg'] = 'Somethings went wrong. Please try again.';
     }
+
+    echo json_encode($results);
+    wp_die();
 
 }
 

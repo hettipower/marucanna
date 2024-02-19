@@ -76,11 +76,11 @@ if (is_user_logged_in()):
                                 </a>
                             </td>
                             <td><?php echo $phone; ?></td>
-                            <td style="width: 350px;">
+                            <td style="width: 390px;">
                                 <?php if( !$consultant ): ?>
                                     <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id); ?>" class="btn style_4 small">Consultation</a>
                                 <?php else: ?>
-                                    <button class="btn style_4 small" disabled data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No Consultation Available">Consultation</button>
+                                    <button class="btn style_4 small" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No Consultation Available">Consultation</button>
                                 <?php endif; ?>
                                 <a href="<?php echo home_url('about-us/patient-feedback/?patient='.$patient->ID.'&patient_post='.$patient_post_id); ?>" class="btn style_2 small">Follow Up</a>
 
@@ -96,6 +96,10 @@ if (is_user_logged_in()):
 </section>
 
 <?php get_footer(); ?>
+<script>
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 
 <?php
     else:

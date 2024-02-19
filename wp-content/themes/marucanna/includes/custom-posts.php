@@ -381,15 +381,16 @@ function mc_patient_consent_button_content($post) {
 	$consent_url = admin_url( 'admin-post.php?action=sent_consent_form&patient='.get_the_ID() );
 	$send_consent = get_post_meta( get_the_ID(), 'send_consent', true );
 	$consent_date = get_field('consent_date' , get_the_ID());
+	$patient = get_the_ID();
 
 	if( $send_consent ) {
 		if( $consent_date ) {
 			echo '<p><strong>The patient has given consent.</strong></p>';
 		} else {
-			echo '<p><strong>The Patient Consent email has been sent.</strong></p><p><a href="'.$consent_url.'" class="button action">Resend</a></p>';
+			echo '<p><strong>The Patient Consent email has been sent.</strong></p><p><a href="#" class="button action" id="send_consent" data-patient="'.$patient.'">Resend</a></p>';
 		}
 	} else {
-		echo '<a href="'.$consent_url.'" class="button action">Send Consent</a>';
+		echo '<a href="#" class="button action" id="send_consent" data-patient="'.$patient.'">Send Consent</a>';
 	}
 }
 
