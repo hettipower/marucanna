@@ -27,6 +27,7 @@ $button_hover_color: 	$theme_color;
 
 	&:hover {
 		background-color: $theme_color;
+		color: $white;
 	}
 
 	&.btn_link {

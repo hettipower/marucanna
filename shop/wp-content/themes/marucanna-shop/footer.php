@@ -142,7 +142,10 @@
 
 <div id="mp-minicart-wrap">
     <a href="#" id="minicart-close"><i class="fas fa-times"></i></a>
-    <?php woocommerce_mini_cart(); ?>
+    
+    <div class="widget_shopping_cart_content">
+        <?php woocommerce_mini_cart(); ?>
+    </div>
 </div>
 
 <?php wp_footer(); ?>

@@ -57,7 +57,7 @@ $colors: (
   "red":        $red,
   "orange":     $orange,
   "yellow":     $yellow,
-  "green":      $green,
+  "#0a8e35":      $green,
   "teal":       $teal,
   "cyan":       $cyan,
   "black":      $black,
@@ -568,7 +568,7 @@ $component-active-bg:         #0c8e36 !default;
 // scss-docs-start focus-ring-variables
 $focus-ring-width:      .25rem !default;
 $focus-ring-opacity:    .25 !default;
-$focus-ring-color:      rgba($primary, $focus-ring-opacity) !default;
+$focus-ring-color:      rgba($green, $focus-ring-opacity) !default;
 $focus-ring-blur:       0 !default;
 $focus-ring-box-shadow: 0 0 $focus-ring-blur $focus-ring-width $focus-ring-color !default;
 // scss-docs-end focus-ring-variables

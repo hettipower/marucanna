@@ -61,20 +61,11 @@ function mp_woocommerce_share_action(){
     <?php
 }
 
-add_filter( 'woocommerce_add_to_cart_fragments', function($fragments) {
-    ob_start();
-    ?>
-    <a class="nav-link" id="sliding_cart" href="#">
-        <i class="fas fa-shopping-cart"></i>
-        <span>Cart</span>
-        <span id="cart_count" class="count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
-    </a>
-
-    <?php $fragments['a#sliding_cart.nav-link'] = ob_get_clean();
-
+add_filter( 'woocommerce_add_to_cart_fragments', 'cart_count_fragments', 10, 1 );
+function cart_count_fragments( $fragments ) {
+    $fragments['span#cart_count.count'] = '<span id="cart_count" class="count">'.WC()->cart->get_cart_contents_count().'</span>';
     return $fragments;
-
-} );
+}
 
 /* Wishlist Count */
 if ( defined( 'YITH_WCWL' ) && ! function_exists( 'yith_wcwl_get_items_count' ) ) {
@@ -122,4 +113,42 @@ if ( defined( 'YITH_WCWL' ) && ! function_exists( 'yith_wcwl_enqueue_custom_scri
     }
 
     add_action( 'wp_enqueue_scripts', 'yith_wcwl_enqueue_custom_script', 20 );
+}
+
+//Add Form Validation Script
+add_action('woocommerce_after_customer_login_form' , 'mp_form_validation_script');
+add_action('woocommerce_after_reset_password_form' , 'mp_form_validation_script');
+add_action('woocommerce_after_edit_account_form' , 'mp_form_validation_script');
+function mp_form_validation_script() {
+    ?>
+    <script>
+    (() => {
+      'use strict'
+    
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+    
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+    
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+    </script>
+    <?php
+}
+
+//Customize My Account nav items
+add_filter( 'woocommerce_account_menu_items', 'mp_customize_my_account_nav', 99, 1 );
+function mp_customize_my_account_nav( $items ) {
+    
+    unset($items['downloads']);
+
+    return $items;
 }
