@@ -137,4 +137,6 @@ while( have_rows('prs_sec2_content_boxes_rep') ): the_row();
     </div>
 </section>
 
+<?php get_template_part( 'template-part/related', 'articles' ); ?>
+
 <?php get_footer(); ?>

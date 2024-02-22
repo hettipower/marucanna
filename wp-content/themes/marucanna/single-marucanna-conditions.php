@@ -100,6 +100,8 @@
     </div>
 </section>
 
+<?php get_template_part( 'template-part/related', 'articles' ); ?>
+
 <script>
 jQuery(document).ready(function($) {
 

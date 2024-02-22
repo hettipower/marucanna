@@ -2,7 +2,7 @@
     $thumb_id = get_post_thumbnail_id();
     $thumb_url = wp_get_attachment_image_src($thumb_id,'full', true);
 ?>
-<div class="blog_item mb-5">
+<div class="blog_item mb-5 <?php echo $args['classes'];	?>">
     <div class="blog-img">
         <?php if ( has_post_thumbnail() ) : ?>
             <img src="<?php echo $thumb_url[0]; ?>" class="rounded img-fluid" alt="<?php the_title(); ?>">

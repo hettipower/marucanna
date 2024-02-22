@@ -93,4 +93,6 @@ get_header(); ?>
     </div>
 </section>
 
+<?php get_template_part( 'template-part/related', 'articles' ); ?>
+
 <?php get_footer(); ?>

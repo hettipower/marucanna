@@ -80,4 +80,6 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'doc-home-thumb', true);
     </div>
 </section>
 
+<?php get_template_part( 'template-part/related', 'articles' ); ?>
+
 <?php get_footer(); ?>

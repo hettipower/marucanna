@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-02-15 12:02:15 PM */
+/*! css 1.0.0 filename.js 2024-02-12 2:08:24 AM */
 
 Fancybox.bind("[data-fancybox]", {});
 

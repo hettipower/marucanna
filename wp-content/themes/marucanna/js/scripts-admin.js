@@ -65,6 +65,8 @@ jQuery(document).ready(function ($) {
   
       return false;
     });
+	
+	
 
     $('#send_consent').on('click' , function(e){
   
