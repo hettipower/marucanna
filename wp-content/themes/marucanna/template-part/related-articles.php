@@ -3,7 +3,7 @@ $source_type = get_field( 'source_type' );
 $select_category = get_field( 'select_category' );
 $select_blogs = get_field( 'select_blogs' );
 ?>
-<?php if( $source_type != 'none' ): ?>
+<?php if( $source_type != 'none' && isset($source_type) ): ?>
 <section class="section related_articles">
     <div class="container">
         
