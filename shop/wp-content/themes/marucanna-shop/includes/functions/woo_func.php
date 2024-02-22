@@ -3,6 +3,7 @@ remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_prod
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
 
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 6 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 5 );
@@ -151,4 +152,37 @@ function mp_customize_my_account_nav( $items ) {
     unset($items['downloads']);
 
     return $items;
+}
+
+add_action('woocommerce_archive_description', 'custom_category_archive_description', 10);
+function custom_category_archive_description() {
+
+    if ( is_product_taxonomy() && 0 === absint( get_query_var( 'paged' ) ) ) {
+		$term = get_queried_object();
+
+		if ( $term ) {
+			/**
+			 * Filters the archive's raw description on taxonomy archives.
+			 *
+			 * @since 6.7.0
+			 *
+			 * @param string  $term_description Raw description text.
+			 * @param WP_Term $term             Term object for this taxonomy archive.
+			 */
+			$term_description = apply_filters( 'woocommerce_taxonomy_archive_description_raw', $term->description, $term );
+
+            $thumbnail_id = get_term_meta( $term->term_id, 'thumbnail_id', true ); 
+            $image_url = wp_get_attachment_url( $thumbnail_id ); 
+
+			if ( ! empty( $term_description ) ) {
+				echo '<div class="term-description">';
+                    if( $image_url ) {
+                        echo '<div class="category_image"><img src="'. $image_url .'" alt="'.$term->name.'" /></div>';
+                    }
+                    echo wc_format_content( wp_kses_post( $term_description ) );
+                echo '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+		}
+	}
+    
 }

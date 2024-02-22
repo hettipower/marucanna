@@ -51,6 +51,8 @@ get_header( 'shop' ); ?>
 		do_action( 'woocommerce_after_main_content' );
 	?>
 
+<?php get_template_part( 'template-part/related', 'articles' ); ?>
+
 <?php
 get_footer( 'shop' );
 

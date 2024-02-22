@@ -1,5 +1,6 @@
 <div class="sidebar_item search_wrap">
     <form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
+        <input type="hidden" value="post" name="post_type" id="post_type" />
         <div class="input-group">
             <input type="search" class="form-control" placeholder="<?php echo esc_attr_x( 'Search …', 'placeholder' ) ?>" aria-label="<?php echo esc_attr_x( 'Search …', 'placeholder' ) ?>" value="<?php echo get_search_query() ?>" name="s">
             <span class="input-group-text">

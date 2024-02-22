@@ -12,14 +12,22 @@
         padding-top: 30px;
         padding-bottom: 30px;
 
-        .logo
-        {
+        @include media-breakpoint-down(md) {
+            justify-content: center;
+        }
+
+        .logo {
             color: #d8d5ae;
             font-size: 35px;
             margin-right: 20px;
         }
 
         .content {
+
+            @include media-breakpoint-down(md) {
+                flex: 0 0 60%;
+            }
+
             h4 , p {
                 margin: 0;
                 color: #fff;
@@ -44,8 +52,31 @@ footer {
     .footer_top_wrap {
         padding-bottom: 25px;
 
+        @include media-breakpoint-down(md) {
+            text-align: center;
+
+            .col-md-4 {
+                margin-bottom: 30px;
+            }
+
+            .mc-footer-menu {
+                li {
+                    a {
+                        font-size: 17px;
+                        padding: 8px 0;
+                        display: inline-block;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
         a {
             color: #fff;
+
+            &:hover {
+                color: #0b8e36;
+            }
         }
 
         h6 {
@@ -87,11 +118,36 @@ footer {
                 }
             }
         }
+
+        .social {
+            .nav {
+                @include media-breakpoint-down(md) {
+                    justify-content: center;
+                }
+
+                .nav-link {
+                    font-size: 24px;
+                }
+            }
+        }
     }
 
     .footer_bottom_wrap {
+
+        @include media-breakpoint-down(md) {
+            text-align: center;
+
+            .text-end {
+                text-align: center !important;
+            }
+        }
+
         p {
             color: #fff;
+
+            @include media-breakpoint-down(md) {
+                font-size: 17px;
+            }
         }
     }
 }
