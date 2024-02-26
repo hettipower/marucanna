@@ -63,6 +63,16 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 				$thumbnail         = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 				$product_price     = apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key );
 				$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
+				// Get the product price
+				$product_price = $_product->get_price();
+
+				if ( $_product->is_sold_individually() ) {
+					$min_quantity = 1;
+					$max_quantity = 1;
+				} else {
+					$min_quantity = 0;
+					$max_quantity = $_product->get_max_purchase_quantity();
+				}
 				?>
 				<li class="woocommerce-mini-cart-item <?php echo esc_attr( apply_filters( 'woocommerce_mini_cart_item_class', 'mini_cart_item', $cart_item, $cart_item_key ) ); ?> d-flex p-2 border rounded">
 					<?php echo $thumbnail; ?>
@@ -76,7 +86,26 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 						<?php endif; ?>
 						<div class="cart-data">
 							<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-							<?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s', $cart_item['quantity'], $product_price ) . '</span>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<div class="quantity input-group">
+								<span class="input-group-text">
+									<button class="minus" data-product-key="<?php echo esc_attr($cart_item_key); ?>">-</button>
+								</span>
+								<input
+									type="number"
+									class="input-text qty form-control"
+									step="1"
+									min="<?php echo esc_attr($min_quantity); ?>"
+									max="<?php echo esc_attr(apply_filters('woocommerce_quantity_input_max', $max_quantity, $_product)); ?>"
+									name="cart[<?php echo esc_attr($cart_item_key); ?>][qty]"
+									value="<?php echo esc_attr($cart_item['quantity']); ?>"
+									title="<?php esc_attr_e('Qty', 'woocommerce'); ?>"
+									size="4"
+								/>
+								<span class="input-group-text">
+									<button class="plus" data-product-key="<?php echo esc_attr($cart_item_key); ?>">+</button>
+								</span>
+							</div>
+							<div class="price"><?php echo wc_price($product_price); ?></div>
 							<?php
 								echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									'woocommerce_cart_item_remove_link',
@@ -102,7 +131,6 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 		do_action( 'woocommerce_mini_cart_contents' );
 		?>
 	</ul>
-
 <?php else : ?>
 
 	<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'No products in the cart.', 'woocommerce' ); ?></p>

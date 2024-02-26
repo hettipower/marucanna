@@ -371,6 +371,11 @@
         .woocommerce-mini-cart-item {
             margin-bottom: 10px;
 
+            img {
+                max-width: 50px;
+                object-fit: contain;
+            }
+
             .content {
                 padding-left: 17px;
     
@@ -382,8 +387,32 @@
                 .cart-data {
                     display: flex;
                     justify-content: space-between;
+                    align-items: center;
+                    margin-top: 8px;
     
                     .quantity {
+                        color: #fff;
+                        border-radius: 5px;
+                        overflow: hidden;
+                        max-width: 130px;
+
+                        .input-group-text {
+                            padding: 0;
+                            border: none;
+
+                            button {
+                                background-color: #0b8e36;
+                                color: #fff;
+                                border: none;
+                                height: 100%;
+                                padding: 0 11px;
+                                font-size: 22px;
+                            }
+                        }
+
+                    } 
+
+                    .price {
                         color: #fff;
                     }
     

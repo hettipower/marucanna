@@ -186,3 +186,20 @@ function custom_category_archive_description() {
 	}
     
 }
+
+add_action('wp_ajax_update_mini_cart_quantity', 'update_mini_cart_quantity');
+add_action('wp_ajax_nopriv_update_mini_cart_quantity', 'update_mini_cart_quantity');
+function update_mini_cart_quantity() {
+    $product_key = wc_clean($_POST['product_key']);
+    $quantity = wc_clean($_POST['quantity']);
+
+    // Update the cart quantity
+    WC()->cart->set_quantity($product_key, $quantity);
+    
+    ob_start();
+    woocommerce_mini_cart();
+    $mini_cart_content = ob_get_clean();
+
+    // Send back the updated mini cart HTML
+    wp_send_json_success($mini_cart_content);
+}

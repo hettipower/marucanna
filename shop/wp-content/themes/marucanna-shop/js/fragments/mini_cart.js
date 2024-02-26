@@ -34,3 +34,24 @@ function toggle_mini_cart() {
         });
     });
 }
+
+function updateMiniCartQuantity(productKey, quantity) {
+    // AJAX request to update mini cart
+    jQuery.ajax({
+        type: 'POST',
+        url: woocommerce_params.ajax_url,
+        data: {
+            action: 'update_mini_cart_quantity',
+            product_key: productKey,
+            quantity: quantity,
+        },
+        dataType: 'json',
+        success: function (response) {
+            // Update mini cart with new HTML
+            if (response.success) {
+                // Update the mini cart content
+                jQuery('.widget_shopping_cart_content').html(response.data);
+            }
+        },
+    });
+}
