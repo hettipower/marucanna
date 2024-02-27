@@ -37533,6 +37533,9 @@ section.section.breadcrumb_wrap .woocommerce-breadcrumb {
   background-color: #60bf2d;
   color: #000;
 }
+#single_product_wrap .product .summary .cart .btns_wrap .added_to_cart {
+  display: none;
+}
 #single_product_wrap .product .summary .yith-wcwl-add-to-wishlist {
   font-size: 16px;
 }

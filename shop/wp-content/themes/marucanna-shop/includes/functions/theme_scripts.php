@@ -20,6 +20,12 @@ function html5blank_header_scripts()
 
     /* wp_register_script('fancybox', get_template_directory_uri() . '/vendor/fancybox/fancybox.umd.js', array('jquery'), false, true);
     wp_enqueue_script('fancybox'); */
+
+    if ( is_product() ) {
+        if (class_exists('WooCommerce')) {
+            wp_enqueue_script('wc-add-to-cart');
+        }
+    }
     
     wp_register_script('themescript', get_template_directory_uri() . '/js/scripts.js', array('jquery'), false, true); // Custom scripts
     wp_enqueue_script('themescript'); // Enqueue it! 

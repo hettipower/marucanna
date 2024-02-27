@@ -39,7 +39,7 @@ function updateMiniCartQuantity(productKey, quantity) {
     // AJAX request to update mini cart
     jQuery.ajax({
         type: 'POST',
-        url: woocommerce_params.ajax_url,
+        url: CUSTOM_PARAMS.ajaxUrl,
         data: {
             action: 'update_mini_cart_quantity',
             product_key: productKey,

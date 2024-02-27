@@ -1,6 +1,7 @@
 jQuery(document).ready(function ($) {
   toggle_mini_cart();
   menu_dropdown();
+  mp_ajax_add_to_cart_single();
 
   // Increment quantity
   jQuery(document.body).on('click', '.mini_cart_item .quantity .plus', function () {
