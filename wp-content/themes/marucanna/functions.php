@@ -256,3 +256,10 @@ function custom_patient_base() {
   // Change 'author' to your desired custom slug
   $wp_rewrite->author_base = 'patient';
 }
+
+function mp_acf_google_map_api( $api ){
+  $google_map_key = get_field( 'google_map_key', 'option' );
+  $api['key'] = $google_map_key;
+  return $api;
+}
+add_filter('acf/fields/google_map/api', 'mp_acf_google_map_api');
