@@ -15,6 +15,13 @@
                 img {
                     mix-blend-mode: darken;
                 }
+
+                .onsale {
+                    background-color: #60bf2d;
+                    padding: 0;
+                    left: 8px;
+                    top: 6px;
+                }
             }
             
             .woocommerce-loop-product__title {

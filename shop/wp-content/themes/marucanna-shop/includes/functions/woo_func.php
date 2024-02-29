@@ -1,5 +1,5 @@
 <?php
-remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
+//remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
@@ -281,4 +281,16 @@ if( ! function_exists('is_woocommerce_page') ){
 
         return false;
     }
+}
+
+add_action( 'woocommerce_product_query', 'mp_product_query' );
+function mp_product_query( $q ){
+
+    $sale = (isset($_GET['sale'])) ? $_GET['sale'] : false ;
+
+    if( $sale ) {
+        $product_ids_on_sale = wc_get_product_ids_on_sale();
+        $q->set( 'post__in', $product_ids_on_sale );
+    }
+
 }
