@@ -552,7 +552,7 @@ function mc_create_follow_up_pdf( $entry, $form ) {
             <td style="width: 170px;"><img style="width: 170px;" src="'.$site_logo.'" /></td>
             <td>
                 <h4 style="background-color: #0c8e36;color: #fff;padding: 10px; width:100%; text-align: center;">Medicinal Cannabis follow up and Adverse Effects Assessment Questionnaire</h4>
-                <h4 style="text-align: right;color: #000;">Confidetial Document</h4>
+                <h4 style="text-align: right;color: #000;">Confidential Document</h4>
             </td>
         </tr>
     </table>

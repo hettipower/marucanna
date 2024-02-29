@@ -82,7 +82,7 @@ if (is_user_logged_in()):
                                 <?php else: ?>
                                     <button class="btn style_4 small" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No Consultation Available">Consultation</button>
                                 <?php endif; ?>
-                                <a href="<?php echo home_url('about-us/patient-feedback/?patient='.$patient->ID.'&patient_post='.$patient_post_id); ?>" class="btn style_2 small">Follow Up</a>
+                                <a href="<?php echo home_url('about-us/patient-follow-up/?patient='.$patient->ID.'&patient_post='.$patient_post_id); ?>" class="btn style_2 small">Follow Up</a>
 
                                 <a href="<?php echo admin_url( 'admin-post.php?action=create_patient_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_3 small">Export Patient File</a>
                             </td>

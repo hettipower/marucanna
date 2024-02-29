@@ -39479,7 +39479,8 @@ section.section.bg_gray {
 .page-template-page-clinic .mc-title-section.style_1::after,
 .page-template-page-feedback .mc-title-section.style_1::after,
 .page-template-page-login .mc-title-section.style_1::after,
-.page-template-page-patient-dashboard .mc-title-section.style_1::after {
+.page-template-page-patient-dashboard .mc-title-section.style_1::after,
+.page-template-page-reviews .mc-title-section.style_1::after {
   background-image: url("../img/wave14.svg");
 }
 
