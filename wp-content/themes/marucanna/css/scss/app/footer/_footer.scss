@@ -69,10 +69,14 @@ footer {
                 color: $white;
                 font-size: 16px;
                 font-weight: 400;
-                padding: 0;
+                padding: 0 0 4px;
+                //border-bottom: 1px solid transparent;
 
-                &:hover {
+                &:hover , 
+                &:focus {
                     color: $white;
+                    //border-bottom-color: #fff;
+                    text-decoration: underline;
                 }
             }
         }
@@ -138,6 +142,13 @@ footer {
 
                 a {
                     font-size: 20px;
+                    padding: 0;
+                    border: none;
+
+                    &:hover , 
+                    &:focus {
+                        text-decoration: none;
+                    }
                 }
             }
         }
@@ -152,6 +163,14 @@ footer {
     footer{
         &::before{
             background-image: url('../img/wave11.svg');
+        }
+    }
+
+    &.page-has-related-articles {
+        footer{
+            &::before{
+                background-image: url('../img/wave8.svg');
+            }
         }
     }
 }

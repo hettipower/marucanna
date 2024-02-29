@@ -29,18 +29,13 @@ get_header(); ?>
 <section class="section contact_wrap">
     <div class="container">
         <div class="row">
+            <div class="col-12 mb-3 into_text">
+                <?php the_field( 'intro_text' ); ?>
+            </div>
             <div class="col-md-6 col-12 form_wrap">
                 <?php echo do_shortcode( '[gravityform id="12" title="false"]' ); ?>
             </div>
-            <div class="col-md-6 col-12 image_wrap">
-                <?php 
-                    $contact_image = get_field( 'contact_image' );
-                    if ( $contact_image ) { 
-                ?>
-                    <img src="<?php echo $contact_image['url']; ?>" alt="<?php echo $contact_image['alt']; ?>" />
-                <?php } ?>
-            </div>
-            <div class="col-12 mt-3 map_wrap">
+            <div class="col-md-6 col-12 map_wrap">
                 <?php 
                     $google_map = get_field( 'google_map' ); 
                     if( $google_map ): 
@@ -51,6 +46,20 @@ get_header(); ?>
                         </div>
                     </div>
                 <?php endif; ?>
+            </div>
+            <div class="col-12 mt-5 contact_details_wrap">
+                <div class="row">
+                    <div class="col-md-6 col-12 contact_details">
+                        <div class="inner">
+                            <?php the_field( 'contact_details' ); ?>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 contact_details">
+                        <div class="inner">
+                            <?php the_field( 'opening_times' ); ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

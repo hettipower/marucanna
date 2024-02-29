@@ -40,7 +40,7 @@ get_header(); ?>
 <section class="section conditions-list-section">
     <div class="container">
         <div class="title_wrap">
-            <h3><?php the_field( 'prs_sec1_title_2' ); ?></h3>
+            <h3><?php echo do_shortcode(get_field('prs_sec1_title_2')); ?></h3>
         </div>
         <div class="condition_list_wrap">
             <?php the_field( 'prs_sec1_content_2' ); ?>

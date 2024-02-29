@@ -1,5 +1,5 @@
 <?php 
-/* Template Name: Blog Page */
+/* Template Name: Glossary Page */
 
 get_header(); ?>
 
@@ -26,30 +26,22 @@ get_header(); ?>
     </div>
 </section>
 
-<section class="section blog_wrap">
+<section class="section glossary_wrap">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-sm-12 order-md-2 blog_listing">
-
-                <?php
-                    $blog_query = new WP_Query(array(
-                        'post_type' => 'post',
-                        'paged' => $paged
-                    ));
-                    if ( $blog_query->have_posts() ) : while ( $blog_query->have_posts() ) : $blog_query->the_post();
-                ?>
-                    <?php get_template_part( 'template-part/blog', 'main' ); ?>
-	            <?php endwhile; wp_reset_postdata(); endif; ?>
-
-                <div class="pagination_wrap">
-                    <nav>
-                        <?php kriesi_pagination($blog_query->max_num_pages); ?>
-                    </nav>
-                </div>
-                
+            <div class="col-12 mb-3 into_text">
+                <?php the_field( 'intro_text' ); ?>
             </div>
-            
-            <?php get_template_part( 'template-part/blog', 'sidebar' ); ?>
+            <div class="col-12 glossary_table_wrap">
+                <table class="table">
+                    <?php if ( have_rows( 'glossary_table' ) ) : while ( have_rows( 'glossary_table' ) ) : the_row(); ?>
+                        <tr>
+                            <th><?php the_sub_field( 'title' ); ?></th>
+                            <td><?php the_sub_field( 'content' ); ?></td>
+                        </tr>
+                    <?php endwhile; endif; ?>
+                </table>
+            </div>
         </div>
     </div>
 </section>

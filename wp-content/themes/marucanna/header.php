@@ -23,12 +23,23 @@
 			autoReplaceSvg: false
 		}
 	</script>
+	<?php if ( get_field( 'additional_scripts' ) ) { ?>
+	
+	<?php the_field( 'additional_scripts' ); ?>
+	
+	<?php } ?>
 
 	<?php wp_head(); ?>
 
 </head>
-
-<body <?php body_class(); ?>>
+<?php
+$source_type = get_field( 'source_type' );
+$source_class = '';
+if( $source_type != 'none' && isset($source_type) ) {
+	$source_class = 'page-has-related-articles';
+}
+?>
+<body <?php body_class($source_class); ?>>
 
 <header>
 	<nav class="navbar navbar-expand-lg">
