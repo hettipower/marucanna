@@ -3,18 +3,9 @@
 
 get_header(); ?>
 
-<section class="section mc-title-section style_1" style="<?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);<?php } ?>">
+<section class="section main-title-section">
     <div class="container">
-	
-	<?php if ( get_field( 'page_title' ) ) { ?>
-	<h1><?php the_field( 'page_title' ); ?></h1>
-	<?php } else { ?>
-		<?php if ( have_posts() ) : ?>
-<?php while ( have_posts() ) : the_post(); ?>   
         <h1><?php the_title(); ?></h1>
-		<?php endwhile; ?>
-<?php endif; ?>
-		<?php }  ?>
     </div>
 </section>
 
