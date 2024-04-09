@@ -147,7 +147,7 @@ if (is_user_logged_in()):
                 </div>
                 <div class="col-12 col-md-3">
                     <?php if( $repeat_eligible ): ?>
-                        <a href="<?php echo admin_url( 'admin-post.php?action=repeat_prescription&patient='.$patient_post_id ); ?>" id="repeat_order" class="btn style_2">ORDER REPEAT Prescription</a>
+                        <a href="#" id="repeat_order" data-patient="<?php echo $patient_post_id; ?>" class="btn style_2">ORDER REPEAT Prescription</a>
                     <?php else: ?>
                         <button type="button" class="btn style_2" disabled>ORDER REPEAT Prescription</button>
                     <?php endif; ?>
@@ -845,6 +845,61 @@ if (is_user_logged_in()):
 
     </div>
 </section>
+
+<script>
+jQuery(document).ready(function ($) {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn style_2",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+    var ajaxUrl = '<?php echo admin_url('admin-ajax.php'); ?>';
+
+    $('#repeat_order').on('click' , function(){
+
+        var patient = $(this).data('patient');
+
+        swalWithBootstrapButtons.fire({
+            title: "Order Repeat Prescription",
+            inputLabel: "Note",
+            input: "textarea",
+            showCancelButton: false,
+            confirmButtonText: "Send",
+            showLoaderOnConfirm: true,
+            preConfirm: async (note) => {
+
+                var data = {
+                    action: 'repeat_prescription',
+                    patient: patient,
+                    note: note
+                };
+        
+                // Perform the AJAX request
+                $.post(ajaxUrl, data, function(response) {
+
+                    // Parse the JSON response
+                    var jsonResponse = JSON.parse(response);
+                    
+                    if( jsonResponse.status ) {
+                        swalWithBootstrapButtons.fire({
+                            title: "",
+                            text: jsonResponse.msg,
+                            icon: "success"
+                        });
+                    }
+
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        });
+
+        return false;
+    });
+});
+</script>
 
 <?php get_footer(); ?>
 

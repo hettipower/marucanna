@@ -40365,4 +40365,25 @@ section.section.bg_gray {
   color: #3374ff;
 }
 
+.blog_content a {
+  color: #0c8e36;
+}
+.blog_content a:hover {
+  color: #9cc52b;
+}
+
+.single_content p a {
+  color: #0c8e36;
+}
+.single_content p a:hover {
+  color: #9cc52b;
+}
+
+.page_container p a {
+  color: #0c8e36;
+}
+.page_container p a:hover {
+  color: #9cc52b;
+}
+
 /*# sourceMappingURL=main.css.map */

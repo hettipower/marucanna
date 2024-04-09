@@ -292,8 +292,15 @@ function mc_consultant_data_update( $entry, $form ) {
     $complementary_medicines_2 = rgar( $entry, '47' );
     $patient_preferences_1 = rgar( $entry, '49' );
     $additional_notes = rgar( $entry, '50' );
+    $doctor = rgar( $entry, '54' );
+    $consultation_date = rgar( $entry, '55' );
     
+    $doctor_info = get_userdata($doctor);
+
     if($patient_post_id) {
+        update_field('mc_doctor_name', $doctor_info->display_name , $patient_post_id);
+        update_field('mc_consultation_date', $consultation_date , $patient_post_id);
+
         update_field('mc_full_name', $full_name , $patient_post_id);
         update_field('mc_date_of_birth', $date_of_birth , $patient_post_id);
         update_field('mc_address_line_1', $address_line_1 , $patient_post_id);
@@ -539,7 +546,8 @@ function mc_create_follow_up_pdf( $entry, $form ) {
     $impact  = rgar( $entry, '21' );
     $additional_comments = rgar( $entry, '23' );
     $recommendations = rgar( $entry, '25' ); 
-    $doctor_name = (rgar( $entry, '31' )) ? 'Conducted by : Dr. '.rgar( $entry, '31' ) : '';
+    $doctor = rgar( $entry, '31' );
+    $doctor_name = ($doctor) ? 'Conducted by : Dr. '.$doctor : '';
     
     $patient_id = get_field('patient_id' , $patient_post_id);
     $current_date = date('Y-m-d');
@@ -557,8 +565,8 @@ function mc_create_follow_up_pdf( $entry, $form ) {
             <td>
                 <h4 style="background-color: #0c8e36;color: #fff;padding: 10px; width:100%; text-align: center;">Medicinal Cannabis follow up and Adverse Effects Assessment Questionnaire</h4>
                 <div style="display:flex; justify-content: space-between;">
-                    <h4 style="text-align: left;color: #000;">'.$doctor_name.'</h4>
-                    <h4 style="text-align: right;color: #000;">Confidential Document</h4>
+                    <h4 style="text-align: left;color: #000;float:left;">'.$doctor_name.'</h4>
+                    <h4 style="text-align: right;color: #000;float:right;">Confidential Document</h4>
                 </div>
             </td>
         </tr>
@@ -679,6 +687,7 @@ function mc_create_follow_up_pdf( $entry, $form ) {
 
         //Update Follow up Data
         $new_follow_up = array(
+            'appointment_doctor_name' => $doctor,
             'appointment_date' => $current_date,
             'appointment_file' => $attachment_id,
         );
@@ -991,6 +1000,9 @@ function mc_create_patient_file_pdf() {
         $prescription_note_3 = get_field('prescription_note_3' , $patient);
         $other_prescription_data = get_field('other_prescription_data' , $patient);
 
+        $mc_doctor_name = get_field('mc_doctor_name' , $patient);
+        $mc_consultation_date = get_field('mc_consultation_date' , $patient);
+
         $mc_information_1 = get_field('mc_information_1' , $patient);
         $mc_medical_history_1 = get_field('mc_medical_history_1' , $patient);
         $mc_medical_history_2 = get_field('mc_medical_history_2' , $patient);
@@ -1079,6 +1091,8 @@ function mc_create_patient_file_pdf() {
         <h2>Consultation Data</h2>
 
         <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">General Patient Information</h3>
+        <p><strong>Consultation Doctor Name :</strong><br/>'.$mc_doctor_name.'</p>
+        <p><strong>Consultation Date :</strong><br/>'.$mc_consultation_date.'</p>
         <p><strong>Do you have a legal guardian, and if so, please provide their information? :</strong><br/>'.$mc_information_1.'</p>
 
         <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Medical History</h3>
@@ -1294,10 +1308,12 @@ function mc_create_patient_file_pdf() {
     
 }
 
-add_action( 'admin_post_repeat_prescription', 'mc_repeat_prescription' );
+//add_action( 'admin_post_repeat_prescription', 'mc_repeat_prescription' );
+add_action( 'wp_ajax_repeat_prescription', 'mc_repeat_prescription' );
 function mc_repeat_prescription() {
 
-    $patient = (isset($_REQUEST['patient'])) ? $_REQUEST['patient'] : false;
+    $patient = (isset($_REQUEST['patient'])) ? (int)$_REQUEST['patient'] : false;
+    $note = (isset($_REQUEST['note'])) ? $_REQUEST['note'] : false;
     $admin_email = get_admin_email();
 
     if( $patient ) {
@@ -1309,6 +1325,9 @@ function mc_repeat_prescription() {
         $subject = "Patient $patient_id eligible for repeat prescription.";
         $html .= "<p>Dear Admin,</p>";
         $html .= "<p>Patient <strong>$patient_id</strong> eligible for and has requested repeat prescription.</p>";
+        if( $note ) {
+            $html .= "<p><strong>Patient Note : </strong> $note</p>";
+        }
         $html .= "<p>MARUCANNA</p>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
 
@@ -1325,7 +1344,7 @@ function mc_repeat_prescription() {
         wp_mail( $patient_email, $subjectPatient, $htmlPatient, $headers );
     }
 
-    wp_redirect( home_url("patient-dashboard?form=rep&status=1") );
+    echo json_encode(array('status'=> true , 'msg' => 'Repeat Prescription Request send successfully'));
     die();
 
 }
@@ -1380,6 +1399,171 @@ function mc_patient_consent_details( $entry, $form ) {
     if($patient_post_id) {
 
         update_field('consent_date', $date , $patient_post_id);
+        
+    }
+    
+}
+
+add_action( 'admin_post_create_consultation_file_pdf', 'mc_create_consultation_file_pdf' );
+function mc_create_consultation_file_pdf() {
+
+    $patient = (isset($_REQUEST['patient'])) ? $_REQUEST['patient'] : false;
+    
+    if( $patient ) {
+
+        $patient_id = get_field('patient_id' , $patient);
+        $name = get_field('mc_full_name' , $patient);
+        $phone = get_field('mc_phone' , $patient);
+        $address_line_1 = get_field('mc_address_line_1' , $patient);
+        $address_line_2 = get_field('mc_address_line_2' , $patient);
+        $dob = get_field('mc_date_of_birth' , $patient);
+
+        $mc_doctor_name = get_field('mc_doctor_name' , $patient);
+        $mc_consultation_date = get_field('mc_consultation_date' , $patient);
+
+        if( $mc_consultation_date ) {
+            $consultation_date = DateTime::createFromFormat('Y-m-d h:i:sa', $mc_consultation_date);
+        } else {
+            $consultation_date = DateTime::createFromFormat('Y-m-d h:i:sa', date("Y-m-d h:i:sa"));
+        }
+
+        $formatted_consultation_date = $consultation_date->format('Ymd');    
+
+        $mc_information_1 = get_field('mc_information_1' , $patient);
+        $mc_medical_history_1 = get_field('mc_medical_history_1' , $patient);
+        $mc_medical_history_2 = get_field('mc_medical_history_2' , $patient);
+        $mc_medical_history_3 = get_field('mc_medical_history_3' , $patient);
+        $mc_medical_history_4 = get_field('mc_medical_history_4' , $patient);
+        $mc_medical_history_5 = get_field('mc_medical_history_5' , $patient);
+        $mc_medical_condition_1 = get_field('mc_medical_condition_1' , $patient);
+        $mc_medical_condition_2 = get_field('mc_medical_condition_2' , $patient);
+        $mc_medical_condition_3 = get_field('mc_medical_condition_3' , $patient);
+        $mc_previous_treatments_1 = get_field('mc_previous_treatments_1' , $patient);
+        $mc_previous_treatments_2 = get_field('mc_previous_treatments_2' , $patient);
+        $mc_previous_treatments_3 = get_field('mc_previous_treatments_3' , $patient);
+        $mc_expectations_1 = get_field('mc_expectations_1' , $patient);
+        $mc_expectations_2 = get_field('mc_expectations_2' , $patient);
+        $mc_expectations_3 = get_field('mc_expectations_3' , $patient);
+        $mc_allergies_1 = get_field('mc_allergies_1' , $patient);
+        $mc_allergies_2 = get_field('mc_allergies_2' , $patient);
+        $mc_family_medical_history_1 = get_field('mc_family_medical_history_1' , $patient);
+        $mc_family_medical_history_2 = get_field('mc_family_medical_history_2' , $patient);
+        $mc_habits_1 = get_field('mc_habits_1' , $patient);
+        $mc_habits_2 = get_field('mc_habits_2' , $patient);
+        $mc_habits_3 = get_field('mc_habits_3' , $patient);
+        $mc_psychosocial_assessment_1 = get_field('mc_psychosocial_assessment_1' , $patient);
+        $mc_psychosocial_assessment_2 = get_field('mc_psychosocial_assessment_2' , $patient);
+        $mc_psychosocial_assessment_3 = get_field('mc_psychosocial_assessment_3' , $patient);
+        $mc_legal_1 = get_field('mc_legal_1' , $patient);
+        $mc_legal_2 = get_field('mc_legal_2' , $patient);
+        $mc_complementary_medicines_1 = get_field('mc_complementary_medicines_1' , $patient);
+        $mc_complementary_medicines_2 = get_field('mc_complementary_medicines_2' , $patient);
+        $mc_patient_preferences_1 = get_field('mc_patient_preferences_1' , $patient);
+        $mc_additional_notes = get_field('mc_additional_notes' , $patient);
+        $doctor_name = get_field('doctor_name' , $patient);
+        $patient_approved_medication = get_field('patient_approved_medication' , $patient);
+
+        $site_logo = get_template_directory_uri() . '/img/logo.png';
+
+        $html = '<html>
+        <body>
+        <table style="width:100%;margin-bottom:15px;">
+            <tr>
+                <td style="width: 170px;"><img style="width: 170px;" src="'.$site_logo.'" /></td>
+                <td>
+                    <h4 style="background-color: #0c8e36;color: #fff;padding: 10px; width:100%; text-align: center;">Consultation File</h4>
+                </td>
+            </tr>
+        </table>
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Patient Details</h3>
+        <p><strong>Patient ID :</strong><br/>'.$patient_id.'</p>
+        <p><strong>Full Name :</strong><br/>'.$$name.'</p>
+        <p><strong>Phone :</strong><br/>'.$phone.'</p>
+        <p><strong>Addrerss :</strong><br/>'.$address_line_1.'<br/>'.$address_line_2.'</p>
+        <p><strong>Date of Birth :</strong><br/>'.$dob.'</p>
+
+        <h2>Consultation Data</h2>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">General Patient Information</h3>
+        <p><strong>Consultation Doctor Name :</strong><br/>'.$mc_doctor_name.'</p>
+        <p><strong>Consultation Date :</strong><br/>'.$mc_consultation_date.'</p>
+        <p><strong>Do you have a legal guardian, and if so, please provide their information? :</strong><br/>'.$mc_information_1.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Medical History</h3>
+        <p><strong>Have you been diagnosed with any medical conditions or diseases? :</strong><br/>'.$mc_medical_history_1.'</p>
+        <p><strong>What treatments, medications, or therapies have you previously tried for your medical condition(s)? :</strong><br/>'.$mc_medical_history_2.'</p>
+        <p><strong>Have you undergone any surgeries or medical procedures in the past? If so, please provide details. :</strong><br/>'.$mc_medical_history_3.'</p>
+        <p><strong>Are you currently taking any medications, supplements, or herbal remedies? Please list them. :</strong><br/>'.$mc_medical_history_4.'</p>
+        <p><strong>Review SCR :</strong><br/>'.$mc_medical_history_5.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Current Medical Condition</h3>
+        <p><strong>What are the speciﬁc symptoms or issues you are experiencing due to your medical condition(s)? :</strong><br/>'.$mc_medical_condition_1.'</p>
+        <p><strong>How long have you been dealing with these symptoms? :</strong><br/>'.$mc_medical_condition_2.'</p>
+        <p><strong>Are there any recent changes or developments in your condition that you would like to mention? :</strong><br/>'.$mc_medical_condition_3.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Response to Previous Treatments</h3>
+        <p><strong>Have you tried any medications, therapies, or interventions for your current medical condition(s)? If so, what were the results? :</strong><br/>'.$mc_previous_treatments_1.'</p>
+        <p><strong>Were there any side eﬀects or adverse reactions to previous treatments? :</strong><br/>'.$mc_previous_treatments_2.'</p>
+        <p><strong>Have you found any treatments to be eﬀective or ineﬀective in managing your symptoms? :</strong><br/>'.$mc_previous_treatments_3.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Patient Goals and Expectations</h3>
+        <p><strong>What are your goals for treatment with medicinal cannabis? :</strong><br/>'.$mc_expectations_1.'</p>
+        <p><strong>What outcomes are you hoping to achieve? :</strong><br/>'.$mc_expectations_2.'</p>
+        <p><strong>Do you have speciﬁc expectations regarding symptom relief, improved quality of life, or other treatment outcomes? :</strong><br/>'.$mc_expectations_3.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Allergies and Sensitivities</h3>
+        <p><strong>Are you allergic to any medications, substances, or foods? Please provide details. :</strong><br/>'.$mc_allergies_1.'</p>
+        <p><strong>Have you ever experienced adverse reactions or sensitivities to any medications in the past? :</strong><br/>'.$mc_allergies_2.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Family Medical History</h3>
+        <p><strong>Is there a family history of the medical condition(s) you are currently experiencing? :</strong><br/>'.$mc_family_medical_history_1.'</p>
+        <p><strong>Are there any genetic conditions or predispositions that run in your family? :</strong><br/>'.$mc_family_medical_history_2.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Lifestyle and Habits</h3>
+        <p><strong>Do you smoke or use tobacco products? :</strong><br/>'.$mc_habits_1.'</p>
+        <p><strong>Do you consume alcohol or recreational drugs? :</strong><br/>'.$mc_habits_2.'</p>
+        <p><strong>Are you physically active, and if so, how often do you engage in exercise or physical activities? :</strong><br/>'.$mc_habits_3.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Psychosocial Assessment</h3>
+        <p><strong>How is your mental and emotional well-being? :</strong><br/>'.$mc_psychosocial_assessment_1.'</p>
+        <p><strong>Have you experienced any mental health conditions, such as anxiety or depression? :</strong><br/>'.$mc_psychosocial_assessment_2.'</p>
+        <p><strong>Do you have a support system, including family and friends, to assist you during your treatment? :</strong><br/>'.$mc_psychosocial_assessment_3.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Legal and Regulatory Information</h3>
+        <p><strong>Are you aware of the legal regulations surrounding the use of medicinal cannabis in your jurisdiction? :</strong><br/>'.$mc_legal_1.'</p>
+        <p><strong>Do you have any concerns about the legal status of medicinal cannabis? :</strong><br/>'.$mc_legal_2.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Alternative Therapies and Complementary Medicines</h3>
+        <p><strong>Have you explored or considered alternative therapies or complementary medicines for your condition(s), such as acupuncture, chiropractic care, or dietary supplements? :</strong><br/>'.$mc_complementary_medicines_1.'</p>
+        <p><strong>If so, please provide details about your experiences with these treatments. :</strong><br/>'.$mc_complementary_medicines_2.'</p>
+
+        <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Patient Preferences and Concerns</h3>
+        <p><strong>Do you have any preferences regarding the type of medicinal cannabis product (e.g., oil, capsules, inhalation) you would prefer? :</strong><br/>'.$mc_patient_preferences_1.'</p>
+        <p><strong>Additional notes :</strong><br/>'.$mc_additional_notes.'</p>
+        </body>
+        </html>';
+
+        // Create a Dompdf instance
+        $options = new Options();
+        //$options->set('defaultFont', 'Helvetica');
+        $options->set('defaultFont', 'DejaVu Sans');
+        //$options->setDefaultFont('Helvetica');
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
+        // Load HTML content into Dompdf
+        $dompdf->loadHtml($html);
+
+        // Set paper size (optional)
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render PDF (first pass to get total pages)
+        $dompdf->render();
+
+        $pdf_name = 'CN-'.$patient_id.'-'.$formatted_consultation_date.'-'.$patient.'.pdf';
+        $dompdf->stream($pdf_name,array('Attachment'=>1));
         
     }
     

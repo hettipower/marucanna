@@ -64,3 +64,35 @@
 @import "components/blocks/_form_styles";
 
 @import "square/_sq-payment";
+
+.blog_content{
+    a{
+        color: #0c8e36;
+
+        &:hover{
+            color: #9cc52b;
+        }
+    }
+}
+.single_content {
+    p {
+        a{
+            color: #0c8e36;
+
+            &:hover{
+                color: #9cc52b;
+            }
+        }
+    }
+}
+.page_container {
+    p {
+        a{
+            color: #0c8e36;
+
+            &:hover{
+                color: #9cc52b;
+            }
+        }
+    }
+}

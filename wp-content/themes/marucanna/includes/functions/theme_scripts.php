@@ -30,8 +30,8 @@ function html5blank_header_scripts()
     wp_register_script('fancybox', get_template_directory_uri() . '/vendor/fancybox/fancybox.umd.js', array('jquery'), false, true);
     wp_enqueue_script('fancybox');
 
-    //wp_register_script('phonemask', get_template_directory_uri() . '/vendor/phonemask/phonemask.js', array('jquery'), false, true);
-    //wp_enqueue_script('phonemask');
+    wp_register_script('phonemask', get_template_directory_uri() . '/vendor/phonemask/phonemask.js', array('jquery'), false, true);
+    wp_enqueue_script('phonemask');
 
     if( function_exists('get_field') ) {
         $google_map_key = get_field( 'google_map_key', 'option' );
@@ -40,6 +40,9 @@ function html5blank_header_scripts()
             wp_enqueue_script('google-map');
         }
     }
+
+    wp_register_script('sweetalert2', get_template_directory_uri() . '/vendor/sweetalert2/sweetalert2.min.js', array('jquery'), true, true);
+    wp_enqueue_script('sweetalert2');
     
     wp_register_script('themescript', get_template_directory_uri() . '/js/scripts.js', array('jquery'), false, true); // Custom scripts
     wp_enqueue_script('themescript'); // Enqueue it! 

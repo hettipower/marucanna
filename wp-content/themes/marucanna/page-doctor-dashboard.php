@@ -77,11 +77,11 @@ if (is_user_logged_in()):
                                 </a>
                             </td>
                             <td><?php echo $phone; ?></td>
-                            <td style="width: 390px;">
+                            <td style="width: 405px;">
                                 <?php if( !$consultant ): ?>
-                                    <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id); ?>" class="btn style_4 small">Consultation</a>
+                                    <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_4 small">Consultation</a>
                                 <?php else: ?>
-                                    <button class="btn style_6 small" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No Consultation Available">Consultation</button>
+                                    <a href="<?php echo admin_url( 'admin-post.php?action=create_consultation_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_4 small">Consultation File</a>
                                 <?php endif; ?>
                                 <a href="<?php echo home_url('about-us/patient-follow-up/?patient='.$patient->ID.'&patient_post='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_2 small">Follow Up</a>
 
