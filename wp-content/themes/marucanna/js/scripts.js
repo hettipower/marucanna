@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-03-01 1:46:03 AM */
+/*! css 1.0.0 filename.js 2024-03-12 10:39:48 PM */
 
 Fancybox.bind("[data-fancybox]", {});
 
@@ -16,8 +16,6 @@ function patients_datatable() {
         }
     });
 }
-
-function phone_uk_maks() {}
 
 (function($) {
     function initMap($el) {

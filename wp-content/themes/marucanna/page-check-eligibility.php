@@ -83,8 +83,7 @@ $contact = isset($_GET['contact']) ? $_GET['contact'] : '';
                     
                     <div class="mb-3 col-12 col-md-6">
                         <label for="contact_no" class="form-label">Phone <span class="req">*</span></label>
-                        <input type="tel" name="contact_no" class="form-control uk_mask" id="contact_no" required value="___ ____ ____" mask="___ ____ ____" placeholder="___ ____ ____">
-                        <div class="form-text">ex:- 020 7946 0958</div>
+                        <input type="tel" name="contact_no" class="form-control" id="contact_no" required value="<?php echo $contact; ?>">
                         <div class="invalid-feedback">This field is required.</div>
                     </div>
 
@@ -142,6 +141,30 @@ $contact = isset($_GET['contact']) ? $_GET['contact'] : '';
     </div>
 </section>
 
+<?php if( !$status ) : ?>
+<div class="modal fade" id="noticeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>As part of our commitment to delivering comprehensive healthcare services, we may need to share your medical data with other healthcare professionals involved in your care. This sharing of information ensures that you receive the best possible treatment and coordinated support.</p>
+                <p>Additionally, we will obtain your medical history and and share treatment outcomes with your General Practitioner (GP). This collaboration allows us to maintain continuity of care and keep your GP informed about your health status and treatment progress.</p>
+                <p>Please be assured that your privacy and confidentiality are of utmost importance to us. Your data will only be shared on a need-to-know basis and in compliance with relevant privacy regulations.</p>
+                <p>By continuing to receive care from our healthcare team, you consent to the sharing of your medical information as described above</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn style_2" data-bs-dismiss="modal">Accept</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'));
+    noticeModal.show();
+});
+</script>
+<?php endif; ?>
+
 <script>
 (() => {
     'use strict'
@@ -160,7 +183,17 @@ $contact = isset($_GET['contact']) ? $_GET['contact'] : '';
             form.classList.add('was-validated')
         }, false)
     })
-})()
+})();
+jQuery(document).ready(function($) {
+    $('#contact_no').keypress(function(event) {
+      var charCode = event.which;
+
+      // Allow only numeric values (0-9)
+      if (charCode < 48 || charCode > 57) {
+        event.preventDefault();
+      }
+    });
+});
 </script>
 
 <?php get_footer(); ?>

@@ -261,7 +261,7 @@ const phoneMask = function () {
             const tag = list[keys[i]]
             try {
                 if (!checkEvent(tag)) {
-                    const mask = tag.getAttribute('mask')
+                    const mask = tag.getAttribute('value') ? tag.getAttribute('value') : tag.getAttribute('mask')
                     tag.value = mask
 
                     listTags.push(tag)

@@ -7,7 +7,6 @@ jQuery(document).ready(function ($) {
   sticky_header();
   menu_dropdown();
 	patients_datatable();
-  //phone_uk_maks();
 });
 
 function patients_datatable() {
@@ -16,8 +15,4 @@ function patients_datatable() {
           "emptyTable": "No patients available."
         }
     });
-}
-
-function phone_uk_maks() {
-  //(new phoneMask()).init('input.uk_mask');
 }

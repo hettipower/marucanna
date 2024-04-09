@@ -70,9 +70,10 @@ if (is_user_logged_in()):
                                     <?php echo $patient->user_login; ?>
                                 </a>
                             </td>
-                            <td>
+                            <td class="patient-name">
                                 <a href="<?php echo $patient_url; ?>" target="_blank" rel="noopener noreferrer">
                                     <?php echo $name; ?>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </a>
                             </td>
                             <td><?php echo $phone; ?></td>
@@ -80,9 +81,9 @@ if (is_user_logged_in()):
                                 <?php if( !$consultant ): ?>
                                     <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id); ?>" class="btn style_4 small">Consultation</a>
                                 <?php else: ?>
-                                    <button class="btn style_4 small" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No Consultation Available">Consultation</button>
+                                    <button class="btn style_6 small" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="No Consultation Available">Consultation</button>
                                 <?php endif; ?>
-                                <a href="<?php echo home_url('about-us/patient-follow-up/?patient='.$patient->ID.'&patient_post='.$patient_post_id); ?>" class="btn style_2 small">Follow Up</a>
+                                <a href="<?php echo home_url('about-us/patient-follow-up/?patient='.$patient->ID.'&patient_post='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_2 small">Follow Up</a>
 
                                 <a href="<?php echo admin_url( 'admin-post.php?action=create_patient_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_3 small">Export Patient File</a>
                             </td>
@@ -107,7 +108,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
         die();
     endif; 
 else:
-    wp_redirect( home_url() );
+    wp_redirect( home_url('login') );
     die();
 endif;
 ?>

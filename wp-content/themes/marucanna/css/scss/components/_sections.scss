@@ -1968,6 +1968,31 @@ section.section {
             }        
         }
     }
+
+    #patients_details {
+        .patient-name {
+            a {
+                display: inline-block;
+                position: relative;
+                padding-right: 30px;
+                width: 80%;
+
+                .fa-arrow-up-right-from-square {
+                    position: absolute;
+                    right: 0;
+                    top: 8px;
+                    color: #808080;
+                    font-size: 13px;
+                }
+
+                &:hover {
+                    .fa-arrow-up-right-from-square {
+                        color: #0b8e36;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .payment_wrapper {

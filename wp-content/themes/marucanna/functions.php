@@ -10,6 +10,7 @@ include 'includes/functions/menus.php';
 include 'includes/functions/forms_func.php';
 include 'includes/functions/login_func.php';
 include 'includes/functions/helpers.php';
+include 'includes/functions/theme_misc.php';
 include_once __DIR__ . '/includes/acf/acf-hidden-field/init.php';    
 include_once __DIR__ . '/includes/payments/payment.php';
 
@@ -230,6 +231,17 @@ function add_mc_user_roles() {
   add_role(
     'doctor',
     __('Doctor'),
+    array(
+      // Define capabilities here
+      'read'         => true,
+      'edit_posts'   => true,
+      'delete_posts' => false,
+    )
+  );
+
+  add_role(
+    'pharmacist',
+    __('Pharmacist'),
     array(
       // Define capabilities here
       'read'         => true,

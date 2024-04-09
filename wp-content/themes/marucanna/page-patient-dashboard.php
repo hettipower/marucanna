@@ -66,10 +66,12 @@ if (is_user_logged_in()):
 
         $currentDate = new DateTime();
         $latest_prescription_date = get_latest_prescription_date($patient_post_id);
+        $show_repeat_prescription = false;
 
         if( $latest_prescription_date ) {
             $prescriptionDateTime = DateTime::createFromFormat('d/m/Y', $latest_prescription_date);
             $expire_prescription_date = $prescriptionDateTime->modify('+19 days');
+            $show_repeat_prescription = true;
         }
 
         $repeat_eligible = true;
@@ -133,23 +135,25 @@ if (is_user_logged_in()):
             </div>
         </div>
         
-        <div class="row profile-detail-wrap rounded mb-4 repeat_order_wrap">
-            <div class="col-12 col-md-9 m-auto">
-                <?php if( $currentDate >= $expire_prescription_date ): ?>
-                    Congratulations, you are now eligible for repeat prescription
-                <?php else: ?>
-                    <?php $repeat_eligible = false; ?>
-                    You are only eligible for repeat prescription 20 days or more from your last prescription issued date, which was <?php echo $latest_prescription_date; ?>
-                <?php endif; ?>
+        <?php if( $show_repeat_prescription ): ?>
+            <div class="row profile-detail-wrap rounded mb-4 repeat_order_wrap">
+                <div class="col-12 col-md-9 m-auto">
+                    <?php if( $currentDate >= $expire_prescription_date ): ?>
+                        Congratulations, you are now eligible for repeat prescription
+                    <?php else: ?>
+                        <?php $repeat_eligible = false; ?>
+                        You are only eligible for repeat prescription 20 days or more from your last prescription issued date, which was <?php echo $latest_prescription_date; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="col-12 col-md-3">
+                    <?php if( $repeat_eligible ): ?>
+                        <a href="<?php echo admin_url( 'admin-post.php?action=repeat_prescription&patient='.$patient_post_id ); ?>" id="repeat_order" class="btn style_2">ORDER REPEAT Prescription</a>
+                    <?php else: ?>
+                        <button type="button" class="btn style_2" disabled>ORDER REPEAT Prescription</button>
+                    <?php endif; ?>
+                </div>
             </div>
-            <div class="col-12 col-md-3">
-                <?php if( $repeat_eligible ): ?>
-                    <a href="<?php echo admin_url( 'admin-post.php?action=repeat_prescription&patient='.$patient_post_id ); ?>" id="repeat_order" class="btn style_2">ORDER REPEAT Prescription</a>
-                <?php else: ?>
-                    <button type="button" class="btn style_2" disabled>ORDER REPEAT Prescription</button>
-                <?php endif; ?>
-            </div>
-        </div>
+        <?php endif; ?>
 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -202,9 +206,60 @@ if (is_user_logged_in()):
                                 <div class="label">Patient ID</div>
                                 <div class="value"><?php echo $patient_id; ?></div>
                             </div>
-                            <div class="col-12 profile-item">
-                                <?php echo do_shortcode('[gravityform id="9" title="false" field_values="patient_id='.$user_id.'&patient_post_id='.$patient_post_id.'&full_name='.$name.'&email='.$email.'&phone='.$phone.'&gender='.$gender.'&address_line_1='.$address_line_1.'&address_line_2='.$address_line_2.'&town='.$town.'&country='.$country.'&postcode='.$postcode.'&dob='.$dob.'"]'); ?>
+
+                            <div class="col-12 col-md-6 profile-item">
+                                <button class="btn style_2" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false">Toggle Edit Contact Details</button>
                             </div>
+
+                            <div class="collapse show multi-collapse" id="contactDetailView">
+                                <div class="col-12 col-sm-9 profile-detail">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 profile-item">
+                                            <div class="label">Full Name</div>
+                                            <div class="value"><?php echo $name; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-4 profile-item">
+                                            <div class="label">Email</div>
+                                            <div class="value"><?php echo $email; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-4 profile-item">
+                                            <div class="label">Phone</div>
+                                            <div class="value"><?php echo $phone; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-4 profile-item">
+                                            <div class="label">Gender</div>
+                                            <div class="value"><?php echo $gender; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-4 profile-item">
+                                            <div class="label">Address</div>
+                                            <div class="value"><?php echo $address_line_1 . '<br/>' . $address_line_2; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-4 profile-item">
+                                            <div class="label">Town</div>
+                                            <div class="value"><?php echo $town; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-4 profile-item">
+                                            <div class="label">Country</div>
+                                            <div class="value"><?php echo $country; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-4 profile-item">
+                                            <div class="label">Postcode</div>
+                                            <div class="value"><?php echo $postcode; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-4 profile-item">
+                                            <div class="label">Date of Birth</div>
+                                            <div class="value"><?php echo $dob; ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="collapse multi-collapse" id="contactDetailEdit">
+                                <div class="col-12 profile-item">
+                                    <?php echo do_shortcode('[gravityform id="9" title="false" field_values="patient_id='.$user_id.'&patient_post_id='.$patient_post_id.'&full_name='.$name.'&email='.$email.'&phone='.$phone.'&gender='.$gender.'&address_line_1='.$address_line_1.'&address_line_2='.$address_line_2.'&town='.$town.'&country='.$country.'&postcode='.$postcode.'&dob='.$dob.'"]'); ?>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -259,12 +314,69 @@ if (is_user_logged_in()):
             <div class="tab-pane fade" id="pills-clinic-details" role="tabpanel" aria-labelledby="pills-clinic-details-tab" tabindex="0">
                 <div class="row profile-detail-wrap rounded mb-3">
                     <div class="profile-detail">
-                        <h3>Clinic Details</h3>
+                        <h3 class="d-flex justify-content-between">
+                            <span>Clinic Details</span>
+                            <button class="btn style_2" type="button" data-bs-toggle="collapse" data-bs-target=".multi-clinic-collapse" aria-expanded="false">Toggle Edit Clinic Details</button>
+                        </h3>
                         <div class="row">
-                            <div class="col-12 profile-item">
-                                <?php echo do_shortcode('[gravityform id="10" title="false" field_values="patient_id='.$user_id.'&patient_post_id='.$patient_post_id.'&referred_clinic='.$referred_clinic.'&clinic_name='.$clinic_name.'&clinic_postcode='.$clinic_postcode.'&clinic_phone_number='.$clinic_phone_number.'&gp_name='.$gp_name.'&practice_name='.$practice_name.'&gp_address_line_1='.$gp_address_line_1.'&gp_address_line_2='.$gp_address_line_2.'&gp_town='.$gp_town.'&gp_country='.$gp_country.'&gp_postal_code='.$gp_postal_code.'&gp_phone='.$gp_phone.'"]'); ?>
+
+                            <div class="collapse show multi-clinic-collapse" id="clinicDetailView">
+                                <div class="row">
+                                    <div class="col-12 col-md-3 profile-item">
+                                        <div class="label">Referred from another clinic</div>
+                                        <div class="value"><?php echo $referred_clinic; ?></div>
+                                    </div>
+                                    <?php if( $referred_clinic == 'yes' ): ?>
+                                        <div class="col-12 col-md-3 profile-item">
+                                            <div class="label">Clinic name</div>
+                                            <div class="value"><?php echo $clinic_name; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-3 profile-item">
+                                            <div class="label">Clinic Postcode</div>
+                                            <div class="value"><?php echo $clinic_postcode; ?></div>
+                                        </div>
+                                        <div class="col-12 col-md-3 profile-item">
+                                            <div class="label">Clinic Phone number</div>
+                                            <div class="value"><?php echo $clinic_phone_number; ?></div>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="col-12 col-md-3 profile-item">
+                                        <div class="label">GP name</div>
+                                        <div class="value"><?php echo $gp_name; ?></div>
+                                    </div>
+                                    <div class="col-12 col-md-3 profile-item">
+                                        <div class="label">Practice name</div>
+                                        <div class="value"><?php echo $practice_name; ?></div>
+                                    </div>
+                                    <div class="col-12 col-md-3 profile-item">
+                                        <div class="label">Address</div>
+                                        <div class="value"><?php echo $gp_address_line_1 . '<br/>' . $gp_address_line_2; ?></div>
+                                    </div>
+                                    <div class="col-12 col-md-3 profile-item">
+                                        <div class="label">GP Town</div>
+                                        <div class="value"><?php echo $gp_town; ?></div>
+                                    </div>
+                                    <div class="col-12 col-md-3 profile-item">
+                                        <div class="label">GP Country</div>
+                                        <div class="value"><?php echo $gp_country; ?></div>
+                                    </div>
+                                    <div class="col-12 col-md-3 profile-item">
+                                        <div class="label">GP Postal Code</div>
+                                        <div class="value"><?php echo $gp_postal_code; ?></div>
+                                    </div>
+                                    <div class="col-12 col-md-3 profile-item">
+                                        <div class="label">GP Phone</div>
+                                        <div class="value"><?php echo $gp_phone; ?></div>
+                                    </div>
+                                </div>
                             </div>
 
+                            <div class="collapse multi-clinic-collapse" id="clinicDetailView">
+                                <div class="col-12 profile-item">
+                                    <?php echo do_shortcode('[gravityform id="10" title="false" field_values="patient_id='.$user_id.'&patient_post_id='.$patient_post_id.'&referred_clinic='.$referred_clinic.'&clinic_name='.$clinic_name.'&clinic_postcode='.$clinic_postcode.'&clinic_phone_number='.$clinic_phone_number.'&gp_name='.$gp_name.'&practice_name='.$practice_name.'&gp_address_line_1='.$gp_address_line_1.'&gp_address_line_2='.$gp_address_line_2.'&gp_town='.$gp_town.'&gp_country='.$gp_country.'&gp_postal_code='.$gp_postal_code.'&gp_phone='.$gp_phone.'"]'); ?>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -738,7 +850,7 @@ if (is_user_logged_in()):
 
 <?php
     else:
-        wp_redirect( home_url('login') );
+        wp_redirect( home_url() );
         die();
     endif; 
 else:

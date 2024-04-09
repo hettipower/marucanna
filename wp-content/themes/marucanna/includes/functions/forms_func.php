@@ -347,8 +347,8 @@ add_filter( 'gform_phone_formats', 'uk_phone_format' );
 function uk_phone_format( $phone_formats ) {
     $phone_formats['uk'] = array(
         'label'       => 'UK',
-        'mask'        => '999 9999 9999',
-        'regex'       => '/^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/',
+        'mask'        => false,
+        'regex'       => '/[0-9]{11}/',
         'instruction' => false,
     );
  
@@ -539,6 +539,10 @@ function mc_create_follow_up_pdf( $entry, $form ) {
     $impact  = rgar( $entry, '21' );
     $additional_comments = rgar( $entry, '23' );
     $recommendations = rgar( $entry, '25' ); 
+    $doctor_name = (rgar( $entry, '31' )) ? 'Conducted by : Dr. '.rgar( $entry, '31' ) : '';
+    
+    $patient_id = get_field('patient_id' , $patient_post_id);
+    $current_date = date('Y-m-d');
     
     $upload_dir = wp_upload_dir();
     $follow_up_dir = $upload_dir['basedir'] . '/follow_ups/';
@@ -552,7 +556,10 @@ function mc_create_follow_up_pdf( $entry, $form ) {
             <td style="width: 170px;"><img style="width: 170px;" src="'.$site_logo.'" /></td>
             <td>
                 <h4 style="background-color: #0c8e36;color: #fff;padding: 10px; width:100%; text-align: center;">Medicinal Cannabis follow up and Adverse Effects Assessment Questionnaire</h4>
-                <h4 style="text-align: right;color: #000;">Confidential Document</h4>
+                <div style="display:flex; justify-content: space-between;">
+                    <h4 style="text-align: left;color: #000;">'.$doctor_name.'</h4>
+                    <h4 style="text-align: right;color: #000;">Confidential Document</h4>
+                </div>
             </td>
         </tr>
     </table>
@@ -637,11 +644,8 @@ function mc_create_follow_up_pdf( $entry, $form ) {
     // Get PDF content
     $pdf_content = $dompdf->output();
 
-    $user = get_user_by('login', $patient);
-    $pdf_name = 'follow-up-'.$patient.'-'.time().'.pdf';
-    if ($user) {
-        $pdf_name = 'follow-up-'.$user->username.'-'.time().'.pdf';
-    }
+    $pdf_date = date('Ymd');
+    $pdf_name = 'FU-'.$patient_id.'-'.$pdf_date.'-'.$patient_post_id.'.pdf';
 
     $pdf_path = $follow_up_dir . $pdf_name;
     file_put_contents($pdf_path, $pdf_content);
@@ -682,6 +686,18 @@ function mc_create_follow_up_pdf( $entry, $form ) {
         $existing_follow_up_appointments[] = $new_follow_up;
 
         update_field('follow_up_appointments', $existing_follow_up_appointments, $patient_post_id);
+
+        //Send Mail to admin
+        $admin_email = get_admin_email();
+
+        $subject = "Follow up session has been completed for – $patient_id";
+        $html .= "<p>Dear Admin,</p>";
+        $html .= "<p>Follow up session has been completed for patient - $patient_id</p>";
+        $html .= "<p>Date of follow up – $current_date</p>";
+        $html .= "<p>MARUCANNA</p>";
+        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+
+        wp_mail( $admin_email, $subject, $html, $headers );
         
     }
     
@@ -1006,6 +1022,8 @@ function mc_create_patient_file_pdf() {
         $mc_complementary_medicines_2 = get_field('mc_complementary_medicines_2' , $patient);
         $mc_patient_preferences_1 = get_field('mc_patient_preferences_1' , $patient);
         $mc_additional_notes = get_field('mc_additional_notes' , $patient);
+        $doctor_name = get_field('doctor_name' , $patient);
+        $patient_approved_medication = get_field('patient_approved_medication' , $patient);
 
         $upload_dir = wp_upload_dir();
         $patient_dir = $upload_dir['basedir'] . '/patients/';
@@ -1116,6 +1134,18 @@ function mc_create_patient_file_pdf() {
         <p><strong>Additional notes :</strong><br/>'.$mc_additional_notes.'</p>
 
         <hr/>';
+
+        if( $doctor_name || $patient_approved_medication ) {
+            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">MDT Meeting</h3>';
+        }
+
+        if( $doctor_name ) {
+            $html .= '<p><strong>Name of doctor who has taken the meeting :</strong><br/>'.$doctor_name.'</p>';
+        }
+
+        if( $patient_approved_medication ) {
+            $html .= '<p><strong>Is the patient approved to be prescribed medication ? :</strong><br/>'.$patient_approved_medication.'</p>';
+        }
 
         if( $follow_up_appointments ) {
             $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Follow Ups</h3>
@@ -1240,7 +1270,9 @@ function mc_create_patient_file_pdf() {
 
         // Create a Dompdf instance
         $options = new Options();
-        $options->setDefaultFont('Helvetica');
+        //$options->set('defaultFont', 'Helvetica');
+        $options->set('defaultFont', 'DejaVu Sans');
+        //$options->setDefaultFont('Helvetica');
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
         $options->set('isRemoteEnabled', true);
@@ -1255,7 +1287,7 @@ function mc_create_patient_file_pdf() {
         // Render PDF (first pass to get total pages)
         $dompdf->render();
 
-        $pdf_name = 'patient-'.$patient_id.'-'.time().'.pdf';
+        $pdf_name = 'PF-'.$patient_id.'-'.$patient.'.pdf';
         $dompdf->stream($pdf_name,array('Attachment'=>1));
         
     }
@@ -1306,10 +1338,9 @@ function mc_sent_consent_form() {
 
     if( $patient ) {
 
-        //http://localhost/marucanna/patient-consent/
         $patient_id = get_field('patient' , $patient);
         $patient_email = get_field('email' , $patient);
-        $name = get_field('name' , $patient);
+        $name = get_field('patient_id' , $patient);
         $consent_url = home_url( 'patient-consent?patient='.$patient_id.'&patient_post='.$patient );
 
         //Patient Email

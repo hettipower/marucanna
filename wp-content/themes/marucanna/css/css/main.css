@@ -37536,6 +37536,14 @@ a:hover {
   padding: 2px 18px 3px;
   font-size: 13px;
 }
+.btn.style_6 {
+  color: #FFFFFF;
+  background-color: #ccc;
+}
+.btn.style_6:hover {
+  color: #FFFFFF;
+  background-color: #ccc;
+}
 
 /*------------------------------------*\
     BASE - IMAGES
@@ -39713,6 +39721,22 @@ section.section.bg_gray {
 }
 .dashboard_wrapper .nav-pills .nav-item .nav-link.active {
   color: #fff;
+}
+.dashboard_wrapper #patients_details .patient-name a {
+  display: inline-block;
+  position: relative;
+  padding-right: 30px;
+  width: 80%;
+}
+.dashboard_wrapper #patients_details .patient-name a .fa-arrow-up-right-from-square {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  color: #808080;
+  font-size: 13px;
+}
+.dashboard_wrapper #patients_details .patient-name a:hover .fa-arrow-up-right-from-square {
+  color: #0b8e36;
 }
 
 .payment_wrapper {

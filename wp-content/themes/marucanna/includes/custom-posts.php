@@ -277,6 +277,8 @@ function mc_booking_column_header($columns) {
 		'eligibility' => "Eligibility",
 		'gp' => "GP",
 		'payment_id' => "Payment ID",
+		'login_time' => "Login Time",
+		'logout_time' => "Logout Time",
 		'date' => "Date"
 	);
 
@@ -286,6 +288,10 @@ add_filter('manage_marucanna-patients_posts_columns', 'mc_booking_column_header'
 
 // Display content for custom column
 function mc_booking_column_content($column, $post_id) {
+	$patient = get_field('patient' , $post_id);
+	$lastLoginTime = get_user_meta($patient, 'last_login_time', true);
+    $lastLogoutTime = get_user_meta($patient, 'last_logout_time', true);
+
     if ($column == 'patient_id') {
         echo get_field('patient_id' , $post_id);
     }
@@ -300,6 +306,14 @@ function mc_booking_column_content($column, $post_id) {
 
 	if ($column == 'payment_id') {
         echo get_field('paypal_transaction_id' , $post_id);
+    }
+
+	if ($column == 'login_time') {
+        echo $lastLoginTime ? $lastLoginTime : '-';
+    }
+
+	if ($column == 'logout_time') {
+        echo $lastLogoutTime ? $lastLogoutTime : '-';
     }
 }
 add_action('manage_marucanna-patients_posts_custom_column', 'mc_booking_column_content', 10, 2);
@@ -352,8 +366,6 @@ function mc_patient_delete_handler() {
 			$results['status'] = false;
 			$results['msg'] = 'Patinet file not deleted.';
 		}
-
-		$results['test'] = $patient_post_id;
 	} else {
 		$results['status'] = false;
 		$results['msg'] = 'Somethings went wrong. Please try again.';
@@ -369,6 +381,15 @@ function mc_patient_consent_sidebar_metabox() {
         'mc_patient_consent_button',
         'Patient Consent',
         'mc_patient_consent_button_content',
+        'marucanna-patients', // Replace with your custom post type slug
+        'side',
+        'default'
+    );
+
+	add_meta_box(
+        'mc_patient_file_download',
+        'Patient File',
+        'mc_patient_file_download_content',
         'marucanna-patients', // Replace with your custom post type slug
         'side',
         'default'
@@ -392,6 +413,13 @@ function mc_patient_consent_button_content($post) {
 	} else {
 		echo '<a href="#" class="button action" id="send_consent" data-patient="'.$patient.'">Send Consent</a>';
 	}
+}
+
+function mc_patient_file_download_content($post) {
+
+	$patient_file_url = admin_url( 'admin-post.php?action=create_patient_file_pdf&patient='.get_the_ID() );
+
+	echo '<a href="'.$patient_file_url.'" class="button action">Download Patient File</a>';
 }
 
 function filter_posts_by_meta_field() {
