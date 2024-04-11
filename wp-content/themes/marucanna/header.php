@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
-	<title><?php wp_title('|',true,'right');?><?php bloginfo('name');?></title>
+	<title><?php wp_title('|',true,'right');?></title>
 
 	<link href="//www.google-analytics.com" rel="dns-prefetch">
 	<link href="<?php echo get_template_directory_uri(); ?>/img/favs/favicon.png" rel="shortcut icon">
