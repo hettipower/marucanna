@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/4.0.0\n"
+"X-Generator: GlotPress/4.0.1\n"
 "Language: en_GB\n"
 "Project-Id-Version: WordPress - 6.5.x - Development - Administration\n"
 
@@ -14333,6 +14333,10 @@ msgstr "Profile"
 #: wp-admin/menu.php:96
 msgid "Comments %s"
 msgstr "Comments %s"
+
+#: wp-admin/menu.php:67
+msgid "Library"
+msgstr "Library"
 
 #: wp-admin/media-new.php:43
 msgid "Upload New Media"
