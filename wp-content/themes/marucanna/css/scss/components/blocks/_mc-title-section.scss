@@ -1,5 +1,11 @@
 .mc-title-section {
 
+    .container {
+        h1 {
+            color: $white;
+        }
+    }
+
     &.style_2 {
         background: rgb(11,142,54);
         /* background: linear-gradient(90deg, rgba(11,142,54,1) 0%, rgba(24,168,107,1) 100%);
@@ -77,6 +83,11 @@
         h1 {
             margin-bottom: 0;
             text-transform: uppercase;
+            background-color: rgba(11, 142, 54 , 0.8);
+            display: inline-block;
+            width: auto;
+            padding: 10px 60px 17px;
+            font-size: 44px;
         }
 
         &::after {
@@ -98,17 +109,6 @@
             @include media-breakpoint-down(md) {
                 height: 2vw;
             }
-        }
-    }
-
-    .container {
-        h1 {
-            color: $white;
-            background-color: #2d2d2d;
-            display: inline-block;
-            width: auto;
-            padding: 10px 60px 17px;
-            font-size: 44px;
         }
     }
 }
