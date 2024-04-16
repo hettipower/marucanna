@@ -42032,3 +42032,10 @@ section.section.bg_gray {
 .page_container p a:hover {
   color: #9cc52b;
 }
+
+@media (max-width: 1280px) {
+  .eligibility-modal p {
+    letter-spacing: -0.2px !important;
+    line-height: 1.1;
+  }
+}

@@ -38006,7 +38006,7 @@ footer .social .nav li a:hover, footer .social .nav li a:focus {
 .mc-title-section.style_1 h1, .mc-title-section.style_1 .h1 {
   margin-bottom: 0;
   text-transform: uppercase;
-  background-color: rgba(11, 142, 54, 0.8);
+  background-color: #2d2d2d;
   display: inline-block;
   width: auto;
   padding: 10px 60px 17px;
@@ -40389,6 +40389,14 @@ section.section.bg_gray {
 }
 .page_container p a:hover {
   color: #9cc52b;
+}
+
+
+@media (max-width: 1280px) {
+.eligibility-modal p{
+letter-spacing: 0.1px !important;    
+}    
+    
 }
 
 /*# sourceMappingURL=main.css.map */

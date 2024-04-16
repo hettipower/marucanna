@@ -96,3 +96,10 @@
         }
     }
 }
+
+@media (max-width: 1280px) {
+	.eligibility-modal p{
+		letter-spacing: -0.2px !important; 
+		line-height: 1.1;
+	} 
+}
