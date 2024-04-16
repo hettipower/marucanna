@@ -2058,3 +2058,20 @@ section.section {
         }
     }
 }
+
+.page-template-page-check-eligibility {
+
+    .mc-title-section{
+        &.style_1 {
+            min-height: 370px;
+        }
+    }
+
+    .eligibility_wrap {
+        .box-content-wrap {
+            .box_content {
+                margin-top: 10%;
+            }
+        }
+    }
+}

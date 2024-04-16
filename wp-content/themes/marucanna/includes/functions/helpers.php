@@ -139,7 +139,7 @@ function validatePhoneNumberUK($phoneNumber) {
     $cleanedNumber = preg_replace('/\D/', '', $phoneNumber);
 
     // Define the UK phone number pattern
-    $pattern = '/^(?:(?:\+44)|(?:0))(?:(?:(?:20|21|22|23|24|25|26|27|28|29)|(?:(?:11|12|13|14|15|16|17|18|19)(?:[0-9])))(?:[1-9](?:\d{0,8}))?)$/';
+    $pattern = '/[0-9]{11}/';
 
     // Check if the cleaned number matches the pattern
     return preg_match($pattern, $cleanedNumber) === 1;

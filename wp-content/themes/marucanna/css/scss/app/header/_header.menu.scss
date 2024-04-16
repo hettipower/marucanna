@@ -9,11 +9,16 @@
 	transition: 0.5s all ease;
 
 	@include media-breakpoint-down(lg) {
-		margin-top: 65px
+		margin-top: 65px;
 	}
 
 	@include media-breakpoint-down(md) {
-		margin-top: 80px
+		margin-top: 80px;
+
+		.menu-main-menu-container {
+			max-height: calc(80vh);
+			overflow: auto;
+		}
 	}
 
 	.navbar-nav {

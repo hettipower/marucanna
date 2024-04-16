@@ -18,6 +18,10 @@
         min-height: 840px;
         background-blend-mode: color-burn;
 
+        @include media-breakpoint-down(md) {
+            min-height: 470px;
+        }
+
         &::after {
             position: absolute;
             content: "";

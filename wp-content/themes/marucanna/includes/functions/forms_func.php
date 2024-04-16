@@ -184,7 +184,7 @@ function mc_patient_booking_post_type_update( $entry, $form ) {
     $country = rgar( $entry, '83.6' );
     $postcode = rgar( $entry, '87' );
     $dob = rgar( $entry, '81' );
-    $treatment = rgar( $entry, '88' );
+    //$treatment = rgar( $entry, '88' );
     $additional_note = rgar( $entry, '89' );
     $medical_history_1 = rgar( $entry, '90' );
     $medical_history_2 = rgar( $entry, '91' );
@@ -220,7 +220,7 @@ function mc_patient_booking_post_type_update( $entry, $form ) {
         update_field('country', $country , $booking);
         update_field('postcode', $postcode , $booking);
         update_field('dob', $dob , $booking);
-        update_field('treatment', $treatment , $booking);
+        //update_field('treatment', $treatment , $booking);
         update_field('additional_note', $additional_note , $booking);
         update_field('medical_history_1', $medical_history_1 , $booking);
         update_field('medical_history_2', $medical_history_2 , $booking);

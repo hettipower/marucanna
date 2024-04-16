@@ -120,7 +120,7 @@ jQuery(document).ready(function($) {
     if( windowWidth > 767 ) {
         $('.single_content').height(containerHeight);
     } else {
-        $('.single_content').height(containerHeight + 100);
+        $('.single_content').height(containerHeight + 150);
     }
     
 
