@@ -40,7 +40,7 @@
 
 <body <?php body_class(); ?>>
 
-<header>
+<header id="main_header">
 	<div class="logo_wrap d-none d-lg-block">
 		<div class="container">
 			<a class="navbar-brand" href="<?php echo home_url(); ?>">
@@ -54,7 +54,13 @@
 		</div>
 	</div>
 	<div class="top_navbar">
-		<div class="container"><?php the_field( 'top_bar_content', 'option' ); ?></div>
+		<div class="container">
+			<div class="logo_shadow"></div>
+			<div class="content_wrap"><?php the_field( 'top_bar_content', 'option' ); ?></div>
+			<div class="right_nav">
+				<?php get_template_part( 'template-part/secondary', 'menu' ); ?>
+			</div>
+		</div>
 	</div>
 	<div class="middle_navbar">
 		<div class="container">
@@ -72,18 +78,14 @@
 				</div>
 			</div>
 
-			<?php get_template_part( 'template-part/top', 'search' ); ?>
-
-			<div class="right_nav">
-				<?php get_template_part( 'template-part/secondary', 'menu' ); ?>
-			</div>
+			<?php //get_template_part( 'template-part/top', 'search' ); ?>
 		</div>
 	</div>
 
 	<nav class="bottom_navbar navbar navbar-expand-lg">
 		<div class="container">
 
-			<?php get_template_part( 'template-part/top', 'search' ); ?>
+			<?php //get_template_part( 'template-part/top', 'search' ); ?>
 
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>

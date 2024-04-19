@@ -179,7 +179,7 @@ function custom_category_archive_description() {
                     if( $image_url ) {
                         echo '<div class="category_image"><img src="'. $image_url .'" alt="'.$term->name.'" /></div>';
                     }
-                    echo wc_format_content( wp_kses_post( $term_description ) );
+                    echo '<div class="category_content">'.wc_format_content( wp_kses_post( $term_description ) ).'</div>';
                 echo '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}

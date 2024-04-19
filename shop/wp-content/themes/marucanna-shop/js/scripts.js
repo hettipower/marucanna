@@ -1,9 +1,10 @@
-/*! css 1.0.0 filename.js 2024-02-29 1:13:01 AM */
+/*! css 1.0.0 filename.js 2024-04-19 1:40:12 PM */
 
 jQuery(document).ready(function($) {
     toggle_mini_cart();
     menu_dropdown();
     mp_ajax_add_to_cart_single();
+    sticky_header();
     jQuery(document.body).on("click", ".mini_cart_item .quantity .plus", function() {
         var productKey = jQuery(this).data("product-key");
         var quantityInput = jQuery(this).closest(".mini_cart_item").find(".quantity input.qty");
@@ -89,6 +90,26 @@ function menu_dropdown() {
         var link = jQuery(this).attr("href");
         window.location.href = link;
     });
+}
+
+function sticky_header() {
+    jQuery(window).scroll(function() {
+        toggle_sticky_header();
+    });
+    toggle_sticky_header();
+}
+
+function toggle_sticky_header() {
+    if (window.innerWidth > 767) {
+        var topamount = 150;
+    } else {
+        var topamount = 100;
+    }
+    if (jQuery(window).scrollTop() > topamount) {
+        jQuery("body").addClass("sticky-nav");
+    } else {
+        jQuery("body").removeClass("sticky-nav");
+    }
 }
 
 function toggle_mini_cart() {

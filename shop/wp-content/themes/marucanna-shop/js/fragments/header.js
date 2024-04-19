@@ -12,3 +12,29 @@ function menu_dropdown() {
 
     });
 }
+
+// Adding sticky header class to menu
+function sticky_header(){
+    jQuery(window).scroll(function(){
+        //if ( jQuery(window).width() > 767) {
+            toggle_sticky_header();
+        //}
+    });
+    toggle_sticky_header();
+}
+
+function toggle_sticky_header(){
+	
+	if (window.innerWidth > 767){
+		var topamount = 150
+	}
+	else{
+		var topamount = 100
+	}
+	
+    if ( (jQuery(window).scrollTop()) > topamount ) { 
+                jQuery('body').addClass('sticky-nav');
+    } else {
+        jQuery('body').removeClass('sticky-nav');
+    }
+}

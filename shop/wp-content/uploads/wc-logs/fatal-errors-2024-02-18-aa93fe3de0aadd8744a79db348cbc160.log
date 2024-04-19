@@ -1,8 +1,0 @@
-2024-02-18T13:32:46+00:00 CRITICAL Uncaught Error: Call to undefined function the_breadcrumb() in E:\xampp\htdocs\marucanna\shop\wp-content\themes\marucanna-shop\single.php:19
-Stack trace:
-#0 E:\xampp\htdocs\marucanna\shop\wp-includes\template-loader.php(106): include()
-#1 E:\xampp\htdocs\marucanna\shop\wp-blog-header.php(19): require_once('E:\\xampp\\htdocs...')
-#2 E:\xampp\htdocs\marucanna\shop\index.php(17): require('E:\\xampp\\htdocs...')
-#3 {main}
-  thrown in E:\xampp\htdocs\marucanna\shop\wp-content\themes\marucanna-shop\single.php on line 19
-
