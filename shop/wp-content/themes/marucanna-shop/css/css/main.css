@@ -35701,12 +35701,15 @@ img {
 }
 
 body {
-  padding-top: 86px;
+  padding-top: 116px;
   transition: 0.5s all ease;
   -webkit-transition: 0.5s all ease;
   -moz-transition: 0.5s all ease;
   -ms-transition: 0.5s all ease;
   -o-transition: 0.5s all ease;
+}
+body.home {
+  padding-top: 86px;
 }
 
 .sticky-nav {
@@ -36023,10 +36026,6 @@ section.section.contact_wrap .contact_details_wrap .contact_details .inner h3, s
 .gform_wrapper .gform-body .gform_page_footer .gform_button:not(:only-child):nth-child(1):hover {
   background-color: #60bf2d !important;
   color: #FFFFFF !important;
-}
-
-.page_container {
-  padding-top: 45px;
 }
 
 .product .product-inner {

@@ -305,12 +305,16 @@
 }
 
 body {
-    padding-top: 86px;
+    padding-top: 116px;
     transition: 0.5s all ease;
     -webkit-transition: 0.5s all ease;
     -moz-transition: 0.5s all ease;
     -ms-transition: 0.5s all ease;
     -o-transition: 0.5s all ease;
+
+    &.home {
+        padding-top: 86px;
+    }
 }
 
 .sticky-nav {
