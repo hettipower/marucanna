@@ -85,7 +85,16 @@
 	<nav class="bottom_navbar navbar navbar-expand-lg">
 		<div class="container">
 
-			<?php //get_template_part( 'template-part/top', 'search' ); ?>
+			<div class="logo_wrap">
+				<a class="navbar-brand" href="<?php echo home_url(); ?>">
+					<?php
+						$site_logo = get_field('site_logo' , 'option');
+						if( $site_logo ): 
+					?>
+						<img src="<?php echo $site_logo['url']; ?>" alt="<?php echo get_bloginfo( 'name' ); ?>">
+					<?php endif; ?>
+				</a>
+			</div>
 
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>

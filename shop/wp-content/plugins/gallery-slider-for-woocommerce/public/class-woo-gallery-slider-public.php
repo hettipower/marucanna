@@ -181,7 +181,7 @@ class Woo_Gallery_Slider_Public {
 	 * @param string $plugin The plugin help page.
 	 */
 	public function redirect_help_page( $plugin ) {
-		if ( WOO_GALLERY_SLIDER_BASENAME === $plugin ) {
+		if ( WOO_GALLERY_SLIDER_BASENAME === $plugin && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) && ! ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 			wp_safe_redirect( admin_url( 'admin.php?page=wpgs-settings#tab=help' ) );
 			exit();
 		}

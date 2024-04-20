@@ -2,10 +2,10 @@
 Contributors: shapedplugin, rubel_miah, khalilu, shamimmiashuhagh
 Tags: woocommerce product gallery, woocommerce product gallery slider, additional variation images gallery for woocommerce, woocommerce gallery slider, additional variation images gallery, gallery, product gallery, product gallery slider, woocommerce gallery, woocommerce product thumbnails slider, woocommerce slider, product slider, woocommerce product image slider, woocommerce product image carousel, woocommerce thumbnails carousel, woocommerce product gallery carousel, thumbnails slider, thumbnails slider, best product gallery slider for woocommerce, product variation image gallery, product variation image, variation images gallery, additional image, additional variation image, woocommerce variation product thumbnail gallery, woocommerce
 Requires at least: 5.3
-Tested up to: 6.4.2
+Tested up to: 6.5
 WC requires at least: 4.5
-WC tested up to: 8.4.0
-Stable tag: 2.0.1
+WC tested up to: 8.7.0
+Stable tag: 2.0.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -452,6 +452,11 @@ Yes, the plugin is compatible with the most popular WooCommerce themes. We’re 
 
 
 == Changelog ==
+
+= 2.0.2 - Apr 01, 2024 =
+* Fix: The warning was found when the plugin was activated via the WP-Cli command.
+* Tested: WordPress 6.5 compatibility.
+* Tested: WooCommerce 8.7.0 compatibility.
 
 = 2.0.1 - Jan 04, 2024 =
 * Fix: Gallery Slider end tag issue.

@@ -1,4 +1,6 @@
 .product {
+    position: relative;
+    
     .product-inner {
         background-color: #eeeeee;
         padding: 10px;
@@ -21,6 +23,18 @@
                     padding: 0;
                     left: 8px;
                     top: 6px;
+
+                    min-height: 3.236em;
+                    min-width: 3.236em;
+                    font-weight: 700;
+                    position: absolute;
+                    text-align: center;
+                    line-height: 3.236;
+                    margin: 0;
+                    border-radius: 100%;
+                    color: #fff;
+                    font-size: .857em;
+                    z-index: 9;
                 }
             }
             
