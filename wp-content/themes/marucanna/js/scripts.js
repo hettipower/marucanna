@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-04-16 9:57:58 AM */
+/*! css 1.0.0 filename.js 2024-04-20 11:12:47 PM */
 
 Fancybox.bind("[data-fancybox]", {});
 
@@ -7,6 +7,7 @@ jQuery(document).ready(function($) {
     sticky_header();
     menu_dropdown();
     patients_datatable();
+    mobile_menu();
 });
 
 function patients_datatable() {
@@ -94,6 +95,12 @@ function menu_dropdown() {
     jQuery(".nav-item.dropdown .dropdown-toggle").on("click", function() {
         var link = jQuery(this).attr("href");
         window.location.href = link;
+    });
+}
+
+function mobile_menu() {
+    jQuery("header .navbar .container-fluid .navbar-toggler").on("click", function() {
+        jQuery("html").toggleClass("menu-open");
     });
 }
 

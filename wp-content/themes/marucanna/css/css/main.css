@@ -40413,5 +40413,11 @@ section.section.bg_gray {
     line-height: 1.1;
   }
 }
+html.menu-open {
+  overflow: hidden !important;
+}
+html.menu-open body {
+  overflow: hidden !important;
+}
 
 /*# sourceMappingURL=main.css.map */

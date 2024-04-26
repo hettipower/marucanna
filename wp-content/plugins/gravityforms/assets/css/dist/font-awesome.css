@@ -1,308 +1,494 @@
-/* stylelint-disable */
-/*!
- *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */
-/* FONT PATH
- * -------------------------- */
-@font-face {
-  font-family: 'GFFontAwesome';
-  src: url('../../../fonts/fontawesome-webfont.eot?v=4.7.0');
-  src: url('../../../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../../../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../../../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../../../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../../../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@keyframes fa-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(359deg);
-  }
-}
-.gforms_edit_form .fa, .gforms_form_settings_wrap .fa, .gform-settings__wrapper .fa, .gforms_help .fa, .gform_wrapper .fa, .gf_entry_wrap .fa {
-    display: inline-block;
-    font: normal normal normal 14px/1 GFFontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-/* makes the font 33% larger relative to the icon container */
-.gforms_edit_form .fa-lg, .gforms_form_settings_wrap .fa-lg, .gform-settings__wrapper .fa-lg, .gforms_help .fa-lg, .gform_wrapper .fa-lg, .gf_entry_wrap .fa-lg {
-    font-size: 1.33333333em;
-    line-height: 0.75em;
-    vertical-align: -15%;
-  }
-.gforms_edit_form .fa-2x, .gforms_form_settings_wrap .fa-2x, .gform-settings__wrapper .fa-2x, .gforms_help .fa-2x, .gform_wrapper .fa-2x, .gf_entry_wrap .fa-2x {
-    font-size: 2em;
-  }
-.gforms_edit_form .fa-3x, .gforms_form_settings_wrap .fa-3x, .gform-settings__wrapper .fa-3x, .gforms_help .fa-3x, .gform_wrapper .fa-3x, .gf_entry_wrap .fa-3x {
-    font-size: 3em;
-  }
-.gforms_edit_form .fa-4x, .gforms_form_settings_wrap .fa-4x, .gform-settings__wrapper .fa-4x, .gforms_help .fa-4x, .gform_wrapper .fa-4x, .gf_entry_wrap .fa-4x {
-    font-size: 4em;
-  }
-.gforms_edit_form .fa-5x, .gforms_form_settings_wrap .fa-5x, .gform-settings__wrapper .fa-5x, .gforms_help .fa-5x, .gform_wrapper .fa-5x, .gf_entry_wrap .fa-5x {
-    font-size: 5em;
-  }
-.gforms_edit_form .fa-fw, .gforms_form_settings_wrap .fa-fw, .gform-settings__wrapper .fa-fw, .gforms_help .fa-fw, .gform_wrapper .fa-fw, .gf_entry_wrap .fa-fw {
-    width: 1.28571429em;
-    text-align: center;
-  }
-.gforms_edit_form .fa-ul, .gforms_form_settings_wrap .fa-ul, .gform-settings__wrapper .fa-ul, .gforms_help .fa-ul, .gform_wrapper .fa-ul, .gf_entry_wrap .fa-ul {
-    padding-left: 0;
-    margin-left: 2.14285714em;
-    list-style-type: none;
-  }
-.gforms_edit_form .fa-ul > li, .gforms_form_settings_wrap .fa-ul > li, .gform-settings__wrapper .fa-ul > li, .gforms_help .fa-ul > li, .gform_wrapper .fa-ul > li, .gf_entry_wrap .fa-ul > li {
-    position: relative;
-  }
-.gforms_edit_form .fa-li, .gforms_form_settings_wrap .fa-li, .gform-settings__wrapper .fa-li, .gforms_help .fa-li, .gform_wrapper .fa-li, .gf_entry_wrap .fa-li {
-    position: absolute;
-    left: -2.14285714em;
-    width: 2.14285714em;
-    top: 0.14285714em;
-    text-align: center;
-  }
-.gforms_edit_form .fa-li.fa-lg, .gforms_form_settings_wrap .fa-li.fa-lg, .gform-settings__wrapper .fa-li.fa-lg, .gforms_help .fa-li.fa-lg, .gform_wrapper .fa-li.fa-lg, .gf_entry_wrap .fa-li.fa-lg {
-    left: -1.85714286em;
-  }
-.gforms_edit_form .fa-border, .gforms_form_settings_wrap .fa-border, .gform-settings__wrapper .fa-border, .gforms_help .fa-border, .gform_wrapper .fa-border, .gf_entry_wrap .fa-border {
-    padding: .2em .25em .15em;
-    border: solid 0.08em #eee;
-    border-radius: .1em;
-  }
-.gforms_edit_form .fa-pull-left, .gforms_form_settings_wrap .fa-pull-left, .gform-settings__wrapper .fa-pull-left, .gforms_help .fa-pull-left, .gform_wrapper .fa-pull-left, .gf_entry_wrap .fa-pull-left {
-    float: left;
-  }
-.gforms_edit_form .fa-pull-right, .gforms_form_settings_wrap .fa-pull-right, .gform-settings__wrapper .fa-pull-right, .gforms_help .fa-pull-right, .gform_wrapper .fa-pull-right, .gf_entry_wrap .fa-pull-right {
-    float: right;
-  }
-.gforms_edit_form .fa.fa-pull-left, .gforms_form_settings_wrap .fa.fa-pull-left, .gform-settings__wrapper .fa.fa-pull-left, .gforms_help .fa.fa-pull-left, .gform_wrapper .fa.fa-pull-left, .gf_entry_wrap .fa.fa-pull-left {
-    margin-right: .3em;
-  }
-.gforms_edit_form .fa.fa-pull-right, .gforms_form_settings_wrap .fa.fa-pull-right, .gform-settings__wrapper .fa.fa-pull-right, .gforms_help .fa.fa-pull-right, .gform_wrapper .fa.fa-pull-right, .gf_entry_wrap .fa.fa-pull-right {
-    margin-left: .3em;
-  }
-/* Deprecated as of 4.4.0 */
-.gforms_edit_form .pull-right, .gforms_form_settings_wrap .pull-right, .gform-settings__wrapper .pull-right, .gforms_help .pull-right, .gform_wrapper .pull-right, .gf_entry_wrap .pull-right {
-    float: right;
-  }
-.gforms_edit_form .pull-left, .gforms_form_settings_wrap .pull-left, .gform-settings__wrapper .pull-left, .gforms_help .pull-left, .gform_wrapper .pull-left, .gf_entry_wrap .pull-left {
-    float: left;
-  }
-.gforms_edit_form .fa.pull-left, .gforms_form_settings_wrap .fa.pull-left, .gform-settings__wrapper .fa.pull-left, .gforms_help .fa.pull-left, .gform_wrapper .fa.pull-left, .gf_entry_wrap .fa.pull-left {
-    margin-right: .3em;
-  }
-.gforms_edit_form .fa.pull-right, .gforms_form_settings_wrap .fa.pull-right, .gform-settings__wrapper .fa.pull-right, .gforms_help .fa.pull-right, .gform_wrapper .fa.pull-right, .gf_entry_wrap .fa.pull-right {
-    margin-left: .3em;
-  }
-.gforms_edit_form .fa-spin, .gforms_form_settings_wrap .fa-spin, .gform-settings__wrapper .fa-spin, .gforms_help .fa-spin, .gform_wrapper .fa-spin, .gf_entry_wrap .fa-spin {
-    animation: fa-spin 2s infinite linear;
-  }
-.gforms_edit_form .fa-pulse, .gforms_form_settings_wrap .fa-pulse, .gform-settings__wrapper .fa-pulse, .gforms_help .fa-pulse, .gform_wrapper .fa-pulse, .gf_entry_wrap .fa-pulse {
-    animation: fa-spin 1s infinite steps(8);
-  }
-.gforms_edit_form .fa-rotate-90, .gforms_form_settings_wrap .fa-rotate-90, .gform-settings__wrapper .fa-rotate-90, .gforms_help .fa-rotate-90, .gform_wrapper .fa-rotate-90, .gf_entry_wrap .fa-rotate-90 {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-    transform: rotate(90deg);
-  }
-.gforms_edit_form .fa-rotate-180, .gforms_form_settings_wrap .fa-rotate-180, .gform-settings__wrapper .fa-rotate-180, .gforms_help .fa-rotate-180, .gform_wrapper .fa-rotate-180, .gf_entry_wrap .fa-rotate-180 {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-    transform: rotate(180deg);
-  }
-.gforms_edit_form .fa-rotate-270, .gforms_form_settings_wrap .fa-rotate-270, .gform-settings__wrapper .fa-rotate-270, .gforms_help .fa-rotate-270, .gform_wrapper .fa-rotate-270, .gf_entry_wrap .fa-rotate-270 {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
-    transform: rotate(270deg);
-  }
-.gforms_edit_form .fa-flip-horizontal, .gforms_form_settings_wrap .fa-flip-horizontal, .gform-settings__wrapper .fa-flip-horizontal, .gforms_help .fa-flip-horizontal, .gform_wrapper .fa-flip-horizontal, .gf_entry_wrap .fa-flip-horizontal {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
-    transform: scale(-1, 1);
-  }
-.gforms_edit_form .fa-flip-vertical, .gforms_form_settings_wrap .fa-flip-vertical, .gform-settings__wrapper .fa-flip-vertical, .gforms_help .fa-flip-vertical, .gform_wrapper .fa-flip-vertical, .gf_entry_wrap .fa-flip-vertical {
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-    transform: scale(1, -1);
-  }
-.gforms_edit_form :root .fa-rotate-90, .gforms_edit_form :root .fa-rotate-180, .gforms_edit_form :root .fa-rotate-270, .gforms_edit_form :root .fa-flip-horizontal, .gforms_edit_form :root .fa-flip-vertical, .gforms_form_settings_wrap :root .fa-rotate-90, .gforms_form_settings_wrap :root .fa-rotate-180, .gforms_form_settings_wrap :root .fa-rotate-270, .gforms_form_settings_wrap :root .fa-flip-horizontal, .gforms_form_settings_wrap :root .fa-flip-vertical, .gform-settings__wrapper :root .fa-rotate-90, .gform-settings__wrapper :root .fa-rotate-180, .gform-settings__wrapper :root .fa-rotate-270, .gform-settings__wrapper :root .fa-flip-horizontal, .gform-settings__wrapper :root .fa-flip-vertical, .gforms_help :root .fa-rotate-90, .gforms_help :root .fa-rotate-180, .gforms_help :root .fa-rotate-270, .gforms_help :root .fa-flip-horizontal, .gforms_help :root .fa-flip-vertical, .gform_wrapper :root .fa-rotate-90, .gform_wrapper :root .fa-rotate-180, .gform_wrapper :root .fa-rotate-270, .gform_wrapper :root .fa-flip-horizontal, .gform_wrapper :root .fa-flip-vertical, .gf_entry_wrap :root .fa-rotate-90, .gf_entry_wrap :root .fa-rotate-180, .gf_entry_wrap :root .fa-rotate-270, .gf_entry_wrap :root .fa-flip-horizontal, .gf_entry_wrap :root .fa-flip-vertical {
-    filter: none;
-  }
-.gforms_edit_form .fa-stack, .gforms_form_settings_wrap .fa-stack, .gform-settings__wrapper .fa-stack, .gforms_help .fa-stack, .gform_wrapper .fa-stack, .gf_entry_wrap .fa-stack {
-    position: relative;
-    display: inline-block;
-    width: 2em;
-    height: 2em;
-    line-height: 2em;
-    vertical-align: middle;
-  }
-.gforms_edit_form .fa-stack-1x, .gforms_edit_form .fa-stack-2x, .gforms_form_settings_wrap .fa-stack-1x, .gforms_form_settings_wrap .fa-stack-2x, .gform-settings__wrapper .fa-stack-1x, .gform-settings__wrapper .fa-stack-2x, .gforms_help .fa-stack-1x, .gforms_help .fa-stack-2x, .gform_wrapper .fa-stack-1x, .gform_wrapper .fa-stack-2x, .gf_entry_wrap .fa-stack-1x, .gf_entry_wrap .fa-stack-2x {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    text-align: center;
-  }
-.gforms_edit_form .fa-stack-1x, .gforms_form_settings_wrap .fa-stack-1x, .gform-settings__wrapper .fa-stack-1x, .gforms_help .fa-stack-1x, .gform_wrapper .fa-stack-1x, .gf_entry_wrap .fa-stack-1x {
-    line-height: inherit;
-  }
-.gforms_edit_form .fa-stack-2x, .gforms_form_settings_wrap .fa-stack-2x, .gform-settings__wrapper .fa-stack-2x, .gforms_help .fa-stack-2x, .gform_wrapper .fa-stack-2x, .gf_entry_wrap .fa-stack-2x {
-    font-size: 2em;
-  }
-.gforms_edit_form .fa-inverse, .gforms_form_settings_wrap .fa-inverse, .gform-settings__wrapper .fa-inverse, .gforms_help .fa-inverse, .gform_wrapper .fa-inverse, .gf_entry_wrap .fa-inverse {
-    color: #fff;
-  }
-/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
-	 readers do not read off random characters that represent icons */
-.gforms_edit_form .fa-glass:before, .gforms_form_settings_wrap .fa-glass:before, .gform-settings__wrapper .fa-glass:before, .gforms_help .fa-glass:before, .gform_wrapper .fa-glass:before, .gf_entry_wrap .fa-glass:before {
-    content: "\f000";
-  }
-.gforms_edit_form .fa-music:before, .gforms_form_settings_wrap .fa-music:before, .gform-settings__wrapper .fa-music:before, .gforms_help .fa-music:before, .gform_wrapper .fa-music:before, .gf_entry_wrap .fa-music:before {
-    content: "\f001";
-  }
-.gforms_edit_form .fa-search:before, .gforms_form_settings_wrap .fa-search:before, .gform-settings__wrapper .fa-search:before, .gforms_help .fa-search:before, .gform_wrapper .fa-search:before, .gf_entry_wrap .fa-search:before {
-    content: "\f002";
-  }
-.gforms_edit_form .fa-envelope-o:before, .gforms_form_settings_wrap .fa-envelope-o:before, .gform-settings__wrapper .fa-envelope-o:before, .gforms_help .fa-envelope-o:before, .gform_wrapper .fa-envelope-o:before, .gf_entry_wrap .fa-envelope-o:before {
-    content: "\f003";
-  }
-.gforms_edit_form .fa-heart:before, .gforms_form_settings_wrap .fa-heart:before, .gform-settings__wrapper .fa-heart:before, .gforms_help .fa-heart:before, .gform_wrapper .fa-heart:before, .gf_entry_wrap .fa-heart:before {
-    content: "\f004";
-  }
-.gforms_edit_form .fa-star:before, .gforms_form_settings_wrap .fa-star:before, .gform-settings__wrapper .fa-star:before, .gforms_help .fa-star:before, .gform_wrapper .fa-star:before, .gf_entry_wrap .fa-star:before {
-    content: "\f005";
-  }
-.gforms_edit_form .fa-star-o:before, .gforms_form_settings_wrap .fa-star-o:before, .gform-settings__wrapper .fa-star-o:before, .gforms_help .fa-star-o:before, .gform_wrapper .fa-star-o:before, .gf_entry_wrap .fa-star-o:before {
-    content: "\f006";
-  }
-.gforms_edit_form .fa-user:before, .gforms_form_settings_wrap .fa-user:before, .gform-settings__wrapper .fa-user:before, .gforms_help .fa-user:before, .gform_wrapper .fa-user:before, .gf_entry_wrap .fa-user:before {
-    content: "\f007";
-  }
-.gforms_edit_form .fa-film:before, .gforms_form_settings_wrap .fa-film:before, .gform-settings__wrapper .fa-film:before, .gforms_help .fa-film:before, .gform_wrapper .fa-film:before, .gf_entry_wrap .fa-film:before {
-    content: "\f008";
-  }
-.gforms_edit_form .fa-th-large:before, .gforms_form_settings_wrap .fa-th-large:before, .gform-settings__wrapper .fa-th-large:before, .gforms_help .fa-th-large:before, .gform_wrapper .fa-th-large:before, .gf_entry_wrap .fa-th-large:before {
-    content: "\f009";
-  }
-.gforms_edit_form .fa-th:before, .gforms_form_settings_wrap .fa-th:before, .gform-settings__wrapper .fa-th:before, .gforms_help .fa-th:before, .gform_wrapper .fa-th:before, .gf_entry_wrap .fa-th:before {
-    content: "\f00a";
-  }
-.gforms_edit_form .fa-th-list:before, .gforms_form_settings_wrap .fa-th-list:before, .gform-settings__wrapper .fa-th-list:before, .gforms_help .fa-th-list:before, .gform_wrapper .fa-th-list:before, .gf_entry_wrap .fa-th-list:before {
-    content: "\f00b";
-  }
-.gforms_edit_form .fa-check:before, .gforms_form_settings_wrap .fa-check:before, .gform-settings__wrapper .fa-check:before, .gforms_help .fa-check:before, .gform_wrapper .fa-check:before, .gf_entry_wrap .fa-check:before {
-    content: "\f00c";
-  }
-.gforms_edit_form .fa-remove:before, .gforms_edit_form .fa-close:before, .gforms_edit_form .fa-times:before, .gforms_form_settings_wrap .fa-remove:before, .gforms_form_settings_wrap .fa-close:before, .gforms_form_settings_wrap .fa-times:before, .gform-settings__wrapper .fa-remove:before, .gform-settings__wrapper .fa-close:before, .gform-settings__wrapper .fa-times:before, .gforms_help .fa-remove:before, .gforms_help .fa-close:before, .gforms_help .fa-times:before, .gform_wrapper .fa-remove:before, .gform_wrapper .fa-close:before, .gform_wrapper .fa-times:before, .gf_entry_wrap .fa-remove:before, .gf_entry_wrap .fa-close:before, .gf_entry_wrap .fa-times:before {
-    content: "\f00d";
-  }
-.gforms_edit_form .fa-search-plus:before, .gforms_form_settings_wrap .fa-search-plus:before, .gform-settings__wrapper .fa-search-plus:before, .gforms_help .fa-search-plus:before, .gform_wrapper .fa-search-plus:before, .gf_entry_wrap .fa-search-plus:before {
-    content: "\f00e";
-  }
-.gforms_edit_form .fa-search-minus:before, .gforms_form_settings_wrap .fa-search-minus:before, .gform-settings__wrapper .fa-search-minus:before, .gforms_help .fa-search-minus:before, .gform_wrapper .fa-search-minus:before, .gf_entry_wrap .fa-search-minus:before {
-    content: "\f010";
-  }
-.gforms_edit_form .fa-power-off:before, .gforms_form_settings_wrap .fa-power-off:before, .gform-settings__wrapper .fa-power-off:before, .gforms_help .fa-power-off:before, .gform_wrapper .fa-power-off:before, .gf_entry_wrap .fa-power-off:before {
-    content: "\f011";
-  }
-.gforms_edit_form .fa-signal:before, .gforms_form_settings_wrap .fa-signal:before, .gform-settings__wrapper .fa-signal:before, .gforms_help .fa-signal:before, .gform_wrapper .fa-signal:before, .gf_entry_wrap .fa-signal:before {
-    content: "\f012";
-  }
-.gforms_edit_form .fa-gear:before, .gforms_edit_form .fa-cog:before, .gforms_form_settings_wrap .fa-gear:before, .gforms_form_settings_wrap .fa-cog:before, .gform-settings__wrapper .fa-gear:before, .gform-settings__wrapper .fa-cog:before, .gforms_help .fa-gear:before, .gforms_help .fa-cog:before, .gform_wrapper .fa-gear:before, .gform_wrapper .fa-cog:before, .gf_entry_wrap .fa-gear:before, .gf_entry_wrap .fa-cog:before {
-    content: "\f013";
-  }
-.gforms_edit_form .fa-trash-o:before, .gforms_form_settings_wrap .fa-trash-o:before, .gform-settings__wrapper .fa-trash-o:before, .gforms_help .fa-trash-o:before, .gform_wrapper .fa-trash-o:before, .gf_entry_wrap .fa-trash-o:before {
-    content: "\f014";
-  }
-.gforms_edit_form .fa-home:before, .gforms_form_settings_wrap .fa-home:before, .gform-settings__wrapper .fa-home:before, .gforms_help .fa-home:before, .gform_wrapper .fa-home:before, .gf_entry_wrap .fa-home:before {
-    content: "\f015";
-  }
-.gforms_edit_form .fa-file-o:before, .gforms_form_settings_wrap .fa-file-o:before, .gform-settings__wrapper .fa-file-o:before, .gforms_help .fa-file-o:before, .gform_wrapper .fa-file-o:before, .gf_entry_wrap .fa-file-o:before {
-    content: "\f016";
-  }
-.gforms_edit_form .fa-clock-o:before, .gforms_form_settings_wrap .fa-clock-o:before, .gform-settings__wrapper .fa-clock-o:before, .gforms_help .fa-clock-o:before, .gform_wrapper .fa-clock-o:before, .gf_entry_wrap .fa-clock-o:before {
-    content: "\f017";
-  }
-.gforms_edit_form .fa-road:before, .gforms_form_settings_wrap .fa-road:before, .gform-settings__wrapper .fa-road:before, .gforms_help .fa-road:before, .gform_wrapper .fa-road:before, .gf_entry_wrap .fa-road:before {
-    content: "\f018";
-  }
-.gforms_edit_form .fa-download:before, .gforms_form_settings_wrap .fa-download:before, .gform-settings__wrapper .fa-download:before, .gforms_help .fa-download:before, .gform_wrapper .fa-download:before, .gf_entry_wrap .fa-download:before {
-    content: "\f019";
-  }
-.gforms_edit_form .fa-arrow-circle-o-down:before, .gforms_form_settings_wrap .fa-arrow-circle-o-down:before, .gform-settings__wrapper .fa-arrow-circle-o-down:before, .gforms_help .fa-arrow-circle-o-down:before, .gform_wrapper .fa-arrow-circle-o-down:before, .gf_entry_wrap .fa-arrow-circle-o-down:before {
-    content: "\f01a";
-  }
-.gforms_edit_form .fa-arrow-circle-o-up:before, .gforms_form_settings_wrap .fa-arrow-circle-o-up:before, .gform-settings__wrapper .fa-arrow-circle-o-up:before, .gforms_help .fa-arrow-circle-o-up:before, .gform_wrapper .fa-arrow-circle-o-up:before, .gf_entry_wrap .fa-arrow-circle-o-up:before {
-    content: "\f01b";
-  }
-.gforms_edit_form .fa-inbox:before, .gforms_form_settings_wrap .fa-inbox:before, .gform-settings__wrapper .fa-inbox:before, .gforms_help .fa-inbox:before, .gform_wrapper .fa-inbox:before, .gf_entry_wrap .fa-inbox:before {
-    content: "\f01c";
-  }
-.gforms_edit_form .fa-play-circle-o:before, .gforms_form_settings_wrap .fa-play-circle-o:before, .gform-settings__wrapper .fa-play-circle-o:before, .gforms_help .fa-play-circle-o:before, .gform_wrapper .fa-play-circle-o:before, .gf_entry_wrap .fa-play-circle-o:before {
-    content: "\f01d";
-  }
-.gforms_edit_form .fa-rotate-right:before, .gforms_edit_form .fa-repeat:before, .gforms_form_settings_wrap .fa-rotate-right:before, .gforms_form_settings_wrap .fa-repeat:before, .gform-settings__wrapper .fa-rotate-right:before, .gform-settings__wrapper .fa-repeat:before, .gforms_help .fa-rotate-right:before, .gforms_help .fa-repeat:before, .gform_wrapper .fa-rotate-right:before, .gform_wrapper .fa-repeat:before, .gf_entry_wrap .fa-rotate-right:before, .gf_entry_wrap .fa-repeat:before {
-    content: "\f01e";
-  }
-.gforms_edit_form .fa-refresh:before, .gforms_form_settings_wrap .fa-refresh:before, .gform-settings__wrapper .fa-refresh:before, .gforms_help .fa-refresh:before, .gform_wrapper .fa-refresh:before, .gf_entry_wrap .fa-refresh:before {
-    content: "\f021";
-  }
-.gforms_edit_form .fa-list-alt:before, .gforms_form_settings_wrap .fa-list-alt:before, .gform-settings__wrapper .fa-list-alt:before, .gforms_help .fa-list-alt:before, .gform_wrapper .fa-list-alt:before, .gf_entry_wrap .fa-list-alt:before {
-    content: "\f022";
-  }
-.gforms_edit_form .fa-lock:before, .gforms_form_settings_wrap .fa-lock:before, .gform-settings__wrapper .fa-lock:before, .gforms_help .fa-lock:before, .gform_wrapper .fa-lock:before, .gf_entry_wrap .fa-lock:before {
-    content: "\f023";
-  }
-.gforms_edit_form .fa-flag:before, .gforms_form_settings_wrap .fa-flag:before, .gform-settings__wrapper .fa-flag:before, .gforms_help .fa-flag:before, .gform_wrapper .fa-flag:before, .gf_entry_wrap .fa-flag:before {
-    content: "\f024";
-  }
-.gforms_edit_form .fa-headphones:before, .gforms_form_settings_wrap .fa-headphones:before, .gform-settings__wrapper .fa-headphones:before, .gforms_help .fa-headphones:before, .gform_wrapper .fa-headphones:before, .gf_entry_wrap .fa-headphones:before {
-    content: "\f025";
-  }
-.gforms_edit_form .fa-volume-off:before, .gforms_form_settings_wrap .fa-volume-off:before, .gform-settings__wrapper .fa-volume-off:before, .gforms_help .fa-volume-off:before, .gform_wrapper .fa-volume-off:before, .gf_entry_wrap .fa-volume-off:before {
-    content: "\f026";
-  }
-.gforms_edit_form .fa-volume-down:before, .gforms_form_settings_wrap .fa-volume-down:before, .gform-settings__wrapper .fa-volume-down:before, .gforms_help .fa-volume-down:before, .gform_wrapper .fa-volume-down:before, .gf_entry_wrap .fa-volume-down:before {
-    content: "\f027";
-  }
-.gforms_edit_form .fa-volume-up:before, .gforms_form_settings_wrap .fa-volume-up:before, .gform-settings__wrapper .fa-volume-up:before, .gforms_help .fa-volume-up:before, .gform_wrapper .fa-volume-up:before, .gf_entry_wrap .fa-volume-up:before {
-    content: "\f028";
-  }
-.gforms_edit_form .fa-qrcode:before, .gforms_form_settings_wrap .fa-qrcode:before, .gform-settings__wrapper .fa-qrcode:before, .gforms_help .fa-qrcode:before, .gform_wrapper .fa-qrcode:before, .gf_entry_wrap .fa-qrcode:before {
-    content: "\f029";
-  }
-.gforms_edit_form .fa-barcode:before, .gforms_form_settings_wrap .fa-barcode:before, .gform-settings__wrapper .fa-barcode:before, .gforms_help .fa-barcode:before, .gform_wrapper .fa-barcode:before, .gf_entry_wrap .fa-barcode:before {
-    content: "\f02a";
-  }
-.gforms_edit_form .fa-tag:before, .gforms_form_settings_wrap .fa-tag:before, .gform-settings__wrapper .fa-tag:before, .gforms_help .fa-tag:before, .gform_wrapper .fa-tag:before, .gf_entry_wrap .fa-tag:before {
-    content: "\f02b";
-  }
-.gforms_edit_form .fa-tags:before, .gforms_form_settings_wrap .fa-tags:before, .gform-settings__wrapper .fa-tags:before, .gforms_help .fa-tags:before, .gform_wrapper .fa-tags:before, .gf_entry_wrap .fa-tags:before {
-    content: "\f02c";
-  }
-.gforms_edit_form .fa-book:before, .gforms_form_settings_wrap .fa-book:before, .gform-settings__wrapper .fa-book:before, .gforms_help .fa-book:before, .gform_wrapper .fa-book:before, .gf_entry_wrap .fa-book:before {
-    content: "\f02d";
-  }
-.gforms_edit_form .fa-bookmark:before, .gforms_form_settings_wrap .fa-bookmark:before, .gform-settings__wrapper .fa-bookmark:before, .gforms_help .fa-bookmark:before, .gform_wrapper .fa-bookmark:before, .gf_entry_wrap .fa-bookmark:before {
-    content: "\f02e";
-  }
-.gforms_edit_form .fa-print:before, .gforms_form_settings_wrap .fa-print:before, .gform-settings__wrapper .fa-print:before, .gforms_help .fa-print:before, .gform_wrapper .fa-print:before, .gf_entry_wrap .fa-print:before {
-    content: "\f02f";
-  }
-.gforms_edit_form .fa-camera:before, .gforms_form_settings_wrap .fa-camera:before, .gform-settings__wrapper .fa-camera:before, .gforms_help .fa-camera:before, .gform_wrapper .fa-camera:before, .gf_entry_wrap .fa-camera:before {
-    content: "\f030";
-  }
-.gforms_edit_form .fa-font:before, .gforms_form_settings_wrap .fa-font:before, .gform-settings__wrapper .fa-font:before, .gforms_help .fa-font:before, .gform_wrapper .fa-font:before, .gf_entry_wrap .fa-font:before {
-    content: "\f031";
-  }
-.gforms_edit_form .fa-bold:before, .gforms_form_settings_wrap .fa-bold:before, .gform-settings__wrapper .fa-bold:before, .gforms_help .fa-bold:before, .gform_wrapper .fa-bold:before, .gf_entry_wrap .fa-bold:before {
-    content: "\f032";
-  }
-.gforms_edit_form .fa-italic:before, .gforms_form_settings_wrap .fa-italic:before, .gform-settings__wrapper .fa-italic:before, .gforms_help .fa-italic:before, .gform_wrapper .fa-italic:before, .gf_entry_wrap .fa-italic:before {
-    content: "\f033";
-  }
-.gforms_edit_form .fa-text-height:before, .gforms_form_settings_wrap .fa-text-height:before, .gform-settings__wrapper .fa-text-height:before, .gforms_help .fa-text-height:before, .gform_wrapper .fa-text-height:before, .gf_entry_wrap .fa-text-height:before {
-    content: "\f034";
-  }
-.gforms_edit_form .fa-text-width:before, .gforms_form_settings_wrap .fa-text-width:before, .gform-settings__wrapper .fa-text-width:before, .gforms_help .fa-text-width:before, .gform_wrapper .fa-text-width:before, .gf_entry_wrap .fa-text-width:before {
+# Advanced Custom Fields Translations are a combination of translate.wordpress.org contributions,
+# combined with user contributed strings for the PRO version.
+# Translations from translate.wordpress.org take priority over translations in this file.
+# translate.wordpress.org contributions are synced at the time of each release.
+#
+# If you would like to contribute translations, please visit
+# https://translate.wordpress.org/projects/wp-plugins/advanced-custom-fields/stable/
+#
+# For additional ACF PRO strings, please submit a pull request over on the ACF GitHub repo at
+# http://github.com/advancedcustomfields/acf using the .pot (and any existing .po) files in /lang/pro/
+#
+# This file is distributed under the same license as Advanced Custom Fields.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2023-11-14T11:51:05+00:00\n"
+"Report-Msgid-Bugs-To: http://support.advancedcustomfields.com\n"
+"Language: gu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: gettext\n"
+"Project-Id-Version: Advanced Custom Fields\n"
+
+#: includes/admin/views/options-page-preview.php:30
+msgid "Upgrade to ACF PRO"
+msgstr ""
+
+#. translators: %s URL to ACF options pages documentation
+#: includes/admin/views/options-page-preview.php:7
+msgid ""
+"ACF <a href=\"%s\" target=\"_blank\">options pages</a> are custom admin "
+"pages for managing global settings via fields. You can create multiple pages "
+"and sub-pages."
+msgstr ""
+
+#: includes/admin/views/global/header.php:35
+msgid "Add Options Page"
+msgstr ""
+
+#: includes/admin/views/acf-post-type/advanced-settings.php:703
+msgid "In the editor used as the placeholder of the title."
+msgstr "શીર્ષકના પ્લેસહોલ્ડર તરીકે ઉપયોગમાં લેવાતા એડિટરમાં."
+
+#: includes/admin/views/acf-post-type/advanced-settings.php:702
+msgid "Title Placeholder"
+msgstr "શીર્ષક પ્લેસહોલ્ડર"
+
+#: includes/admin/views/global/navigation.php:97
+msgid "4 Months Free"
+msgstr "4 મહિના મફત"
+
+#. translators: %s - A singular label for a post type or taxonomy.
+#: includes/admin/views/global/form-top.php:56
+msgid " (Duplicated from %s)"
+msgstr " (%s માંથી ડુપ્લિકેટ)"
+
+#: includes/admin/tools/class-acf-admin-tool-export.php:298
+msgid "Select Options Pages"
+msgstr "વિકલ્પો પૃષ્ઠો પસંદ કરો"
+
+#: includes/admin/post-types/admin-taxonomy.php:107
+msgid "Duplicate taxonomy"
+msgstr "ડુપ્લિકેટ વર્ગીકરણ"
+
+#: includes/admin/post-types/admin-post-type.php:106
+#: includes/admin/post-types/admin-taxonomy.php:106
+msgid "Create taxonomy"
+msgstr "વર્ગીકરણ બનાવો"
+
+#: includes/admin/post-types/admin-post-type.php:105
+msgid "Duplicate post type"
+msgstr "ડુપ્લિકેટ પોસ્ટ પ્રકાર"
+
+#: includes/admin/post-types/admin-post-type.php:104
+#: includes/admin/post-types/admin-taxonomy.php:108
+msgid "Create post type"
+msgstr "પોસ્ટ પ્રકાર બનાવો"
+
+#: includes/admin/post-types/admin-post-type.php:103
+#: includes/admin/post-types/admin-taxonomy.php:105
+msgid "Link field groups"
+msgstr "ફીલ્ડ જૂથોને લિંક કરો"
+
+#: includes/admin/post-types/admin-post-type.php:102
+#: includes/admin/post-types/admin-taxonomy.php:104
+msgid "Add fields"
+msgstr "ક્ષેત્રો ઉમેરો"
+
+#: includes/admin/post-types/admin-field-group.php:121
+#: assets/build/js/acf-field-group.js:2745
+#: assets/build/js/acf-field-group.js:3220
+msgid "This Field"
+msgstr "આ ક્ષેત્ર"
+
+#: includes/admin/admin.php:267
+msgid "ACF PRO"
+msgstr "એસીએફ પ્રો"
+
+#: includes/admin/admin.php:265
+msgid "Feedback"
+msgstr "પ્રતિસાદ"
+
+#: includes/admin/admin.php:263
+msgid "Support"
+msgstr "સપોર્ટ"
+
+#. translators: This text is prepended by a link to ACF's website, and appended
+#. by a link to WP Engine's website.
+#: includes/admin/admin.php:238
+msgid "is developed and maintained by"
+msgstr "દ્વારા વિકસિત અને જાળવણી કરવામાં આવે છે"
+
+#. translators: %s - either "post type" or "taxonomy"
+#: includes/admin/admin-internal-post-type.php:321
+msgid "Add this %s to the location rules of the selected field groups."
+msgstr "પસંદ કરેલ ક્ષેત્ર જૂથોના સ્થાન નિયમોમાં આ %s ઉમેરો."
+
+#. translators: %s the URL to ACF's bidirectional relationship documentation
+#: includes/acf-bidirectional-functions.php:271
+msgid ""
+"Enabling the bidirectional setting allows you to update a value in the "
+"target fields for each value selected for this field, adding or removing the "
+"Post ID, Taxonomy ID or User ID of the item being updated. For more "
+"information, please read the <a href=\"%s\" target=\"_blank\">documentation</"
+"a>."
+msgstr ""
+"દ્વિપક્ષીય સેટિંગને સક્ષમ કરવાથી તમે આ ફીલ્ડ માટે પસંદ કરેલ દરેક મૂલ્ય માટે લક્ષ્ય ફીલ્ડમાં મૂલ્ય "
+"અપડેટ કરી શકો છો, પોસ્ટ ID, વર્ગીકરણ ID અથવા અપડેટ કરવામાં આવી રહેલી આઇટમના "
+"વપરાશકર્તા ID ને ઉમેરીને અથવા દૂર કરી શકો છો. વધુ માહિતી માટે, કૃપા કરીને <a href=\"%s"
+"\" target=\"_blank\">દસ્તાવેજીકરણ</a> વાંચો."
+
+#: includes/acf-bidirectional-functions.php:247
+msgid ""
+"Select field(s) to store the reference back to the item being updated. You "
+"may select this field. Target fields must be compatible with where this "
+"field is being displayed. For example, if this field is displayed on a "
+"Taxonomy, your target field should be of type Taxonomy"
+msgstr ""
+"અપડેટ કરવામાં આવી રહેલી આઇટમનો સંદર્ભ પાછો સંગ્રહિત કરવા માટે ક્ષેત્ર(ઓ) પસંદ કરો. તમે આ "
+"ક્ષેત્ર પસંદ કરી શકો છો. જ્યાં આ ક્ષેત્ર પ્રદર્શિત થઈ રહ્યું છે તેની સાથે લક્ષ્ય ક્ષેત્રો સુસંગત "
+"હોવા જોઈએ. ઉદાહરણ તરીકે, જો આ ક્ષેત્ર વર્ગીકરણ પર પ્રદર્શિત થાય છે, તો તમારું લક્ષ્ય "
+"ક્ષેત્ર વર્ગીકરણ પ્રકારનું હોવું જોઈએ"
+
+#: includes/acf-bidirectional-functions.php:246
+msgid "Target Field"
+msgstr "લક્ષ્ય ક્ષેત્ર"
+
+#: includes/acf-bidirectional-functions.php:220
+msgid "Update a field on the selected values, referencing back to this ID"
+msgstr "આ ID નો સંદર્ભ આપીને પસંદ કરેલ મૂલ્યો પર ફીલ્ડ અપડેટ કરો"
+
+#: includes/acf-bidirectional-functions.php:219
+msgid "Bidirectional"
+msgstr "દ્વિપક્ષીય"
+
+#. translators: %s A field type name, such as "Relationship"
+#: includes/acf-bidirectional-functions.php:192
+msgid "%s Field"
+msgstr "%s ફીલ્ડ"
+
+#: includes/fields/class-acf-field-page_link.php:517
+#: includes/fields/class-acf-field-post_object.php:426
+#: includes/fields/class-acf-field-select.php:407
+#: includes/fields/class-acf-field-user.php:82
+msgid "Select Multiple"
+msgstr "બહુવિધ પસંદ કરો"
+
+#: includes/admin/views/global/navigation.php:215
+msgid "WP Engine logo"
+msgstr "WP એન્જિન લોગો"
+
+#: includes/admin/views/acf-taxonomy/basic-settings.php:58
+msgid "Lower case letters, underscores and dashes only, Max 32 characters."
+msgstr "લોઅર કેસ અક્ષરો, માત્ર અન્ડરસ્કોર અને ડૅશ, મહત્તમ 32 અક્ષરો."
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:1136
+msgid "The capability name for assigning terms of this taxonomy."
+msgstr "આ વર્ગીકરણની શરતો સોંપવા માટેની ક્ષમતાનું નામ."
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:1135
+msgid "Assign Terms Capability"
+msgstr "ટર્મ ક્ષમતા સોંપો"
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:1119
+msgid "The capability name for deleting terms of this taxonomy."
+msgstr "આ વર્ગીકરણની શરતોને કાઢી નાખવા માટેની ક્ષમતાનું નામ."
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:1118
+msgid "Delete Terms Capability"
+msgstr "ટર્મ ક્ષમતા કાઢી નાખો"
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:1102
+msgid "The capability name for editing terms of this taxonomy."
+msgstr "આ વર્ગીકરણની શરતોને સંપાદિત કરવા માટેની ક્ષમતાનું નામ."
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:1101
+msgid "Edit Terms Capability"
+msgstr "શરતો ક્ષમતા સંપાદિત કરો"
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:1085
+msgid "The capability name for managing terms of this taxonomy."
+msgstr "આ વર્ગીકરણની શરતોનું સંચાલન કરવા માટેની ક્ષમતાનું નામ."
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:1084
+msgid "Manage Terms Capability"
+msgstr "શરતોની ક્ષમતા મેનેજ કરો"
+
+#: includes/admin/views/acf-post-type/advanced-settings.php:886
+msgid ""
+"Sets whether posts should be excluded from search results and taxonomy "
+"archive pages."
+msgstr ""
+"શોધ પરિણામો અને વર્ગીકરણ આર્કાઇવ પૃષ્ઠોમાંથી પોસ્ટ્સને બાકાત રાખવા જોઈએ કે કેમ તે સેટ કરે "
+"છે."
+
+#: includes/admin/views/acf-field-group/pro-features.php:59
+msgid "More Tools from WP Engine"
+msgstr "WP એન્જિનના વધુ સાધનો"
+
+#. translators: %s - WP Engine logo
+#: includes/admin/views/acf-field-group/pro-features.php:54
+msgid "Built for those that build with WordPress, by the team at %s"
+msgstr "%s પરની ટીમ દ્વારા વર્ડપ્રેસ સાથે બિલ્ડ કરનારાઓ માટે બનાવેલ છે"
+
+#: includes/admin/views/acf-field-group/pro-features.php:16
+msgid "View Pricing & Upgrade"
+msgstr "કિંમત અને અપગ્રેડ જુઓ"
+
+#: includes/admin/views/acf-field-group/pro-features.php:15
+#: includes/admin/views/options-page-preview.php:29
+msgid "Learn More"
+msgstr "વધુ શીખો"
+
+#: includes/admin/views/acf-field-group/pro-features.php:13
+msgid ""
+"Speed up your workflow and develop better websites with features like ACF "
+"Blocks and Options Pages, and sophisticated field types like Repeater, "
+"Flexible Content, Clone, and Gallery."
+msgstr ""
+"તમારા વર્કફ્લોને ઝડપી બનાવો અને ACF બ્લોક્સ અને ઓપ્શન્સ પેજીસ જેવી સુવિધાઓ અને રિપીટર, "
+"ફ્લેક્સિબલ કન્ટેન્ટ, ક્લોન અને ગેલેરી જેવા અત્યાધુનિક ફીલ્ડ પ્રકારો સાથે વધુ સારી વેબસાઇટ્સ "
+"વિકસાવો."
+
+#: includes/admin/views/acf-field-group/pro-features.php:2
+msgid "Unlock Advanced Features and Build Even More with ACF PRO"
+msgstr "ACF PRO સાથે અદ્યતન સુવિધાઓને અનલૉક કરો અને હજી વધુ બનાવો"
+
+#. translators: %s - singular label of post type/taxonomy, i.e. "Movie"/"Genre"
+#: includes/admin/views/global/form-top.php:19
+msgid "%s fields"
+msgstr "%s ફીલ્ડ"
+
+#: includes/admin/post-types/admin-taxonomies.php:293
+msgid "No terms"
+msgstr "કોઈ શરતો નથી"
+
+#: includes/admin/post-types/admin-taxonomies.php:266
+msgid "No post types"
+msgstr "કોઈ પોસ્ટ પ્રકાર નથી"
+
+#: includes/admin/post-types/admin-post-types.php:289
+msgid "No posts"
+msgstr "કોઈ પોસ્ટ નથી"
+
+#: includes/admin/post-types/admin-post-types.php:263
+msgid "No taxonomies"
+msgstr "કોઈ વર્ગીકરણ નથી"
+
+#: includes/admin/post-types/admin-post-types.php:208
+#: includes/admin/post-types/admin-taxonomies.php:208
+msgid "No field groups"
+msgstr "કોઈ ક્ષેત્ર જૂથો નથી"
+
+#: includes/admin/post-types/admin-field-groups.php:281
+msgid "No fields"
+msgstr "કોઈ ફીલ્ડ નથી"
+
+#: includes/admin/post-types/admin-field-groups.php:154
+#: includes/admin/post-types/admin-post-types.php:172
+#: includes/admin/post-types/admin-taxonomies.php:172
+msgid "No description"
+msgstr "કોઈ વર્ણન નથી"
+
+#: includes/fields/class-acf-field-page_link.php:484
+#: includes/fields/class-acf-field-post_object.php:389
+#: includes/fields/class-acf-field-relationship.php:601
+msgid "Any post status"
+msgstr "કોઈપણ પોસ્ટ સ્થિતિ"
+
+#: includes/post-types/class-acf-taxonomy.php:284
+msgid ""
+"This taxonomy key is already in use by another taxonomy registered outside "
+"of ACF and cannot be used."
+msgstr ""
+"આ વર્ગીકરણ કી પહેલેથી જ ACF ની બહાર નોંધાયેલ અન્ય વર્ગીકરણ દ્વારા ઉપયોગમાં લેવાય છે અને "
+"તેનો ઉપયોગ કરી શકાતો નથી."
+
+#: includes/post-types/class-acf-taxonomy.php:279
+msgid ""
+"This taxonomy key is already in use by another taxonomy in ACF and cannot be "
+"used."
+msgstr ""
+"આ વર્ગીકરણ કી પહેલેથી જ ACF માં અન્ય વર્ગીકરણ દ્વારા ઉપયોગમાં લેવાય છે અને તેનો ઉપયોગ "
+"કરી શકાતો નથી."
+
+#: includes/post-types/class-acf-taxonomy.php:252
+msgid ""
+"The taxonomy key must only contain lower case alphanumeric characters, "
+"underscores or dashes."
+msgstr ""
+"વર્ગીકરણ કી માં માત્ર લોઅર કેસ આલ્ફાન્યૂમેરિક અક્ષરો, અન્ડરસ્કોર અથવા ડેશ હોવા જોઈએ."
+
+#: includes/post-types/class-acf-taxonomy.php:247
+msgid "The taxonomy key must be under 32 characters."
+msgstr "વર્ગીકરણ કી 32 અક્ષરોથી ઓછી હોવી જોઈએ."
+
+#: includes/post-types/class-acf-taxonomy.php:99
+msgid "No Taxonomies found in Trash"
+msgstr "ટ્રેશમાં કોઈ વર્ગીકરણ મળ્યું નથી"
+
+#: includes/post-types/class-acf-taxonomy.php:98
+msgid "No Taxonomies found"
+msgstr "કોઈ વર્ગીકરણ મળ્યું નથી"
+
+#: includes/post-types/class-acf-taxonomy.php:97
+msgid "Search Taxonomies"
+msgstr "વર્ગીકરણ શોધો"
+
+#: includes/post-types/class-acf-taxonomy.php:96
+msgid "View Taxonomy"
+msgstr "વર્ગીકરણ જુઓ"
+
+#: includes/post-types/class-acf-taxonomy.php:95
+msgid "New Taxonomy"
+msgstr "નવુ વર્ગીકરણ"
+
+#: includes/post-types/class-acf-taxonomy.php:94
+msgid "Edit Taxonomy"
+msgstr "વર્ગીકરણ સંપાદિત કરો"
+
+#: includes/post-types/class-acf-taxonomy.php:93
+msgid "Add New Taxonomy"
+msgstr "નવુ વર્ગીકરણ ઉમેરો"
+
+#: includes/post-types/class-acf-post-type.php:100
+msgid "No Post Types found in Trash"
+msgstr "ટ્રેશમાં કોઈ પોસ્ટ પ્રકારો મળ્યા નથી"
+
+#: includes/post-types/class-acf-post-type.php:99
+msgid "No Post Types found"
+msgstr "કોઈ પોસ્ટ પ્રકારો મળ્યા નથી"
+
+#: includes/post-types/class-acf-post-type.php:98
+msgid "Search Post Types"
+msgstr "પોસ્ટ પ્રકારો શોધો"
+
+#: includes/post-types/class-acf-post-type.php:97
+msgid "View Post Type"
+msgstr "પોસ્ટનો પ્રકાર જુઓ"
+
+#: includes/post-types/class-acf-post-type.php:96
+msgid "New Post Type"
+msgstr "નવો પોસ્ટ પ્રકાર"
+
+#: includes/post-types/class-acf-post-type.php:95
+msgid "Edit Post Type"
+msgstr "પોસ્ટ પ્રકાર સંપાદિત કરો"
+
+#: includes/post-types/class-acf-post-type.php:94
+msgid "Add New Post Type"
+msgstr "નવો પોસ્ટ પ્રકાર ઉમેરો"
+
+#: includes/post-types/class-acf-post-type.php:361
+msgid ""
+"This post type key is already in use by another post type registered outside "
+"of ACF and cannot be used."
+msgstr ""
+"આ પોસ્ટ ટાઇપ કી પહેલેથી જ ACF ની બહાર નોંધાયેલ અન્ય પોસ્ટ પ્રકાર દ્વારા ઉપયોગમાં લેવાય "
+"છે અને તેનો ઉપયોગ કરી શકાતો નથી."
+
+#: includes/post-types/class-acf-post-type.php:356
+msgid ""
+"This post type key is already in use by another post type in ACF and cannot "
+"be used."
+msgstr ""
+"આ પોસ્ટ ટાઇપ કી પહેલેથી જ ACF માં અન્ય પોસ્ટ પ્રકાર દ્વારા ઉપયોગમાં છે અને તેનો ઉપયોગ "
+"કરી શકાતો નથી."
+
+#. translators: %s a link to WordPress.org's Reserved Terms page
+#: includes/post-types/class-acf-post-type.php:335
+#: includes/post-types/class-acf-taxonomy.php:258
+msgid ""
+"This field must not be a WordPress <a href=\"%s\" target=\"_blank\">reserved "
+"term</a>."
+msgstr ""
+"આ ફીલ્ડ વર્ડપ્રેસનો <a href=\"%s\" target=\"_blank\">આરક્ષિત શબ્દ</a> ન હોવો જોઈએ."
+
+#: includes/post-types/class-acf-post-type.php:329
+msgid ""
+"The post type key must only contain lower case alphanumeric characters, "
+"underscores or dashes."
+msgstr ""
+"પોસ્ટ ટાઈપ કીમાં માત્ર લોઅર કેસ આલ્ફાન્યૂમેરિક અક્ષરો, અન્ડરસ્કોર અથવા ડેશ હોવા જોઈએ."
+
+#: includes/post-types/class-acf-post-type.php:324
+msgid "The post type key must be under 20 characters."
+msgstr "પોસ્ટ પ્રકાર કી 20 અક્ષરોથી ઓછી હોવી જોઈએ."
+
+#: includes/fields/class-acf-field-wysiwyg.php:27
+msgid "We do not recommend using this field in ACF Blocks."
+msgstr "અમે ACF બ્લોક્સમાં આ ક્ષેત્રનો ઉપયોગ કરવાની ભલામણ કરતા નથી."
+
+#: includes/fields/class-acf-field-wysiwyg.php:27
+msgid ""
+"Displays the WordPress WYSIWYG editor as seen in Posts and Pages allowing "
+"for a rich text-editing experience that also allows for multimedia content."
+msgstr ""
+"વર્ડપ્રેસ WYSIWYG એડિટર પ્રદર્શિત કરે છે જે પોસ્ટ્સ અને પૃષ્ઠો જોવા મળે છે જે સમૃદ્ધ ટેક્સ્ટ-"
+"એડિટિંગ અનુભવ માટે પરવાનગી આપે છે જે મલ્ટીમીડિયા સામગ્રી માટે પણ પરવાનગી આપે છે."
+
+#: includes/fields/class-acf-field-wysiwyg.php:25
+msgid "WYSIWYG Editor"
+msgstr "WYSIWYG સંપાદક"
+
+#: includes/fields/class-acf-field-user.php:17
+msgid ""
+"Allows the selection of one or more users which can be used to create "
+"relationships between data objects."
+msgstr ""
+"એક અથવા વધુ વપરાશકર્તાઓની પસંદગીની મંજૂરી આપે છે જેનો ઉપયોગ ડેટા ઑબ્જેક્ટ્સ વચ્ચે સંબંધ "
+"બનાવવા માટે થઈ શકે છે."
+
+#: includes/fields/class-acf-field-url.php:26
+msgid "A text input specifically designed for storing web addresses."
+msgstr "ખાસ કરીને વેબ એડ્રેસ સ્ટોર કરવા માટે રચાયેલ ટેક્સ્ટ ઇનપુટ."
+
+#: includes/fields/class-acf-field-url.php:25
+msgid "URL"
+msgstr "URL"
+
+#: includes/fields/class-acf-field-true_false.php:27
+msgid ""
+"A toggle that allows you to pick a value of 1 or 0 (on or off, true or "
+"false, etc). Can be presented as a stylized switch or checkbox."
+msgstr ""
+"એક ટૉગલ જે તમને 1 અથવા 0 (ચાલુ અથવા બંધ, સાચું કે ખોટું, વગેરે) નું મૂલ્ય પસંદ કરવાની મંજૂરી "
+"આપે છે. સ્ટાઇલાઇઝ્ડ સ્વીચ અથવા ચેકબોક્સ તરીકે રજૂ કરી શકાય છે."
+
+#: includes/fields/class-acf-field-time_picker.php:27
+msgid ""
+"An interactive UI for picking a time. The time format can be customized "
+"using the field settings."
+msgstr ""
+"સમય પસંદ કરવા માટે એક ઇન્ટરેક્ટિવ UI. ક્ષેત્ર સેટિંગ્સ ઉપયોગ કરીને સમય ફોર્મેટ કસ્ટમાઇઝ કરી "
+"શકાય છે."
+
+#: includes/fields/class-acf-field-textarea.php:26
+msgid "A basic textarea input for storing paragraphs of text."
+msgstr "ટેક્સ્ટના ફકરાને સ્ટોર કરવા માટે મૂળભૂત ટેક્સ્ટેરિયા ઇનપુટ."
+
+#: includes/fields/class-acf-field-text.php:26
+msgid "A basic text input, useful for storing single string values."
+msgstr "મૂળભૂત મૂળ લખાણ ઇનપુટ, એક તાર મૂલ્યો સંગ્રહ કરવા માટે ઉપયોગી."
+
+#: includes/fields/class-acf-field-taxonomy.php:22
+msgid ""
+"Allows the selection of one or more taxonomy terms based on the criteria and "
+"options specified in the fields settings."
+msgstr ""
+"ફીલ્ડ સેટિંગ્સમાં ઉલ્લેખિત માપદંડ અને વિકલ્પોના આધારે એક અથવા વધુ વર્ગીકરણ શરતોની પસંદગીની "
+"મંજૂરી આપે છે."
+
+#: includes/fields/class-acf-field-tab.php:28
+msgid ""
+"Allows you to group fields into tabbed sections in the edit screen. Useful "
+"for keeping fields organized and structured."
+msgstr ""
+"તમને સંપાદન સ્ક્રીનમાં ટેબ કરેલ વિભાગોમાં ક્ષેત્રોને જૂથબદ્ધ કરવાની મંજૂરી આપે છે. ક્ષેત્રોને "
+"વ્યવસ્થિત અને સંરચિત રાખવા માટે ઉપયોગી."
+
+#: includes/fields/class-acf-field-select.php:27
+msgid "A dropdown list with a selection of choices that you specify."
+msgstr "તમે ઉલ્લેખિત કરો છો તે પસંદગીઓની પસંદગી સાથે ડ્રોપડાઉન સૂચિ."
+
+#: includes/fields/class-acf-field-relationship.php:19
+msgid ""
+"A dual-column interface to select one or more posts, pages, or custom post "
+"type items to create a relationship with the item that you're currently "
+"editing. Includes options to search and filter."
+msgstr ""
+"તમે હાલમાં સંપાદિત કરી રહ્યાં છો તે આઇટમ સાથે સં-text-width:before, .gforms_form_settings_wrap .fa-text-width:before, .gform-settings__wrapper .fa-text-width:before, .gforms_help .fa-text-width:before, .gform_wrapper .fa-text-width:before, .gf_entry_wrap .fa-text-width:before {
     content: "\f035";
   }
 .gforms_edit_form .fa-align-left:before, .gforms_form_settings_wrap .fa-align-left:before, .gform-settings__wrapper .fa-align-left:before, .gforms_help .fa-align-left:before, .gform_wrapper .fa-align-left:before, .gf_entry_wrap .fa-align-left:before {

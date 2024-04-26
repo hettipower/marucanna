@@ -23,3 +23,13 @@ function menu_dropdown() {
 
     });
 }
+
+function mobile_menu(){
+
+    jQuery('header .navbar .container-fluid .navbar-toggler').on('click' , function(){
+
+        jQuery('html').toggleClass('menu-open');
+
+    });
+
+}

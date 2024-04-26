@@ -103,3 +103,13 @@
 		line-height: 1.1;
 	} 
 }
+
+html {
+    &.menu-open {
+        overflow: hidden !important;
+
+        body {
+            overflow: hidden !important;
+        }
+    }
+}

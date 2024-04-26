@@ -7,6 +7,7 @@ jQuery(document).ready(function ($) {
   sticky_header();
   menu_dropdown();
 	patients_datatable();
+  mobile_menu();
 });
 
 function patients_datatable() {

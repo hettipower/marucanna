@@ -1,71 +1,39 @@
-<?php
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-commit".
 
-namespace Yoast\WP\SEO\Promotions\Domain;
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+	against=HEAD
+else
+	# Initial commit: diff against an empty tree object
+	against=$(git hash-object -t tree /dev/null)
+fi
 
-/**
- * Class Time_Interval
- *
- * Value object for a time interval.
- */
-class Time_Interval {
+# If you want to allow non-ASCII filenames set this variable to true.
+allownonascii=$(git config --type=bool hooks.allownonascii)
 
-	/**
-	 * The starting time of the interval as a Unix timestamp.
-	 *
-	 * @var int
-	 */
-	public $time_start;
+# Redirect output to stderr.
+exec 1>&2
 
-	/**
-	 * The ending time of the interval as a Unix timestamp.
-	 *
-	 * @var int
-	 */
-	public $time_end;
+# Cross platform projects tend to avoid non-ASCII filenames; prevent
+# them from being added to the repository. We exploit the fact that the
+# printable range starts at the space character and ends with tilde.
+if [ "$allownonascii" != "true" ] &&
+	# Note that the use of brackets around a tr range is ok here, (it's
+	# even required, for portability to Solaris 10's /usr/bin/tr), since
+	# the square bracket bytes happen to fall in the designated range.
+	test $(git diff-index --cached --name-only --diff-filter=A -z $against |
+	  LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
+then
+	cat <<\EOF
+Error: Attempt to add a non-ASCII file name.
 
-	/**
-	 * Time_Interval constructor.
-	 *
-	 * @codeCoverageIgnore
-	 *
-	 * @param int $time_start Interval start time.
-	 * @param int $time_end   Interval end time.
-	 */
-	public function __construct( int $time_start, int $time_end ) {
-		$this->time_start = $time_start;
-		$this->time_end   = $time_end;
-	}
+This can cause problems if you want to work with people on other platforms.
 
-	/**
-	 * Checks if the given time is within the interval.
-	 *
-	 * @param int $time The time to check.
-	 *
-	 * @return bool Whether the given time is within the interval.
-	 */
-	public function contains( int $time ): bool {
-		return ( ( $time > $this->time_start ) && ( $time < $this->time_end ) );
-	}
-
-	/**
-	 * Sets the interval astarting date.
-	 *
-	 * @param int $time_start The interval start time.
-	 *
-	 * @return void
-	 */
-	public function set_start_date( int $time_start ) {
-		$this->time_start = $time_start;
-	}
-
-	/**
-	 * Sets the interval ending date.
-	 *
-	 * @param int $time_end The interval end time.
-	 *
-	 * @return void
-	 */
-	public function set_end_date( int $time_end ) {
-		$this->time_end = $time_end;
-	}
-}
+To be portable it is advisab
