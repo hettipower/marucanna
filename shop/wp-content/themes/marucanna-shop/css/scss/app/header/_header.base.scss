@@ -32,6 +32,10 @@
         }
 
         .content_wrap {
+            max-width: 100%;
+            width: 50%;
+            display: flex;
+            align-items: center;
 
             @include media-breakpoint-down(md) {
                 width: 100%;
@@ -269,7 +273,6 @@
     .logo_wrap {
         .container {
             position: relative;
-            max-width: 1260px;
         }
 
         .navbar-brand{
@@ -334,7 +337,7 @@
 }
 
 body {
-    padding-top: 116px;
+    padding-top: 170px;
     transition: 0.5s all ease;
     -webkit-transition: 0.5s all ease;
     -moz-transition: 0.5s all ease;

@@ -5,9 +5,9 @@
             <span>Account</span>
         </a>
     </li>
-    <li class="nav-item">
-        <?php echo do_shortcode('[yith_wcwl_items_count]'); ?>
-    </li>
+    <!-- <li class="nav-item">
+        <?php //echo do_shortcode('[yith_wcwl_items_count]'); ?>
+    </li> -->
     <li class="nav-item">
         <a class="nav-link" id="sliding_cart" href="#">
             <i class="fas fa-shopping-cart"></i>

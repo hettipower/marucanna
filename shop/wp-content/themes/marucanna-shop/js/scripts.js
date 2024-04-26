@@ -1,10 +1,11 @@
-/*! css 1.0.0 filename.js 2024-04-20 7:35:24 PM */
+/*! css 1.0.0 filename.js 2024-04-25 11:50:17 PM */
 
 jQuery(document).ready(function($) {
     toggle_mini_cart();
     menu_dropdown();
     mp_ajax_add_to_cart_single();
     sticky_header();
+    header_ticker();
     jQuery(document.body).on("click", ".mini_cart_item .quantity .plus", function() {
         var productKey = jQuery(this).data("product-key");
         var quantityInput = jQuery(this).closest(".mini_cart_item").find(".quantity input.qty");
@@ -208,5 +209,19 @@ function mp_ajax_add_to_cart_single() {
             }
         });
         return false;
+    });
+}
+
+function header_ticker() {
+    jQuery("#main_header .top_navbar .content_wrap").slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 0,
+        speed: 5e3,
+        cssEase: "linear",
+        arrows: false,
+        dots: false,
+        infinite: true
     });
 }

@@ -3,6 +3,7 @@ jQuery(document).ready(function ($) {
   menu_dropdown();
   mp_ajax_add_to_cart_single();
   sticky_header();
+  header_ticker();
 
   // Increment quantity
   jQuery(document.body).on('click', '.mini_cart_item .quantity .plus', function () {

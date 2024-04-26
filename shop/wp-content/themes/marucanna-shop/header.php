@@ -56,7 +56,16 @@
 	<div class="top_navbar">
 		<div class="container">
 			<div class="logo_shadow"></div>
-			<div class="content_wrap"><?php the_field( 'top_bar_content', 'option' ); ?></div>
+			<?php
+				$top_bar_content_global = get_field( 'top_bar_content', 'option' );
+				$top_bar_content = get_field( 'top_bar_content' );
+				
+				$ticker = ($top_bar_content) ? $top_bar_content : $top_bar_content_global ;
+			?>
+			<div class="content_wrap">
+				<div class="item"><?php echo $ticker; ?></div>
+				<div class="item"><?php echo $ticker; ?></div>
+			</div>
 			<div class="right_nav">
 				<?php get_template_part( 'template-part/secondary', 'menu' ); ?>
 			</div>

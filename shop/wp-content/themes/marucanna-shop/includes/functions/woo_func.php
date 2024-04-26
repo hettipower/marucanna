@@ -148,10 +148,21 @@ function mp_form_validation_script() {
 //Customize My Account nav items
 add_filter( 'woocommerce_account_menu_items', 'mp_customize_my_account_nav', 99, 1 );
 function mp_customize_my_account_nav( $items ) {
+
+    $wishlist = array( 'wishlist' => __( 'Wishlist', 'woocommerce' ) );
+    $items = array_merge( array_slice( $items, 0, 2 ), $wishlist, array_slice( $items, 2 ) ); 
     
     unset($items['downloads']);
 
     return $items;
+}
+add_filter( 'woocommerce_get_endpoint_url', 'mp_customize_my_account_endpoint'  , 10, 4  );
+function mp_customize_my_account_endpoint( $url, $endpoint, $value, $permalink ) {
+    if ( $endpoint === 'wishlist' ) {
+        $url = home_url( 'wishlist' );
+    }
+    
+    return $url;
 }
 
 add_action('woocommerce_archive_description', 'custom_category_archive_description', 10);

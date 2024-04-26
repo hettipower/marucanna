@@ -36978,6 +36978,14 @@ img {
     display: none;
   }
 }
+#main_header .top_navbar .content_wrap {
+  max-width: 100%;
+  width: 50%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
 @media (max-width: 767.98px) {
   #main_header .top_navbar .content_wrap {
     width: 100%;
@@ -37191,7 +37199,6 @@ img {
 }
 #main_header .logo_wrap .container {
   position: relative;
-  max-width: 1260px;
 }
 #main_header .logo_wrap .navbar-brand {
   margin: 0;
@@ -37252,7 +37259,7 @@ img {
 }
 
 body {
-  padding-top: 116px;
+  padding-top: 170px;
   transition: 0.5s all ease;
   -webkit-transition: 0.5s all ease;
   -moz-transition: 0.5s all ease;
