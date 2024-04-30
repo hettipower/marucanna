@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-04-27 2:08:37 AM */
+/*! css 1.0.0 filename.js 2024-04-30 10:44:58 PM */
 
 jQuery(document).ready(function($) {
     toggle_mini_cart();
@@ -213,16 +213,8 @@ function mp_ajax_add_to_cart_single() {
 }
 
 function header_ticker() {
-    jQuery("#main_header .top_navbar .content_wrap").slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 0,
-        speed: 8e3,
-        cssEase: "linear",
-        arrows: false,
-        dots: false,
-        infinite: true
+    startTicker("ticker-box", {
+        speed: 7
     });
 }
 

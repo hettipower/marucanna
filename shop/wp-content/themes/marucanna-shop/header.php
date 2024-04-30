@@ -63,8 +63,12 @@
 				$ticker = ($top_bar_content) ? $top_bar_content : $top_bar_content_global ;
 			?>
 			<div class="content_wrap">
-				<div class="item"><?php echo $ticker; ?></div>
-				<div class="item"><?php echo $ticker; ?></div>
+				<div id="ticker-box">
+					<ul>
+						<li><?php echo $ticker; ?></li>
+						<li><?php echo $ticker; ?></li>
+					</ul>
+				</div>
 			</div>
 			<div class="right_nav">
 				<?php get_template_part( 'template-part/secondary', 'menu' ); ?>

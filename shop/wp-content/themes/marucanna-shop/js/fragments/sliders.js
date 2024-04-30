@@ -1,5 +1,6 @@
 function header_ticker() {
-    jQuery('#main_header .top_navbar .content_wrap').slick({
+    startTicker('ticker-box', {speed:7});
+    /* jQuery('#main_header .top_navbar .content_wrap').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
@@ -9,5 +10,5 @@ function header_ticker() {
         arrows: false,
         dots:false,
         infinite: true
-    });
+    }); */
 }

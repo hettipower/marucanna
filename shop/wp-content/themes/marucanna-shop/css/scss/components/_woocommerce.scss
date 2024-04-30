@@ -74,6 +74,14 @@
                 background-color: $theme_color;
                 color: #000;
             }
+
+            @include media-breakpoint-down(md) {
+                background-color: #e8551c;
+
+                &:hover {
+                    background-color: $button_color;
+                }
+            }
         }
 
         .added_to_cart {

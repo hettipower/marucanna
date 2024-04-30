@@ -45,6 +45,11 @@
                 width: 100%;
             }
 
+            #ticker-box {
+                width: 100%;
+                min-height: 26px !important;
+            }
+
             p {
                 margin: 0;
                 color: #fff;
@@ -53,6 +58,10 @@
                 @include media-breakpoint-down(md) {
                     font-size: 12px;
                 }
+            }
+
+            a {
+                color: $theme_color;
             }
         }
     }

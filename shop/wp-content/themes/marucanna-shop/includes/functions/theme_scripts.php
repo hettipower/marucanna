@@ -18,8 +18,8 @@ function html5blank_header_scripts()
     wp_register_script('slick', get_template_directory_uri() . '/vendor/slick/slick.min.js', array('jquery'), false, true); // Custom scripts
     wp_enqueue_script('slick');
 
-    /* wp_register_script('fancybox', get_template_directory_uri() . '/vendor/fancybox/fancybox.umd.js', array('jquery'), false, true);
-    wp_enqueue_script('fancybox'); */
+    wp_register_script('ticker', get_template_directory_uri() . '/vendor/ticker/news-ticker.js', array('jquery'), false, true);
+    wp_enqueue_script('ticker');
 
     if ( is_product() ) {
         if (class_exists('WooCommerce')) {
