@@ -4,7 +4,7 @@ function header_ticker() {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 0,
-        speed: 5000,
+        speed: 8000,
         cssEase:'linear',
         arrows: false,
         dots:false,

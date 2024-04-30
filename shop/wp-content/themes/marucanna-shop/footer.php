@@ -148,7 +148,101 @@
     </div>
 </div>
 
+<?php 
+$enable_popup = get_field( 'enable_popup', 'option' ); 
+$restricted_content = get_field( 'restricted_content', 'option' ); 
+$restricted_link = get_field( 'restricted_link', 'option' ); 
+?>
+<?php if( $enable_popup == 'restricted_popup' ): ?>
+    <div class="modal fade" id="restrictedPopup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="restrictedPopupLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="content"><?php echo $restricted_content; ?></div>
+                    <div class="btn_wrap">
+                        <a href="<?php echo $restricted_link['url']; ?>" target="<?php echo $restricted_link['target']; ?>" rel="noopener noreferrer" class="btn btn-no">No</a>
+                        <button type="button" class="btn btn-yes" data-bs-dismiss="modal">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if( $enable_popup == 'subscribe_popup' ): ?>
+    <div class="modal fade" id="subscribePopup" tabindex="-1" aria-labelledby="subscribePopupLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <?php echo do_shortcode('[gravityform id="2" title="false"]'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
 <?php wp_footer(); ?>
+
+<?php if( $enable_popup != 'disable' ): ?>
+<script>
+    var root = document.getElementsByTagName( 'html' )[0];
+    <?php if( $enable_popup == 'restricted_popup' ): ?>
+        var restrictedModalCookie = getCookie('restrictedModalClosed');
+        var restrictedPopupEle = document.getElementById('restrictedPopup');
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            var restrictedPopup = new bootstrap.Modal(restrictedPopupEle);
+
+            if( !restrictedModalCookie ) {
+                restrictedPopup.show();
+            }
+        });
+
+        restrictedPopupEle.addEventListener('shown.bs.modal', event => {
+            root.classList.add('moda-open-html');
+        });
+
+        restrictedPopupEle.addEventListener('hidden.bs.modal', event => {
+            root.classList.remove('moda-open-html');
+
+            // Set a cookie to keep the modal closed for one month
+            var date = new Date();
+            date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 days in milliseconds
+            var expires = "expires=" + date.toUTCString();
+            document.cookie = "restrictedModalClosed=true;" + expires + ";path=/";
+        });
+
+    <?php endif; ?>
+
+    <?php if( $enable_popup == 'subscribe_popup' ): ?>
+        var subscribeModalCookie = getCookie('subscribeModalClosed');
+        var subscribePopupEle = document.getElementById('subscribePopup');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var subscribePopup = new bootstrap.Modal(subscribePopupEle);
+
+            if( !subscribeModalCookie ) {
+                subscribePopup.show();
+            }
+        });
+
+        subscribePopupEle.addEventListener('shown.bs.modal', event => {
+            root.classList.add('moda-open-html');
+        });
+
+        subscribePopupEle.addEventListener('hidden.bs.modal', event => {
+            root.classList.remove('moda-open-html');
+
+            // Set a cookie to keep the modal closed for one month
+            var date = new Date();
+            date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 days in milliseconds
+            var expires = "expires=" + date.toUTCString();
+            document.cookie = "subscribeModalClosed=true;" + expires + ";path=/";
+        });
+    <?php endif; ?>
+</script>
+<?php endif; ?>
 
 </body>
 </html>

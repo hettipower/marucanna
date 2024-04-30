@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-04-25 11:50:17 PM */
+/*! css 1.0.0 filename.js 2024-04-27 2:08:37 AM */
 
 jQuery(document).ready(function($) {
     toggle_mini_cart();
@@ -218,10 +218,25 @@ function header_ticker() {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 0,
-        speed: 5e3,
+        speed: 8e3,
         cssEase: "linear",
         arrows: false,
         dots: false,
         infinite: true
     });
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        while (cookie.charAt(0) == " ") {
+            cookie = cookie.substring(1, cookie.length);
+        }
+        if (cookie.indexOf(nameEQ) == 0) {
+            return cookie.substring(nameEQ.length, cookie.length);
+        }
+    }
+    return null;
 }

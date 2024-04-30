@@ -105,6 +105,10 @@
 				</a>
 			</div>
 
+			<div class="right_nav" style="display:none;">
+				<?php get_template_part( 'template-part/secondary', 'menu' ); ?>
+			</div>
+
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>

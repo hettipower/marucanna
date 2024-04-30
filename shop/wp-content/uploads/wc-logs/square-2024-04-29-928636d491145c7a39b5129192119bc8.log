@@ -1,0 +1,69 @@
+2024-04-29T04:13:45+00:00 NOTICE Request
+ Request
+method:
+uri: listLocations
+user-agent: WooCommerce-Square/4.6.1 (WooCommerce/8.8.2; WordPress/6.5.2)
+headers: Array
+(
+)
+body:
+duration: 0.74829s
+ CONTEXT: {"_legacy":true}
+2024-04-29T04:13:45+00:00 NOTICE Response
+ Response
+code: 200
+message:
+headers: Array
+(
+    [0] => HTTP/1.1 200 OK
+    [Date] => Mon, 29 Apr 2024 04:13:46 GMT
+    [Content-Type] => application/json
+    [Content-Length] => 355
+    [Connection] => keep-alive
+    [CF-Ray] => 87bc761749cb48c8-LHR
+    [CF-Cache-Status] => DYNAMIC
+    [Content-Encoding] => gzip
+    [Strict-Transport-Security] => max-age=631152000; includeSubDomains; preload
+    [Vary] => Accept-Encoding
+    [frame-options] => DENY
+    [square-version] => 2022-04-20
+    [squareup--connect--v2--common--versionmetadata-bin] => CgoyMDIyLTA0LTIw
+    [x-content-type-options] => nosniff
+    [x-envoy-decorator-operation] => /v2/locations
+    [x-frame-options] => DENY
+    [x-sq-dc] => aws
+    [x-sq-region] => us-west-2
+    [x-xss-protection] => 1; mode=block
+    [Set-Cookie] => __cf_bm=e5N75bAVDGTyh1e.noheQrhAkpl2H9.hVGA20gpaZOg-1714364026-1.0.1.1-oI7hwr2ohiffTyooR97N6GGLjXPc3qrnLZcdfmjNLvgiznltrdArafyfFlcAxCMuRndPyGgrnyzf83d2Gf64lQ; path=/; expires=Mon, 29-Apr-24 04:43:46 GMT; domain=.squareupsandbox.com; HttpOnly; Secure; SameSite=None
+    [Server] => cloudflare
+)
+body: {
+    "locations": [
+        {
+            "id": "LEACDQB0ABTMB",
+            "name": "Default Test Account",
+            "address": {
+                "address_line_1": "10 Downing St",
+                "locality": "London",
+                "postal_code": "SW1A 2AA",
+                "country": "GB"
+            },
+            "timezone": "UTC",
+            "capabilities": [
+                "CREDIT_CARD_PROCESSING",
+                "AUTOMATIC_TRANSFERS"
+            ],
+            "status": "ACTIVE",
+            "created_at": "2024-03-13T11:44:25.970Z",
+            "merchant_id": "ML66YK4XR23MM",
+            "country": "GB",
+            "language_code": "en-GB",
+            "currency": "GBP",
+            "business_name": "Default Test Account",
+            "type": "PHYSICAL",
+            "business_hours": {},
+            "mcc": "7299"
+        }
+    ]
+}
+ CONTEXT: {"_legacy":true}
