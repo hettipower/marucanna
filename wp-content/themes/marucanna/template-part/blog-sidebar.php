@@ -1,28 +1,4 @@
 <div class="col-md-4 col-sm-12 order-md-1 sidebar">
-    <?php get_search_form(); ?>
-    <?php
-        $categories = get_terms( array(
-            'taxonomy'   => 'category',
-            'hide_empty' => false,
-        ) );
-        if ( ! empty( $categories ) && ! is_wp_error( $categories ) ):
-    ?>
-    <div class="sidebar_item categories">
-        <h3 class="title">Blog Categories</h3>
-        <ul class="list-group list-group-flush">
-            <?php 
-                foreach ( $categories as $category ): 
-                    if($category->slug == 'uncategorized') {
-                        continue;
-                    }
-            ?>
-            <li class="list-group-item">
-                <a href="<?php echo esc_url( get_term_link( $category ) ); ?>"><?php echo $category->name; ?> (<?php echo $category->count; ?>)</a>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-    <?php endif; ?>
 
     <?php
         $recent_posts = new WP_Query(array(
@@ -54,6 +30,30 @@
     </div>
     <?php endif; ?>
 
+    <?php
+        $categories = get_terms( array(
+            'taxonomy'   => 'category',
+            'hide_empty' => false,
+        ) );
+        if ( ! empty( $categories ) && ! is_wp_error( $categories ) ):
+    ?>
+    <div class="sidebar_item categories">
+        <h3 class="title">Blog Categories</h3>
+        <ul class="list-group list-group-flush">
+            <?php 
+                foreach ( $categories as $category ): 
+                    if($category->slug == 'uncategorized') {
+                        continue;
+                    }
+            ?>
+            <li class="list-group-item">
+                <a href="<?php echo esc_url( get_term_link( $category ) ); ?>"><?php echo $category->name; ?> (<?php echo $category->count; ?>)</a>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+
     
     <?php
         $archives_content = wp_get_archives(array(
@@ -81,21 +81,6 @@
     </div>
     <?php endif; ?>
 
-    <?php
-        $tags = get_terms( array(
-            'taxonomy'   => 'post_tag',
-            'hide_empty' => false,
-        ) );
-        if ( ! empty( $tags ) && ! is_wp_error( $tags ) ):
-    ?>
-    <div class="sidebar_item tags_wrap">
-        <h3 class="title">Popular Tags</h3>
-        <div class="tags">
-            <?php foreach ( $tags as $tag ): ?>
-                <a class="badge rounded-pill" href="<?php echo esc_url( get_term_link( $tag ) ); ?>"><?php echo $tag->name; ?></a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <?php endif; ?>
+    <?php get_search_form(); ?>
 
 </div>

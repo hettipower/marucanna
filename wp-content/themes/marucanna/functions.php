@@ -182,7 +182,8 @@ function the_breadcrumb() {
 		echo "</a></li> ";
 		if (is_category() || is_single()) {
 			echo '<li class="breadcrumb-item">';
-			the_category(' </li><li class="breadcrumb-item"> ');
+			echo '<a href="'.home_url('blog').'">Blog</a>';
+      echo '</li>';
 			if (is_single()) {
 				echo "</li><li class='breadcrumb-item'>";
 				the_title();
