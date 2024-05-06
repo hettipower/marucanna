@@ -214,7 +214,7 @@ function mp_ajax_add_to_cart_single() {
 
 function header_ticker() {
     startTicker("ticker-box", {
-        speed: 10
+        speed: 20
     });
 }
 

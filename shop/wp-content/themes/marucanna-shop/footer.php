@@ -153,7 +153,7 @@ $enable_popup = get_field( 'enable_popup', 'option' );
 $restricted_content = get_field( 'restricted_content', 'option' ); 
 $restricted_link = get_field( 'restricted_link', 'option' ); 
 ?>
-<?php if( $enable_popup == 'restricted_popup' ): ?>
+<?php if( $enable_popup == 'enable' ): ?>
     <div class="modal fade" id="restrictedPopup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="restrictedPopupLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -167,9 +167,7 @@ $restricted_link = get_field( 'restricted_link', 'option' );
             </div>
         </div>
     </div>
-<?php endif; ?>
-
-<?php if( $enable_popup == 'subscribe_popup' ): ?>
+    
     <div class="modal fade" id="subscribePopup" tabindex="-1" aria-labelledby="subscribePopupLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -184,12 +182,15 @@ $restricted_link = get_field( 'restricted_link', 'option' );
 
 <?php wp_footer(); ?>
 
-<?php if( $enable_popup != 'disable' ): ?>
+<?php if( $enable_popup == 'enable' ): ?>
 <script>
     var root = document.getElementsByTagName( 'html' )[0];
-    <?php if( $enable_popup == 'restricted_popup' ): ?>
+    <?php if( $enable_popup == 'enable' ): ?>
         var restrictedModalCookie = getCookie('restrictedModalClosed');
         var restrictedPopupEle = document.getElementById('restrictedPopup');
+
+        var subscribeModalCookie = getCookie('subscribeModalClosed');
+        var subscribePopupEle = document.getElementById('subscribePopup');
         
         document.addEventListener('DOMContentLoaded', function () {
             var restrictedPopup = new bootstrap.Modal(restrictedPopupEle);
@@ -211,15 +212,7 @@ $restricted_link = get_field( 'restricted_link', 'option' );
             date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 days in milliseconds
             var expires = "expires=" + date.toUTCString();
             document.cookie = "restrictedModalClosed=true;" + expires + ";path=/";
-        });
 
-    <?php endif; ?>
-
-    <?php if( $enable_popup == 'subscribe_popup' ): ?>
-        var subscribeModalCookie = getCookie('subscribeModalClosed');
-        var subscribePopupEle = document.getElementById('subscribePopup');
-
-        document.addEventListener('DOMContentLoaded', function () {
             var subscribePopup = new bootstrap.Modal(subscribePopupEle);
 
             if( !subscribeModalCookie ) {
@@ -240,6 +233,7 @@ $restricted_link = get_field( 'restricted_link', 'option' );
             var expires = "expires=" + date.toUTCString();
             document.cookie = "subscribeModalClosed=true;" + expires + ";path=/";
         });
+
     <?php endif; ?>
 </script>
 <?php endif; ?>
