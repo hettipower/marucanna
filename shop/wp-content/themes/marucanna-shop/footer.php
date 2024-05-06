@@ -133,7 +133,7 @@
 					<?php } ?>
                 </div>
                 <div class="col-md-2 col-sm-12 text-end">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo2.webp"/>
+                    <img src="https://marupharma.co.uk/demo/wp-content/uploads/2024/05/registered-pharmacy.jpg"/>
                 </div>
             </div>
         </div>

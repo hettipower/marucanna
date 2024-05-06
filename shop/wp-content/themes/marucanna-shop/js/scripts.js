@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-04-30 10:44:58 PM */
+/*! css 1.0.0 filename.js 2024-05-02 12:10:20 AM */
 
 jQuery(document).ready(function($) {
     toggle_mini_cart();
@@ -214,7 +214,7 @@ function mp_ajax_add_to_cart_single() {
 
 function header_ticker() {
     startTicker("ticker-box", {
-        speed: 7
+        speed: 10
     });
 }
 

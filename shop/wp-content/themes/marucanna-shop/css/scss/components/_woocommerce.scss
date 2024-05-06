@@ -65,22 +65,14 @@
             -o-border-radius: 5px;
 
             padding: 6px 28px 9px;
-            background-color: $button_color;
+            background-color: #e8551c;
             color: $white;
             font-weight: 400;
             line-height: inherit;
 
             &:hover {
-                background-color: $theme_color;
-                color: #000;
-            }
-
-            @include media-breakpoint-down(md) {
-                background-color: #e8551c;
-
-                &:hover {
-                    background-color: $button_color;
-                }
+                background-color: $button_color;
+                color: $white;
             }
         }
 
@@ -272,15 +264,15 @@
                         text-transform: $btn_font_transform;
 
                         padding: 6px 28px 9px;
-                        background-color: #8eb360;
+                        background-color: #e8551c;
                         color: $white;
                         font-weight: 400;
                         line-height: inherit;
                         flex: 1;
 
                         &:hover {
-                            background-color: $theme_color;
-                            color: #000;
+                            background-color: $button_color;
+                            color: $white;
                         }
                     }
 
@@ -480,12 +472,13 @@
                     border-radius: $btn_border_radius;
 
                     padding: 6px 28px 9px;
-                    background-color: $button_color;
+                    background-color: #e8551c;
                     color: $white;
                     border: none;
 
                     &:hover {
-                        background-color: $theme_color;
+                        background-color: $button_color;
+                        color: $white;
                     }
                 }
             }
