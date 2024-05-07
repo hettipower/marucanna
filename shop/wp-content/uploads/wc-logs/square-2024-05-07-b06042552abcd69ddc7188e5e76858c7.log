@@ -1,4 +1,4 @@
-2024-05-06T02:49:45+00:00 NOTICE Request
+2024-05-07T08:42:51+00:00 NOTICE Request
  Request
 method:
 uri: listLocations
@@ -7,20 +7,20 @@ headers: Array
 (
 )
 body:
-duration: 0.64628s
+duration: 0.6415s
  CONTEXT: {"_legacy":true}
-2024-05-06T02:49:45+00:00 NOTICE Response
+2024-05-07T08:42:51+00:00 NOTICE Response
  Response
 code: 200
 message:
 headers: Array
 (
     [0] => HTTP/1.1 200 OK
-    [Date] => Mon, 06 May 2024 02:49:46 GMT
+    [Date] => Tue, 07 May 2024 08:42:53 GMT
     [Content-Type] => application/json
     [Content-Length] => 355
     [Connection] => keep-alive
-    [CF-Ray] => 87f5a8ad9b8535b9-LHR
+    [CF-Ray] => 87ffeb4dbc1e06d9-LHR
     [CF-Cache-Status] => DYNAMIC
     [Content-Encoding] => gzip
     [Strict-Transport-Security] => max-age=631152000; includeSubDomains; preload
@@ -34,7 +34,7 @@ headers: Array
     [x-sq-dc] => aws
     [x-sq-region] => us-west-2
     [x-xss-protection] => 1; mode=block
-    [Set-Cookie] => __cf_bm=Un_5AtH1fLoiy92hMAPS1Jch076obwyg01Hw7rzzhis-1714963786-1.0.1.1-.eX45CsNqmiV_78DdGG9Yl2Yvb6cwZi9fZv13tKqIyGjWYMAkW9Nn0kMfv_iTkSEmm0wwmq_o3kJ7Qzl9K4xXw; path=/; expires=Mon, 06-May-24 03:19:46 GMT; domain=.squareupsandbox.com; HttpOnly; Secure; SameSite=None
+    [Set-Cookie] => __cf_bm=1px9cFhlWaTRa3cxPrmknxk_5GtWHo0onlZtbWV9hb4-1715071373-1.0.1.1-lwddXh4CODTsqKQkt73zU2TXr06cmXz.4IGjPtJCeFNTb9bSulJtvIwuw46odsu9RZpAZgjwiiultXbQH3OJ0w; path=/; expires=Tue, 07-May-24 09:12:53 GMT; domain=.squareupsandbox.com; HttpOnly; Secure; SameSite=None
     [Server] => cloudflare
 )
 body: {
@@ -67,7 +67,7 @@ body: {
     ]
 }
  CONTEXT: {"_legacy":true}
-2024-05-06T03:07:01+00:00 NOTICE Request
+2024-05-07T13:27:32+00:00 NOTICE Request
  Request
 method:
 uri: listLocations
@@ -76,20 +76,20 @@ headers: Array
 (
 )
 body:
-duration: 0.58891s
+duration: 0.6302s
  CONTEXT: {"_legacy":true}
-2024-05-06T03:07:01+00:00 NOTICE Response
+2024-05-07T13:27:32+00:00 NOTICE Response
  Response
 code: 200
 message:
 headers: Array
 (
     [0] => HTTP/1.1 200 OK
-    [Date] => Mon, 06 May 2024 03:07:03 GMT
+    [Date] => Tue, 07 May 2024 13:27:34 GMT
     [Content-Type] => application/json
     [Content-Length] => 355
     [Connection] => keep-alive
-    [CF-Ray] => 87f5c1fe3c153698-LHR
+    [CF-Ray] => 88018c570cdd0639-LHR
     [CF-Cache-Status] => DYNAMIC
     [Content-Encoding] => gzip
     [Strict-Transport-Security] => max-age=631152000; includeSubDomains; preload
@@ -103,7 +103,7 @@ headers: Array
     [x-sq-dc] => aws
     [x-sq-region] => us-west-2
     [x-xss-protection] => 1; mode=block
-    [Set-Cookie] => __cf_bm=edC1R.RZlZyhjh1uzw7x21KVKWS6aDIIwp29x82gS.s-1714964823-1.0.1.1-_G2L7YayzMwPqQ9JOMwNPbXG65ZBurLpa7z7xMNfFyl1Ba9.a9Cp3fHyfTsom_PZfsEi5uOcPLTDQwo4RwGtbg; path=/; expires=Mon, 06-May-24 03:37:03 GMT; domain=.squareupsandbox.com; HttpOnly; Secure; SameSite=None
+    [Set-Cookie] => __cf_bm=VrWsSJYhqXpwB0gbVStk9hxfMEdj2DdCdZjJ8paVB88-1715088454-1.0.1.1-yzzMl4N8uBrXzvohhECSWJNNrxkl4TO9LIbM5gduWEdJSC5Kl0kFe3u0OqjmQRHD1Ac.9_qRQ_AqiKmV0Om9oQ; path=/; expires=Tue, 07-May-24 13:57:34 GMT; domain=.squareupsandbox.com; HttpOnly; Secure; SameSite=None
     [Server] => cloudflare
 )
 body: {

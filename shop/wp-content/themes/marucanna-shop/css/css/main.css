@@ -36752,6 +36752,9 @@ section.section.contact_wrap .contact_details_wrap .contact_details .inner h3, s
   font-size: 9px;
 }
 
+.blog_item {
+  position: relative;
+}
 .blog_item .blog-img {
   margin-bottom: 20px;
 }

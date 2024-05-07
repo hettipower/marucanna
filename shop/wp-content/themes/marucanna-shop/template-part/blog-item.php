@@ -16,4 +16,5 @@
             <a href="<?php the_permalink(); ?>" class="btn">Read More</a>
         </div>
     </div>
+    <a href="<?php the_permalink(); ?>" class="overlay"></a>
 </div>
