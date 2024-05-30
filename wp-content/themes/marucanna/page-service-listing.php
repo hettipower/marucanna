@@ -61,7 +61,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'full', false);
                     <div class="col-md-4 col-sm-12 mb-4">
                         <div class="condition">
 						<?php if ( has_post_thumbnail() ) {?>
-                            <img src="<?php echo $thumb_url[0]; ?>" alt="<?php the_title(); ?> "/>
+                            <img src="<?php echo $thumb_url[0]; ?>" alt="<?php the_title(); ?>" alt="<?php echo get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ); ?>" title="<?php echo get_post(get_post_thumbnail_id())->post_title; ?>"/>
 							<?php } ?>
                             <h4><?php the_title(); ?></h4>
                             <a href="<?php the_permalink(); ?>" class="overlay"></a>

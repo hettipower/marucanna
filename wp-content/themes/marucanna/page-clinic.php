@@ -33,13 +33,13 @@ get_header(); ?>
 			<?php $cl_sec1_main_image = get_field( 'cl_sec1_main_image' ); ?>
 			<?php if ( $cl_sec1_main_image ) { ?>
             <div class="col-md-6 col-sm-12 image_wrapper">
-                	<img src="<?php echo $cl_sec1_main_image['url']; ?>" alt="<?php echo $cl_sec1_main_image['alt']; ?>" />
+                	<img src="<?php echo $cl_sec1_main_image['url']; ?>" alt="<?php echo $cl_sec1_main_image['alt']; ?>" title="<?php echo $cl_sec1_main_image['title']; ?>" />
             </div>
             <?php } ?>
             <div class="col-md-6 col-sm-12 content_wrapper">
 				<?php $cl_sec1_logo = get_field( 'cl_sec1_logo' ); ?>
 				<?php if ( $cl_sec1_logo ) { ?>
-                <img src="<?php echo $cl_sec1_logo['url']; ?>" alt="<?php echo $cl_sec1_logo['alt']; ?>" class="mb-3"/>
+                <img src="<?php echo $cl_sec1_logo['url']; ?>" alt="<?php echo $cl_sec1_logo['alt']; ?>" title="<?php echo $cl_sec1_main_image['title']; ?>" class="mb-3"/>
 				<?php } ?>
 				<?php the_field( 'cl_sec1_content' ); ?>
               
@@ -61,7 +61,7 @@ get_header(); ?>
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="clinic-inner">
                     <a href="<?php the_sub_field( 'link' ); ?>" class="overlay"></a>
-                    <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" />
+                    <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" title="<?php echo $logo['title']; ?>" />
                 </div>
             </div>
 			<?php } ?>

@@ -39561,7 +39561,7 @@ footer .social .nav li a:hover, footer .social .nav li a:focus {
 .mc-title-section.style_2::before {
   position: absolute;
   content: "";
-  background-image: url("../img/banner-overlay.png");
+  background-image: url("../img/banner-overlay.webp");
   width: 553px;
   height: 500px;
   right: 0;

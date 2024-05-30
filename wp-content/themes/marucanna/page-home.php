@@ -18,7 +18,7 @@ get_header(); ?>
 			<?php if ( get_field( 'hm_sec2_bg_image' ) ) { ?>
                 <img src="<?php the_field( 'hm_sec2_bg_image' ); ?>"/>
 				<?php } else {  ?>
-				<img src="<?php echo get_template_directory_uri(); ?>/img/home/about-image.webp"/>
+				<img src="<?php echo get_template_directory_uri(); ?>/img/home/about-image.webp" alt="Welcome to Marucanna medical cannabis clinic" title="Welcome to Marucanna medical cannabis clinic"/>
 				<?php } ?>
             </div>
 			
@@ -76,7 +76,7 @@ endif;
 				<?php if ( get_field( 'hm_sec3_bg_image' ) ) { ?>
                     <img src="<?php the_field( 'hm_sec3_bg_image' ); ?>"/>
 					<?php } else {?>
-					 <img src="<?php echo get_template_directory_uri(); ?>/img/home/how-it-work.webp"/>
+					 <img src="<?php echo get_template_directory_uri(); ?>/img/home/how-it-work.webp" alt="How the medical cannabis process works" title="How the medical cannabis process works"/>
 					 <?php } ?>
                 </div>
                 <a href="<?php the_field( 'hm_sec3_button1_link' ); ?>" class="btn style_4"><?php the_field( 'hm_sec3_button1_text' ); ?></a>
@@ -104,8 +104,20 @@ $i=0;
 		<?php if($i==2) { ?>
 		<li class="nav-item" role="presentation">
                 <button class="nav-link active" id="conditions-tab-<?php echo $i; ?>" data-bs-toggle="pill" data-bs-target="#cn-tab-<?php echo $i; ?>" type="button" role="tab" aria-controls="conditions-tab-<?php echo $i; ?>" aria-selected="true">
-				<?php if ( get_sub_field( 'icon' ) ) { ?>
-                    <img src="<?php the_sub_field( 'icon' ); ?>"/>
+				<?php 
+		$image = get_sub_field('icon');
+		
+		if ( $image ) { 
+			// Image variables.
+    $url = $image['url'];
+    $title = $image['title'];
+    $alt = $image['alt'];		
+			
+			
+			?>
+					
+                  
+                    <img src="<?php echo esc_url($url); ?>" alt="<?php echo esc_attr($alt); ?>" title="<?php echo esc_attr($title); ?>"/>
 					<?php } ?>
                     <span><?php the_sub_field( 'title' ); ?></span>
                 </button>
@@ -116,8 +128,21 @@ $i=0;
 		
 		   <li class="nav-item" role="presentation">
                 <button class="nav-link" id="conditions-tab-<?php echo $i; ?>" data-bs-toggle="pill" data-bs-target="#cn-tab-<?php echo $i; ?>" type="button" role="tab" aria-controls="conditions-tab-<?php echo $i; ?>" aria-selected="false">
-                    <?php if ( get_sub_field( 'icon' ) ) { ?>
-                    <img src="<?php the_sub_field( 'icon' ); ?>"/>
+					
+						<?php 
+		$image = get_sub_field('icon');
+		
+		if ( $image ) { 
+			// Image variables.
+    $url = $image['url'];
+    $title = $image['title'];
+    $alt = $image['alt'];		
+			
+			
+			?>
+					
+                  
+                    <img src="<?php echo esc_url($url); ?>" alt="<?php echo esc_attr($alt); ?>" title="<?php echo esc_attr($title); ?>"/>
 					<?php } ?>
                     <span><?php the_sub_field( 'title' ); ?></span>
                 </button>
@@ -153,9 +178,19 @@ $i=0;
 		<?php if($i==2) { ?>
             <div class="tab-pane fade show active" id="cn-tab-<?php echo $i; ?>" role="tabpanel" aria-labelledby="conditions-tab-<?php echo $i; ?>" tabindex="0">
                 <div class="row">
-				<?php if ( get_sub_field( 'main_image' ) ) { ?>
+					<?php 
+		$image = get_sub_field('main_image');
+		
+		if ( $image ) { 
+			// Image variables.
+    $url = $image['url'];
+    $title = $image['title'];
+    $alt = $image['alt'];		
+			
+			
+			?>
                     <div class="col-md-4 col-sm-12 image-wrap">
-                        <img src="<?php the_sub_field( 'main_image' ); ?>"/>
+                        <img src="<?php echo esc_url($url); ?>" alt="<?php echo esc_attr($alt); ?>" title="<?php echo esc_attr($title); ?>"/>
                     </div>
 					<?php } ?>
                     <div class="col-md-8 col-sm-12 content-wrap mc-tab-title">
@@ -180,9 +215,19 @@ $i=0;
 			
             <div class="tab-pane fade" id="cn-tab-<?php echo $i; ?>" role="tabpanel" aria-labelledby="conditions-tab-<?php echo $i; ?>" tabindex="0">
                 <div class="row">
-                  <?php if ( get_sub_field( 'main_image' ) ) { ?>
+                 	<?php 
+		$image = get_sub_field('main_image');
+		
+		if ( $image ) { 
+			// Image variables.
+    $url = $image['url'];
+    $title = $image['title'];
+    $alt = $image['alt'];		
+			
+			
+			?>
                     <div class="col-md-4 col-sm-12 image-wrap">
-                        <img src="<?php the_sub_field( 'main_image' ); ?>"/>
+                         <img src="<?php echo esc_url($url); ?>" alt="<?php echo esc_attr($alt); ?>" title="<?php echo esc_attr($title); ?>"/>
                     </div>
 					<?php } ?>
                     <div class="col-md-8 col-sm-12 content-wrap mc-tab-title">
@@ -244,7 +289,7 @@ endif;
                     <div class="card-body text-center">
 					<?php if ( get_sub_field( 'icon' ) ) { ?>
                         <div class="image">
-                            <img src="<?php the_sub_field( 'icon' ); ?>"/>
+                            <img src="<?php the_sub_field( 'icon' ); ?>" alt="Why use us?" title="Why use us?"/>
                         </div>
 						<?php } ?>
                         <h4><?php the_sub_field( 'title' ); ?></h4>
@@ -291,7 +336,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'reviews-thumb', true);
                         <div class="author">
 						<?php if ( has_post_thumbnail() ) {?>
                             <div class="image">
-                                <img src="<?php echo $thumb_url[0]; ?>"/>
+                                <img src="<?php echo $thumb_url[0]; ?>" alt="Patient review" title="Patient review"/>
                             </div>
 							<?php
  }
@@ -301,7 +346,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'reviews-thumb', true);
                                 <span class="type"><?php the_field( 'designation' ); ?></span>
                             </div>
                             <div class="star">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/home/img2.png"/>
+                                <img src="<?php echo get_template_directory_uri(); ?>/img/home/img2.png" alt="5 star rated" title="5 star rated"/>
                             </div>
                         </div>
                     </div>
@@ -342,7 +387,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'doc-home-thumb', true);
 		<div class="item">
 		<?php if ( has_post_thumbnail() ) {?>
                 <div class="image">
-                    <img src="<?php echo $thumb_url[0]; ?>"/>
+                    <img src="<?php echo $thumb_url[0]; ?>" alt="<?php echo get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ); ?>" title="<?php echo get_post(get_post_thumbnail_id())->post_title; ?>"/>
                 </div>
 		<?php } ?>
                 <div class="name"><?php the_title(); ?></div>
@@ -394,7 +439,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'blog-home-thumb', true);
             <div class="col-md-4 col-sm-12">
                 <div class="card">
 				<?php if ( has_post_thumbnail() ) {?>
-                    <img src="<?php echo $thumb_url[0]; ?>" class="card-img-top" alt="<?php the_title(); ?>"/>
+                    <img src="<?php echo $thumb_url[0]; ?>" class="card-img-top" alt="<?php echo get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ); ?>" title="<?php echo get_post(get_post_thumbnail_id())->post_title; ?>"/>
 				<?php } ?>
                     <div class="card-body mc-blog-text">
                         <h5 class="card-title"><?php the_title(); ?></h5>
@@ -402,7 +447,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'blog-home-thumb', true);
 						<?php my_excerpt(17); ?>
                         
                     </div>
-                    <a href="<?php the_permalink(); ?>" class="overlay"></a>
+                    <a href="<?php the_permalink(); ?>" aria-label="<?php the_title(); ?>" class="overlay"></a>
                 </div>
             </div>
 			
@@ -432,7 +477,7 @@ wp_reset_query();
 		<?php $logos_images = get_field( 'logos' ); ?>
 <?php if ( $logos_images ) :  ?>
 	<?php foreach ( $logos_images as $logos_image ): ?>
-            <img src="<?php echo $logos_image['url']; ?>"/>
+            <img src="<?php echo $logos_image['url']; ?>" alt="<?php echo $logos_image['alt']; ?>" title="<?php echo $logos_image['title']; ?>"/>
            <?php endforeach; ?>
 <?php endif; ?>
         </div>

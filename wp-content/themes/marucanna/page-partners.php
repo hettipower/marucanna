@@ -45,7 +45,7 @@ get_header(); ?>
 					<?php $icon = get_sub_field( 'icon' ); ?>
 		<?php if ( $icon ) { ?>
                     <div class="icon">
-                        <img src="<?php echo $icon['url']; ?>" alt="<?php echo $icon['alt']; ?>"/>
+                        <img src="<?php echo $icon['url']; ?>" alt="<?php echo $icon['alt']; ?>" title="<?php echo $icon['alt']; ?>"/>
                     </div>
 					<?php } ?>
                     <div class="content">

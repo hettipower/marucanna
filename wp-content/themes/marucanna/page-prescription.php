@@ -71,9 +71,20 @@ while( have_rows('prs_sec2_content_boxes_rep') ): the_row();
     <section class="section image_text_block style_2">
     <div class="container">
         <div class="row">
-		<?php if ( get_sub_field( 'image' ) ) { ?>
+		<?php 
+		$image = get_sub_field('image');
+		
+		if ( $image ) { 
+			// Image variables.
+    $url = $image['url'];
+    $title = $image['title'];
+    $alt = $image['alt'];		
+			
+			
+			?>
+								  
             <div class="col-md-4 col-sm-12 image_wrapper">
-				<img src="<?php the_sub_field( 'image' ); ?>"/>
+				<img src="<?php echo esc_url($url); ?>" alt="<?php echo esc_attr($alt); ?>" title="<?php echo esc_attr($title); ?>"/>
             </div>
             <?php } ?>
 			
@@ -91,10 +102,24 @@ while( have_rows('prs_sec2_content_boxes_rep') ): the_row();
   <section class="section image_text_block style_1">
     <div class="container">
         <div class="row">
+		<?php
+         $image = get_sub_field('image');
 		
-          <?php if ( get_sub_field( 'image' ) ) { ?>
+		
+		
+		if ( $image ) {
+			
+		// Image variables.
+    $url = $image['url'];
+    $title = $image['title'];
+    $alt = $image['alt'];	
+			
+			
+			?>
+			
+			
             <div class="col-md-4 col-sm-12 image_wrapper">
-				<img src="<?php the_sub_field( 'image' ); ?>"/>
+				<img src="<?php echo esc_url($url); ?>" alt="<?php echo esc_attr($alt); ?>" title="<?php echo esc_attr($title); ?>"/>
             </div>
             <?php } ?>
 			

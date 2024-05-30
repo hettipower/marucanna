@@ -38,7 +38,7 @@ get_header(); ?>
                                 $site_logo = get_field('site_logo' , 'option');
                                 if( $site_logo ): 
                             ?>
-                                <img src="<?php echo $site_logo['url']; ?>" alt="<?php echo get_bloginfo( 'name' ); ?>">
+                                <img src="<?php echo $site_logo['url']; ?>" alt="<?php echo get_bloginfo( 'name' ); ?>" title="<?php echo get_bloginfo( 'name' ); ?>">
                             <?php endif; ?>
                         </th>
                         <th class="odd">Medical <br/>Cannabis Clinics</th>

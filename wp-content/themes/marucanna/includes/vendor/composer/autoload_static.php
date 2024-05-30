@@ -14,17 +14,12 @@ class ComposerStaticInit253789a4af9b8b54fbe1089a766458a0
     );
 
     public static $prefixLengthsPsr4 = array (
-        'a' => 
-        array (
-            'apimatic\\jsonmapper\\' => 20,
-        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Svg\\' => 4,
-            'Square\\' => 7,
             'Sabberworm\\CSS\\' => 15,
         ),
         'R' => 
@@ -56,10 +51,6 @@ class ComposerStaticInit253789a4af9b8b54fbe1089a766458a0
     );
 
     public static $prefixDirsPsr4 = array (
-        'apimatic\\jsonmapper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/apimatic/jsonmapper/src',
-        ),
         'Symfony\\Polyfill\\Php81\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
@@ -75,10 +66,6 @@ class ComposerStaticInit253789a4af9b8b54fbe1089a766458a0
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
-        ),
-        'Square\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/square/square/src',
         ),
         'Sabberworm\\CSS\\' => 
         array (
@@ -118,16 +105,6 @@ class ComposerStaticInit253789a4af9b8b54fbe1089a766458a0
         ),
     );
 
-    public static $prefixesPsr0 = array (
-        'U' => 
-        array (
-            'Unirest\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/apimatic/unirest-php/src',
-            ),
-        ),
-    );
-
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
@@ -145,7 +122,6 @@ class ComposerStaticInit253789a4af9b8b54fbe1089a766458a0
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit253789a4af9b8b54fbe1089a766458a0::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit253789a4af9b8b54fbe1089a766458a0::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit253789a4af9b8b54fbe1089a766458a0::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit253789a4af9b8b54fbe1089a766458a0::$classMap;
 
         }, null, ClassLoader::class);

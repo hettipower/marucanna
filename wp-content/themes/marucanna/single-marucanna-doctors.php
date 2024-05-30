@@ -26,7 +26,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'full');
          <?php if ( has_post_thumbnail() ) {?>
             <div class="col-12 col-md-6 image">
                 <div class="img_wrap">
-                    <img src="<?php echo $thumb_url[0]; ?>"/>
+                    <img src="<?php echo $thumb_url[0]; ?>" alt="<?php echo get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ); ?>" title="<?php echo get_post(get_post_thumbnail_id())->post_title; ?>"/>
                 </div>
             </div>
             	<?php } ?>

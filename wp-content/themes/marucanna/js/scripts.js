@@ -1,6 +1,8 @@
-/*! css 1.0.0 filename.js 2024-04-20 11:12:47 PM */
+/*! css 1.0.0 filename.js 2024-05-30 9:07:55 PM */
 
-Fancybox.bind("[data-fancybox]", {});
+if (jQuery("body").hasClass("author") || jQuery("body").hasClass("page-template-page-patient-dashboard")) {
+    Fancybox.bind("[data-fancybox]", {});
+}
 
 jQuery(document).ready(function($) {
     our_team_slider();
@@ -11,11 +13,13 @@ jQuery(document).ready(function($) {
 });
 
 function patients_datatable() {
-    new DataTable("#patients_details", {
-        language: {
-            emptyTable: "No patients available."
-        }
-    });
+    if (jQuery("body").hasClass("page-template-page-doctor-dashboard")) {
+        new DataTable("#patients_details", {
+            language: {
+                emptyTable: "No patients available."
+            }
+        });
+    }
 }
 
 (function($) {

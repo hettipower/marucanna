@@ -276,3 +276,14 @@ function mp_acf_google_map_api( $api ){
   return $api;
 }
 add_filter('acf/fields/google_map/api', 'mp_acf_google_map_api');
+
+
+//Remove Gutenberg editor loading
+function smartwp_remove_wp_block_library_css(){
+ wp_dequeue_style( 'wp-block-library' );
+ wp_dequeue_style( 'wp-block-library-theme' );
+ wp_dequeue_style( 'wc-blocks-style' ); // Remove WooCommerce block CSS
+} 
+add_action( 'wp_enqueue_scripts', 'smartwp_remove_wp_block_library_css', 100 );
+
+remove_action( 'wp_enqueue_scripts', 'wp_enqueue_classic_theme_styles' );

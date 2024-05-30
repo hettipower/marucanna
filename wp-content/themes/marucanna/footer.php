@@ -62,7 +62,7 @@
                         <h6>SUBSCRIBE TO NEWSLETTER</h6>
                         <form action="">
                             <div class="input-group">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" aria-label="newsletter">
                                 <button class="btn" type="button">SIGN UP</button>
                             </div>
                         </form>
@@ -73,32 +73,32 @@
                         <ul class="nav">
 						<?php if ( get_field( 'twitter','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php the_field('twitter','option'); ?>"><i class="fa-brands fa-twitter"></i></a>
+                                <a class="nav-link" href="<?php the_field('twitter','option'); ?>" aria-label="twitter"><i class="fa-brands fa-twitter"></i></a>
                             </li>
 							<?php endif; ?>
 							<?php if ( get_field( 'linkedin','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php the_field('linkedin','option'); ?>"><i class="fa-brands fa-linkedin"></i></a>
+                                <a class="nav-link" href="<?php the_field('linkedin','option'); ?>" aria-label="linkedin"><i class="fa-brands fa-linkedin"></i></a>
                             </li>
 							<?php endif; ?>
 							<?php if ( get_field( 'youtube','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php the_field('youtube','option'); ?>"><i class="fa-brands fa-youtube"></i></a>
+                                <a class="nav-link" href="<?php the_field('youtube','option'); ?>" aria-label="youtube"><i class="fa-brands fa-youtube"></i></a>
                             </li>
 							<?php endif; ?>
 							<?php if ( get_field( 'instagram','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php the_field('instagram','option'); ?>"><i class="fa-brands fa-instagram"></i></a>
+                                <a class="nav-link" href="<?php the_field('instagram','option'); ?>" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a>
                             </li>
 							<?php endif; ?>
 							<?php if ( get_field( 'facebook','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php the_field('facebook','option'); ?>"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a class="nav-link" href="<?php the_field('facebook','option'); ?>" aria-label="facebook"><i class="fa-brands fa-facebook-f"></i></a>
                             </li>
 							<?php endif; ?>
 							<?php if ( get_field( 'pinterest','option' ) ): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php the_field('pinterest','option'); ?>"><i class="fa-brands fa-pinterest"></i></a>
+                                <a class="nav-link" href="<?php the_field('pinterest','option'); ?>" aria-label="pinterest"><i class="fa-brands fa-pinterest"></i></a>
                             </li>
 							<?php endif; ?>
                         </ul>
@@ -112,7 +112,7 @@
 				<?php if ( get_field( 'footer_logo', 'option' ) ) { ?>
                     <img src="<?php the_field( 'footer_logo', 'option' ); ?>"/>
 					<?php } else { ?>
-					<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.webp"/>
+					<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.webp" alt="Marucanna logo" title="Marucanna logo"/>
 					<?php } ?>
                 </div>
                 <div class="col-md-8 col-sm-12">
@@ -123,7 +123,7 @@
 					<?php } ?>
                 </div>
                 <div class="col-md-2 col-sm-12">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo2.webp"/>
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo2.webp" alt="CQC logo" title="CQC logo"/>
                 </div>
             </div>
         </div>

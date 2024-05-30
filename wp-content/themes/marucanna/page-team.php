@@ -53,7 +53,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'doc-home-thumb', true);
             <div class="item g-col-md-4 g-col-6">
                 <?php if ( has_post_thumbnail() ) {?>
                 <div class="image">
-                    <img src="<?php echo $thumb_url[0]; ?>"/>
+                    <img src="<?php echo $thumb_url[0]; ?>" alt="<?php echo get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ); ?>" title="<?php echo get_post(get_post_thumbnail_id())->post_title; ?>"/>
                 </div>
                 	<?php } ?>
                 <div class="name"><?php the_title(); ?></div>

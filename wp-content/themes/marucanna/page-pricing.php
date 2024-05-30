@@ -47,7 +47,7 @@ get_header(); ?>
                 <?php if ( get_field( 'pr_sec1_main_image' ) ) { ?>
                 	<img src="<?php the_field( 'pr_sec1_main_image' ); ?>"/>
                 <?php } else { ?>
-				<img src="<?php echo get_template_directory_uri(); ?>/img/pricing.webp"/>
+				<img src="<?php echo get_template_directory_uri(); ?>/img/pricing.webp" title="medical cannabis pricing" alt="medical cannabis pricing"/>
 				 <?php }  ?>
             </div>
 			
@@ -165,7 +165,7 @@ endif;
             <?php if ( get_field( 'pr_sec3_main_image' ) ) { ?>
             <img src="<?php the_field( 'pr_sec3_main_image' ); ?>" />
             <?php } else { ?>
-            <img src="<?php bloginfo( 'template_url' ); ?>/img/pricing-timeline.webp" class="img-fluid"/>
+            <img src="<?php bloginfo( 'template_url' ); ?>/img/pricing-timeline.webp" class="img-fluid" alt="medical cannabis timeline" title="medical cannabis timeline"/>
              <?php }  ?>
         </div>
         <div class="btn_wrap mt-3 text-center">

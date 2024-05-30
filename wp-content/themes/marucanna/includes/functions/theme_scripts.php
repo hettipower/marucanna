@@ -24,16 +24,20 @@ function html5blank_header_scripts()
     /* wp_register_script('dropzone', get_template_directory_uri() . '/vendor/dropzone/dropzone.min.js', array('jquery'), false, true); // Custom scripts
     wp_enqueue_script('dropzone'); */
 
-    wp_register_script('datatable', get_template_directory_uri() . '/vendor/datatable/datatables.min.js', array('jquery'), false, true);
-    wp_enqueue_script('datatable');
+    if( is_page_template( 'page-doctor-dashboard.php' ) ) {
+        wp_register_script('datatable', get_template_directory_uri() . '/vendor/datatable/datatables.min.js', array('jquery'), false, true);
+        wp_enqueue_script('datatable');
+    }
 
-    wp_register_script('fancybox', get_template_directory_uri() . '/vendor/fancybox/fancybox.umd.js', array('jquery'), false, true);
-    wp_enqueue_script('fancybox');
+    if( is_page_template( 'page-patient-dashboard.php' ) || is_author() ) {
+        wp_register_script('fancybox', get_template_directory_uri() . '/vendor/fancybox/fancybox.umd.js', array('jquery'), false, true);
+        wp_enqueue_script('fancybox');
+    }
 
     wp_register_script('phonemask', get_template_directory_uri() . '/vendor/phonemask/phonemask.js', array('jquery'), false, true);
     wp_enqueue_script('phonemask');
 
-    if( function_exists('get_field') ) {
+    if( function_exists('get_field') && is_page_template( 'page-contact.php' ) ) {
         $google_map_key = get_field( 'google_map_key', 'option' );
         if( $google_map_key ) {
             wp_register_script('google-map', 'https://maps.googleapis.com/maps/api/js?key='.$google_map_key.'&callback=Function.prototype', array('jquery'), false, true);
@@ -41,8 +45,10 @@ function html5blank_header_scripts()
         }
     }
 
-    wp_register_script('sweetalert2', get_template_directory_uri() . '/vendor/sweetalert2/sweetalert2.min.js', array('jquery'), true, true);
-    wp_enqueue_script('sweetalert2');
+    if( is_page_template( 'page-patient-dashboard.php' ) ) {
+        wp_register_script('sweetalert2', get_template_directory_uri() . '/vendor/sweetalert2/sweetalert2.min.js', array('jquery'), true, true);
+        wp_enqueue_script('sweetalert2');
+    }
     
     wp_register_script('themescript', get_template_directory_uri() . '/js/scripts.js', array('jquery'), false, true); // Custom scripts
     wp_enqueue_script('themescript'); // Enqueue it! 
@@ -50,7 +56,7 @@ function html5blank_header_scripts()
     wp_localize_script('themescript', 'CUSTOM_PARAMS', array('ajaxUrl' => admin_url('admin-ajax.php')));
     
 }
-add_action('init', 'html5blank_header_scripts');
+add_action('wp_enqueue_scripts', 'html5blank_header_scripts');
 
 function mc_enqueue_custom_admin_style( $hook ) {
 

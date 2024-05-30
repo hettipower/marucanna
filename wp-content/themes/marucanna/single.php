@@ -31,7 +31,7 @@
             <div class="col-md-8 col-sm-12 order-md-2 blog_content_wrap">
                 <div class="blog-img">
                     <?php if ( has_post_thumbnail() ) : ?>
-                        <img src="<?php echo $thumb_url[0]; ?>" class="rounded img-fluid" alt="<?php the_title(); ?>">
+                        <img src="<?php echo $thumb_url[0]; ?>" class="rounded img-fluid" alt="<?php the_title(); ?>" title="<?php the_title(); ?>">
                     <?php endif; ?>
                 </div>
                 <div class="blog_content">

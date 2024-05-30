@@ -115,12 +115,7 @@ class Permalink_Manager_URI_Functions_Post {
 			$permalink = "{$home_url}/{$permalink_manager_uris[$post->post_parent]}/attachment/{$post->post_name}";
 		}
 
-		// 5. Allow to filter (do not filter in Customizer)
-		if ( ! ( function_exists( 'is_customize_preview' ) && is_customize_preview() ) ) {
-			return apply_filters( 'permalink_manager_filter_final_post_permalink', $permalink, $post, $old_permalink );
-		} else {
-			return $old_permalink;
-		}
+		return apply_filters( 'permalink_manager_filter_final_post_permalink', $permalink, $post, $old_permalink );
 	}
 
 	/**
@@ -128,10 +123,11 @@ class Permalink_Manager_URI_Functions_Post {
 	 *
 	 * @param string $slug
 	 * @param int $id
+	 * @param bool $preview_mode
 	 *
 	 * @return string
 	 */
-	static function update_slug_by_id( $slug, $id ) {
+	static function update_slug_by_id( $slug, $id, $preview_mode = false ) {
 		global $wpdb;
 
 		// Update slug and make it unique
@@ -139,9 +135,11 @@ class Permalink_Manager_URI_Functions_Post {
 		$slug = sanitize_title( $slug );
 
 		$new_slug = wp_unique_post_slug( $slug, $id, get_post_status( $id ), get_post_type( $id ), 0 );
-		$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET post_name = %s WHERE ID = %d", $new_slug, $id ) );
 
-		clean_post_cache( $id );
+		if ( ! $preview_mode ) {
+			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET post_name = %s WHERE ID = %d", $new_slug, $id ) );
+			clean_post_cache( $id );
+		}
 
 		return $new_slug;
 	}
@@ -544,8 +542,8 @@ class Permalink_Manager_URI_Functions_Post {
 				}
 
 				// Check if native slug should be changed
-				if ( ( $mode == 'slugs' ) && ( $old_post_name !== $new_post_name ) && ! $preview_mode ) {
-					$new_post_name = self::update_slug_by_id( $new_post_name, $row['ID'] );
+				if ( $mode == 'slugs' && $old_post_name !== $new_post_name ) {
+					$new_post_name = self::update_slug_by_id( $new_post_name, $row['ID'], $preview_mode );
 				}
 
 				$new_uri = apply_filters( 'permalink_manager_pre_update_post_uri', $new_uri, $row['ID'], $old_uri, $native_uri, $default_uri );
@@ -862,6 +860,11 @@ class Permalink_Manager_URI_Functions_Post {
 			return;
 		}
 
+		// Check if the user can edit this post
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
 		// Fix for revisions
 		$post_id = wp_is_post_revision( $post_id ) ? wp_is_post_revision( $post_id ) : $post_id;
 		$post    = get_post( $post_id );
@@ -874,7 +877,7 @@ class Permalink_Manager_URI_Functions_Post {
 		}
 
 		// Update the slug (if changed)
-		if ( ! empty( $post->post_name ) && isset( $_POST['native_slug'] ) && ( $_POST['native_slug'] !== $post->post_name ) ) {
+		if ( isset( $_POST['permalink-manager-edit-uri-element-slug'] ) && isset( $_POST['native_slug'] ) && ( $_POST['native_slug'] !== $post->post_name ) ) {
 			// Make sure that '_wp_old_slug' is saved
 			if ( ! empty( $_POST['post_name'] ) || ( isset( $_POST['action'] ) && in_array( $_POST['action'], array( 'pm_save_permalink', 'editpost' ) ) ) ) {
 				$post_after            = clone $post;
