@@ -39561,7 +39561,7 @@ footer .social .nav li a:hover, footer .social .nav li a:focus {
 .mc-title-section.style_2::before {
   position: absolute;
   content: "";
-  background-image: url("../img/banner-overlay.webp");
+  background-image: url("../img/banner-overlay.png");
   width: 553px;
   height: 500px;
   right: 0;
@@ -40656,6 +40656,8 @@ section.section.bg_gray {
 .pricing_section_wrap .pricing {
   margin-top: 60px;
   margin-bottom: 20px;
+  -ms-flex-pack: center;
+      justify-content: center;
 }
 .pricing_section_wrap .pricing .card {
   --bs-card-inner-border-radius: 10px;

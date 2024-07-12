@@ -294,6 +294,7 @@ function mc_consultant_data_update( $entry, $form ) {
     $additional_notes = rgar( $entry, '50' );
     $doctor = rgar( $entry, '54' );
     $consultation_date = rgar( $entry, '55' );
+    $consent = rgar( $entry, '56' );
     
     $doctor_info = get_userdata($doctor);
 
@@ -337,6 +338,7 @@ function mc_consultant_data_update( $entry, $form ) {
         update_field('mc_complementary_medicines_2', $complementary_medicines_2 , $patient_post_id);
         update_field('mc_patient_preferences_1', $patient_preferences_1 , $patient_post_id);
         update_field('mc_additional_notes', $additional_notes , $patient_post_id);
+        update_field('mc_consent', $consent , $patient_post_id);
 
         $user = get_user_by('login', $patient);
 
@@ -1036,6 +1038,10 @@ function mc_create_patient_file_pdf() {
         $mc_additional_notes = get_field('mc_additional_notes' , $patient);
         $doctor_name = get_field('doctor_name' , $patient);
         $patient_approved_medication = get_field('patient_approved_medication' , $patient);
+        $mc_consent = get_field('mc_consent', $patient);
+        $consent = $mc_consent ? 'Yes' : 'No';
+        $meeting_note = get_field('meeting_note', $patient);
+        $consent_date = get_field('consent_date', $patient);;
 
         $upload_dir = wp_upload_dir();
         $patient_dir = $upload_dir['basedir'] . '/patients/';
@@ -1146,20 +1152,9 @@ function mc_create_patient_file_pdf() {
         <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Patient Preferences and Concerns</h3>
         <p><strong>Do you have any preferences regarding the type of medicinal cannabis product (e.g., oil, capsules, inhalation) you would prefer? :</strong><br/>'.$mc_patient_preferences_1.'</p>
         <p><strong>Additional notes :</strong><br/>'.$mc_additional_notes.'</p>
+        <p><strong>Consultant gives consent for this patient to go into shared care :</strong><br/>'.$consent.'</p>
 
         <hr/>';
-
-        if( $doctor_name || $patient_approved_medication ) {
-            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">MDT Meeting</h3>';
-        }
-
-        if( $doctor_name ) {
-            $html .= '<p><strong>Name of doctor who has taken the meeting :</strong><br/>'.$doctor_name.'</p>';
-        }
-
-        if( $patient_approved_medication ) {
-            $html .= '<p><strong>Is the patient approved to be prescribed medication ? :</strong><br/>'.$patient_approved_medication.'</p>';
-        }
 
         if( $follow_up_appointments ) {
             $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Follow Ups</h3>
@@ -1185,6 +1180,26 @@ function mc_create_patient_file_pdf() {
                 }
             $html .= '</tbody>
             </table>';
+        }
+
+        if( $meeting_note || $consent_date || $doctor_name || $patient_approved_medication ) {
+            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">MDT Meeting</h3>';
+        }
+
+        if( $meeting_note ) {
+            $html .= '<p><strong>Meeting note :</strong><br/>'.$meeting_note.'</p>';
+        }
+
+        if( $consent_date ) {
+            $html .= '<p><strong>Consent Date :</strong><br/>'.$consent_date.'</p>';
+        }
+
+        if( $doctor_name ) {
+            $html .= '<p><strong>Name of doctor who has taken the meeting :</strong><br/>'.$doctor_name.'</p>';
+        }
+
+        if( $patient_approved_medication ) {
+            $html .= '<p><strong>Is the patient approved to be prescribed medication ? :</strong><br/>'.$patient_approved_medication.'</p>';
         }
 
         if( $prescription_date_1 || $prescription_date_2 || $prescription_date_3 ||$other_prescription_data ) {

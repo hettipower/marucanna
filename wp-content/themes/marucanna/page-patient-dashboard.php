@@ -165,17 +165,17 @@ if (is_user_logged_in()):
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-treatment-tab" data-bs-toggle="pill" data-bs-target="#pills-treatment" type="button" role="tab" aria-controls="pills-treatment" aria-selected="false">Treatment Details</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <!-- <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-documents-tab" data-bs-toggle="pill" data-bs-target="#pills-documents" type="button" role="tab" aria-controls="pills-documents" aria-selected="false">Documents</button>
-            </li>
+            </li> -->
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-consultation-tab" data-bs-toggle="pill" data-bs-target="#pills-consultation" type="button" role="tab" aria-controls="pills-consultation" aria-selected="false">Consultation</button>
             </li>
 
             <?php if( $payment_date_1 || $payment_date_2 || $payment_date_3 || $other_payments ): ?>
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-payments-tab" data-bs-toggle="pill" data-bs-target="#pills-payments" type="button" role="tab" aria-controls="pills-payments" aria-selected="false">Payments</button>
-                </li>
+                </li> -->
             <?php endif; ?>
             
             <?php if( $prescription_date_1 || $prescription_date_2 || $prescription_date_3 || $other_prescription_data ): ?>

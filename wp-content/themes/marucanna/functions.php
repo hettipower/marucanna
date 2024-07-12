@@ -249,6 +249,17 @@ function add_mc_user_roles() {
       'delete_posts' => false,
     )
   );
+
+  add_role(
+    'office',
+    __('Office'),
+    array(
+      // Define capabilities here
+      'read'         => true,
+      'edit_posts'   => false,
+      'delete_posts' => false,
+    )
+  );
 }
 
 //prioritize pagination over displaying custom post type content (Used this to fix conditions page pagination 404 issue #LWP)
