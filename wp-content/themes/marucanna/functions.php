@@ -217,6 +217,9 @@ add_action( 'after_setup_theme', 'mc_after_setup_theme' );
  */
 add_action('init', 'add_mc_user_roles');
 function add_mc_user_roles() {
+
+  $editor = get_role('editor');
+
   add_role(
     'patient',
     __('Patient'),
@@ -253,13 +256,9 @@ function add_mc_user_roles() {
   add_role(
     'office',
     __('Office'),
-    array(
-      // Define capabilities here
-      'read'         => true,
-      'edit_posts'   => false,
-      'delete_posts' => false,
-    )
+    $editor->capabilities
   );
+
 }
 
 //prioritize pagination over displaying custom post type content (Used this to fix conditions page pagination 404 issue #LWP)
@@ -297,3 +296,37 @@ function smartwp_remove_wp_block_library_css(){
 add_action( 'wp_enqueue_scripts', 'smartwp_remove_wp_block_library_css', 100 );
 
 remove_action( 'wp_enqueue_scripts', 'wp_enqueue_classic_theme_styles' );
+
+add_action('admin_menu', 'hide_admin_menu_items_for_office', 999);
+function hide_admin_menu_items_for_office() {
+  // Check if the current user has the 'office' role
+  if (current_user_can('office')) {
+    // Remove menu items
+    remove_menu_page('index.php');                  // Dashboard
+    remove_menu_page('edit.php');                   // Posts
+    remove_menu_page('upload.php');                 // Media
+    remove_menu_page('edit.php?post_type=page');    // Pages
+    remove_menu_page('edit-comments.php');          // Comments
+    remove_menu_page('themes.php');                 // Appearance
+    remove_menu_page('plugins.php');                // Plugins
+    remove_menu_page('users.php');                  // Users
+    remove_menu_page('tools.php');                  // Tools
+    remove_menu_page('options-general.php');        // Settings
+    remove_menu_page('edit.php?post_type=marucanna-reviews');
+    remove_menu_page('admin.php?page=theme-options');
+
+  }
+}
+
+add_filter('admin_body_class', 'add_custom_admin_body_class');
+function add_custom_admin_body_class($classes) {
+  // Add your custom classes
+  $classes .= '';
+
+  // You can also add classes conditionally
+  if (current_user_can('office')) {
+    $classes .= ' office-admin-user';
+  }
+
+  return $classes;
+}

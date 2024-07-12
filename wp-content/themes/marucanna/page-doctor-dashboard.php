@@ -10,6 +10,8 @@ if (is_user_logged_in()):
         $patients = get_users( array(
             'role__in' => array( 'patient' )
         ));
+        $form = (isset($_GET['form'])) ? $_GET['form'] : false;
+        $status = (isset($_GET['status'])) ? $_GET['status'] : false;
 ?>
 
 <section class="section mc-title-section style_1" style="<?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);<?php } ?>">
@@ -34,6 +36,13 @@ if (is_user_logged_in()):
 
 <section class="section dashboard_wrapper">
     <div class="container">
+
+        <?php if( $form == 'note' && $status ): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Note added successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
 
         <?php get_template_part( 'template-part/doctor', 'dashbord-nav' ); ?>
         
@@ -77,7 +86,7 @@ if (is_user_logged_in()):
                                 </a>
                             </td>
                             <td><?php echo $phone; ?></td>
-                            <td style="width: 405px;">
+                            <td style="width: 500px;text-align: center;vertical-align: middle;">
                                 <?php if( !$consultant ): ?>
                                     <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_4 small">Consultation</a>
                                 <?php else: ?>
@@ -85,7 +94,24 @@ if (is_user_logged_in()):
                                 <?php endif; ?>
                                 <a href="<?php echo home_url('about-us/patient-follow-up/?patient='.$patient->ID.'&patient_post='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_2 small">Follow Up</a>
 
+                                <a href="#" class="btn style_4 small" data-bs-toggle="modal" data-bs-target="#addNoteModal<?php echo $patient_post_id; ?>">Add Note</a>
+
                                 <a href="<?php echo admin_url( 'admin-post.php?action=create_patient_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_3 small">Export Patient File</a>
+
+                                <div class="modal fade" id="addNoteModal<?php echo $patient_post_id; ?>" tabindex="-1" aria-labelledby="addNoteModal<?php echo $patient_post_id; ?>Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="addNoteModal<?php echo $patient_post_id; ?>Label">Add Note</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <?php echo do_shortcode('[gravityform id="14" title="false" field_values="patient_post_id='.$patient_post_id.'"]'); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -48,3 +48,43 @@
         }
     }
 }
+
+.office-admin-user {
+    #adminmenu {
+        .wp-submenu {
+            li {
+                display: none;
+
+                &.wp-first-item {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+
+    #toplevel_page_theme-options , 
+    #toplevel_page_wpseo_workouts , 
+    #major-publishing-actions , 
+    #mc_patient_consent_button {
+        display: none;
+    }
+
+    #wpbody-content {
+        .wrap {
+            .page-title-action {
+                display: none;
+            }
+
+            .row-actions {
+                span {
+                    display: none;
+
+                    &.edit , 
+                    &.view {
+                        display: inline;
+                    }
+                }
+            }
+        }
+    }
+}

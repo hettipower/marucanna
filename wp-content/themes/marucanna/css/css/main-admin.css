@@ -1124,4 +1124,26 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
   outline: none;
 }
 
+.office-admin-user #adminmenu .wp-submenu li {
+  display: none;
+}
+.office-admin-user #adminmenu .wp-submenu li.wp-first-item {
+  display: inline-block;
+}
+.office-admin-user #toplevel_page_theme-options,
+.office-admin-user #toplevel_page_wpseo_workouts,
+.office-admin-user #major-publishing-actions,
+.office-admin-user #mc_patient_consent_button {
+  display: none;
+}
+.office-admin-user #wpbody-content .wrap .page-title-action {
+  display: none;
+}
+.office-admin-user #wpbody-content .wrap .row-actions span {
+  display: none;
+}
+.office-admin-user #wpbody-content .wrap .row-actions span.edit, .office-admin-user #wpbody-content .wrap .row-actions span.view {
+  display: inline;
+}
+
 /*# sourceMappingURL=main-admin.css.map */

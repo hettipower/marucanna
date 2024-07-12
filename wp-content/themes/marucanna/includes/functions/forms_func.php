@@ -853,7 +853,6 @@ function mc_update_patient_contact_details( $entry, $form ) {
 add_action( 'gform_after_submission_10', 'mc_update_patient_clinic_details', 10, 2 );
 function mc_update_patient_clinic_details( $entry, $form ) {
   
-    $patient = rgar( $entry, '15' );
     $patient_post_id = rgar( $entry, '16' );
     $referred_clinic = rgar( $entry, '1' );
     $clinic_name = rgar( $entry, '3' );
@@ -864,7 +863,7 @@ function mc_update_patient_clinic_details( $entry, $form ) {
     $gp_address_line_1 = rgar( $entry, '10.1' );
     $gp_address_line_2 = rgar( $entry, '10.2' );
     $gp_town = rgar( $entry, '11' );
-    $gp_country = rgar( $entry, '12' );
+    $gp_country = rgar( $entry, '12.6' );
     $gp_postal_code = rgar( $entry, '13' );
     $gp_phone = rgar( $entry, '14' );
     
@@ -1581,5 +1580,29 @@ function mc_create_consultation_file_pdf() {
         $dompdf->stream($pdf_name,array('Attachment'=>1));
         
     }
+    
+}
+
+add_action( 'gform_after_submission_14', 'mc_add_note_from_doctor', 10, 2 );
+function mc_add_note_from_doctor( $entry, $form ) {
+
+    $patient_post_id = rgar( $entry, '16' );
+    $date = rgar( $entry, '17' );
+    $note = rgar( $entry, '18' );
+    
+    if($patient_post_id) {
+
+        $existing_notes = get_field('notes' , $patient_post_id);
+
+        $new_row = array(
+            'date' => $date,
+            'note' => $note,
+        );
+
+        $existing_notes[] = $new_row;
+
+        update_field('notes', $existing_notes, $patient_post_id);
+        
+    } 
     
 }

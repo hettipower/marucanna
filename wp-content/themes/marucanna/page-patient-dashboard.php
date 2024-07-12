@@ -373,7 +373,7 @@ if (is_user_logged_in()):
 
                             <div class="collapse multi-clinic-collapse" id="clinicDetailView">
                                 <div class="col-12 profile-item">
-                                    <?php echo do_shortcode('[gravityform id="10" title="false" field_values="patient_id='.$user_id.'&patient_post_id='.$patient_post_id.'&referred_clinic='.$referred_clinic.'&clinic_name='.$clinic_name.'&clinic_postcode='.$clinic_postcode.'&clinic_phone_number='.$clinic_phone_number.'&gp_name='.$gp_name.'&practice_name='.$practice_name.'&gp_address_line_1='.$gp_address_line_1.'&gp_address_line_2='.$gp_address_line_2.'&gp_town='.$gp_town.'&gp_country='.$gp_country.'&gp_postal_code='.$gp_postal_code.'&gp_phone='.$gp_phone.'"]'); ?>
+                                    <?php echo do_shortcode('[gravityform id="10" title="false" field_values="patient='.$user_id.'&patient_post_id='.$patient_post_id.'&referred_clinic='.$referred_clinic.'&clinic_name='.$clinic_name.'&clinic_postcode='.$clinic_postcode.'&clinic_phone_number='.$clinic_phone_number.'&gp_name='.$gp_name.'&practice_name='.$practice_name.'&gp_address_line_1='.$gp_address_line_1.'&gp_address_line_2='.$gp_address_line_2.'&gp_town='.$gp_town.'&gp_country='.$gp_country.'&gp_postal_code='.$gp_postal_code.'&gp_phone='.$gp_phone.'"]'); ?>
                                 </div>
                             </div>
                             
