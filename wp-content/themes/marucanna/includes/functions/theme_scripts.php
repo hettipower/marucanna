@@ -4,7 +4,6 @@
 /*------------------------------------*\
     THEME SCRIPTS
 \*------------------------------------*/
-use Square\Environment;
 
 function html5blank_header_scripts()
 {

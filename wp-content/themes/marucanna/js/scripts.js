@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-05-30 9:07:55 PM */
+/*! css 1.0.0 filename.js 2024-05-30 9:21:59 PM */
 
 if (jQuery("body").hasClass("author") || jQuery("body").hasClass("page-template-page-patient-dashboard")) {
     Fancybox.bind("[data-fancybox]", {});
