@@ -11,7 +11,7 @@ include 'includes/functions/forms_func.php';
 include 'includes/functions/login_func.php';
 include 'includes/functions/helpers.php';
 include 'includes/functions/theme_misc.php';
-include_once __DIR__ . '/includes/acf/acf-hidden-field/init.php';   
+include_once __DIR__ . '/includes/acf/acf-hidden-field/init.php';
 
 add_theme_support( 'post-thumbnails' ); 
 add_image_size( 'reviews-thumb', 50, 49,true);

@@ -60,7 +60,7 @@ get_header(); ?>
 			<?php if ( $logo ) { ?>
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="clinic-inner">
-                    <a href="<?php the_sub_field( 'link' ); ?>" class="overlay"></a>
+                    <a href="<?php the_sub_field( 'link' ); ?>" class="overlay" title="<?php echo $logo['title']; ?>"></a>
                     <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" title="<?php echo $logo['title']; ?>" />
                 </div>
             </div>

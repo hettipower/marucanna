@@ -447,7 +447,7 @@ $thumb_url = wp_get_attachment_image_src($thumb_id,'blog-home-thumb', true);
 						<?php my_excerpt(17); ?>
                         
                     </div>
-                    <a href="<?php the_permalink(); ?>" aria-label="<?php the_title(); ?>" class="overlay"></a>
+                    <a href="<?php the_permalink(); ?>" aria-label="<?php the_title(); ?>" class="overlay" title="<?php echo get_post(get_post_thumbnail_id())->post_title; ?>"></a>
                 </div>
             </div>
 			
