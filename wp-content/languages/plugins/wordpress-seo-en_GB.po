@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Yoast SEO - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-05-14 08:26:47+0000\n"
+"PO-Revision-Date: 2024-06-07 15:34:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,31 @@ msgstr ""
 "X-Generator: GlotPress/4.0.1\n"
 "Language: en_GB\n"
 "Project-Id-Version: Plugins - Yoast SEO - Stable (latest release)\n"
+
+#: blocks/dynamic-blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "site structure"
+msgstr "site structure"
+
+#: blocks/dynamic-blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "internal linking"
+msgstr "internal linking"
+
+#: blocks/dynamic-blocks/breadcrumbs/block.json
+msgctxt "block keyword"
+msgid "breadcrumbs"
+msgstr "breadcrumbs"
+
+#: blocks/dynamic-blocks/breadcrumbs/block.json
+msgctxt "block description"
+msgid "Adds the Yoast SEO breadcrumbs to your template or content."
+msgstr "Adds the Yoast SEO breadcrumbs to your template or content."
+
+#: blocks/dynamic-blocks/breadcrumbs/block.json
+msgctxt "block title"
+msgid "Yoast Breadcrumbs"
+msgstr "Yoast Breadcrumbs"
 
 #: blocks/structured-data-blocks/how-to/block.json
 msgctxt "block keyword"
@@ -47,8 +72,18 @@ msgstr "Schema"
 
 #: blocks/structured-data-blocks/faq/block.json
 msgctxt "block keyword"
+msgid "Frequently Asked Questions"
+msgstr "Frequently Asked Questions"
+
+#: blocks/structured-data-blocks/faq/block.json
+msgctxt "block keyword"
 msgid "FAQ"
 msgstr "FAQ"
+
+#: blocks/structured-data-blocks/faq/block.json
+msgctxt "block description"
+msgid "List your Frequently Asked Questions in an SEO-friendly way."
+msgstr "List your Frequently Asked Questions in an SEO-friendly way."
 
 #: blocks/structured-data-blocks/faq/block.json
 msgctxt "block title"
