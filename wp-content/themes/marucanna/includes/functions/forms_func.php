@@ -963,6 +963,7 @@ function mc_create_patient_file_pdf() {
         $country = get_field('country' , $patient);
         $postcode = get_field('postcode' , $patient);
         $dob = get_field('dob' , $patient);
+        $nhs_number = get_field('nhs_number' , $patient);
 
         $treatment = get_field('treatment' , $patient);
         $additional_notes = get_field('additional_notes' , $patient);
@@ -1063,7 +1064,8 @@ function mc_create_patient_file_pdf() {
         </table>
         <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Patient Details</h3>
         <p><strong>Patient ID :</strong><br/>'.$patient_id.'</p>
-        <p><strong>Full Name :</strong><br/>'.$$name.'</p>
+        <p><strong>Full Name :</strong><br/>'.$name.'</p>
+        <p><strong>NHS Number :</strong><br/>'.$nhs_number.'</p>
         <p><strong>Email :</strong><br/>'.$email.'</p>
         <p><strong>Phone :</strong><br/>'.$phone.'</p>
         <p><strong>Gender :</strong><br/>'.$gender.'</p>
@@ -1431,6 +1433,7 @@ function mc_create_consultation_file_pdf() {
 
         $patient_id = get_field('patient_id' , $patient);
         $name = get_field('mc_full_name' , $patient);
+        $nhs_number = get_field('nhs_number' , $patient);
         $phone = get_field('mc_phone' , $patient);
         $address_line_1 = get_field('mc_address_line_1' , $patient);
         $address_line_2 = get_field('mc_address_line_2' , $patient);
@@ -1495,7 +1498,8 @@ function mc_create_consultation_file_pdf() {
         </table>
         <h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Patient Details</h3>
         <p><strong>Patient ID :</strong><br/>'.$patient_id.'</p>
-        <p><strong>Full Name :</strong><br/>'.$$name.'</p>
+        <p><strong>Full Name :</strong><br/>'.$name.'</p>
+        <p><strong>NHS Number :</strong><br/>'.$nhs_number.'</p>
         <p><strong>Phone :</strong><br/>'.$phone.'</p>
         <p><strong>Addrerss :</strong><br/>'.$address_line_1.'<br/>'.$address_line_2.'</p>
         <p><strong>Date of Birth :</strong><br/>'.$dob.'</p>

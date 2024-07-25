@@ -78,7 +78,7 @@ $nhs_number = isset($_GET['nhs_number']) ? $_GET['nhs_number'] : '';
 
                     <div class="mb-3">
                         <label for="nhs_number" class="form-label">Your NHS number <span class="req">*</span></label>
-                        <input type="number" name="nhs_number" class="form-control" id="nhs_number" required value="<?php echo $nhs_number; ?>" max="10">
+                        <input type="text" name="nhs_number" class="form-control" id="nhs_number" required value="<?php echo $nhs_number; ?>" maxlength="10">
                         <div class="invalid-feedback">This field is required.</div>
                     </div>
 
@@ -206,6 +206,26 @@ jQuery(document).ready(function($) {
             event.preventDefault();
         }
     });
+	
+});
+function enforceMaxLength(event) {
+	const input = event.target;
+
+	// Allow only digits
+	if (!/^\d*$/.test(input.value)) {
+		input.value = input.value.replace(/[^\d]/g, '');
+	}
+
+	// Limit to 10 digits
+	if (input.value.length > 10) {
+		input.value = input.value.slice(0, 10);
+	}
+}	
+	
+	
+document.addEventListener('DOMContentLoaded', (event) => {
+	const inputField = document.getElementById('nhs_number');
+	inputField.addEventListener('input', enforceMaxLength);
 });
 </script>
 
