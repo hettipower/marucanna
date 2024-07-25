@@ -3,7 +3,7 @@
  * Plugin Name: Gravity Forms Square Add-On
  * Plugin URI: https://gravityforms.com
  * Description: Integrates Gravity Forms with Square, enabling end users to purchase goods and services through Gravity Forms.
- * Version: 2.1.0
+ * Version: 2.2.0
  * Author: Gravity Forms
  * Author URI: https://gravityforms.com
  * License: GPL-2.0+
@@ -11,7 +11,7 @@
  * Domain Path: /languages
  *
  * ------------------------------------------------------------------------
- * Copyright 2009 - 2023 rocketgenius
+ * Copyright 2009 - 2024 rocketgenius
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
 
 defined( 'ABSPATH' ) || die();
 
-define( 'GF_SQUARE_VERSION', '2.1.0' );
+define( 'GF_SQUARE_VERSION', '2.2.0' );
 
 define( 'GF_SQUARE_MIN_GF_VERSION', '2.3' );
 

@@ -314,6 +314,8 @@ function hide_admin_menu_items_for_office() {
     remove_menu_page('options-general.php');        // Settings
     remove_menu_page('edit.php?post_type=marucanna-reviews');
     remove_menu_page('admin.php?page=theme-options');
+    remove_menu_page('edit.php?post_type=marucanna-doctors');
+    remove_menu_page('edit.php?post_type=marucanna-conditions');
 
   }
 }

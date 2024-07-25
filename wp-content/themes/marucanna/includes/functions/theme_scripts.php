@@ -52,7 +52,12 @@ function html5blank_header_scripts()
     wp_register_script('themescript', get_template_directory_uri() . '/js/scripts.js', array('jquery'), false, true); // Custom scripts
     wp_enqueue_script('themescript'); // Enqueue it! 
 
-    wp_localize_script('themescript', 'CUSTOM_PARAMS', array('ajaxUrl' => admin_url('admin-ajax.php')));
+    $localize_args = array(
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'gpLists' => get_all_gp_list_data(),
+        'gpPostalCodes' => get_all_gp_postal_codes()
+    );
+    wp_localize_script('themescript', 'CUSTOM_PARAMS', $localize_args);
     
 }
 add_action('wp_enqueue_scripts', 'html5blank_header_scripts');

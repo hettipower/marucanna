@@ -10,6 +10,7 @@ jQuery(document).ready(function ($) {
   menu_dropdown();
 	patients_datatable();
   mobile_menu();
+  autocomplete(document.getElementById("input_1_106"), CUSTOM_PARAMS.gpPostalCodes);
 });
 
 function patients_datatable() {

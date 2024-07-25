@@ -520,6 +520,27 @@ table.dataTable {
 	td {
 		-webkit-box-sizing: content-box;
 		box-sizing: content-box;
+
+		.dropdown {
+			display: inline-block;
+
+			.dropdown-menu {
+				padding: 0;
+				overflow: hidden;
+
+				.dropdown-item {
+					font-size: 14px;
+
+					&:hover {
+						background-color: #e3ffec;
+					}
+				}
+			}
+		}
+
+		.modal {
+			text-align: left;
+		}
 	}
 	th {
 		-webkit-box-sizing: content-box;

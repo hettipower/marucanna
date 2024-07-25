@@ -9,6 +9,7 @@ function admin_mc_eligibility_checker() {
     $fname = isset($_POST['fname']) ? $_POST['fname'] : false;
     $email = isset($_POST['email']) ? $_POST['email'] : false;
     $contact_no = isset($_POST['contact_no']) ? $_POST['contact_no'] : false;
+    $nhs_number = isset($_POST['nhs_number']) ? $_POST['nhs_number'] : false;
     $eligibility_q1 = isset($_POST['eligibility_q1']) ? $_POST['eligibility_q1'] : false;
     $eligibility_q2 = isset($_POST['eligibility_q2']) ? $_POST['eligibility_q2'] : false;
     $eligibility_q3 = isset($_POST['eligibility_q3']) ? $_POST['eligibility_q3'] : false;
@@ -26,11 +27,13 @@ function admin_mc_eligibility_checker() {
     
     $password = wp_generate_password(15 , false);
 
-    if($fname && $email && $contact_no) {
+    if($fname && $email && $contact_no && $nhs_number) {
         if(!validatePhoneNumberUK($contact_no)) {
-            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please enter valid Contact Number.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no;
+            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please enter valid Contact Number.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } elseif(email_exists($email)) {
-            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=User exists.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no;
+            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=User exists.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
+        } if(!validateNHSNumber($nhs_number)) {
+            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please enter valid NHS Number.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } else {
 
             $is_email_exist = check_patient_email_exist($email);
@@ -57,6 +60,7 @@ function admin_mc_eligibility_checker() {
                     update_field('name', $fname , $patient_post_id);
                     update_field('email', $email , $patient_post_id);
                     update_field('phone', $contact_no , $patient_post_id);
+                    update_field('nhs_number', $nhs_number , $patient_post_id);
             
                     if($eligibility_q1 && !$eligibility_q5) {
                         $eligibility = 'Eligible';
@@ -95,15 +99,15 @@ function admin_mc_eligibility_checker() {
                             $return_url = get_field('booking_page' , 'option').'?patient='.$user_id.'&booking='.$patient_post_id;
                 
                         } else {
-                            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$user_id->get_error_message().'&fname='.$fname.'&email='.$email.'&contact='.$contact_no;
+                            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$user_id->get_error_message().'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
                         }
             
                     }else{
-                        $return_url = get_field('check_eligibility_page' , 'option').'?status=2&mgs=You are not Eligible.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no;
+                        $return_url = get_field('check_eligibility_page' , 'option').'?status=2&mgs=You are not Eligible.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
                     }
             
                 } else {
-                    $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$patient_post_id->get_error_message().'&fname='.$fname.'&email='.$email.'&contact='.$contact_no;
+                    $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$patient_post_id->get_error_message().'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
                 }
             } else {
 
@@ -154,17 +158,17 @@ function admin_mc_eligibility_checker() {
                         $return_url = get_field('booking_page' , 'option').'?patient='.$user_id.'&booking='.$is_email_exist;
             
                     } else {
-                        $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$user_id->get_error_message().'&fname='.$fname.'&email='.$email.'&contact='.$contact_no;
+                        $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs='.$user_id->get_error_message().'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
                     }
         
                 }else{
-                    $return_url = get_field('check_eligibility_page' , 'option').'?status=2&mgs=You are not Eligible.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no;
+                    $return_url = get_field('check_eligibility_page' , 'option').'?status=2&mgs=You are not Eligible.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
                 }
 
             }
         }
     } else {
-        $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please fill in all required fields.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no;
+        $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please fill in all required fields.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
     }
     
     wp_redirect( $return_url );
@@ -1316,7 +1320,7 @@ function mc_create_patient_file_pdf() {
         $dompdf->render();
 
         $pdf_name = 'PF-'.$patient_id.'-'.$patient.'.pdf';
-        $dompdf->stream($pdf_name,array('Attachment'=>1));
+        $dompdf->stream($pdf_name,array('Attachment'=>false));
         
     }
     
@@ -1602,6 +1606,57 @@ function mc_add_note_from_doctor( $entry, $form ) {
         $existing_notes[] = $new_row;
 
         update_field('notes', $existing_notes, $patient_post_id);
+        
+    } 
+    
+}
+
+add_action( 'gform_after_submission_15', 'mc_add_mdt_from_doctor', 10, 2 );
+function mc_add_mdt_from_doctor( $entry, $form ) {
+
+    $patient_post_id = rgar( $entry, '16' );
+    $note = rgar( $entry, '18' );
+    $doctor = rgar( $entry, '19' );
+    
+    if($patient_post_id) {
+        update_field('meeting_note', $note, $patient_post_id);
+    } 
+    
+}
+
+add_action( 'gform_after_submission_16', 'mc_add_prescription_from_doctor', 10, 2 );
+function mc_add_prescription_from_doctor( $entry, $form ) {
+
+    $patient_post_id = rgar( $entry, '16' );
+    $prescription_note = rgar( $entry, '18' );
+    $prescription_date = rgar( $entry, '20' );
+    
+    if($patient_post_id) {
+        $existing_other_prescription_data = get_field('other_prescription_data' , $patient_post_id);
+        $prescription_date_3 = get_field('prescription_date_3' , $patient_post_id);
+        $prescription_date_2 = get_field('prescription_date_2' , $patient_post_id);
+        $prescription_date_1 = get_field('prescription_date_1' , $patient_post_id);
+
+        if( !$prescription_date_1 ) {
+            update_field('prescription_date_1', $prescription_date, $patient_post_id);
+            update_field('prescription_note_1', $prescription_note, $patient_post_id);
+        } else if( !$prescription_date_2 ) {
+            update_field('prescription_date_2', $prescription_date, $patient_post_id);
+            update_field('prescription_note_2', $prescription_note, $patient_post_id);
+        } else if( !$prescription_date_3 ) {
+            update_field('prescription_date_3', $prescription_date, $patient_post_id);
+            update_field('prescription_note_3', $prescription_note, $patient_post_id);
+        } else {
+            $new_row = array(
+                'prescription_date' => $prescription_date,
+                'prescription_note' => $prescription_note,
+            );
+    
+            $existing_other_prescription_data[] = $new_row;
+    
+            update_field('other_prescription_data', $existing_other_prescription_data, $patient_post_id);
+        }
+
         
     } 
     

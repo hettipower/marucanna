@@ -259,8 +259,9 @@ class GF_Square extends GFPaymentAddOn {
 	 * @return array
 	 */
 	public function scripts() {
-
-		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
+		$base_url = $this->get_base_url();
+		$version  = $this->_version;
+		$min      = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
 
 		$square_script_url = $this->is_sandbox() ? 'https://sandbox.web.squarecdn.com/v1/square.js' : 'https://web.squarecdn.com/v1/square.js';
 		$catch_all_message = wp_strip_all_tags( __( 'An error occurred while processing your request, please try again later.', 'gravityformssquare' ) );
@@ -284,8 +285,8 @@ class GF_Square extends GFPaymentAddOn {
 			// Front end script.
 			array(
 				'handle'    => 'gform_square_vendor_theme_js',
-				'src'       => trailingslashit( $this->get_base_url() ) . "/assets/js/dist/vendor-theme.js",
-				'version'   => $this->_version,
+				'src'       => $base_url . "/assets/js/dist/vendor-theme{$min}.js",
+				'version'   => $version,
 				'deps'      => array( 'gforms_square_web_payments' ),
 				'in_footer' => true,
 				'enqueue'   => array(
@@ -298,8 +299,8 @@ class GF_Square extends GFPaymentAddOn {
 			),
 			array(
 				'handle'    => 'gforms_square_theme',
-				'src'       => $this->get_base_url() . '/assets/js/dist/scripts-theme.js',
-				'version'   => $this->_version,
+				'src'       => $base_url . "/assets/js/dist/scripts-theme{$min}.js",
+				'version'   => $version,
 				'deps'      => array( 'jquery', 'gforms_square_web_payments', 'gform_square_vendor_theme_js' ),
 				'in_footer' => true,
 				'enqueue'   => array(
@@ -329,8 +330,8 @@ class GF_Square extends GFPaymentAddOn {
 			),
 			array(
 				'handle'    => 'gform_square_vendor_admin',
-				'src'       => trailingslashit( $this->get_base_url() ) . '/assets/js/dist/vendor-admin.js',
-				'version'   => $this->_version,
+				'src'       => $base_url . "/assets/js/dist/vendor-admin{$min}.js",
+				'version'   => $version,
 				'deps'      => array(),
 				'in_footer' => true,
 				'enqueue'   => array(
@@ -342,8 +343,8 @@ class GF_Square extends GFPaymentAddOn {
 			array(
 				'handle'    => 'gform_square_admin',
 				'deps'      => array( 'jquery' ),
-				'src'       => $this->get_base_url() . '/assets/js/dist/scripts-admin.js',
-				'version'   => $this->_version,
+				'src'       => $base_url . "/assets/js/dist/scripts-admin{$min}.js",
+				'version'   => $version,
 				'in_footer' => true,
 				'enqueue'   => array(
 					array(
@@ -379,14 +380,15 @@ class GF_Square extends GFPaymentAddOn {
 	 * @return array $styles
 	 */
 	public function styles() {
-
-		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
+		$base_url = $this->get_base_url();
+		$version  = $this->_version;
+		$min  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		$styles = array(
 			array(
 				'handle'    => 'gforms_square_frontend',
-				'src'       => $this->get_base_url() . "/assets/css/dist/theme{$min}.css",
-				'version'   => $this->_version,
+				'src'       => $base_url . "/assets/css/dist/theme{$min}.css",
+				'version'   => $version,
 				'in_footer' => false,
 				'enqueue'   => array(
 					array( $this, 'frontend_script_callback' ),
@@ -398,8 +400,8 @@ class GF_Square extends GFPaymentAddOn {
 			),
 			array(
 				'handle'  => 'gform_square_admin',
-				'src'     => $this->get_base_url() . "/assets/css/dist/admin{$min}.css",
-				'version' => $this->_version,
+				'src'     => $base_url . "/assets/css/dist/admin{$min}.css",
+				'version' => $version,
 				'deps'    => array( 'thickbox' ),
 				'enqueue' => array(
 					array(
@@ -434,13 +436,14 @@ class GF_Square extends GFPaymentAddOn {
 		}
 
 		$base_url = plugins_url( '', __FILE__ );
+		$min  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		return array(
 			'foundation' => array(
-				array( 'gravity_forms_square_theme_foundation', "$base_url/assets/css/dist/theme-foundation.css" ),
+				array( 'gravity_forms_square_theme_foundation', $base_url . "/assets/css/dist/theme-foundation{$min}.css" ),
 			),
 			'framework' => array(
-				array( 'gravity_forms_square_theme_framework', "$base_url/assets/css/dist/theme-framework.css" ),
+				array( 'gravity_forms_square_theme_framework', $base_url . "/assets/css/dist/theme-framework{$min}.css" ),
 			),
 		);
 	}
@@ -2532,6 +2535,7 @@ class GF_Square extends GFPaymentAddOn {
 	 * Create the Square payment and return any authorization errors which occur.
 	 *
 	 * @since  1.0.0
+	 * @since  2.1.1 a verification token is required to make a payment.
 	 *
 	 * @param array $feed The feed object currently being processed.
 	 * @param array $submission_data The customer and transaction data.
@@ -2546,6 +2550,12 @@ class GF_Square extends GFPaymentAddOn {
 		if ( rgblank( $square_nonce ) ) {
 			return $this->authorization_error( esc_html__( 'Invalid square nonce', 'gravityformssquare' ) );
 		}
+		// a verification token is required to make a payment, return early if it doesn't exist.
+		$verification_token = sanitize_text_field( rgpost( 'square_verification' ) );
+		if ( empty( $verification_token ) ) {
+			return $this->authorization_error( esc_html_e( 'Customer verification failed.', 'gravityformssquare' ) );
+		}
+
 		// Get main payment information.
 		$currency    = $this->get_selected_location_currency();
 		$amount      = $this->get_amount_export( $submission_data['payment_amount'], $currency );
@@ -2557,17 +2567,17 @@ class GF_Square extends GFPaymentAddOn {
 
 		// Build payment data array.
 		$payment_data = array(
-			'idempotency_key' => $this->api->generate_idempotency_key(),
-			'amount_money'    => array(
+			'idempotency_key'    => $this->api->generate_idempotency_key(),
+			'amount_money'       => array(
 				'amount'   => $amount,
 				'currency' => $currency,
 			),
-			'source_id'       => $square_nonce,
-			'autocomplete'    => false,
-			'location_id'     => $location_id,
-			'note'            => 'Gravity Forms - ' . $submission_data['form_title'],
+			'source_id'          => $square_nonce,
+			'autocomplete'       => false,
+			'location_id'        => $location_id,
+			'note'               => 'Gravity Forms - ' . $submission_data['form_title'],
+			'verification_token' => $verification_token,
 		);
-
 
 		// If the site is using a custom app then send the Integration ID.
 		$mode = $this->get_mode();
@@ -2582,12 +2592,6 @@ class GF_Square extends GFPaymentAddOn {
 
 		// Add order information if it exists.
 		$this->add_order_information( $feed, $entry, $submission_data, $payment_data );
-
-		// Add verification token if it exists.
-		$verification = sanitize_text_field( rgpost( 'square_verification' ) );
-		if ( ! empty( $verification ) ) {
-			$payment_data['verification_token'] = $verification;
-		}
 
 		/**
 		 * Filters Square payment data.

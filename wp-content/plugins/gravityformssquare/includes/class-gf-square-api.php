@@ -153,7 +153,7 @@ class GF_Square_API {
 			 *
 			 * @return bool
 			 */
-			'sslverify' => apply_filters( 'https_local_ssl_verify', false ),
+			'sslverify' => apply_filters( 'https_local_ssl_verify', false, $request_url ),
 			/**
 			 * Sets the HTTP timeout, in seconds, for the request.
 			 *

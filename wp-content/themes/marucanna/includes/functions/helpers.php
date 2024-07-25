@@ -144,3 +144,140 @@ function validatePhoneNumberUK($phoneNumber) {
     // Check if the cleaned number matches the pattern
     return preg_match($pattern, $cleanedNumber) === 1;
 }
+
+function validateNHSNumber($phoneNumber) {
+    // Remove spaces and non-digit characters from the phone number
+    $cleanedNumber = preg_replace('/\D/', '', $phoneNumber);
+
+    // Define the UK phone number pattern
+    $pattern = '/[0-9]{10}/';
+
+    // Check if the cleaned number matches the pattern
+    return preg_match($pattern, $cleanedNumber) === 1;
+}
+
+function get_need_follow_up_patients() {
+
+    // Calculate the date 3 months ago
+    $datetime_three_months_ago = date('Y-m-d H:i:s', strtotime('-3 months'));
+    $date_three_months_ago = date('Y-m-d', strtotime('-3 months'));
+    $follow_up_patients = array();
+
+    // WP_Query arguments
+    $args = array(
+        'post_type'      => 'marucanna-patients',
+        'posts_per_page' => -1,
+    );
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+
+            $mc_consultation_date = get_field('mc_consultation_date');
+            $last_followup_date = get_last_followup_date(get_the_ID());
+            $name = get_field('name');
+
+            if( $last_followup_date < $date_three_months_ago ) {
+                $item = array(
+                    'ID' => get_the_ID(),
+                    'name' => $name,
+                );
+            } else if( $mc_consultation_date < $datetime_three_months_ago ) {
+                $item = array(
+                    'ID' => get_the_ID(),
+                    'name' => $name,
+                );
+            }
+            
+            array_push($follow_up_patients , $item);
+        }
+    }
+    wp_reset_postdata();
+
+    return array_filter($follow_up_patients);
+
+}
+
+function get_last_followup_date($patient_post_id) {
+
+    $follow_up_appointments = get_field('follow_up_appointments' , $patient_post_id);
+
+    if( !empty($follow_up_appointments) ){
+        $last_follow_up = end($follow_up_appointments);
+
+        return $last_follow_up['appointment_date'];
+    } else {
+        return false;
+    }
+
+}
+
+function get_all_gp_list_data(){
+
+    $gp_lists = array();
+    $query = new WP_Query(
+        array(
+            'post_type' => 'gp_list',
+            'posts_per_page' => -1
+        )
+    );
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+
+            $practice_name = get_field('practice_name');
+            $address_line1 = get_field('address_line1');
+            $address_line2 = get_field('address_line2');
+            $address_line3 = get_field('address_line3');
+            $address_line4 = get_field('address_line4');
+            $town = get_field('town');
+            $postal_code = get_field('postal_code');
+            $phone = get_field('phone');
+
+            $item = array(
+                'ID' => get_the_ID(),
+                'practice_name' => $practice_name,
+                'address_line1' => $address_line1,
+                'address_line2' => $address_line2,
+                'address_line3' => $address_line3,
+                'address_line4' => $address_line4,
+                'town' => $town,
+                'postal_code' => $postal_code,
+                'phone' => $phone,
+            );
+            
+            array_push($gp_lists , $item);
+        }
+    }
+    wp_reset_postdata();
+
+    return array_filter($gp_lists);
+
+}
+
+function get_all_gp_postal_codes(){
+
+    $postal_codes = array();
+    $query = new WP_Query(
+        array(
+            'post_type' => 'gp_list',
+            'posts_per_page' => -1
+        )
+    );
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+
+            $postal_code = get_field('postal_code');
+            
+            array_push($postal_codes , $postal_code);
+        }
+    }
+    wp_reset_postdata();
+
+    return array_filter($postal_codes);
+
+}

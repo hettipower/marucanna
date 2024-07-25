@@ -1,3 +1,8 @@
+### 2.2.0 - 2024-06-26
+- Added security enhancements.
+- Fixed an issue where a fatal error can occur if the https_local_ssl_verify filter is used with all arguments.
+- Fixed an issue where the loading spinner is not hidden after the form fails validation.
+
 ### 2.1.0 | 2023-12-13
 - Added the Square receipt URL merge tag.
 - Updated the theme framework variables to be compatible with Gravity Forms 2.8.

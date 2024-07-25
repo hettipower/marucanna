@@ -34058,6 +34058,22 @@ table.dataTable td {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
+table.dataTable td .dropdown {
+  display: inline-block;
+}
+table.dataTable td .dropdown .dropdown-menu {
+  padding: 0;
+  overflow: hidden;
+}
+table.dataTable td .dropdown .dropdown-menu .dropdown-item {
+  font-size: 14px;
+}
+table.dataTable td .dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: #e3ffec;
+}
+table.dataTable td .modal {
+  text-align: left;
+}
 table.dataTable th {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -39818,6 +39834,47 @@ section.section.bg_gray {
   margin-top: 10%;
 }
 
+.list-items .item {
+  display: flex;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
+}
+.list-items .item > span {
+  flex: 1;
+  color: #000;
+}
+.list-items .item .value {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#gpListModal .modal-dialog {
+  max-width: 900px;
+}
+#gpListModal .modal-dialog #gp_list_wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+#gpListModal .modal-dialog #gp_list_wrap .item {
+  border: 1px solid #c1c1c1;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+#gpListModal .modal-dialog #gp_list_wrap .item:hover {
+  border-color: #0c8e36;
+}
+#gpListModal .modal-dialog #gp_list_wrap .item p {
+  margin-bottom: 1px;
+}
+#gpListModal .modal-dialog #gp_list_wrap .item p:empty {
+  display: none;
+}
+
 @media (max-width: 767.98px) {
   .blog_wrap .sidebar {
     margin-top: 40px;
@@ -40344,6 +40401,39 @@ section.section.bg_gray {
 }
 .gform_confirmation_wrapper .gform_confirmation_message p {
   color: var(--bs-success-text-emphasis);
+}
+
+.ginput_container {
+  position: relative !important;
+}
+.ginput_container .autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  font-family: "Arial";
+  font-size: 14px;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.ginput_container .autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.ginput_container .autocomplete-items div:hover {
+  background-color: #e9e9e9;
+}
+.ginput_container .autocomplete-items div.autocomplete-active {
+  background-color: #0c8e36 !important;
+  color: #ffffff;
+}
+.ginput_container .autocomplete-items div strong {
+  font-weight: 600;
 }
 
 .payment-form {

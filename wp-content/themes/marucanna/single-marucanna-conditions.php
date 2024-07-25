@@ -18,8 +18,8 @@
     <div class="container">
         <nav style="--bs-breadcrumb-divider: '->';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">PAIN RELIEF</a></li>
+                <li class="breadcrumb-item"><a href="/demo/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/demo/medical-cannabis-for-pain/">MEDICAL CANNABIS FOR PAIN</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?php the_title(); ?></li>
             </ol>
         </nav>

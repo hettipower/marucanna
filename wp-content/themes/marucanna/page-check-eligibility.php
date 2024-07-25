@@ -8,6 +8,7 @@ $mgs = isset($_GET['mgs']) ? $_GET['mgs'] : false;
 $fname = isset($_GET['fname']) ? $_GET['fname'] : '';
 $email = isset($_GET['email']) ? $_GET['email'] : '';
 $contact = isset($_GET['contact']) ? $_GET['contact'] : '';
+$nhs_number = isset($_GET['nhs_number']) ? $_GET['nhs_number'] : '';
 
 ?>
 
@@ -72,6 +73,12 @@ $contact = isset($_GET['contact']) ? $_GET['contact'] : '';
                     <div class="mb-3">
                         <label for="fname" class="form-label">Full Name <span class="req">*</span></label>
                         <input type="text" name="fname" class="form-control" id="fname" required value="<?php echo $fname; ?>">
+                        <div class="invalid-feedback">This field is required.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nhs_number" class="form-label">Your NHS number <span class="req">*</span></label>
+                        <input type="number" name="nhs_number" class="form-control" id="nhs_number" required value="<?php echo $nhs_number; ?>" max="10">
                         <div class="invalid-feedback">This field is required.</div>
                     </div>
 
@@ -183,12 +190,21 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 jQuery(document).ready(function($) {
     $('#contact_no').keypress(function(event) {
-      var charCode = event.which;
+        var charCode = event.which;
 
-      // Allow only numeric values (0-9)
-      if (charCode < 48 || charCode > 57) {
-        event.preventDefault();
-      }
+        // Allow only numeric values (0-9)
+        if (charCode < 48 || charCode > 57) {
+            event.preventDefault();
+        }
+    });
+
+    $('#nhs_number').keypress(function(event) {
+        var charCode = event.which;
+
+        // Allow only numeric values (0-9)
+        if (charCode < 48 || charCode > 57) {
+            event.preventDefault();
+        }
     });
 });
 </script>

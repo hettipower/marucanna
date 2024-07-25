@@ -2076,3 +2076,55 @@ section.section {
         }
     }
 }
+
+.list-items {
+    .item {
+        display: flex;
+        margin-bottom: 5px;
+        font-size: 16px;
+        color: #333;
+
+        > span {
+            flex: 1;
+            color: #000;
+        }
+
+        .value {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+#gpListModal {
+    .modal-dialog {
+        max-width: 900px;
+
+        #gp_list_wrap {
+            display: grid;
+            grid-template-columns: repeat(4 , 1fr);
+            grid-gap: 10px;
+
+            .item {
+                border: 1px solid #c1c1c1;
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 14px;
+                cursor: pointer;
+
+                &:hover {
+                    border-color: $theme_color;
+                }
+
+                p {
+                    margin-bottom: 1px;
+
+                    &:empty {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

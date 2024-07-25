@@ -123,7 +123,7 @@
 					<?php } ?>
                 </div>
                 <div class="col-md-2 col-sm-12">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo2.webp" alt="CQC logo" title="CQC logo"/>
+                    <img src="https://marucanna.co.uk/demo/wp-content/uploads/CQC-Logo-Transparent.png" alt="CQC logo" title="CQC logo"/>
                 </div>
             </div>
         </div>
