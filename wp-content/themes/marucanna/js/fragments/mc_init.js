@@ -10,7 +10,10 @@ jQuery(document).ready(function ($) {
   menu_dropdown();
 	patients_datatable();
   mobile_menu();
-  autocomplete(document.getElementById("input_1_106"), CUSTOM_PARAMS.gpPostalCodes);
+  
+  if( $('body').hasClass('page-template-page-appointment-booking') && CUSTOM_PARAMS.gpPostalCodes ) {
+    autocomplete(document.getElementById("input_1_106"), CUSTOM_PARAMS.gpPostalCodes);
+  }
 });
 
 function patients_datatable() {

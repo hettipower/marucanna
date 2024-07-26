@@ -54,9 +54,13 @@ function html5blank_header_scripts()
 
     $localize_args = array(
         'ajaxUrl' => admin_url('admin-ajax.php'),
-        'gpLists' => get_all_gp_list_data(),
-        'gpPostalCodes' => get_all_gp_postal_codes()
     );
+
+    if( is_page_template( 'page-appointment-booking.php' ) ) {
+        $localize_args['gpLists'] = get_all_gp_list_data();
+        $localize_args['gpPostalCodes'] = get_all_gp_postal_codes();
+    }
+
     wp_localize_script('themescript', 'CUSTOM_PARAMS', $localize_args);
     
 }

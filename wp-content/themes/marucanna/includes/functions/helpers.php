@@ -278,6 +278,6 @@ function get_all_gp_postal_codes(){
     }
     wp_reset_postdata();
 
-    return array_filter($postal_codes);
+    return array_unique($postal_codes);
 
 }

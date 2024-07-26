@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-07-25 12:29:17 AM */
+/*! css 1.0.0 filename.js 2024-07-26 9:36:30 PM */
 
 if (jQuery("body").hasClass("author") || jQuery("body").hasClass("page-template-page-patient-dashboard")) {
     Fancybox.bind("[data-fancybox]", {});
@@ -10,7 +10,9 @@ jQuery(document).ready(function($) {
     menu_dropdown();
     patients_datatable();
     mobile_menu();
-    autocomplete(document.getElementById("input_1_106"), CUSTOM_PARAMS.gpPostalCodes);
+    if ($("body").hasClass("page-template-page-appointment-booking") && CUSTOM_PARAMS.gpPostalCodes) {
+        autocomplete(document.getElementById("input_1_106"), CUSTOM_PARAMS.gpPostalCodes);
+    }
 });
 
 function patients_datatable() {
