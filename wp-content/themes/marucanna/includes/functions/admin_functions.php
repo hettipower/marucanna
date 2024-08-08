@@ -69,19 +69,19 @@ function mc_patient_letters_content($post) {
     echo '<div id="letter-loading"><div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div></div>';
 
     if( $send_initial_consult_letter ) {
-        echo '<p><strong>Initial Consult Letter sent.</strong></p>';
+        echo '<p><strong>Initial Consult Letter has been sent.</strong></p>';
     } else {
         echo '<p><button class="button action" id="send_initial_consult" data-patient="'.$patient.'" >Send Initial Consult Letter</button></p>';
     }
 
     if( $send_after_mdt ) {
-        echo '<p><strong>First Letter after MDT sent.</strong></p>';
+        echo '<p><strong>First Letter after MDT has been sent.</strong></p>';
     } else {
         echo '<p><button class="button action" id="send_after_mdt" data-patient="'.$patient.'" >Send First Letter after MDT</button></p>';
     }
 
     if( $send_refusal_following_mdt ) {
-        echo '<p><strong>Refusal Following MDT Letter sent.</strong></p>';
+        echo '<p><strong>Refusal Following MDT Letter has been sent.</strong></p>';
     } else {
         echo '<p><button class="button action" id="send_refusal_following_mdt" data-patient="'.$patient.'" >Send Refusal Following MDT Letter</button></p>';
     }
@@ -91,7 +91,7 @@ function mc_patient_letters_content($post) {
     echo '<p><button class="button action" id="send_after_followup_appointment" data-patient="'.$patient.'" >Send Change after a follow up appointment Letter</button></p>';
 
     if( $send_stopping_after_follow_up ) {
-        echo '<p><strong>Stopping after follow up Letter sent.</strong></p>';
+        echo '<p><strong>Stopping after follow up Letter has been sent.</strong></p>';
     } else {
         echo '<p><button class="button action" id="send_stopping_after_follow_up" data-patient="'.$patient.'" >Send Stopping after follow up Letter</button></p>';
     }
@@ -126,6 +126,17 @@ function mc_send_initial_consult_letter() {
         $address_line_2 = get_field('address_line_2' , $patient);
         $address_line_2 = get_field('address_line_2' , $patient);
         $patient_id = get_field('patient_id' , $patient);
+        
+        $gp_name = get_field('gp_name' , $patient);
+        $practice_name = get_field('practice_name' , $patient);
+        $gp_address_line_1 = get_field('gp_address_line_1' , $patient);
+        $gp_address_line_2 = get_field('gp_address_line_2' , $patient);
+        $gp_town = get_field('gp_town' , $patient);
+        $gp_country = get_field('gp_country' , $patient);
+        $gp_postal_code = get_field('gp_postal_code' , $patient);
+        $gp_phone = get_field('gp_phone' , $patient);
+
+        $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
 
         $letter_content = get_field('initial_consult_letter' , 'option');
 
@@ -150,15 +161,12 @@ function mc_send_initial_consult_letter() {
 
         $html = '<html>
             <head>'.letter_pdf_styles().'</head>
-            <body>
-                <header>';
-                    $html .= admin_letters_header();
-                $html .= '</header>
-
-                <footer>';
+            <body><footer>';
                     $html .= admin_letters_footer();
                 $html .= '</footer>
-                <main>';
+                <main><div class="header">';
+                    $html .= admin_letters_header();
+                $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
             </body>
@@ -186,8 +194,28 @@ function mc_send_initial_consult_letter() {
         file_put_contents($file_path, $pdf_content);
 
         //Patient Email
-        $subjectPatient = "Initial Consult Letter - $patient_id";
-        $htmlPatient = 'Please find the attached document';
+        $subjectPatient = "Initial Consult Letter - $patient_id - $nhs_number";
+        $htmlPatient .= '<p>Please find the attached document</p>';
+        $htmlPatient .= "<table style='width: 500px;'>
+            <tbody>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient Name</th>
+                    <td>$name</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient ID</th>
+                    <td>$patient_id</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>NHS Number</th>
+                    <td>$nhs_number</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>GP Details</th>
+                    <td>$gp_details</td>
+                </tr>
+            </tbody>
+        </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
 
         // Attach the PDF
@@ -231,6 +259,17 @@ function mc_send_after_mdt_letter() {
         $dob = get_field('dob' , $patient);
         $nhs_number = get_field('nhs_number' , $patient);
         $patient_id = get_field('patient_id' , $patient);
+        
+        $gp_name = get_field('gp_name' , $patient);
+        $practice_name = get_field('practice_name' , $patient);
+        $gp_address_line_1 = get_field('gp_address_line_1' , $patient);
+        $gp_address_line_2 = get_field('gp_address_line_2' , $patient);
+        $gp_town = get_field('gp_town' , $patient);
+        $gp_country = get_field('gp_country' , $patient);
+        $gp_postal_code = get_field('gp_postal_code' , $patient);
+        $gp_phone = get_field('gp_phone' , $patient);
+
+        $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
 
         $letter_content = get_field('first_letter_after_mdt' , 'option');
 
@@ -255,7 +294,9 @@ function mc_send_after_mdt_letter() {
                 <footer>';
                 $html .= admin_letters_footer();
                 $html .= '</footer>
-                <main>';
+                <main><div class="header">';
+                    $html .= admin_letters_header();
+                $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
             </body>
@@ -283,8 +324,28 @@ function mc_send_after_mdt_letter() {
         file_put_contents($file_path, $pdf_content);
 
         //Patient Email
-        $subjectPatient = "First Letter after MDT - $patient_id";
-        $htmlPatient = 'Please find the attached document';
+        $subjectPatient = "First Letter after MDT Letter - $patient_id - $nhs_number";
+        $htmlPatient .= '<p>Please find the attached document</p>';
+        $htmlPatient .= "<table style='width: 500px;'>
+            <tbody>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient Name</th>
+                    <td>$name</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient ID</th>
+                    <td>$patient_id</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>NHS Number</th>
+                    <td>$nhs_number</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>GP Details</th>
+                    <td>$gp_details</td>
+                </tr>
+            </tbody>
+        </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
 
         // Attach the PDF
@@ -387,8 +448,28 @@ function mc_send_refusal_following_mdt_letter() {
         file_put_contents($file_path, $pdf_content);
 
         //Patient Email
-        $subjectPatient = "Refusal Following MDT Letter - $patient_id";
-        $htmlPatient = 'Please find the attached document';
+        $subjectPatient = "Refusal Following MDT Letter - $patient_id - $nhs_number";
+        $htmlPatient .= '<p>Please find the attached document</p>';
+        $htmlPatient .= "<table style='width: 500px;'>
+            <tbody>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient Name</th>
+                    <td>$name</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient ID</th>
+                    <td>$patient_id</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>NHS Number</th>
+                    <td>$nhs_number</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>GP Details</th>
+                    <td>$gp_details</td>
+                </tr>
+            </tbody>
+        </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
 
         // Attach the PDF
@@ -437,6 +518,17 @@ function mc_send_follow_up_letter() {
         $latest_prescription_note = get_latest_prescription_note($patient);
         $latest_followup_date = get_last_followup_date($patient);
 
+        $gp_name = get_field('gp_name' , $patient);
+        $practice_name = get_field('practice_name' , $patient);
+        $gp_address_line_1 = get_field('gp_address_line_1' , $patient);
+        $gp_address_line_2 = get_field('gp_address_line_2' , $patient);
+        $gp_town = get_field('gp_town' , $patient);
+        $gp_country = get_field('gp_country' , $patient);
+        $gp_postal_code = get_field('gp_postal_code' , $patient);
+        $gp_phone = get_field('gp_phone' , $patient);
+
+        $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
+
         $replacements = array(
             'patient_name_address' => "$name, $address_line_1, $address_line_2",
             'mdt_date' => $meeting_date,
@@ -461,7 +553,9 @@ function mc_send_follow_up_letter() {
                 <footer>';
                 $html .= admin_letters_footer();
                 $html .= '</footer>
-                <main>';
+                <main><div class="header">';
+                    $html .= admin_letters_header();
+                $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
             </body>
@@ -489,8 +583,28 @@ function mc_send_follow_up_letter() {
         file_put_contents($file_path, $pdf_content);
 
         //Patient Email
-        $subjectPatient = "Follow up Letter - $patient_id";
-        $htmlPatient = 'Please find the attached document';
+        $subjectPatient = "Follow up Letter - $patient_id - $nhs_number";
+        $htmlPatient .= '<p>Please find the attached document</p>';
+        $htmlPatient .= "<table style='width: 500px;'>
+            <tbody>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient Name</th>
+                    <td>$name</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient ID</th>
+                    <td>$patient_id</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>NHS Number</th>
+                    <td>$nhs_number</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>GP Details</th>
+                    <td>$gp_details</td>
+                </tr>
+            </tbody>
+        </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
         
         // Attach the PDF
@@ -648,7 +762,7 @@ function mc_send_stopping_after_follow_up() {
 
         $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
 
-        $letter_content = get_field('after_followup_appointment' , 'option');
+        $letter_content = get_field('stopping_after_follow_up' , 'option');
 
         $replacements = array(
             'patient_name' => $name,
@@ -698,8 +812,28 @@ function mc_send_stopping_after_follow_up() {
         file_put_contents($file_path, $pdf_content);
 
         //Patient Email
-        $subjectPatient = "Stopping after follow up Letter - $patient_id";
-        $htmlPatient = 'Please find the attached document';
+        $subjectPatient = "Stopping after follow up Letter - $patient_id - $nhs_number";
+        $htmlPatient .= '<p>Please find the attached document</p>';
+        $htmlPatient .= "<table style='width: 500px;'>
+            <tbody>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient Name</th>
+                    <td>$name</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient ID</th>
+                    <td>$patient_id</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>NHS Number</th>
+                    <td>$nhs_number</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>GP Details</th>
+                    <td>$gp_details</td>
+                </tr>
+            </tbody>
+        </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
         
         // Attach the PDF

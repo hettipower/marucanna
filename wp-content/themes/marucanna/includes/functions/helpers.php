@@ -307,7 +307,7 @@ function get_all_gp_postal_codes(){
 
 function admin_letters_header() {
     $html = '<div class="logo"><img src="'.get_template_directory_uri().'/img/letter-logo.png" /></div>';
-    $html .= '<div class="address"></div>';
+    $html .= '<div class="address">'.get_field( 'address', 'option' ).'</div>';
 
     return $html;
 }
@@ -349,24 +349,28 @@ function letter_pdf_styles() {
             margin: 0cm 0cm;
         }
         body {
-            margin-top: 3cm;
+            margin-top: 2cm;
             margin-left: 2cm;
             margin-right: 2cm;
             margin-bottom: 2cm;
         }
-        header {
-            position: fixed;
-            top: 0cm;
-            left: 0cm;
-            right: 0cm;
+        .header {
             height: 3cm;
             margin-left: 2cm;
             margin-right: 2cm;
-            text-align : center
+            text-align : center;
+            position: relative;
         }
         .logo {
             margin: auto;
         }
+		.address {
+            position: absolute;
+			top:0;
+            right: 0;
+			font-size: 13px;
+            text-align : left;
+		}
         /** Define the footer rules **/
         footer {
             position: fixed; 

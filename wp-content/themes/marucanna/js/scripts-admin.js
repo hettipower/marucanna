@@ -223,8 +223,6 @@ jQuery(document).ready(function ($) {
     });
 
     $('#send_after_mdt').on('click' , function(e){
-  
-        $('#letter-loading').addClass('show');
 
         var patient = $(this).data('patient');
 
@@ -239,6 +237,8 @@ jQuery(document).ready(function ($) {
         })
         .then((result) => {
             if (result.isConfirmed) {
+
+                $('#letter-loading').addClass('show');
 
                 var data = {
                     action: 'send_after_mdt_letter_action',
@@ -311,7 +311,7 @@ jQuery(document).ready(function ($) {
                             refusal: document.getElementById('refusal').value,
                             doctor: document.getElementById('doctor').value
                         }
-                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                        if (!resultObject.refusal || !resultObject.doctor) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Error',
                                 text: "You must complete all the fields to perform this operation.",
@@ -417,7 +417,7 @@ jQuery(document).ready(function ($) {
         return false;
     });
 
-    $('#send_refusal_following_mdt').on('click' , function(e){
+    $('#send_after_followup_appointment').on('click' , function(e){
 
         var patient = $(this).data('patient');
 
@@ -445,7 +445,7 @@ jQuery(document).ready(function ($) {
                             appointment_changes: document.getElementById('appointment_changes').value,
                             doctor: document.getElementById('doctor').value
                         }
-                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                        if (!resultObject.appointment_changes || !resultObject.doctor) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Error',
                                 text: "You must complete all the fields to perform this operation.",
@@ -537,7 +537,7 @@ jQuery(document).ready(function ($) {
                             discontinuation: document.getElementById('discontinuation').value,
                             doctor: document.getElementById('doctor').value
                         }
-                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                        if (!resultObject.discontinuation || !resultObject.doctor) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Error',
                                 text: "You must complete all the fields to perform this operation.",

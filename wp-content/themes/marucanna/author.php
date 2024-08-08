@@ -730,7 +730,7 @@ jQuery(document).ready(function ($) {
                             refusal: document.getElementById('refusal').value,
                             doctor: document.getElementById('doctor').value
                         }
-                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                        if (!resultObject.refusal || !resultObject.doctor) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Error',
                                 text: "You must complete all the fields to perform this operation.",
@@ -822,7 +822,7 @@ jQuery(document).ready(function ($) {
                             appointment_changes: document.getElementById('appointment_changes').value,
                             doctor: document.getElementById('doctor').value
                         }
-                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                        if (!resultObject.appointment_changes || !resultObject.doctor) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Error',
                                 text: "You must complete all the fields to perform this operation.",
@@ -914,7 +914,7 @@ jQuery(document).ready(function ($) {
                             discontinuation: document.getElementById('discontinuation').value,
                             doctor: document.getElementById('doctor').value
                         }
-                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                        if (!resultObject.discontinuation || !resultObject.doctor) {
                             swalWithBootstrapButtons.fire({
                                 title: 'Error',
                                 text: "You must complete all the fields to perform this operation.",
