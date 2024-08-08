@@ -104,6 +104,16 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                     <button class="nav-link" id="pills-prescriptions-tab" data-bs-toggle="pill" data-bs-target="#pills-prescriptions" type="button" role="tab" aria-controls="pills-prescriptions" aria-selected="false">Prescriptions</button>
                 </li>
             <?php endif; ?>
+            <?php
+                if (is_user_logged_in()):
+                    $user = wp_get_current_user();
+                    $allowed_roles = array( 'doctor', 'administrator' );
+                    if ( array_intersect( $allowed_roles, $user->roles ) ) :
+            ?>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-letters-tab" data-bs-toggle="pill" data-bs-target="#pills-letters" type="button" role="tab" aria-controls="pills-letters" aria-selected="false">Letters</button>
+                </li>
+            <?php endif; endif; ?>
         </ul>
 
         <div class="tab-content" id="pills-tabContent">
@@ -435,9 +445,541 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                 </div>
             </div>
 
+            <?php
+                if (is_user_logged_in()):
+                    $user = wp_get_current_user();
+                    $allowed_roles = array( 'doctor', 'administrator' );
+                    if ( array_intersect( $allowed_roles, $user->roles ) ) :
+                        $send_initial_consult_letter = get_post_meta( $patient_post_id, 'send_initial_consult_letter', true );
+                        $send_after_mdt = get_post_meta( $patient_post_id, 'send_after_mdt', true );
+                        $send_refusal_following_mdt = get_post_meta( $patient_post_id, 'send_refusal_following_mdt', true );
+                        $send_stopping_after_follow_up = get_post_meta( $patient_post_id, 'send_stopping_after_follow_up', true );
+            ?>
+                <div class="tab-pane fade" id="pills-letters" role="tabpanel" aria-labelledby="pills-letters-tab" tabindex="0">
+                    <div class="row profile-detail-wrap rounded mb-3">
+                        <?php 
+                            echo '<div id="letter-loading"><div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div></div>';
+                        ?>
+                        
+                        <div class="btns-wrapper">
+                            <?php
+
+                                if( $send_initial_consult_letter ) {
+                                    echo '<p><strong>Initial Consult Letter has been sent.</strong></p>';
+                                } else {
+                                    echo '<p><button class="btn style_2" id="send_initial_consult" data-patient="'.$patient_post_id.'" >Send Initial Consult Letter</button></p>';
+                                }
+                            
+                                if( $send_after_mdt ) {
+                                    echo '<p><strong>First Letter after MDT has been sent.</strong></p>';
+                                } else {
+                                    echo '<p><button class="btn style_2" id="send_after_mdt" data-patient="'.$patient_post_id.'" >Send First Letter after MDT</button></p>';
+                                }
+                            
+                                if( $send_refusal_following_mdt ) {
+                                    echo '<p><strong>Refusal Following MDT Letter has been sent.</strong></p>';
+                                } else {
+                                    echo '<p><button class="btn style_2" id="send_refusal_following_mdt" data-patient="'.$patient_post_id.'" >Send Refusal Following MDT Letter</button></p>';
+                                }
+                            
+                                echo '<p><button class="btn style_2" id="send_follow_up_letter" data-patient="'.$patient_post_id.'" >Send Follow up Letter</button></p>';
+                            
+                                echo '<p><button class="btn style_2" id="send_after_followup_appointment" data-patient="'.$patient_post_id.'" >Send Change after a follow up appointment Letter</button></p>';
+                            
+                                if( $send_stopping_after_follow_up ) {
+                                    echo '<p><strong>Stopping after follow up Letter has been sent.</strong></p>';
+                                } else {
+                                    echo '<p><button class="btn style_2" id="send_stopping_after_follow_up" data-patient="'.$patient_post_id.'" >Send Stopping after follow up Letter</button></p>';
+                                }
+                            ?>
+                        </div>
+
+                    </div>
+                </div>
+            <?php endif; endif; ?>
+
         </div>
 
     </div>
 </section>
+
+<?php
+    if (is_user_logged_in()):
+        $user = wp_get_current_user();
+        $allowed_roles = array( 'doctor', 'administrator' );
+        if ( array_intersect( $allowed_roles, $user->roles ) ) :
+            $user_info = get_userdata($user->data->ID);
+            
+?>
+<script>
+jQuery(document).ready(function ($) {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn style_2",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+    var ajaxUrl = '<?php echo admin_url('admin-ajax.php'); ?>';
+
+    $('#send_after_mdt').on('click' , function(e){
+
+        var patient = $(this).data('patient');
+        $('#letter-loading').addClass('show');
+
+        var data = {
+            action: 'send_after_mdt_letter_action',
+            patient: patient
+        };
+
+        // Perform the AJAX request
+        $.post(ajaxUrl, data, function(response) {
+            // Parse the JSON response
+            var jsonResponse = JSON.parse(response);
+            $('#letter-loading').removeClass('show');
+            
+            if( jsonResponse.status ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Sent!",
+                    text: jsonResponse.msg,
+                    icon: "success"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload(true);
+                    }
+                });
+            } else {
+                swalWithBootstrapButtons.fire({
+                    title: "Error!",
+                    text: jsonResponse.msg,
+                    icon: "error"
+                });
+            }
+
+        });
+
+        return false;
+    });
+
+    $('#send_follow_up_letter').on('click' , function(e){
+        
+        $('#letter-loading').addClass('show');
+
+        var patient = $(this).data('patient');
+
+        var data = {
+            action: 'send_follow_up_letter_action',
+            patient: patient
+        };
+
+        // Perform the AJAX request
+        $.post(ajaxUrl, data, function(response) {
+            // Parse the JSON response
+            var jsonResponse = JSON.parse(response);
+
+            $('#letter-loading').removeClass('show');
+            
+            if( jsonResponse.status ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Sent!",
+                    text: jsonResponse.msg,
+                    icon: "success"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload(true);
+                    }
+                });
+            } else {
+                swalWithBootstrapButtons.fire({
+                    title: "Error!",
+                    text: jsonResponse.msg,
+                    icon: "error"
+                });
+            }
+
+        });
+        
+
+        return false;
+    });
+
+    $('#send_initial_consult').on('click' , function(e){
+
+        var patient = $(this).data('patient');
+
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+
+                swalWithBootstrapButtons.fire({
+                    title: "Fill Following Details",
+                    focusConfirm: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'submit',
+                    html: '<div class="form-group"><label for="key_symptoms">Key Symptoms</label><input type="text" class="form-control" id="key_symptoms"></div><div class="form-group"><label for="current_diagnosis">Current Diagnosis</label><input type="text" class="form-control" id="current_diagnosis"></div><div class="form-group"><label for="previous_management">Previous Management</label><input type="text" class="form-control" id="previous_management"></div><div class="form-group"><label for="cannabinoid_history">Previous cannabinoid history</label><input type="text" class="form-control" id="cannabinoid_history"></div><div class="form-group"><label for="doctor">Doctor</label><input type="text" class="form-control" id="doctor" value="<?php echo $user_info->first_name.' '.$user_info->last_name; ?>"></div>',
+                    preConfirm: () => {
+                        let resultObject = {
+                            key_symptoms: document.getElementById('key_symptoms').value,
+                            current_diagnosis: document.getElementById('current_diagnosis').value,
+                            previous_management: document.getElementById('previous_management').value,
+                            cannabinoid_history: document.getElementById('cannabinoid_history').value,
+                            doctor: document.getElementById('doctor').value
+                        }
+                        if (!resultObject.key_symptoms || !resultObject.current_diagnosis || !resultObject.previous_management || !resultObject.cannabinoid_history || !resultObject.doctor) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Error',
+                                text: "You must complete all the fields to perform this operation.",
+                                icon: 'error'
+                            })
+                            return null
+                        }
+
+                        return resultObject
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed && result.value) {
+
+                        var data = {
+                            action: 'send_initial_consult_letter_action',
+                            patient: patient,
+                            cannabinoid_history: result.value.cannabinoid_history,
+                            current_diagnosis: result.value.current_diagnosis,
+                            doctor: result.value.doctor,
+                            key_symptoms: result.value.key_symptoms,
+                            previous_management: result.value.previous_management
+                        };
+
+                        $('#letter-loading').addClass('show');
+                
+                        $.post(ajaxUrl, data, function(response) {
+                            // Parse the JSON response
+                            var jsonResponse = JSON.parse(response);
+                
+                            $('#letter-loading').removeClass('show');
+                            
+                            if( jsonResponse.status ) {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Sent!",
+                                    text: jsonResponse.msg,
+                                    icon: "success"
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(true);
+                                    }
+                                });
+                            } else {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Error!",
+                                    text: jsonResponse.msg,
+                                    icon: "error"
+                                });
+                            }
+                
+                        });
+                    }
+                });
+                
+            } else if ( result.dismiss === Swal.DismissReason.cancel ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Initial Consult Letter didn't send.",
+                    icon: "error"
+                });
+            }
+        });
+
+
+        return false;
+    });
+
+    $('#send_refusal_following_mdt').on('click' , function(e){
+
+        var patient = $(this).data('patient');
+
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+
+                swalWithBootstrapButtons.fire({
+                    title: "Fill Following Details",
+                    focusConfirm: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'submit',
+                    html: '<div class="form-group"><label for="refusal">Reason for Refusal</label><input type="text" class="form-control" id="refusal"></div><div class="form-group"><label for="doctor">Doctor</label><input type="text" class="form-control" id="doctor" value="<?php echo $user_info->first_name.' '.$user_info->last_name; ?>"></div>',
+                    preConfirm: () => {
+                        let resultObject = {
+                            refusal: document.getElementById('refusal').value,
+                            doctor: document.getElementById('doctor').value
+                        }
+                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Error',
+                                text: "You must complete all the fields to perform this operation.",
+                                icon: 'error'
+                            })
+                            return null
+                        }
+
+                        return resultObject
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed && result.value) {
+
+                        var data = {
+                            action: 'send_refusal_following_mdt_letter_action',
+                            patient: patient,
+                            refusal: result.value.refusal,
+                            doctor: result.value.doctor
+                        };
+
+                        $('#letter-loading').addClass('show');
+                
+                        $.post(ajaxUrl, data, function(response) {
+                            // Parse the JSON response
+                            var jsonResponse = JSON.parse(response);
+                
+                            $('#letter-loading').removeClass('show');
+                            
+                            if( jsonResponse.status ) {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Sent!",
+                                    text: jsonResponse.msg,
+                                    icon: "success"
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(true);
+                                    }
+                                });
+                            } else {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Error!",
+                                    text: jsonResponse.msg,
+                                    icon: "error"
+                                });
+                            }
+                
+                        });
+                    }
+                });
+                
+            } else if ( result.dismiss === Swal.DismissReason.cancel ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Initial Consult Letter didn't send.",
+                    icon: "error"
+                });
+            }
+        });
+
+
+        return false;
+    });
+
+    $('#send_refusal_following_mdt').on('click' , function(e){
+
+        var patient = $(this).data('patient');
+
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+
+                swalWithBootstrapButtons.fire({
+                    title: "Fill Following Details",
+                    focusConfirm: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'submit',
+                    html: '<div class="form-group"><label for="appointment_changes">Details of Changes</label><input type="text" class="form-control" id="appointment_changes"></div><div class="form-group"><label for="doctor">Doctor</label><input type="text" class="form-control" id="doctor" value="<?php echo $user_info->first_name.' '.$user_info->last_name; ?>"></div>',
+                    preConfirm: () => {
+                        let resultObject = {
+                            appointment_changes: document.getElementById('appointment_changes').value,
+                            doctor: document.getElementById('doctor').value
+                        }
+                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Error',
+                                text: "You must complete all the fields to perform this operation.",
+                                icon: 'error'
+                            })
+                            return null
+                        }
+
+                        return resultObject
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed && result.value) {
+
+                        var data = {
+                            action: 'send_after_followup_appointment_letter_action',
+                            patient: patient,
+                            appointment_changes: result.value.appointment_changes,
+                            doctor: result.value.doctor
+                        };
+        
+                        $('#letter-loading').addClass('show');
+                
+                        $.post(ajaxUrl, data, function(response) {
+                            // Parse the JSON response
+                            var jsonResponse = JSON.parse(response);
+                
+                            $('#letter-loading').removeClass('show');
+                            
+                            if( jsonResponse.status ) {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Sent!",
+                                    text: jsonResponse.msg,
+                                    icon: "success"
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(true);
+                                    }
+                                });
+                            } else {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Error!",
+                                    text: jsonResponse.msg,
+                                    icon: "error"
+                                });
+                            }
+                
+                        });
+                    }
+                });
+                
+            } else if ( result.dismiss === Swal.DismissReason.cancel ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Initial Consult Letter didn't send.",
+                    icon: "error"
+                });
+            }
+        });
+
+
+        return false;
+    });
+
+    $('#send_stopping_after_follow_up').on('click' , function(e){
+
+        var patient = $(this).data('patient');
+
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+
+                swalWithBootstrapButtons.fire({
+                    title: "Fill Following Details",
+                    focusConfirm: false,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'submit',
+                    html: '<div class="form-group"><label for="discontinuation">Reason for Discontinuation</label><input type="text" class="form-control" id="discontinuation"></div><div class="form-group"><label for="doctor">Doctor</label><input type="text" class="form-control" id="doctor" value="<?php echo $user_info->first_name.' '.$user_info->last_name; ?>"></div>',
+                    preConfirm: () => {
+                        let resultObject = {
+                            discontinuation: document.getElementById('discontinuation').value,
+                            doctor: document.getElementById('doctor').value
+                        }
+                        if (!resultObject.key_symptoms || !resultObject.doctor) {
+                            swalWithBootstrapButtons.fire({
+                                title: 'Error',
+                                text: "You must complete all the fields to perform this operation.",
+                                icon: 'error'
+                            })
+                            return null
+                        }
+
+                        return resultObject
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed && result.value) {
+
+                        var data = {
+                            action: 'send_stopping_after_follow_up_action',
+                            patient: patient,
+                            discontinuation: result.value.discontinuation,
+                            doctor: result.value.doctor
+                        };
+        
+                        $('#letter-loading').addClass('show');
+                
+                        $.post(ajaxUrl, data, function(response) {
+                            // Parse the JSON response
+                            var jsonResponse = JSON.parse(response);
+                
+                            $('#letter-loading').removeClass('show');
+                            
+                            if( jsonResponse.status ) {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Sent!",
+                                    text: jsonResponse.msg,
+                                    icon: "success"
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(true);
+                                    }
+                                });
+                            } else {
+                                swalWithBootstrapButtons.fire({
+                                    title: "Error!",
+                                    text: jsonResponse.msg,
+                                    icon: "error"
+                                });
+                            }
+                
+                        });
+                    }
+                });
+                
+            } else if ( result.dismiss === Swal.DismissReason.cancel ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Initial Consult Letter didn't send.",
+                    icon: "error"
+                });
+            }
+        });
+
+
+        return false;
+    });
+
+});
+</script>
+<?php endif; endif; ?>
 
 <?php get_footer(); ?>

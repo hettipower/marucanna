@@ -392,3 +392,25 @@
         }
     }
 }
+
+.swal2-html-container {
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        margin-bottom: 15px;
+
+        label {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+    }
+}
+.swal2-container {
+    .swal2-actions {
+        .btn {
+            margin: 0 10px;
+        }
+    }
+}

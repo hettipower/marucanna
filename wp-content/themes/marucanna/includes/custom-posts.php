@@ -375,52 +375,6 @@ function mc_patient_delete_handler() {
     wp_die();
 }
 
-function mc_patient_consent_sidebar_metabox() {
-    add_meta_box(
-        'mc_patient_consent_button',
-        'Patient Consent',
-        'mc_patient_consent_button_content',
-        'marucanna-patients', // Replace with your custom post type slug
-        'side',
-        'default'
-    );
-
-	add_meta_box(
-        'mc_patient_file_download',
-        'Patient File',
-        'mc_patient_file_download_content',
-        'marucanna-patients', // Replace with your custom post type slug
-        'side',
-        'default'
-    );
-}
-add_action('add_meta_boxes', 'mc_patient_consent_sidebar_metabox');
-
-function mc_patient_consent_button_content($post) {
-
-	$consent_url = admin_url( 'admin-post.php?action=sent_consent_form&patient='.get_the_ID() );
-	$send_consent = get_post_meta( get_the_ID(), 'send_consent', true );
-	$consent_date = get_field('consent_date' , get_the_ID());
-	$patient = get_the_ID();
-
-	if( $send_consent ) {
-		if( $consent_date ) {
-			echo '<p><strong>The patient has given consent.</strong></p>';
-		} else {
-			echo '<p><strong>The Patient Consent email has been sent.</strong></p><p><a href="#" class="button action" id="send_consent" data-patient="'.$patient.'">Resend</a></p>';
-		}
-	} else {
-		echo '<a href="#" class="button action" id="send_consent" data-patient="'.$patient.'">Send Consent</a>';
-	}
-}
-
-function mc_patient_file_download_content($post) {
-
-	$patient_file_url = admin_url( 'admin-post.php?action=create_patient_file_pdf&patient='.get_the_ID() );
-
-	echo '<a href="'.$patient_file_url.'" class="button action">Download Patient File</a>';
-}
-
 function filter_posts_by_meta_field() {
     global $typenow;
 
@@ -510,3 +464,59 @@ function gp_list_post_type() {
 
 }
 add_action( 'init', 'gp_list_post_type', 0 );
+
+// Register Custom Post Type - GP List
+function feedback_submissions_post_type() {
+
+	$labels = array(
+		'name'                  => _x( 'Feedback Submission', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'Feedback Submission', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'             => __( 'Feedback Submissions', 'text_domain' ),
+		'name_admin_bar'        => __( 'Feedback Submissions', 'text_domain' ),
+		'archives'              => __( 'Item Archives', 'text_domain' ),
+		'attributes'            => __( 'Item Attributes', 'text_domain' ),
+		'parent_item_colon'     => __( 'Parent', 'text_domain' ),
+		'all_items'             => __( 'All Feedback Submissions', 'text_domain' ),
+		'add_new_item'          => __( 'Add New', 'text_domain' ),
+		'add_new'               => __( 'Add New', 'text_domain' ),
+		'new_item'              => __( 'New Item', 'text_domain' ),
+		'edit_item'             => __( 'Edit', 'text_domain' ),
+		'update_item'           => __( 'Update', 'text_domain' ),
+		'view_item'             => __( 'View', 'text_domain' ),
+		'view_items'            => __( 'View Items', 'text_domain' ),
+		'search_items'          => __( 'Search', 'text_domain' ),
+		'not_found'             => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+		'featured_image'        => __( 'Featured Image', 'text_domain' ),
+		'set_featured_image'    => __( 'Profile Picture', 'text_domain' ),
+		'remove_featured_image' => __( 'Remove Profile Picture', 'text_domain' ),
+		'use_featured_image'    => __( 'Use as Profile Picture', 'text_domain' ),
+		'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+		'items_list'            => __( 'Items list', 'text_domain' ),
+		'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+		'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+	);
+	$args = array(
+		'label'                 => __( 'Feedback Submission', 'text_domain' ),
+		'description'           => __( 'Feedback Submission.', 'text_domain' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title'),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,		
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => false,
+		'capability_type'       => 'post',
+		'rewrite' => array('slug' => 'feedback-submissions','with_front' => false),
+	);
+	register_post_type( 'feedback_submissions', $args );
+
+}
+add_action( 'init', 'feedback_submissions_post_type', 0 );

@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-07-26 9:36:30 PM */
+/*! css 1.0.0 filename.js 2024-08-07 12:10:36 AM */
 
 if (jQuery("body").hasClass("author") || jQuery("body").hasClass("page-template-page-patient-dashboard")) {
     Fancybox.bind("[data-fancybox]", {});
@@ -201,11 +201,19 @@ function sticky_header() {
 }
 
 function menu_dropdown() {
-    jQuery(".nav-item.dropdown").hover(function() {
-        jQuery(this).find(".dropdown-menu").addClass("show");
-    }, function() {
-        jQuery(this).find(".dropdown-menu").removeClass("show");
-    });
+    var windowWidth = jQuery(window).width();
+    if (windowWidth > 991) {
+        jQuery(".nav-item.dropdown").hover(function() {
+            jQuery(this).find(".dropdown-menu").addClass("show");
+        }, function() {
+            jQuery(this).find(".dropdown-menu").removeClass("show");
+        });
+    } else {
+        jQuery("nav-item.dropdown .dropdown-click").on("click", function() {
+            jQuery(this).find(".dropdown-menu").toggleClass("show");
+            return false;
+        });
+    }
     jQuery(".nav-item.dropdown .dropdown-toggle").on("click", function() {
         var link = jQuery(this).attr("href");
         window.location.href = link;

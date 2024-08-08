@@ -11,6 +11,7 @@ include 'includes/functions/forms_func.php';
 include 'includes/functions/login_func.php';
 include 'includes/functions/helpers.php';
 include 'includes/functions/theme_misc.php';
+include 'includes/functions/admin_functions.php';
 include_once __DIR__ . '/includes/acf/acf-hidden-field/init.php';
 
 add_theme_support( 'post-thumbnails' ); 

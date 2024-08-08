@@ -92,6 +92,29 @@ function get_latest_prescription_date($patient_post_id) {
 
 }
 
+function get_latest_prescription_note($patient_post_id) {
+
+    $other_prescription_data = get_field('other_prescription_data' , $patient_post_id);
+    $prescription_note_3 = get_field('prescription_note_3' , $patient_post_id);
+    $prescription_note_2 = get_field('prescription_note_2' , $patient_post_id);
+    $prescription_note_1 = get_field('prescription_note_1' , $patient_post_id);
+
+    if( !empty($other_prescription_data) ){
+        $last_payment = end($other_prescription_data);
+
+        return $last_payment['prescription_note'];
+    } elseif( $prescription_note_3 ) {
+        return $prescription_note_3;
+    } elseif( $prescription_note_2 ) {
+        return $prescription_note_2;
+    } elseif( $prescription_note_1 ) {
+        return $prescription_note_1;
+    } else {
+        return false;
+    }
+
+}
+
 function check_valid_patinet($patient_id) {
 
     $patient_post_id = get_user_meta( $patient_id, 'patient_info', true );
@@ -280,4 +303,80 @@ function get_all_gp_postal_codes(){
 
     return array_unique($postal_codes);
 
+}
+
+function admin_letters_header() {
+    $html = '<div class="logo"><img src="'.get_template_directory_uri().'/img/letter-logo.png" /></div>';
+    $html .= '<div class="address"></div>';
+
+    return $html;
+}
+
+function admin_letters_footer() {
+    return get_field('letters_footer' , 'option');
+}
+
+//Need to fix this func
+function get_feedback_url($patient_ID) {
+    return get_field( 'feedback_survey_link', 'option' ).'?patient='.$patient_ID;
+}
+
+function check_patient_nhs_no_exist($nhs_no) {
+    $patients_loop = new WP_Query(
+        array(
+            'post_type' => 'marucanna-patients',
+            'posts_per_page' => '1',
+            'meta_query' => array(
+                array(
+                    'key' => 'nhs_number',
+                    'value' => $nhs_no,
+                    'compare' => '=',
+                ),
+            ),
+        )
+    );
+
+    if( $patients_loop->found_posts > 0 ) {
+        return $patients_loop->posts[0]->ID;
+    }
+
+    return false;
+}
+
+function letter_pdf_styles() {
+    return '<style>
+        @page {
+            margin: 0cm 0cm;
+        }
+        body {
+            margin-top: 3cm;
+            margin-left: 2cm;
+            margin-right: 2cm;
+            margin-bottom: 2cm;
+        }
+        header {
+            position: fixed;
+            top: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 3cm;
+            margin-left: 2cm;
+            margin-right: 2cm;
+            text-align : center
+        }
+        .logo {
+            margin: auto;
+        }
+        /** Define the footer rules **/
+        footer {
+            position: fixed; 
+            bottom: 0cm; 
+            left: 0cm; 
+            right: 0cm;
+            height: 2cm;
+            font-size: 15px;
+            margin-left: 2cm;
+            margin-right: 2cm;
+        }
+    </style>';
 }

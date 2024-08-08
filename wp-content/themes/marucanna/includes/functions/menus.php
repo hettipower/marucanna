@@ -61,6 +61,8 @@ class MC_Header_Menu_Walker extends Walker_Nav_Menu {
             $item_output .= '</a>';
         } else {
             if( in_array('menu-item-has-children' , $classes) ) {
+                $item_output .= '<a href="#" class="dropdown-toggle dropdown-click" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-chevron-down"></i></a>';
+
                 $item_output .= '<a' . $attributes . ' class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">';
                 $item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
                 $item_output .= '</a>';

@@ -28,12 +28,17 @@ function admin_mc_eligibility_checker() {
     $password = wp_generate_password(15 , false);
 
     if($fname && $email && $contact_no && $nhs_number) {
+
+        $is_nhs_number_exist = check_patient_nhs_no_exist($nhs_number);
+
         if(!validatePhoneNumberUK($contact_no)) {
             $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please enter valid Contact Number.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } elseif(email_exists($email)) {
             $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=User exists.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } if(!validateNHSNumber($nhs_number)) {
             $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please enter valid NHS Number.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
+        } if(!$is_nhs_number_exist) {
+            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=NHS Number is exists.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } else {
 
             $is_email_exist = check_patient_email_exist($email);
@@ -1664,4 +1669,41 @@ function mc_add_prescription_from_doctor( $entry, $form ) {
         
     } 
     
+}
+
+add_action( 'gform_after_submission_17', 'mc_patient_feedback_survey', 10, 2 );
+function mc_patient_feedback_survey( $entry, $form ) {
+
+    $patient = rgar( $entry, '11' );
+    $date_of_feedback = rgar( $entry, '1' );
+    $questions_1 = rgar( $entry, '12' );
+    $questions_2 = rgar( $entry, '13' );
+    $questions_3 = rgar( $entry, '14' );
+    $questions_4 = rgar( $entry, '15' );
+    $questions_5 = rgar( $entry, '16' );
+    $questions_6 = rgar( $entry, '9' );
+    $questions_7 = rgar( $entry, '10' );
+
+    $title = "Feedback entry:: $patient - Date :: $date_of_feedback";
+
+    $feedback_args = array(
+        'post_title'    => $title,
+        'post_status'   => 'publish',
+        'post_type' => 'feedback_submissions',
+    );
+    $feedback_post_id = wp_insert_post($feedback_args);
+
+    if(!is_wp_error($feedback_post_id)) {
+
+        update_field('patient', $patient , $feedback_post_id);
+        update_field('date_of_feedback', $date_of_feedback , $feedback_post_id);
+        update_field('questions_1', $questions_1 , $feedback_post_id);
+        update_field('questions_2', $questions_2 , $feedback_post_id);
+        update_field('questions_3', $questions_3 , $feedback_post_id);
+        update_field('questions_4', $questions_4 , $feedback_post_id);
+        update_field('questions_5', $questions_5 , $feedback_post_id);
+        update_field('questions_6', $questions_6 , $feedback_post_id);
+        update_field('questions_7', $questions_7 , $feedback_post_id);
+    }
+  
 }

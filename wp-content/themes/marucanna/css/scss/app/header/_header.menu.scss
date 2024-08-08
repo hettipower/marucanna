@@ -38,12 +38,22 @@
 
 				padding: 6px 16px;
 
+				position: relative;
+
+				@include media-breakpoint-down(lg) {
+					padding: 13px 16px;
+				}
+
 				&:hover {
 					background-color: $theme_color2;
 				}
 
 				&.dropdown-toggle {
 					padding-right: 25px;
+
+					@include media-breakpoint-down(lg) {
+						padding-right: 16px;
+					}
 
 					&.show {
 						background-color: $theme_color2;
@@ -61,6 +71,7 @@
 
 						@include media-breakpoint-down(lg) {
 							top: 12px;
+							display: none;
 						}
 					}
 				}
@@ -77,6 +88,20 @@
 						display: grid;
 					}
 				}
+
+				.dropdown-click {
+					display: none;
+
+					@include media-breakpoint-down(lg) {
+						display: block;
+						position: absolute;
+						right: 0;
+						top: 0;
+						background-color: #9cc52b;
+						border-radius: 0;
+						z-index: 10;
+					}
+				}
 			}
 
 			.dropdown-menu {
@@ -89,6 +114,10 @@
 				grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 				margin-top: 3px;
 				gap: 5px;
+
+				@include media-breakpoint-down(lg) {
+					width: 100%;
+				}
 
 				@include media-breakpoint-down(md) {
 					width: 100%;

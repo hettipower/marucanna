@@ -92,6 +92,12 @@
             width: auto;
             padding: 10px 60px 17px;
             font-size: 44px;
+
+            @include media-breakpoint-down(md) {
+                padding: 10px 20px 17px;
+                font-size: 35px;
+                width: 100%;
+            }
         }
 
         &::after {

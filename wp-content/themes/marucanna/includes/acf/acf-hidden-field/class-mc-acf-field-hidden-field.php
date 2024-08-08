@@ -157,7 +157,7 @@ class mc_acf_field_hidden_field extends \acf_field {
 		$url     = trailingslashit( $this->env['url'] );
 		$version = $this->env['version'];
 
-		wp_register_script(
+		/* wp_register_script(
 			'mc-hidden-field',
 			"{$url}assets/js/field.js",
 			array( 'acf-input' ),
@@ -172,6 +172,6 @@ class mc_acf_field_hidden_field extends \acf_field {
 		);
 
 		wp_enqueue_script( 'mc-hidden-field' );
-		wp_enqueue_style( 'mc-hidden-field' );
+		wp_enqueue_style( 'mc-hidden-field' ); */
 	}
 }
