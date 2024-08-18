@@ -310,7 +310,8 @@ function get_all_gp_postal_codes(){
 }
 
 function admin_letters_header() {
-    $html = '<div class="logo"><img src="'.get_template_directory_uri().'/img/letter-logo.png" /></div>';
+    $site_logo = get_field('site_logo' , 'option');
+    $html = '<div class="logo"><img src="'.$site_logo['url'].'" alt="'.get_bloginfo( 'name' ).'" /></div>';
     $html .= '<div class="address">'.get_field( 'address', 'option' ).'</div>';
 
     return $html;
@@ -385,6 +386,12 @@ function letter_pdf_styles() {
             font-size: 15px;
             margin-left: 2cm;
             margin-right: 2cm;
+            background-color: #0b8e36;
+            color: #fff;
+            padding: 20px 20px;
+        }
+        footer p {
+            color: #fff;
         }
     </style>';
 }
