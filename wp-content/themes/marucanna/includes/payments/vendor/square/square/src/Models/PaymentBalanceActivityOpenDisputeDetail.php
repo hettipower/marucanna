@@ -1,85 +1,80 @@
 <?php
 
-declare(strict_types=1);
+/**
+ * SimplePie Redis Cache Extension
+ *
+ * @package SimplePie
+ * @author Jan Kozak <galvani78@gmail.com>
+ * @link http://galvani.cz/
+ * @license http://www.opensource.org/licenses/bsd-license.php BSD License
+ * @version 0.2.9
+ */
 
-namespace Square\Models;
 
-use stdClass;
-
-class PaymentBalanceActivityOpenDisputeDetail implements \JsonSerializable
-{
+/**
+ * Caches data to redis
+ *
+ * Registered for URLs with the "redis" protocol
+ *
+ * For example, `redis://localhost:6379/?timeout=3600&prefix=sp_&dbIndex=0` will
+ * connect to redis on `localhost` on port 6379. All tables will be
+ * prefixed with `simple_primary-` and data will expire after 3600 seconds
+ *
+ * @package SimplePie
+ * @subpackage Caching
+ * @uses Redis
+ */
+class SimplePie_Cache_Redis implements SimplePie_Cache_Base {
     /**
-     * @var string|null
-     */
-    private $paymentId;
-
-    /**
-     * @var string|null
-     */
-    private $disputeId;
-
-    /**
-     * Returns Payment Id.
-     * The ID of the payment associated with this activity.
-     */
-    public function getPaymentId(): ?string
-    {
-        return $this->paymentId;
-    }
-
-    /**
-     * Sets Payment Id.
-     * The ID of the payment associated with this activity.
+     * Redis instance
      *
-     * @maps payment_id
+     * @var \Redis
      */
-    public function setPaymentId(?string $paymentId): void
-    {
-        $this->paymentId = $paymentId;
-    }
+    protected $cache;
 
     /**
-     * Returns Dispute Id.
-     * The ID of the dispute associated with this activity.
+     * Options
+     *
+     * @var array
      */
-    public function getDisputeId(): ?string
-    {
-        return $this->disputeId;
-    }
+    protected $options;
 
     /**
-     * Sets Dispute Id.
-     * The ID of the dispute associated with this activity.
+     * Cache name
      *
-     * @maps dispute_id
+     * @var string
      */
-    public function setDisputeId(?string $disputeId): void
-    {
-        $this->disputeId = $disputeId;
-    }
+    protected $name;
 
     /**
-     * Encode this object to JSON
+     * Cache Data
      *
-     * @param bool $asArrayWhenEmpty Whether to serialize this model as an array whenever no fields
-     *        are set. (default: false)
-     *
-     * @return array|stdClass
+     * @var type
      */
-    #[\ReturnTypeWillChange] // @phan-suppress-current-line PhanUndeclaredClassAttribute for (php < 8.1)
-    public function jsonSerialize(bool $asArrayWhenEmpty = false)
-    {
-        $json = [];
-        if (isset($this->paymentId)) {
-            $json['payment_id'] = $this->paymentId;
+    protected $data;
+
+    /**
+     * Create a new cache object
+     *
+     * @param string $location Location string (from SimplePie::$cache_location)
+     * @param string $name Unique ID for the cache
+     * @param string $type Either TYPE_FEED for SimplePie data, or TYPE_IMAGE for image data
+     */
+    public function __construct($location, $name, $options = null) {
+        //$this->cache = \flow\simple\cache\Redis::getRedisClientInstance();
+        $parsed = SimplePie_Cache::parse_URL($location);
+        $redis = new Redis();
+        $redis->connect($parsed['host'], $parsed['port']);
+        if (isset($parsed['pass'])) {
+            $redis->auth($parsed['pass']);
         }
-        if (isset($this->disputeId)) {
-            $json['dispute_id'] = $this->disputeId;
+        if (isset($parsed['path'])) {
+            $redis->select((int)substr($parsed['path'], 1));
         }
-        $json = array_filter($json, function ($val) {
-            return $val !== null;
-        });
+        $this->cache = $redis;
 
-        return (!$asArrayWhenEmpty && empty($json)) ? new stdClass() : $json;
-    }
-}
+        if (!is_null($options) && is_array($options)) {
+            $this->options = $options;
+        } else {
+            $this->options = array (
+          

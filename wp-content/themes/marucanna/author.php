@@ -457,9 +457,8 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
             ?>
                 <div class="tab-pane fade" id="pills-letters" role="tabpanel" aria-labelledby="pills-letters-tab" tabindex="0">
                     <div class="row profile-detail-wrap rounded mb-3">
-                        <?php 
-                            echo '<div id="letter-loading"><div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div></div>';
-                        ?>
+                        
+                        <div id="letter-loading"><div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div></div>
                         
                         <div class="btns-wrapper">
                             <?php
@@ -794,7 +793,7 @@ jQuery(document).ready(function ($) {
         return false;
     });
 
-    $('#send_refusal_following_mdt').on('click' , function(e){
+    $('#send_after_followup_appointment').on('click' , function(e){
 
         var patient = $(this).data('patient');
 

@@ -66,36 +66,93 @@ function mc_patient_letters_content($post) {
     $send_refusal_following_mdt = get_post_meta( get_the_ID(), 'send_refusal_following_mdt', true );
     $send_stopping_after_follow_up = get_post_meta( get_the_ID(), 'send_stopping_after_follow_up', true );
 
-    echo '<div id="letter-loading"><div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div></div>';
+    $initial_consult_letter_date = get_post_meta( get_the_ID(), 'initial_consult_letter_date', true );
+    $after_mdt_date = get_post_meta( get_the_ID(), 'after_mdt_date', true );
+    $refusal_following_mdt_date = get_post_meta( get_the_ID(), 'refusal_following_mdt_date', true );
+    $follow_up_letter_date = get_post_meta( get_the_ID(), 'follow_up_letter_date', true );
+    $after_followup_appointment_date = get_post_meta( get_the_ID(), 'after_followup_appointment_date', true );
+    $stopping_after_follow_up_date = get_post_meta( get_the_ID(), 'stopping_after_follow_up_date', true );
 
-    if( $send_initial_consult_letter ) {
-        echo '<p><strong>Initial Consult Letter has been sent.</strong></p>';
-    } else {
-        echo '<p><button class="button action" id="send_initial_consult" data-patient="'.$patient.'" >Send Initial Consult Letter</button></p>';
-    }
+    ?>
 
-    if( $send_after_mdt ) {
-        echo '<p><strong>First Letter after MDT has been sent.</strong></p>';
-    } else {
-        echo '<p><button class="button action" id="send_after_mdt" data-patient="'.$patient.'" >Send First Letter after MDT</button></p>';
-    }
+    <div id="letter-loading"><div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div></div>
 
-    if( $send_refusal_following_mdt ) {
-        echo '<p><strong>Refusal Following MDT Letter has been sent.</strong></p>';
-    } else {
-        echo '<p><button class="button action" id="send_refusal_following_mdt" data-patient="'.$patient.'" >Send Refusal Following MDT Letter</button></p>';
-    }
-
-    echo '<p><button class="button action" id="send_follow_up_letter" data-patient="'.$patient.'" >Send Follow up Letter</button></p>';
-
-    echo '<p><button class="button action" id="send_after_followup_appointment" data-patient="'.$patient.'" >Send Change after a follow up appointment Letter</button></p>';
-
-    if( $send_stopping_after_follow_up ) {
-        echo '<p><strong>Stopping after follow up Letter has been sent.</strong></p>';
-    } else {
-        echo '<p><button class="button action" id="send_stopping_after_follow_up" data-patient="'.$patient.'" >Send Stopping after follow up Letter</button></p>';
-    }
-
+    <table class="wp-list-table widefat fixed striped table-view-list posts" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="manage-column" scope="col">Action/Note</th>
+                <th class="manage-column" scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <?php
+                        if( $send_initial_consult_letter ) {
+                            echo '<p><strong>Initial Consult Letter has been sent.</strong></p>';
+                        } else {
+                            echo '<p><button class="button action" id="send_initial_consult" data-patient="'.$patient.'" >Send Initial Consult Letter</button></p>';
+                        }
+                    ?>
+                </td>
+                <td><?php echo $initial_consult_letter_date; ?></td>
+            </tr>
+            <tr>
+                <td>
+                    <?php
+                        if( $send_after_mdt ) {
+                            echo '<p><strong>First Letter after MDT has been sent.</strong></p>';
+                        } else {
+                            echo '<p><button class="button action" id="send_after_mdt" data-patient="'.$patient.'" >Send First Letter after MDT</button></p>';
+                        }
+                    ?>
+                </td>
+                <td><?php echo $after_mdt_date; ?></td>
+            </tr>
+            <tr>
+                <td>
+                    <?php
+                        if( $send_refusal_following_mdt ) {
+                            echo '<p><strong>Refusal Following MDT Letter has been sent.</strong></p>';
+                        } else {
+                            echo '<p><button class="button action" id="send_refusal_following_mdt" data-patient="'.$patient.'" >Send Refusal Following MDT Letter</button></p>';
+                        }
+                    ?>
+                </td>
+                <td><?php echo $refusal_following_mdt_date; ?></td>
+            </tr>
+            <tr>
+                <td>
+                    <?php
+                        echo '<p><button class="button action" id="send_follow_up_letter" data-patient="'.$patient.'" >Send Follow up Letter</button></p>';
+                    ?>
+                </td>
+                <td><?php echo $follow_up_letter_date; ?></td>
+            </tr>
+            <tr>
+                <td>
+                    <?php
+                        echo '<p><button class="button action" id="send_after_followup_appointment" data-patient="'.$patient.'" >Send Change after a follow up appointment Letter</button></p>';
+                    ?>
+                </td>
+                <td><?php echo $after_followup_appointment_date; ?></td>
+            </tr>
+            <tr>
+                <td>
+                    <?php
+                        if( $send_stopping_after_follow_up ) {
+                            echo '<p><strong>Stopping after follow up Letter has been sent.</strong></p>';
+                        } else {
+                            echo '<p><button class="button action" id="send_stopping_after_follow_up" data-patient="'.$patient.'" >Send Stopping after follow up Letter</button></p>';
+                        }
+                    ?>
+                </td>
+                <td><?php echo $stopping_after_follow_up_date; ?></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <?php
 }
 
 add_action( 'wp_ajax_send_initial_consult_letter_action', 'mc_send_initial_consult_letter' );
@@ -216,7 +273,14 @@ function mc_send_initial_consult_letter() {
                 </tr>
             </tbody>
         </table>";
-        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>' );
+
+        $letter_emails = explode(",",get_field('letter_emails' , 'option'));
+        if( is_array($letter_emails) ) {
+            for ($i=0; $i < count($letter_emails); $i++) { 
+                $headers[] = 'Bcc: <'.$letter_emails[$i].'>';
+            }
+        }
 
         // Attach the PDF
         $attachments = array($file_path);
@@ -226,6 +290,8 @@ function mc_send_initial_consult_letter() {
         if ( ! add_post_meta( $patient, 'send_initial_consult_letter', true, true ) ) { 
             update_post_meta ( $patient, 'send_initial_consult_letter', true );
         }
+
+        update_post_meta ( $patient, 'initial_consult_letter_date', date('Y-m-d') );
 
         unlink($file_path);
 
@@ -348,6 +414,13 @@ function mc_send_after_mdt_letter() {
         </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
 
+        $letter_emails = explode(",",get_field('letter_emails' , 'option'));
+        if( is_array($letter_emails) ) {
+            for ($i=0; $i < count($letter_emails); $i++) { 
+                $headers[] = 'Bcc: <'.$letter_emails[$i].'>';
+            }
+        }
+
         // Attach the PDF
         $attachments = array($file_path);
 
@@ -356,6 +429,8 @@ function mc_send_after_mdt_letter() {
         if ( ! add_post_meta( $patient, 'send_after_mdt', true, true ) ) { 
             update_post_meta ( $patient, 'send_after_mdt', true );
         }
+
+        update_post_meta ( $patient, 'after_mdt_date', date('Y-m-d') );
 
         unlink($file_path);
 
@@ -472,6 +547,13 @@ function mc_send_refusal_following_mdt_letter() {
         </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
 
+        $letter_emails = explode(",",get_field('letter_emails' , 'option'));
+        if( is_array($letter_emails) ) {
+            for ($i=0; $i < count($letter_emails); $i++) { 
+                $headers[] = 'Bcc: <'.$letter_emails[$i].'>';
+            }
+        }
+
         // Attach the PDF
         $attachments = array($file_path);
 
@@ -480,6 +562,8 @@ function mc_send_refusal_following_mdt_letter() {
         if ( ! add_post_meta( $patient, 'send_refusal_following_mdt', true, true ) ) { 
             update_post_meta ( $patient, 'send_refusal_following_mdt', true );
         }
+
+        update_post_meta ( $patient, 'refusal_following_mdt_date', date('Y-m-d') );
 
         unlink($file_path);
 
@@ -606,11 +690,20 @@ function mc_send_follow_up_letter() {
             </tbody>
         </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+
+        $letter_emails = explode(",",get_field('letter_emails' , 'option'));
+        if( is_array($letter_emails) ) {
+            for ($i=0; $i < count($letter_emails); $i++) { 
+                $headers[] = 'Bcc: <'.$letter_emails[$i].'>';
+            }
+        }
         
         // Attach the PDF
         $attachments = array($file_path);
 
         wp_mail( $patient_email, $subjectPatient, $htmlPatient, $headers , $attachments );
+
+        update_post_meta ( $patient, 'follow_up_letter_date', date('Y-m-d') );
 
         unlink($file_path);
 
@@ -708,14 +801,43 @@ function mc_send_after_followup_appointment_letter() {
         file_put_contents($file_path, $pdf_content);
 
         //Patient Email
-        $subjectPatient = "Change after a follow up appointment Letter - $patient_id";
-        $htmlPatient = 'Please find the attached document';
+        $subjectPatient = "Change after a follow up appointment Letter - $patient_id - $nhs_number";
+        $htmlPatient .= '<p>Please find the attached document</p>';
+        $htmlPatient .= "<table style='width: 500px;'>
+            <tbody>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient Name</th>
+                    <td>$name</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>Patient ID</th>
+                    <td>$patient_id</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>NHS Number</th>
+                    <td>$nhs_number</td>
+                </tr>
+                <tr>
+                    <th style='text-align: left;vertical-align: top;'>GP Details</th>
+                    <td>$gp_details</td>
+                </tr>
+            </tbody>
+        </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+
+        $letter_emails = explode(",",get_field('letter_emails' , 'option'));
+        if( is_array($letter_emails) ) {
+            for ($i=0; $i < count($letter_emails); $i++) { 
+                $headers[] = 'Bcc: <'.$letter_emails[$i].'>';
+            }
+        }
         
         // Attach the PDF
         $attachments = array($file_path);
 
         wp_mail( $patient_email, $subjectPatient, $htmlPatient, $headers , $attachments );
+
+        update_post_meta ( $patient, 'after_followup_appointment_date', date('Y-m-d') );
 
         unlink($file_path);
 
@@ -835,6 +957,13 @@ function mc_send_stopping_after_follow_up() {
             </tbody>
         </table>";
         $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+
+        $letter_emails = explode(",",get_field('letter_emails' , 'option'));
+        if( is_array($letter_emails) ) {
+            for ($i=0; $i < count($letter_emails); $i++) { 
+                $headers[] = 'Bcc: <'.$letter_emails[$i].'>';
+            }
+        }
         
         // Attach the PDF
         $attachments = array($file_path);
@@ -844,6 +973,8 @@ function mc_send_stopping_after_follow_up() {
         if ( ! add_post_meta( $patient, 'send_stopping_after_follow_up', true, true ) ) { 
             update_post_meta ( $patient, 'send_stopping_after_follow_up', true );
         }
+
+        update_post_meta ( $patient, 'stopping_after_follow_up_date', date('Y-m-d') );
 
         unlink($file_path);
 

@@ -241,6 +241,27 @@
                         width: 200px;
                     }
                 }
+
+                .chosen-container {
+                    height: 55px;
+
+                    .chosen-single {
+                        width: 100%;
+                        background-color: #e4e4e4;
+                        color: #000;
+                        border-radius: 5px;
+                        -webkit-border-radius: 5px;
+                        -moz-border-radius: 5px;
+                        -ms-border-radius: 5px;
+                        -o-border-radius: 5px;
+
+                        height: 55px;
+                        border: none;
+                        outline: none;
+                        box-shadow: none;
+                        line-height: 55px;
+                    }
+                }
             }
 
             .readonly-field {

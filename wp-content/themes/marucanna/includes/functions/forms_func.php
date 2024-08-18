@@ -37,7 +37,7 @@ function admin_mc_eligibility_checker() {
             $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=User exists.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } if(!validateNHSNumber($nhs_number)) {
             $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please enter valid NHS Number.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
-        } if(!$is_nhs_number_exist) {
+        } if($is_nhs_number_exist) {
             $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=NHS Number is exists.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } else {
 
@@ -212,7 +212,7 @@ function mc_patient_booking_post_type_update( $entry, $form ) {
     $gp_address_line_2 = rgar( $entry, '104.2' );
     $gp_town = rgar( $entry, '105' );
     $gp_country = rgar( $entry, '108.6' );
-    $gp_postal_code = rgar( $entry, '106' );
+    $gp_postal_code = rgar( $entry, '121' );
     $gp_phone = rgar( $entry, '109' );
 
     $csr_attachment_id = mc_gf_save_file_to_attachment($entry , '110');
@@ -1706,4 +1706,31 @@ function mc_patient_feedback_survey( $entry, $form ) {
         update_field('questions_7', $questions_7 , $feedback_post_id);
     }
   
+}
+
+add_filter('gform_pre_render_1', 'populate_gp_postalcode');
+add_filter('gform_pre_validation_1', 'populate_gp_postalcode');
+add_filter('gform_pre_submission_filter_1', 'populate_gp_postalcode');
+add_filter('gform_admin_pre_render_1', 'populate_gp_postalcode');
+function populate_gp_postalcode($form)
+{
+
+    foreach ($form['fields'] as &$field) {
+        if ($field->id != 121) {
+            continue;
+        }
+
+        $field->choices = array();
+
+        $postalCodes = get_all_gp_postal_codes();
+
+        foreach ($postalCodes as $postalcode) {
+            $field->choices[] = array(
+                'text' => $postalcode,
+                'value' => $postalcode
+            );
+        }
+    }
+
+    return $form;
 }

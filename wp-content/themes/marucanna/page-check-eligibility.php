@@ -78,7 +78,7 @@ $nhs_number = isset($_GET['nhs_number']) ? $_GET['nhs_number'] : '';
 
                     <div class="mb-3">
                         <label for="nhs_number" class="form-label">Your NHS number <span class="req">*</span></label>
-                        <input type="text" name="nhs_number" class="form-control" id="nhs_number" required value="<?php echo $nhs_number; ?>" maxlength="10">
+                        <input type="text" name="nhs_number" class="form-control" id="nhs_number" required value="<?php echo $nhs_number; ?>">
                         <div class="invalid-feedback">This field is required.</div>
                     </div>
 
@@ -221,7 +221,6 @@ function enforceMaxLength(event) {
 		input.value = input.value.slice(0, 10);
 	}
 }	
-	
 	
 document.addEventListener('DOMContentLoaded', (event) => {
 	const inputField = document.getElementById('nhs_number');

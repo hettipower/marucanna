@@ -242,7 +242,9 @@ function get_all_gp_list_data(){
     $query = new WP_Query(
         array(
             'post_type' => 'gp_list',
-            'posts_per_page' => -1
+            'posts_per_page' => -1,
+            'orderby' => 'title',
+            'order'   => 'ASC',
         )
     );
 
@@ -286,7 +288,9 @@ function get_all_gp_postal_codes(){
     $query = new WP_Query(
         array(
             'post_type' => 'gp_list',
-            'posts_per_page' => -1
+            'posts_per_page' => -1,
+            'orderby' => 'title',
+            'order'   => 'ASC',
         )
     );
 
@@ -316,16 +320,16 @@ function admin_letters_footer() {
     return get_field('letters_footer' , 'option');
 }
 
-//Need to fix this func
 function get_feedback_url($patient_ID) {
-    return get_field( 'feedback_survey_link', 'option' ).'?patient='.$patient_ID;
+    $url = get_field( 'feedback_survey_link', 'option' ).'?patient='.$patient_ID;
+    return "<a href='$url'>click here</a>";
 }
 
 function check_patient_nhs_no_exist($nhs_no) {
     $patients_loop = new WP_Query(
         array(
             'post_type' => 'marucanna-patients',
-            'posts_per_page' => '1',
+            'posts_per_page' => -1,
             'meta_query' => array(
                 array(
                     'key' => 'nhs_number',
@@ -337,7 +341,7 @@ function check_patient_nhs_no_exist($nhs_no) {
     );
 
     if( $patients_loop->found_posts > 0 ) {
-        return $patients_loop->posts[0]->ID;
+        return true;
     }
 
     return false;
@@ -383,4 +387,31 @@ function letter_pdf_styles() {
             margin-right: 2cm;
         }
     </style>';
+}
+
+function calculate_average(array $numbers) {
+    // Check if the array is not empty to avoid division by zero
+    if (count($numbers) === 0) {
+        return 0;
+    }
+    
+    // Sum all the numbers in the array
+    $sum = array_sum($numbers);
+    
+    // Calculate the average
+    $average = $sum / count($numbers);
+    
+    return number_format($average , 2);
+}
+
+function calculate_percentage($totalObtained, $totalMax) {
+    // Check if totalMax is greater than 0 to avoid division by zero
+    if ($totalMax <= 0) {
+        return 0;
+    }
+    
+    // Calculate the percentage
+    $percentage = ($totalObtained / $totalMax) * 100;
+    
+    return number_format($percentage , 2);
 }

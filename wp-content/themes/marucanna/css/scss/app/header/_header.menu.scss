@@ -15,10 +15,10 @@
 	@include media-breakpoint-down(md) {
 		margin-top: 80px;
 
-		.menu-main-menu-container {
+		/* .menu-main-menu-container {
 			max-height: calc(80vh);
 			overflow: auto;
-		}
+		} */
 	}
 
 	.navbar-nav {
@@ -84,8 +84,10 @@
 						background-color: $theme_color2;
 					}
 
-					.dropdown-menu {
-						display: grid;
+					@include media-breakpoint-up(lg) {
+						.dropdown-menu {
+							display: grid;
+						}
 					}
 				}
 

@@ -17,12 +17,6 @@ function html5blank_header_scripts()
     wp_register_script('slick', get_template_directory_uri() . '/vendor/slick/slick.min.js', array('jquery'), false, true); // Custom scripts
     wp_enqueue_script('slick');
 
-    /* wp_register_script('datepicker', get_template_directory_uri() . '/vendor/datepicker/bootstrap-datepicker.min.js', array('jquery'), false, true); // Custom scripts
-    wp_enqueue_script('datepicker'); */
-
-    /* wp_register_script('dropzone', get_template_directory_uri() . '/vendor/dropzone/dropzone.min.js', array('jquery'), false, true); // Custom scripts
-    wp_enqueue_script('dropzone'); */
-
     if( is_page_template( 'page-doctor-dashboard.php' ) ) {
         wp_register_script('datatable', get_template_directory_uri() . '/vendor/datatable/datatables.min.js', array('jquery'), false, true);
         wp_enqueue_script('datatable');

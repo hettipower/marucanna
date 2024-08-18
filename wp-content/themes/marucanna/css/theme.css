@@ -39264,10 +39264,10 @@ body:not(.home).sticky-header header .navbar::before {
 @media (max-width: 767.98px) {
   #mainMenuWrap {
     margin-top: 80px;
-  }
-  #mainMenuWrap .menu-main-menu-container {
-    max-height: 80vh;
-    overflow: auto;
+    /* .menu-main-menu-container {
+    	max-height: calc(80vh);
+    	overflow: auto;
+    } */
   }
 }
 @media (max-width: 991.98px) {
@@ -39321,8 +39321,10 @@ body:not(.home).sticky-header header .navbar::before {
 #mainMenuWrap .navbar-nav > li.dropdown:hover .dropdown-toggle {
   background-color: #9cc52b;
 }
-#mainMenuWrap .navbar-nav > li.dropdown:hover .dropdown-menu {
-  display: grid;
+@media (min-width: 992px) {
+  #mainMenuWrap .navbar-nav > li.dropdown:hover .dropdown-menu {
+    display: grid;
+  }
 }
 #mainMenuWrap .navbar-nav > li.dropdown .dropdown-click {
   display: none;
@@ -42113,6 +42115,24 @@ section.section.bg_gray {
 }
 .gform_wrapper .gform-body .gform_fields .gfield table .datepicker_wrap {
   width: 200px;
+}
+.gform_wrapper .gform-body .gform_fields .gfield .chosen-container {
+  height: 55px;
+}
+.gform_wrapper .gform-body .gform_fields .gfield .chosen-container .chosen-single {
+  width: 100%;
+  background-color: #e4e4e4;
+  color: #000;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  height: 55px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  line-height: 55px;
 }
 .gform_wrapper .gform-body .gform_fields .readonly-field {
   border: 1px solid #64c59c;
