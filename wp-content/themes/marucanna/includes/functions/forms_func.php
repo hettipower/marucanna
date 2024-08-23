@@ -211,7 +211,7 @@ function mc_patient_booking_post_type_update( $entry, $form ) {
     $gp_address_line_1 = rgar( $entry, '104.1' );
     $gp_address_line_2 = rgar( $entry, '104.2' );
     $gp_town = rgar( $entry, '105' );
-    $gp_country = rgar( $entry, '108.6' );
+    $gp_country = rgar( $entry, '122' );
     $gp_postal_code = rgar( $entry, '121' );
     $gp_phone = rgar( $entry, '109' );
 
@@ -304,6 +304,9 @@ function mc_consultant_data_update( $entry, $form ) {
     $doctor = rgar( $entry, '54' );
     $consultation_date = rgar( $entry, '55' );
     $consent = rgar( $entry, '56' );
+    $confirm_patient_id = rgar( $entry, '57' );
+    $confirm_patient_location = rgar( $entry, '58' );
+    $confirm_note = rgar( $entry, '59' );
     
     $doctor_info = get_userdata($doctor);
 
@@ -348,6 +351,9 @@ function mc_consultant_data_update( $entry, $form ) {
         update_field('mc_patient_preferences_1', $patient_preferences_1 , $patient_post_id);
         update_field('mc_additional_notes', $additional_notes , $patient_post_id);
         update_field('mc_consent', $consent , $patient_post_id);
+        update_field('confirm_patient_id', $confirm_patient_id , $patient_post_id);
+        update_field('confirm_patient_location', $confirm_patient_location , $patient_post_id);
+        update_field('confirm_note', $confirm_note , $patient_post_id);
 
         $user = get_user_by('login', $patient);
 
@@ -895,39 +901,6 @@ function mc_update_patient_clinic_details( $entry, $form ) {
     
 }
 
-function mc_gf_save_file_to_attachment($entry , $file_field_id) {
-
-    // Get the uploaded file URL
-    $file_url = rgar($entry, $file_field_id);
-
-    // Get the file path from the URL
-    $file_path = str_replace(site_url(), ABSPATH, $file_url);
-
-    // Get the file name
-    $file_name = basename($file_path);
-
-    // Prepare the attachment data
-    $attachment = array(
-        'post_title'     => $file_name,
-        'post_content'   => '',
-        'post_status'    => 'inherit',
-        'post_mime_type' => wp_check_filetype($file_name)['type'],
-    );
-
-    // Insert the attachment into the media library
-    $attachment_id = wp_insert_attachment($attachment, $file_path);
-
-    // Generate attachment metadata and update the attachment
-    //$attachment_data = wp_generate_attachment_metadata($attachment_id, $file_path);
-    //wp_update_attachment_metadata($attachment_id, $attachment_data);
-
-    // Update the entry with the attachment ID
-    gform_update_meta($entry['id'], $file_field_id, $attachment_id);
-
-    return $attachment_id;
-
-}
-
 //Date of Birth Validation
 add_filter('gform_field_validation_1_81', 'validate_date_of_birth', 10, 4);
 add_filter('gform_field_validation_2_5', 'validate_date_of_birth', 10, 4);
@@ -1049,8 +1022,19 @@ function mc_create_patient_file_pdf() {
         $patient_approved_medication = get_field('patient_approved_medication' , $patient);
         $mc_consent = get_field('mc_consent', $patient);
         $consent = $mc_consent ? 'Yes' : 'No';
-        $meeting_note = get_field('meeting_note', $patient);
-        $consent_date = get_field('consent_date', $patient);;
+        $meetings = get_field('meetings', $patient);
+        $consent_date = get_field('consent_date', $patient);
+        $notes = get_field('notes', $patient);
+        $prescription_file_1 = get_field('prescription_file_1', $patient);
+        $prescription_file_2 = get_field('prescription_file_2', $patient);
+        $prescription_file_3 = get_field('prescription_file_3', $patient);
+
+        $initial_consult_letter_date = get_field('initial_consult_letter_date', $patient);
+        $after_mdt_date = get_field('after_mdt_date', $patient);
+        $refusal_following_mdt_date = get_field('refusal_following_mdt_date', $patient);
+        $follow_up_letter_date = get_field('follow_up_letter_date', $patient);
+        $after_followup_appointment_date = get_field('after_followup_appointment_date', $patient);
+        $stopping_after_follow_up_date = get_field('stopping_after_follow_up_date', $patient);
 
         $upload_dir = wp_upload_dir();
         $patient_dir = $upload_dir['basedir'] . '/patients/';
@@ -1171,6 +1155,7 @@ function mc_create_patient_file_pdf() {
             <table style="width: 100%;">
                 <thead>
                     <tr>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Follow Up Doctor Name</th>
                         <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Follow Up Date</th>
                         <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Follow Up File</th>
                     </tr>
@@ -1179,9 +1164,11 @@ function mc_create_patient_file_pdf() {
                 foreach( $follow_up_appointments as $follow_up ) {
                     $appointment_date = $follow_up['appointment_date'];
                     $appointment_file = $follow_up['appointment_file'];
+                    $appointment_doctor_name = $follow_up['appointment_doctor_name'];
 
                     if( $appointment_file ) {
                         $html .= '<tr>
+                            <td>'.$appointment_doctor_name.'</td>
                             <td>'.$appointment_date.'</td>
                             <td><a href="'.$appointment_file.'" download>View file</a></td>
                         </tr>';
@@ -1192,12 +1179,37 @@ function mc_create_patient_file_pdf() {
             </table>';
         }
 
-        if( $meeting_note || $consent_date || $doctor_name || $patient_approved_medication ) {
+        if( $meetings || $consent_date || $doctor_name || $patient_approved_medication ) {
             $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">MDT Meeting</h3>';
         }
 
-        if( $meeting_note ) {
-            $html .= '<p><strong>Meeting note :</strong><br/>'.$meeting_note.'</p>';
+        if( $meetings ) {
+            $html .= '<table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">MDT Meeting Date</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">MDT Meeting Note</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">MDT Meeting Doctor</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                foreach( $meetings as $meeting ) {
+                    $date = $meeting['date'];
+                    $note = $meeting['note'];
+                    $doctor = $meeting['doctor'];
+
+                    $doctor_info = get_userdata($doctor);    
+                    $doctor_name = $doctor_info->first_name . ' ' . $doctor_info->last_name;
+
+                    $html .= '<tr>
+                        <td>'.$date.'</td>
+                        <td>'.$note.'</td>
+                        <td>'.$doctor_name.'</td>
+                    </tr>';
+
+                }
+            $html .= '</tbody>
+            </table>';
         }
 
         if( $consent_date ) {
@@ -1219,6 +1231,7 @@ function mc_create_patient_file_pdf() {
                     <tr>
                         <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Prescription Date</th>
                         <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Prescription Note</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Prescription File</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -1227,31 +1240,48 @@ function mc_create_patient_file_pdf() {
                     $html .= '<tr>
                         <td>'.$prescription_date_1.'</td>
                         <td>'.$prescription_note_1.'</td>
-                    </tr>';
+                        <td>';
+                        if( $prescription_file_1 ) {
+                            $html .= '<a href="'.$prescription_file_1.'" download>View file</a>';
+                        }
+                    $html .= '</td></tr>';
                 }
     
                 if( $prescription_date_2 ) {
                     $html .= '<tr>
                         <td>'.$prescription_date_2.'</td>
                         <td>'.$prescription_note_2.'</td>
-                    </tr>';
+                        <td>';
+                        if( $prescription_file_2 ) {
+                            $html .= '<a href="'.$prescription_file_2.'" download>View file</a>';
+                        }
+                    $html .= '</td></tr>';
                 }
     
                 if( $prescription_date_3 ) {
                     $html .= '<tr>
                         <td>'.$prescription_date_3.'</td>
                         <td>'.$prescription_note_3.'</td>
-                    </tr>';
+                        <td>';
+                        if( $prescription_file_3 ) {
+                            $html .= '<a href="'.$prescription_file_3.'" download>View file</a>';
+                        }
+                    $html .= '</td></tr>';
                 }
     
                 if( $other_prescription_data ) {
                     foreach( $other_prescription_data as $prescription ) {
                         $prescription_date = $prescription['prescription_date'];
                         $prescription_note = $prescription['prescription_note'];
+                        $prescription_file = $prescription['prescription_file'];
                         $html .= '<tr>
                             <td>'.$prescription_date.'</td>
                             <td>'.$prescription_note.'</td>
-                        </tr>';
+                            <td>';
+                            if( $prescription_file ) {
+                                $html .= '<a href="'.$prescription_file.'" download>View file</a>';
+                            }
+                        $html .= '</td></tr>';
                     }
                 }
             $html .= '</tbody>
@@ -1300,6 +1330,95 @@ function mc_create_patient_file_pdf() {
                         </tr>';
                     }
                 }
+            $html .= '</tbody>
+            </table>';
+        }
+
+        if( $notes ) {
+            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Notes</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Date</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Note</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">File</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                foreach( $notes as $note ) {
+                    $date = $note['date'];
+                    $noteText = $note['note'];
+                    $file = $note['file'];
+
+                    $html .= '<tr>
+                        <td>'.$date.'</td>
+                        <td>'.$noteText.'</td><td>';
+
+                        if( $file ) {
+                            $html .= '<a href="'.$file.'" download>View file</a>';
+                        }
+
+                    $html .= '</td></tr>';
+
+                }
+            $html .= '</tbody>
+            </table>';
+        }
+
+
+        if( $initial_consult_letter_date || $after_mdt_date || $refusal_following_mdt_date || $follow_up_letter_date || $after_followup_appointment_date || $stopping_after_follow_up_date ) {
+            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Letters</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Letter</th>
+                        <th style="background-color: #9cc52b;padding: 10px;text-align: center;color: #fff;">Date</th>
+                    </tr>
+                </thead>
+                <tbody>';
+
+                    if( $initial_consult_letter_date ) {
+                        $html .= '<tr>
+                            <td>Initial Consult Letter</td>
+                            <td>'.$initial_consult_letter_date.'</td>
+                        </tr>';
+                    }
+
+                    if( $after_mdt_date ) {
+                        $html .= '<tr>
+                            <td>First Letter after MDT</td>
+                            <td>'.$after_mdt_date.'</td>
+                        </tr>';
+                    }
+
+                    if( $refusal_following_mdt_date ) {
+                        $html .= '<tr>
+                            <td>Refusal Following MDT Letter</td>
+                            <td>'.$refusal_following_mdt_date.'</td>
+                        </tr>';
+                    }
+
+                    if( $follow_up_letter_date ) {
+                        $html .= '<tr>
+                            <td>Follow up Letter</td>
+                            <td>'.$follow_up_letter_date.'</td>
+                        </tr>';
+                    }
+
+                    if( $after_followup_appointment_date ) {
+                        $html .= '<tr>
+                            <td>Change after a follow up appointment Letter</td>
+                            <td>'.$after_followup_appointment_date.'</td>
+                        </tr>';
+                    }
+
+                    if( $stopping_after_follow_up_date ) {
+                        $html .= '<tr>
+                            <td>Stopping after follow up Letter</td>
+                            <td>'.$stopping_after_follow_up_date.'</td>
+                        </tr>';
+                    }
+
             $html .= '</tbody>
             </table>';
         }
@@ -1602,6 +1721,7 @@ function mc_add_note_from_doctor( $entry, $form ) {
     $patient_post_id = rgar( $entry, '16' );
     $date = rgar( $entry, '17' );
     $note = rgar( $entry, '18' );
+    $file = rgar( $entry, '19' );
     
     if($patient_post_id) {
 
@@ -1610,6 +1730,7 @@ function mc_add_note_from_doctor( $entry, $form ) {
         $new_row = array(
             'date' => $date,
             'note' => $note,
+            'file' => $file,
         );
 
         $existing_notes[] = $new_row;
@@ -1626,9 +1747,21 @@ function mc_add_mdt_from_doctor( $entry, $form ) {
     $patient_post_id = rgar( $entry, '16' );
     $note = rgar( $entry, '18' );
     $doctor = rgar( $entry, '19' );
+    $date = rgar( $entry, '20' );
     
     if($patient_post_id) {
-        update_field('meeting_note', $note, $patient_post_id);
+
+        $existing_mdts = get_field('meetings' , $patient_post_id);
+
+        $new_row = array(
+            'date' => $date,
+            'note' => $note,
+            'doctor' => $doctor,
+        );
+
+        $existing_mdts[] = $new_row;
+
+        update_field('meetings', $existing_mdts, $patient_post_id);
     } 
     
 }
@@ -1639,6 +1772,7 @@ function mc_add_prescription_from_doctor( $entry, $form ) {
     $patient_post_id = rgar( $entry, '16' );
     $prescription_note = rgar( $entry, '18' );
     $prescription_date = rgar( $entry, '20' );
+    $file = rgar( $entry, '21' );
     
     if($patient_post_id) {
         $existing_other_prescription_data = get_field('other_prescription_data' , $patient_post_id);
@@ -1649,16 +1783,20 @@ function mc_add_prescription_from_doctor( $entry, $form ) {
         if( !$prescription_date_1 ) {
             update_field('prescription_date_1', $prescription_date, $patient_post_id);
             update_field('prescription_note_1', $prescription_note, $patient_post_id);
+            update_field('prescription_file_1', $file, $patient_post_id);
         } else if( !$prescription_date_2 ) {
             update_field('prescription_date_2', $prescription_date, $patient_post_id);
             update_field('prescription_note_2', $prescription_note, $patient_post_id);
+            update_field('prescription_file_2', $file, $patient_post_id);
         } else if( !$prescription_date_3 ) {
             update_field('prescription_date_3', $prescription_date, $patient_post_id);
             update_field('prescription_note_3', $prescription_note, $patient_post_id);
+            update_field('prescription_file_3', $file, $patient_post_id);
         } else {
             $new_row = array(
                 'prescription_date' => $prescription_date,
                 'prescription_note' => $prescription_note,
+                'prescription_file' => $file,
             );
     
             $existing_other_prescription_data[] = $new_row;

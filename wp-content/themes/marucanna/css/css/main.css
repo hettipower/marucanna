@@ -39824,6 +39824,10 @@ section.section.bg_gray {
 .dashboard_wrapper #patients_details .patient-name a:hover .fa-arrow-up-right-from-square {
   color: #0b8e36;
 }
+.dashboard_wrapper #pills-letters .btns-wrapper .btn {
+  width: 100%;
+  font-size: 14px;
+}
 
 .payment_wrapper {
   padding-top: 50px;
@@ -39927,6 +39931,10 @@ section.section.bg_gray {
   margin-bottom: 1px;
 }
 #gpListModal .modal-dialog #gp_list_wrap .item p:empty {
+  display: none;
+}
+
+#patients_details .hide {
   display: none;
 }
 

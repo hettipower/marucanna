@@ -2010,6 +2010,15 @@ section.section {
             }
         }
     }
+
+    #pills-letters {
+        .btns-wrapper {
+            .btn {
+                width: 100%;
+                font-size: 14px;
+            }
+        }
+    }
 }
 
 .payment_wrapper {
@@ -2145,6 +2154,11 @@ section.section {
     }
 }
 
+#patients_details {
+    .hide {
+        display: none;
+    }
+}
 
 .sk-chase {
     width: 40px;

@@ -14,6 +14,11 @@ function get_patient_ids() {
 }
   
 function isImageUrl($url) {
+
+    if (!checkRemoteFile($url)) {
+        return false;
+    }
+
     // Use getimagesize to fetch image information
     $imageInfo = getimagesize($url);
   
@@ -190,12 +195,22 @@ function get_need_follow_up_patients() {
     $args = array(
         'post_type'      => 'marucanna-patients',
         'posts_per_page' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
     );
     $query = new WP_Query($args);
 
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
+
+            $patient = get_field('patient');
+
+            $is_valid_patient = check_valid_patinet($patient);
+
+            if( !$is_valid_patient ) {
+                continue;
+            }
 
             $mc_consultation_date = get_field('mc_consultation_date');
             $last_followup_date = get_last_followup_date(get_the_ID());
@@ -311,7 +326,7 @@ function get_all_gp_postal_codes(){
 
 function admin_letters_header() {
     $site_logo = get_field('site_logo' , 'option');
-    $html = '<div class="logo"><img src="'.$site_logo['url'].'" alt="'.get_bloginfo( 'name' ).'" /></div>';
+    $html = '<div class="logo" style="height: 150px;"><img style="width: 150px;" src="'.$site_logo['url'].'" alt="'.get_bloginfo( 'name' ).'" /></div>';
     $html .= '<div class="address">'.get_field( 'address', 'option' ).'</div>';
 
     return $html;
@@ -384,11 +399,11 @@ function letter_pdf_styles() {
             right: 0cm;
             height: 2cm;
             font-size: 15px;
-            margin-left: 2cm;
-            margin-right: 2cm;
+            margin-left: 0;
+            margin-right: 0;
             background-color: #0b8e36;
             color: #fff;
-            padding: 20px 20px;
+            padding: 5px 20px;
         }
         footer p {
             color: #fff;
@@ -421,4 +436,90 @@ function calculate_percentage($totalObtained, $totalMax) {
     $percentage = ($totalObtained / $totalMax) * 100;
     
     return number_format($percentage , 2);
+}
+
+function mc_gf_save_file_to_attachment($entry , $file_field_id) {
+
+    // Get the uploaded file URL
+    $file_url = rgar($entry, $file_field_id);
+
+    // Get the file path from the URL
+    $file_path = str_replace(site_url(), ABSPATH, $file_url);
+
+    // Get the file name
+    $file_name = basename($file_path);
+
+    // Prepare the attachment data
+    $attachment = array(
+        'post_title'     => $file_name,
+        'post_content'   => '',
+        'post_status'    => 'inherit',
+        'post_mime_type' => wp_check_filetype($file_name)['type'],
+    );
+
+    // Insert the attachment into the media library
+    $attachment_id = wp_insert_attachment($attachment, $file_path);
+
+    // Update the entry with the attachment ID
+    gform_update_meta($entry['id'], $file_field_id, $attachment_id);
+
+    return $attachment_id;
+
+}
+
+function get_latest_mdt_date($patient_post_id) {
+
+    $meetings = get_field('meetings' , $patient_post_id);
+
+    if( !empty($meetings) ){
+        $last_meeting = end($meetings);
+
+        return $last_meeting['date'];
+    } else {
+        return false;
+    }
+
+}
+
+function checkRemoteFile($url)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,$url);
+    // don't download content
+    curl_setopt($ch, CURLOPT_NOBODY, 1);
+    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+    if($result !== FALSE)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function get_last_payment_date($patient_post_id) {
+
+    $other_payments = get_field('other_payments' , $patient_post_id);
+    $transaction_id_3 = get_field('transaction_id_3' , $patient_post_id);
+    $transaction_id_2 = get_field('transaction_id_2' , $patient_post_id);
+    $transaction_id_1 = get_field('transaction_id_1' , $patient_post_id);
+
+    if( !empty($other_payments) ){
+        $last_payment = end($other_payments);
+        return $last_payment['transaction_id'];
+    } elseif( $transaction_id_3 ) {
+        return $transaction_id_3;
+    } elseif( $transaction_id_2 ) {
+        return $transaction_id_2;
+    } elseif( $transaction_id_1 ) {
+        return $transaction_id_1;
+    } else {
+        return false;
+    }
+
 }

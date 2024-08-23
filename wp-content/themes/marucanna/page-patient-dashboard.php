@@ -62,6 +62,9 @@ if (is_user_logged_in()):
         $prescription_note_1 = get_field('prescription_note_1' , $patient_post_id);
         $prescription_note_2 = get_field('prescription_note_2' , $patient_post_id);
         $prescription_note_3 = get_field('prescription_note_3' , $patient_post_id);
+        $prescription_file_1 = get_field('prescription_file_1' , $patient_post_id);
+        $prescription_file_2 = get_field('prescription_file_2' , $patient_post_id);
+        $prescription_file_3 = get_field('prescription_file_3' , $patient_post_id);
         $other_prescription_data = get_field('other_prescription_data' , $patient_post_id);
 
         $currentDate = new DateTime();
@@ -163,7 +166,7 @@ if (is_user_logged_in()):
                 <button class="nav-link" id="pills-clinic-details-tab" data-bs-toggle="pill" data-bs-target="#pills-clinic-details" type="button" role="tab" aria-controls="pills-clinic-details" aria-selected="false">Clinic Details</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-treatment-tab" data-bs-toggle="pill" data-bs-target="#pills-treatment" type="button" role="tab" aria-controls="pills-treatment" aria-selected="false">Treatment Details</button>
+                <button class="nav-link" id="pills-treatment-tab" data-bs-toggle="pill" data-bs-target="#pills-treatment" type="button" role="tab" aria-controls="pills-treatment" aria-selected="false">Symptoms & Complaints</button>
             </li>
             <!-- <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-documents-tab" data-bs-toggle="pill" data-bs-target="#pills-documents" type="button" role="tab" aria-controls="pills-documents" aria-selected="false">Documents</button>
@@ -268,7 +271,7 @@ if (is_user_logged_in()):
             <div class="tab-pane fade" id="pills-treatment" role="tabpanel" aria-labelledby="pills-treatment-tab" tabindex="0">
                 <div class="row profile-detail-wrap rounded mb-3">
                     <div class="profile-detail">
-                        <h3>Treatment Details</h3>
+                        <h3>Symptoms & Complaints</h3>
                         <div class="row">
                             <div class="col-12 col-md-6 profile-item">
                                 <div class="label">Treatment</div>
@@ -520,6 +523,7 @@ if (is_user_logged_in()):
                                                 <tr>
                                                     <th>Prescription Date</th>
                                                     <th>Prescription Note</th>
+                                                    <th>Prescription File</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -527,18 +531,33 @@ if (is_user_logged_in()):
                                                     <tr>
                                                         <td><?php echo $prescription_date_1; ?></td>
                                                         <td><?php echo $prescription_note_1; ?></td>
+                                                        <td>
+                                                            <?php if( $prescription_file_1 ): ?>
+                                                                <a href="<?php echo $prescription_file_1; ?>" download>View file</a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endif; ?>
                                                 <?php if( $prescription_date_2 ): ?>
                                                     <tr>
                                                         <td><?php echo $prescription_date_2; ?></td>
                                                         <td><?php echo $prescription_note_2; ?></td>
+                                                        <td>
+                                                            <?php if( $prescription_file_2 ): ?>
+                                                                <a href="<?php echo $prescription_file_2; ?>" download>View file</a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endif; ?>
                                                 <?php if( $prescription_date_3 ): ?>
                                                     <tr>
                                                         <td><?php echo $prescription_date_3; ?></td>
                                                         <td><?php echo $prescription_note_3; ?></td>
+                                                        <td>
+                                                            <?php if( $prescription_file_3 ): ?>
+                                                                <a href="<?php echo $prescription_file_3; ?>" download>View file</a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endif; ?>
                                                 <?php 
@@ -548,6 +567,11 @@ if (is_user_logged_in()):
                                                     <tr>
                                                         <td><?php echo $prescription['prescription_date']; ?></td>
                                                         <td><?php echo $prescription['prescription_note']; ?></td>
+                                                        <td>
+                                                            <?php if( $prescription['prescription_file'] ): ?>
+                                                                <a href="<?php echo $prescription['prescription_file']; ?>" download>View file</a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; endif; ?>
                                             </tbody>

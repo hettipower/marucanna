@@ -21,6 +21,8 @@ function create_gp_lists(lists) {
     var gpListModal = new bootstrap.Modal(gpListModalEle);
     var item;
 
+    listDiv.innerHTML = '';
+
     for (i = 0; i < lists.length; i++) {
 
         item = document.createElement("DIV");

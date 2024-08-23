@@ -274,6 +274,7 @@ function mc_booking_column_header($columns) {
 	$columns = array(
 		'title' => "Title",
 		'patient_id' => "Patient ID",
+		'nhs_number' => "NHS Number",
 		'eligibility' => "Eligibility",
 		'gp' => "GP",
 		'payment_id' => "Payment ID",
@@ -296,6 +297,10 @@ function mc_booking_column_content($column, $post_id) {
         echo get_field('patient_id' , $post_id);
     }
 
+	if ($column == 'nhs_number') {
+        echo get_field('nhs_number' , $post_id);
+    }
+
 	if ($column == 'eligibility') {
         echo get_field('eligibility' , $post_id);
     }
@@ -305,7 +310,7 @@ function mc_booking_column_content($column, $post_id) {
     }
 
 	if ($column == 'payment_id') {
-        echo get_field('paypal_transaction_id' , $post_id);
+        echo get_last_payment_date($post_id);
     }
 
 	if ($column == 'login_time') {
@@ -325,8 +330,12 @@ function remove_view_link($actions, $post) {
 		unset($actions['trash']);
 
 		$patient = get_field('patient' , $post->ID);
-		$delete_patinet_url = admin_url( 'admin-post.php?action=delete_patient&patient='.$patient );
-        $actions['delete_patinet'] = '<a href="#" data-patient="'.$patient.'">' . __('Delete Patient', 'textdomain') . '</a>';
+		
+		if( is_array($patient) ) {
+			$actions['delete_patinet'] = '<a href="#" data-patient="'.$patient['ID'].'">' . __('Delete Patient', 'textdomain') . '</a>';
+		} else {
+			$actions['delete_patinet'] = '<a href="#" data-patient="'.$patient.'">' . __('Delete Patient', 'textdomain') . '</a>';
+		}
 
     }
 
@@ -380,13 +389,21 @@ function filter_posts_by_meta_field() {
 
     // Ensure this is the correct post type
     if ($typenow == 'marucanna-patients') {
-        $meta_field = 'patient_id'; // Replace with your actual meta field key
+
+		$patient_id = isset($_GET['patient_id']) ? $_GET['patient_id'] : '';
+		$nhs_number = isset($_GET['nhs_number']) ? $_GET['nhs_number'] : '';
 
         // Display the input field for filtering
-        echo '<input type="text" id="' . $meta_field . '" name="' . $meta_field . '" value="' . esc_attr($_GET[$meta_field]) . '" class="postform" placeholder="Patient ID" />';
+        echo '<input type="text" id="patient_id" name="patient_id" value="' . esc_attr($patient_id) . '" class="postform" placeholder="Patient ID" />';
 
         // Add the submit button
         echo '<input type="submit" name="filter_action" class="button" value="Filter by Patient ID" style="margin-right: 15px;">';
+
+		// Display the input field for filtering
+        echo '<input type="text" id="nhs_number" name="nhs_number" value="' . esc_attr($nhs_number) . '" class="postform" placeholder="NHS Number" />';
+
+        // Add the submit button
+        echo '<input type="submit" name="filter_action" class="button" value="Filter by NHS Number" style="margin-right: 15px;">';
     }
 }
 add_action('restrict_manage_posts', 'filter_posts_by_meta_field');
@@ -394,14 +411,25 @@ add_action('restrict_manage_posts', 'filter_posts_by_meta_field');
 // Step 4: Modify the main query to filter posts based on the entered meta field value
 function filter_posts_by_meta_value($query) {
     global $pagenow;
-    $meta_field = 'patient_id'; // Replace with your actual meta field key
+    $patient_id = 'patient_id';
+    $nhs_number = 'nhs_number';
 
     // Check if it's the admin and the main query
-    if (is_admin() && $pagenow == 'edit.php' && isset($_GET[$meta_field]) && $_GET[$meta_field] != '') {
+    if (is_admin() && $pagenow == 'edit.php' && isset($_GET[$patient_id]) && $_GET[$patient_id] != '') {
         $query->query_vars['meta_query'] = array(
             array(
-                'key'     => $meta_field,
-                'value'   => esc_attr($_GET[$meta_field]),
+                'key'     => $patient_id,
+                'value'   => esc_attr($_GET[$patient_id]),
+                'compare' => 'LIKE',
+            ),
+        );
+    }
+
+	if (is_admin() && $pagenow == 'edit.php' && isset($_GET[$nhs_number]) && $_GET[$nhs_number] != '') {
+        $query->query_vars['meta_query'] = array(
+            array(
+                'key'     => $nhs_number,
+                'value'   => esc_attr($_GET[$nhs_number]),
                 'compare' => 'LIKE',
             ),
         );

@@ -58,7 +58,13 @@ $prescription_date_3 = get_field('prescription_date_3' , $patient_post_id);
 $prescription_note_1 = get_field('prescription_note_1' , $patient_post_id);
 $prescription_note_2 = get_field('prescription_note_2' , $patient_post_id);
 $prescription_note_3 = get_field('prescription_note_3' , $patient_post_id);
+$prescription_file_1 = get_field('prescription_file_1' , $patient_post_id);
+$prescription_file_2 = get_field('prescription_file_2' , $patient_post_id);
+$prescription_file_3 = get_field('prescription_file_3' , $patient_post_id);
 $other_prescription_data = get_field('other_prescription_data' , $patient_post_id);
+$nhs_number = get_field('nhs_number' , $patient_post_id);
+
+$activetab = isset($_GET['activetab']) ? $_GET['activetab'] : false;
 
 ?>
 
@@ -87,7 +93,7 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                 <button class="nav-link" id="pills-clinic-details-tab" data-bs-toggle="pill" data-bs-target="#pills-clinic-details" type="button" role="tab" aria-controls="pills-clinic-details" aria-selected="false">Clinic Details</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-treatment-tab" data-bs-toggle="pill" data-bs-target="#pills-treatment" type="button" role="tab" aria-controls="pills-treatment" aria-selected="false">Treatment Details</button>
+                <button class="nav-link" id="pills-treatment-tab" data-bs-toggle="pill" data-bs-target="#pills-treatment" type="button" role="tab" aria-controls="pills-treatment" aria-selected="false">Symptoms & Complaints</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-documents-tab" data-bs-toggle="pill" data-bs-target="#pills-documents" type="button" role="tab" aria-controls="pills-documents" aria-selected="false">Documents</button>
@@ -132,11 +138,15 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                     </div>
                     <div class="col-12 col-sm-9 profile-detail">
                         <div class="row">
-                            <div class="col-12 col-md-6 profile-item">
+                            <div class="col-12 col-md-4 profile-item">
                                 <div class="label">Patient ID</div>
                                 <div class="value"><?php echo $patient_id; ?></div>
                             </div>
-                            <div class="col-12 col-md-6 profile-item">
+                            <div class="col-12 col-md-4 profile-item">
+                                <div class="label">NHS Number</div>
+                                <div class="value"><?php echo $nhs_number; ?></div>
+                            </div>
+                            <div class="col-12 col-md-4 profile-item">
                                 <div class="label">Full Name</div>
                                 <div class="value"><?php echo $name; ?></div>
                             </div>
@@ -180,7 +190,7 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
             <div class="tab-pane fade" id="pills-treatment" role="tabpanel" aria-labelledby="pills-treatment-tab" tabindex="0">
                 <div class="row profile-detail-wrap rounded mb-3">
                     <div class="profile-detail">
-                        <h3>Treatment Details</h3>
+                        <h3>Symptoms & Complaints</h3>
                         <div class="row">
                             <div class="col-12 col-md-6 profile-item">
                                 <div class="label">Treatment</div>
@@ -286,7 +296,7 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                         <h3>Documents</h3>
                         <div class="row">
 
-                            <?php if( $csr_file ): ?>
+                            <?php if( checkRemoteFile($csr_file) ): ?>
                                 <div class="col-12 col-md-3 profile-item">
                                     <div class="label">CSR file</div>
                                     <div class="value">
@@ -295,15 +305,11 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                                 </div>
                             <?php endif; ?>
 
-                            <?php if( $photo_id ): ?>
+                            <?php if( isImageUrl($photo_id) ): ?>
                                 <div class="col-12 col-md-3 profile-item">
                                     <div class="label">Photo ID</div>
                                     <div class="value">
-                                        <?php if( isImageUrl($photo_id) ): ?>
-                                            <a href="<?php echo $photo_id; ?>" data-fancybox="photo">View File</a>
-                                        <?php else: ?>
-                                            <a href="<?php echo $photo_id; ?>" target="_blank" rel="noopener noreferrer">View File</a>
-                                        <?php endif; ?>
+                                        <a href="<?php echo $photo_id; ?>" data-fancybox="photo">View File</a>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -315,13 +321,15 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                             <h3>Follow Ups</h3>
                             <div class="row">
 
-                                <?php foreach( $follow_up_appointments as $follow_up ): ?>
-                                    <div class="col-12 col-md-3 profile-item">
-                                        <div class="label"><?php echo $follow_up['appointment_date']; ?></div>
-                                        <div class="value">
-                                            <a href="<?php echo $follow_up['appointment_file']; ?>" target="_blank" rel="noopener noreferrer">View File</a>
+                                <?php foreach( array_reverse($follow_up_appointments) as $follow_up ): ?>
+                                    <?php if( $follow_up['appointment_file'] ): ?>
+                                        <div class="col-12 col-md-3 profile-item">
+                                            <div class="label"><?php echo $follow_up['appointment_date']; ?></div>
+                                            <div class="value">
+                                                <a href="<?php echo $follow_up['appointment_file']; ?>" target="_blank" rel="noopener noreferrer">View File</a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                                 
                             </div>
@@ -403,6 +411,7 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                                                 <tr>
                                                     <th>Prescription Date</th>
                                                     <th>Prescription Note</th>
+                                                    <th>Prescription File</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -410,18 +419,33 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                                                     <tr>
                                                         <td><?php echo $prescription_date_1; ?></td>
                                                         <td><?php echo $prescription_note_1; ?></td>
+                                                        <td>
+                                                            <?php if( $prescription_file_1 ): ?>
+                                                                <a href="<?php echo $prescription_file_1; ?>" download>View file</a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endif; ?>
                                                 <?php if( $prescription_date_2 ): ?>
                                                     <tr>
                                                         <td><?php echo $prescription_date_2; ?></td>
                                                         <td><?php echo $prescription_note_2; ?></td>
+                                                        <td>
+                                                            <?php if( $prescription_file_2 ): ?>
+                                                                <a href="<?php echo $prescription_file_2; ?>" download>View file</a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endif; ?>
                                                 <?php if( $prescription_date_3 ): ?>
                                                     <tr>
                                                         <td><?php echo $prescription_date_3; ?></td>
                                                         <td><?php echo $prescription_note_3; ?></td>
+                                                        <td>
+                                                            <?php if( $prescription_file_3 ): ?>
+                                                                <a href="<?php echo $prescription_file_3; ?>" download>View file</a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endif; ?>
                                                 <?php 
@@ -431,6 +455,11 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                                                     <tr>
                                                         <td><?php echo $prescription['prescription_date']; ?></td>
                                                         <td><?php echo $prescription['prescription_note']; ?></td>
+                                                        <td>
+                                                            <?php if( $prescription['prescription_file'] ): ?>
+                                                                <a href="<?php echo $prescription['prescription_file']; ?>" download>View file</a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; endif; ?>
                                             </tbody>
@@ -466,29 +495,29 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
                                 if( $send_initial_consult_letter ) {
                                     echo '<p><strong>Initial Consult Letter has been sent.</strong></p>';
                                 } else {
-                                    echo '<p><button class="btn style_2" id="send_initial_consult" data-patient="'.$patient_post_id.'" >Send Initial Consult Letter</button></p>';
+                                    echo '<p><button class="btn style_2" id="send_initial_consult" data-patient="'.$patient_post_id.'" ><i class="fa-solid fa-envelope"></i> Initial Consult <i class="fa-solid fa-paper-plane"></i></button></p>';
                                 }
                             
                                 if( $send_after_mdt ) {
                                     echo '<p><strong>First Letter after MDT has been sent.</strong></p>';
                                 } else {
-                                    echo '<p><button class="btn style_2" id="send_after_mdt" data-patient="'.$patient_post_id.'" >Send First Letter after MDT</button></p>';
+                                    echo '<p><button class="btn style_2" id="send_after_mdt" data-patient="'.$patient_post_id.'" ><i class="fa-solid fa-envelope"></i> First Letter after MDT <i class="fa-solid fa-paper-plane"></i></button></p>';
                                 }
                             
                                 if( $send_refusal_following_mdt ) {
                                     echo '<p><strong>Refusal Following MDT Letter has been sent.</strong></p>';
                                 } else {
-                                    echo '<p><button class="btn style_2" id="send_refusal_following_mdt" data-patient="'.$patient_post_id.'" >Send Refusal Following MDT Letter</button></p>';
+                                    echo '<p><button class="btn style_2" id="send_refusal_following_mdt" data-patient="'.$patient_post_id.'" ><i class="fa-solid fa-envelope"></i> Refusal Following MDT <i class="fa-solid fa-paper-plane"></i></button></p>';
                                 }
                             
-                                echo '<p><button class="btn style_2" id="send_follow_up_letter" data-patient="'.$patient_post_id.'" >Send Follow up Letter</button></p>';
+                                echo '<p><button class="btn style_2" id="send_follow_up_letter" data-patient="'.$patient_post_id.'" ><i class="fa-solid fa-envelope"></i> Follow up <i class="fa-solid fa-paper-plane"></i></button></p>';
                             
-                                echo '<p><button class="btn style_2" id="send_after_followup_appointment" data-patient="'.$patient_post_id.'" >Send Change after a follow up appointment Letter</button></p>';
+                                echo '<p><button class="btn style_2" id="send_after_followup_appointment" data-patient="'.$patient_post_id.'" ><i class="fa-solid fa-envelope"></i> Change after a follow up appointment <i class="fa-solid fa-paper-plane"></i></button></p>';
                             
                                 if( $send_stopping_after_follow_up ) {
                                     echo '<p><strong>Stopping after follow up Letter has been sent.</strong></p>';
                                 } else {
-                                    echo '<p><button class="btn style_2" id="send_stopping_after_follow_up" data-patient="'.$patient_post_id.'" >Send Stopping after follow up Letter</button></p>';
+                                    echo '<p><button class="btn style_2" id="send_stopping_after_follow_up" data-patient="'.$patient_post_id.'" ><i class="fa-solid fa-envelope"></i> Stopping after follow up <i class="fa-solid fa-paper-plane"></i></button></p>';
                                 }
                             ?>
                         </div>
@@ -511,6 +540,10 @@ $other_prescription_data = get_field('other_prescription_data' , $patient_post_i
             
 ?>
 <script>
+<?php if( $activetab ): ?>
+const triggerEl = document.querySelector('.dashboard_wrapper .nav-pills .nav-item button[data-bs-target="#<?php echo $activetab; ?>"]');
+bootstrap.Tab.getOrCreateInstance(triggerEl).show();
+<?php endif; ?>
 jQuery(document).ready(function ($) {
 
     const swalWithBootstrapButtons = Swal.mixin({

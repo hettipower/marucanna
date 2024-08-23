@@ -78,6 +78,7 @@ $nhs_number = isset($_GET['nhs_number']) ? $_GET['nhs_number'] : '';
 
                     <div class="mb-3">
                         <label for="nhs_number" class="form-label">Your NHS number <span class="req">*</span></label>
+                        <div class="form-text" style="margin-top: -8px;margin-bottom: 8px;">This NHS number can be found on your NHS app or on any letter from your GP/hospital</div>
                         <input type="text" name="nhs_number" class="form-control" id="nhs_number" required value="<?php echo $nhs_number; ?>">
                         <div class="invalid-feedback">This field is required.</div>
                     </div>

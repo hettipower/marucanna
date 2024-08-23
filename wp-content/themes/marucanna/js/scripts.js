@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-08-15 11:27:01 AM */
+/*! css 1.0.0 filename.js 2024-08-23 11:18:06 AM */
 
 if (jQuery("body").hasClass("author") || jQuery("body").hasClass("page-template-page-patient-dashboard")) {
     Fancybox.bind("[data-fancybox]", {});
@@ -97,6 +97,7 @@ function create_gp_lists(lists) {
     var gpListModalEle = document.getElementById("gpListModal");
     var gpListModal = new bootstrap.Modal(gpListModalEle);
     var item;
+    listDiv.innerHTML = "";
     for (i = 0; i < lists.length; i++) {
         item = document.createElement("DIV");
         item.setAttribute("data-id", lists[i].ID);

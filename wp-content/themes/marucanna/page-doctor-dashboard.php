@@ -65,6 +65,7 @@ if (is_user_logged_in()):
             <thead>
                 <tr>
                     <th>Patient ID</th>
+                    <th class="hide">NHS Number</th>
                     <th>Patient Name</th>
                     <th>Phone</th>
                     <th style="width: 480px;">Actions</th>
@@ -92,6 +93,7 @@ if (is_user_logged_in()):
                             $prescription_date_2 = get_field('prescription_date_2', $patient_post_id);
                             $prescription_date_3 = get_field('prescription_date_3', $patient_post_id);
                             $other_prescription_data = get_field('other_prescription_data', $patient_post_id);
+                            $nhs_number = get_field('nhs_number', $patient_post_id);
 
                             $patient_url = get_author_posts_url($patient->ID);
                     ?>
@@ -101,18 +103,20 @@ if (is_user_logged_in()):
                                     <?php echo $patient->user_login; ?>
                                 </a>
                             </td>
+                            <td class="hide"><?php echo $nhs_number; ?></td>
                             <td class="patient-name">
                                 <a href="<?php echo $patient_url; ?>" target="_blank" rel="noopener noreferrer">
                                     <?php echo $name; ?>
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </a>
+                                <?php echo $nhs_number ? "(NHS#: $nhs_number)" : ''; ?>
                             </td>
                             <td><?php echo $phone; ?></td>
-                            <td style="width: 480px;text-align: right;vertical-align: middle;">
+                            <td style="width: 540px;text-align: right;vertical-align: middle;">
                                 <?php if( !$consultant ): ?>
-                                    <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_4 small">Consultation</a>
+                                    <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_4 small">Consultation Needed</a>
                                 <?php else: ?>
-                                    <a href="<?php echo admin_url( 'admin-post.php?action=create_consultation_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_4 small">Consultation File</a>
+                                    <a href="<?php echo admin_url( 'admin-post.php?action=create_consultation_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_4 small">Consultation Complete</a>
                                 <?php endif; ?>
                                 <a href="<?php echo home_url('about-us/patient-follow-up/?patient='.$patient->ID.'&patient_post='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_2 small">Follow Up</a>
 
@@ -127,6 +131,7 @@ if (is_user_logged_in()):
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mdtModal<?php echo $patient_post_id; ?>">MDT</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#prescriptionModal<?php echo $patient_post_id; ?>">Prescription</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#quickSummeryModal<?php echo $patient_post_id; ?>">Quick Summary</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo $patient_url; ?>?activetab=pills-letters" target="_blank" rel="noopener noreferrer">Letters</a></li>
                                     </ul>
                                 </div>
 

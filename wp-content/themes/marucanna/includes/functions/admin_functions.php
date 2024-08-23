@@ -321,7 +321,7 @@ function mc_send_after_mdt_letter() {
         $name = get_field('name' , $patient);
         $address_line_1 = get_field('address_line_1' , $patient);
         $address_line_2 = get_field('address_line_2' , $patient);
-        $meeting_date = get_field('meeting_date' , $patient);
+        $meeting_date = get_latest_mdt_date($patient);
         $dob = get_field('dob' , $patient);
         $nhs_number = get_field('nhs_number' , $patient);
         $patient_id = get_field('patient_id' , $patient);
@@ -495,7 +495,9 @@ function mc_send_refusal_following_mdt_letter() {
                 <footer>';
                 $html .= admin_letters_footer();
                 $html .= '</footer>
-                <main>';
+                <main><div class="header">';
+                    $html .= admin_letters_header();
+                $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
             </body>
@@ -592,7 +594,7 @@ function mc_send_follow_up_letter() {
         $name = get_field('name' , $patient);
         $address_line_1 = get_field('address_line_1' , $patient);
         $address_line_2 = get_field('address_line_2' , $patient);
-        $meeting_date = get_field('meeting_date' , $patient);
+        $meeting_date = get_latest_mdt_date($patient);
         $dob = get_field('dob' , $patient);
         $nhs_number = get_field('nhs_number' , $patient);
         $patient_id = get_field('patient_id' , $patient);
@@ -734,7 +736,7 @@ function mc_send_after_followup_appointment_letter() {
         $name = get_field('name' , $patient);
         $address_line_1 = get_field('address_line_1' , $patient);
         $address_line_2 = get_field('address_line_2' , $patient);
-        $meeting_date = get_field('meeting_date' , $patient);
+        $meeting_date = get_latest_mdt_date($patient);
         $dob = get_field('dob' , $patient);
         $nhs_number = get_field('nhs_number' , $patient);
         $patient_id = get_field('patient_id' , $patient);
@@ -773,7 +775,9 @@ function mc_send_after_followup_appointment_letter() {
                 <footer>';
                 $html .= admin_letters_footer();
                 $html .= '</footer>
-                <main>';
+                <main><div class="header">';
+                    $html .= admin_letters_header();
+                $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
             </body>
@@ -868,7 +872,7 @@ function mc_send_stopping_after_follow_up() {
         $name = get_field('name' , $patient);
         $address_line_1 = get_field('address_line_1' , $patient);
         $address_line_2 = get_field('address_line_2' , $patient);
-        $meeting_date = get_field('meeting_date' , $patient);
+        $meeting_date = get_latest_mdt_date($patient);
         $dob = get_field('dob' , $patient);
         $nhs_number = get_field('nhs_number' , $patient);
         $patient_id = get_field('patient_id' , $patient);
@@ -906,7 +910,9 @@ function mc_send_stopping_after_follow_up() {
                 <footer>';
                 $html .= admin_letters_footer();
                 $html .= '</footer>
-                <main>';
+                <main><div class="header">';
+                    $html .= admin_letters_header();
+                $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
             </body>
