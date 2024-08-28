@@ -38,7 +38,7 @@ function admin_mc_eligibility_checker() {
         } if(!validateNHSNumber($nhs_number)) {
             $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=Please enter valid NHS Number.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } if($is_nhs_number_exist) {
-            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=NHS Number is exists.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
+            $return_url = get_field('check_eligibility_page' , 'option').'?status=0&mgs=NHS Number already exists in system, please try again.'.'&fname='.$fname.'&email='.$email.'&contact='.$contact_no.'&nhs_number='.$nhs_number;
         } else {
 
             $is_email_exist = check_patient_email_exist($email);

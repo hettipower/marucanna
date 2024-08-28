@@ -31,6 +31,17 @@
 
 	<?php wp_head(); ?>
 
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FD06QQ19FN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FD06QQ19FN');
+</script>
+	
+
 </head>
 <?php
 $source_type = get_field( 'source_type' );
@@ -63,17 +74,17 @@ if( $source_type != 'none' && isset($source_type) ) {
 						'walker'       => new MC_Header_Menu_Walker(),
 					));
 				?>
-				<a href="<?php echo home_url('check-eligibility'); ?>" class="btn style_1">CHECK ELIGIBILITY</a>
+				<a href="<?php echo home_url('check-eligibility'); ?>/" class="btn style_1">CHECK ELIGIBILITY</a>
 				<?php 
 					if (is_user_logged_in()): 
 						$user = wp_get_current_user();
     					$allowed_roles = array( 'patient', 'administrator' );
 						if ( array_intersect( $allowed_roles, $user->roles ) ) :
 				?>
-					<a href="<?php echo home_url('patient-dashboard'); ?>" class="btn style_2">REPEAT ORDER</a>
+					<a href="<?php echo home_url('patient-dashboard'); ?>/" class="btn style_2">REPEAT ORDER</a>
 					<?php endif; ?>
 				<?php else: ?>
-					<a href="<?php echo home_url('login'); ?>" class="btn style_2">REPEAT ORDER</a>
+					<a href="<?php echo home_url('login'); ?>/" class="btn style_2">REPEAT ORDER</a>
 				<?php endif; ?>
 			</div>
 		</div>

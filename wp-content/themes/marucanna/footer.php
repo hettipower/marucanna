@@ -60,6 +60,8 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="newsletter">
                         <h6>SUBSCRIBE TO NEWSLETTER</h6>
+						<?php //echo do_shortcode( '[gravityform id="18" title="true"]' );?>
+						
                         <form action="">
                             <div class="input-group">
                                 <input type="text" class="form-control" aria-label="newsletter">
@@ -112,7 +114,7 @@
 				<?php if ( get_field( 'footer_logo', 'option' ) ) { ?>
                     <img src="<?php the_field( 'footer_logo', 'option' ); ?>"/>
 					<?php } else { ?>
-					<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.webp" alt="Marucanna logo" title="Marucanna logo"/>
+					<img src="<?php echo get_template_directory_uri(); ?>/img/footer-logo.webp" alt="MARUCANNA logo" title="MARUCANNA logo"/>
 					<?php } ?>
                 </div>
                 <div class="col-md-8 col-sm-12">
@@ -123,7 +125,7 @@
 					<?php } ?>
                 </div>
                 <div class="col-md-2 col-sm-12">
-                    <img src="https://marucanna.co.uk/demo/wp-content/uploads/CQC-Logo-Transparent.png" alt="CQC logo" title="CQC logo"/>
+                    <a href="https://www.cqc.org.uk/provider/1-13916728975" target="_blank"><img src="https://marucanna.co.uk/demo/wp-content/uploads/CQC-Logo-Transparent.png" alt="CQC - Visit our profile" title="CQC - Visit our profile"/></a>
                 </div>
             </div>
         </div>
@@ -141,6 +143,8 @@
 </div>
 <?php wp_footer(); ?>
 <script>
+//jQuery(".search_wrap button" ).attr("aria-label","search");
+	
 jQuery( ".mc-blog-text p" ).addClass( "card-text" );
 jQuery( ".mc-footer-menu li" ).addClass( "nav-item" );
 jQuery( ".mc-footer-menu a" ).addClass( "nav-link" );

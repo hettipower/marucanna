@@ -242,28 +242,23 @@ get_header(); ?>
 <section class="section faq-section">
     <div class="container">
         <div class="title_wrap text-center">
-            <h2>Frequently asked questions about chronic pain</h2>
+            <h2><?php the_field( 'faq_title' ); ?></h2>
         </div>
 
         <div class="faqs row g-3">
-			            <div class="faq-item">
-                <h3>What is chronic pain ?</h3>
-                <div class="content"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa</p>
-            </div>
-            </div>
+			<?php if ( have_rows( 'faq_rep' ) ) : ?>
+	<?php while ( have_rows( 'faq_rep' ) ) : the_row(); ?>
             <div class="faq-item">
-                <h3>How does medical cannibas help with chronic pain?</h3>
-                <div class="content"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa</p>
+                <h3><?php the_sub_field( 'question' ); ?></h3>
+                <div class="content"><?php the_sub_field( 'answer' ); ?> </div>
             </div>
-            </div>
-            <div class="faq-item">
-                <h3>How do i start treatments ?</h3>
-                <div class="content"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa</p>
-            </div>
-            </div>
-           
+<?php endwhile; ?>
+<?php else : ?>
+	<?php // no rows found ?>
+<?php endif; ?>
+          
 
-           
+        
         </div>
 
     </div>
