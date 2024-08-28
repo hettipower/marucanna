@@ -2158,6 +2158,10 @@ section.section {
     .hide {
         display: none;
     }
+
+    th {
+        width: auto !important;
+    }
 }
 
 .sk-chase {

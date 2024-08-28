@@ -41577,6 +41577,9 @@ section.section.bg_gray {
 #patients_details .hide {
   display: none;
 }
+#patients_details th {
+  width: auto !important;
+}
 
 .sk-chase {
   width: 40px;

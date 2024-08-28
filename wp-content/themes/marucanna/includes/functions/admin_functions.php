@@ -196,6 +196,7 @@ function mc_send_initial_consult_letter() {
         $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
 
         $letter_content = get_field('initial_consult_letter' , 'option');
+        $letter_name = "Initial Consult Letter";
 
         $replacements = array(
             'patient_name_address' => "$name, $address_line_1, $address_line_2",
@@ -222,7 +223,7 @@ function mc_send_initial_consult_letter() {
                     $html .= admin_letters_footer();
                 $html .= '</footer>
                 <main><div class="header">';
-                    $html .= admin_letters_header();
+                    $html .= admin_letters_header($letter_name);
                 $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
@@ -297,7 +298,6 @@ function mc_send_initial_consult_letter() {
 
         $results['status'] = true;
 		$results['msg'] = 'Initial Consult Letter has been sent.';
-		$results['test'] = $replacements;
 
     } else {
         $results['status'] = false;
@@ -337,7 +337,8 @@ function mc_send_after_mdt_letter() {
 
         $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
 
-        $letter_content = get_field('first_letter_after_mdt' , 'option');
+        $letter_content = get_field('first_letter_after_mdt' , 'option'); 
+        $letter_name = "First Letter after MDT";
 
         $replacements = array(
             'patient_name_address' => "$name, $address_line_1, $address_line_2",
@@ -361,7 +362,7 @@ function mc_send_after_mdt_letter() {
                 $html .= admin_letters_footer();
                 $html .= '</footer>
                 <main><div class="header">';
-                    $html .= admin_letters_header();
+                    $html .= admin_letters_header($letter_name);
                 $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
@@ -474,6 +475,7 @@ function mc_send_refusal_following_mdt_letter() {
         $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
 
         $letter_content = get_field('refusal_following_mdt' , 'option');
+        $letter_name = "Refusal Following MDT Letter";
 
         $replacements = array(
             'patient_name' => $name,
@@ -496,7 +498,7 @@ function mc_send_refusal_following_mdt_letter() {
                 $html .= admin_letters_footer();
                 $html .= '</footer>
                 <main><div class="header">';
-                    $html .= admin_letters_header();
+                    $html .= admin_letters_header($letter_name);
                 $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
@@ -614,6 +616,7 @@ function mc_send_follow_up_letter() {
         $gp_phone = get_field('gp_phone' , $patient);
 
         $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
+        $letter_name = "Follow up Letter";
 
         $replacements = array(
             'patient_name_address' => "$name, $address_line_1, $address_line_2",
@@ -640,7 +643,7 @@ function mc_send_follow_up_letter() {
                 $html .= admin_letters_footer();
                 $html .= '</footer>
                 <main><div class="header">';
-                    $html .= admin_letters_header();
+                    $html .= admin_letters_header($letter_name);
                 $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
@@ -753,6 +756,7 @@ function mc_send_after_followup_appointment_letter() {
         $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
 
         $letter_content = get_field('after_followup_appointment' , 'option');
+        $letter_name = "Change after a follow up Letter";
 
         $replacements = array(
             'patient_name' => $name,
@@ -776,7 +780,7 @@ function mc_send_after_followup_appointment_letter() {
                 $html .= admin_letters_footer();
                 $html .= '</footer>
                 <main><div class="header">';
-                    $html .= admin_letters_header();
+                    $html .= admin_letters_header($letter_name);
                 $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>
@@ -889,6 +893,7 @@ function mc_send_stopping_after_follow_up() {
         $gp_details = "$gp_name <br/> $practice_name <br/> $gp_address_line_1 <br/> $gp_address_line_2 <br/> $gp_town <br/> $gp_country <br/> $gp_postal_code <br/> $gp_phone";
 
         $letter_content = get_field('stopping_after_follow_up' , 'option');
+        $letter_name = "Stopping after follow up Letter";
 
         $replacements = array(
             'patient_name' => $name,
@@ -911,7 +916,7 @@ function mc_send_stopping_after_follow_up() {
                 $html .= admin_letters_footer();
                 $html .= '</footer>
                 <main><div class="header">';
-                    $html .= admin_letters_header();
+                    $html .= admin_letters_header($letter_name);
                 $html .= '</div>';
                     $html .= $letter_content;
                 $html .= '</main>

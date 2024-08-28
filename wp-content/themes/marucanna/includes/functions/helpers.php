@@ -324,9 +324,17 @@ function get_all_gp_postal_codes(){
 
 }
 
-function admin_letters_header() {
+function admin_letters_header($letter_name) {
     $site_logo = get_field('site_logo' , 'option');
-    $html = '<div class="logo" style="height: 150px;"><img style="width: 150px;" src="'.$site_logo['url'].'" alt="'.get_bloginfo( 'name' ).'" /></div>';
+    $html = '<table style="width:100%;margin-bottom:15px;">
+            <tr>
+                <td style="width: 170px;"><img style="width: 170px;" src="'.$site_logo['url'].'" /></td>
+                <td>
+                    <h4 style="background-color: #0c8e36;color: #fff;padding: 10px; width:100%; text-align: center;">'.$letter_name.'</h4>
+                    <p style="color: #000;width:100%; text-align: center; margin: 10px 0 0;text-transform: uppercase;"><strong>Private and Confidential</strong></p>
+                </td>
+            </tr>
+        </table>';
     $html .= '<div class="address">'.get_field( 'address', 'option' ).'</div>';
 
     return $html;
@@ -375,9 +383,8 @@ function letter_pdf_styles() {
             margin-bottom: 2cm;
         }
         .header {
-            height: 3cm;
-            margin-left: 2cm;
-            margin-right: 2cm;
+            margin-left: 0;
+            margin-right: 0;
             text-align : center;
             position: relative;
         }
@@ -385,11 +392,9 @@ function letter_pdf_styles() {
             margin: auto;
         }
 		.address {
-            position: absolute;
-			top:0;
-            right: 0;
+            width: 100%;
 			font-size: 13px;
-            text-align : left;
+            text-align : right;
 		}
         /** Define the footer rules **/
         footer {
@@ -401,9 +406,10 @@ function letter_pdf_styles() {
             font-size: 15px;
             margin-left: 0;
             margin-right: 0;
-            background-color: #0b8e36;
+            background-color: #9cc52b;
             color: #fff;
             padding: 5px 20px;
+            text-align: center;
         }
         footer p {
             color: #fff;

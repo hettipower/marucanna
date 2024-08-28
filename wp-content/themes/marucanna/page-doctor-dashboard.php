@@ -98,20 +98,20 @@ if (is_user_logged_in()):
                             $patient_url = get_author_posts_url($patient->ID);
                     ?>
                         <tr>
-                            <td>
+                            <td style="vertical-align: middle;">
                                 <a href="<?php echo $patient_url; ?>" target="_blank" rel="noopener noreferrer">
                                     <?php echo $patient->user_login; ?>
                                 </a>
                             </td>
-                            <td class="hide"><?php echo $nhs_number; ?></td>
-                            <td class="patient-name">
+                            <td style="vertical-align: middle;" class="hide"><?php echo $nhs_number; ?></td>
+                            <td style="vertical-align: middle;" class="patient-name">
                                 <a href="<?php echo $patient_url; ?>" target="_blank" rel="noopener noreferrer">
                                     <?php echo $name; ?>
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </a>
-                                <?php echo $nhs_number ? "(NHS#: $nhs_number)" : ''; ?>
+                                <p><?php echo $nhs_number ? "(NHS#: $nhs_number)" : ''; ?></p>
                             </td>
-                            <td><?php echo $phone; ?></td>
+                            <td style="vertical-align: middle;"><?php echo $phone; ?></td>
                             <td style="width: 540px;text-align: right;vertical-align: middle;">
                                 <?php if( !$consultant ): ?>
                                     <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_4 small">Consultation Needed</a>
