@@ -39493,7 +39493,7 @@ footer .nav li a {
 }
 @media (max-width: 767.98px) {
   footer .nav li a {
-    padding: 10px 0;
+    padding: 13px 0;
   }
 }
 footer .nav li a:hover, footer .nav li a:focus {
@@ -39970,6 +39970,10 @@ section.section.bg_gray {
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
+}
+.treating-section .tab-content .content-wrap .item a {
+  display: inline-block;
+  width: 100%;
 }
 
 .why-select {
