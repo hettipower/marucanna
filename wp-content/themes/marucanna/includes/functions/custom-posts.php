@@ -280,6 +280,7 @@ function mc_booking_column_header($columns) {
 		'payment_id' => "Payment ID",
 		'login_time' => "Login Time",
 		'logout_time' => "Logout Time",
+		'valid' => "Valid Patient",
 		'date' => "Date"
 	);
 
@@ -319,6 +320,15 @@ function mc_booking_column_content($column, $post_id) {
 
 	if ($column == 'logout_time') {
         echo $lastLogoutTime ? $lastLogoutTime : '-';
+    }
+
+	if ($column == 'valid') {
+		$is_valid_patient = check_valid_patinet($patient);
+		if( $is_valid_patient ) {
+			echo 'Yes';
+		} else {
+			echo 'No';
+		}
     }
 }
 add_action('manage_marucanna-patients_posts_custom_column', 'mc_booking_column_content', 10, 2);

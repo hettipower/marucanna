@@ -1035,6 +1035,9 @@ function mc_create_patient_file_pdf() {
         $follow_up_letter_date = get_field('follow_up_letter_date', $patient);
         $after_followup_appointment_date = get_field('after_followup_appointment_date', $patient);
         $stopping_after_follow_up_date = get_field('stopping_after_follow_up_date', $patient);
+        $user_id = get_field('patient' , $patient);
+        $consent_date = get_field('consent_date' , $patient);
+        $send_consent = get_post_meta( $patient, 'send_consent', true );
 
         $upload_dir = wp_upload_dir();
         $patient_dir = $upload_dir['basedir'] . '/patients/';
@@ -1149,6 +1152,19 @@ function mc_create_patient_file_pdf() {
         <p><strong>Consultant gives consent for this patient to go into shared care :</strong><br/>'.$consent.'</p>
 
         <hr/>';
+
+        $consultant = get_user_meta( $user_id, 'consultant', true );
+        if( $consultant ) {
+            $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">INITIAL CONSULTATION</h3>
+            <table style="width: 100%;">
+                <tbody>';
+                    $html .= '<tr>
+                        <td>'.$mc_consultation_date.'</td>
+                        <td><a href="'.admin_url( 'admin-post.php?action=create_consultation_file_pdf&patient='.$patient ).'" target="_blank">View file</a></td>
+                    </tr>';
+            $html .= '</tbody>
+            </table>';
+        }
 
         if( $follow_up_appointments ) {
             $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Follow Ups</h3>
@@ -1365,8 +1381,7 @@ function mc_create_patient_file_pdf() {
             </table>';
         }
 
-
-        if( $initial_consult_letter_date || $after_mdt_date || $refusal_following_mdt_date || $follow_up_letter_date || $after_followup_appointment_date || $stopping_after_follow_up_date ) {
+        if( $initial_consult_letter_date || $after_mdt_date || $refusal_following_mdt_date || $follow_up_letter_date || $after_followup_appointment_date || $stopping_after_follow_up_date || $send_consent ) {
             $html .= '<h3 style="background-color: #9cc52b;padding: 10px;color: #fff;font-weight: 500;margin-bottom: 10px;">Letters</h3>
             <table style="width: 100%;">
                 <thead>
@@ -1416,6 +1431,13 @@ function mc_create_patient_file_pdf() {
                         $html .= '<tr>
                             <td>Stopping after follow up Letter</td>
                             <td>'.$stopping_after_follow_up_date.'</td>
+                        </tr>';
+                    }
+
+                    if( $consent_date ) {
+                        $html .= '<tr>
+                            <td>Patient Consent Received</td>
+                            <td>'.$consent_date.'</td>
                         </tr>';
                     }
 
@@ -1709,7 +1731,7 @@ function mc_create_consultation_file_pdf() {
         $dompdf->render();
 
         $pdf_name = 'CN-'.$patient_id.'-'.$formatted_consultation_date.'-'.$patient.'.pdf';
-        $dompdf->stream($pdf_name,array('Attachment'=>1));
+        $dompdf->stream($pdf_name,array('Attachment'=>false));
         
     }
     
@@ -1871,4 +1893,32 @@ function populate_gp_postalcode($form)
     }
 
     return $form;
+}
+
+add_action( 'gform_after_submission_19', 'mc_add_csr_file', 10, 2 );
+function mc_add_csr_file( $entry, $form ) {
+
+    $patient_post_id = rgar( $entry, '3' );
+    
+    $csr_attachment_id = mc_gf_save_file_to_attachment($entry , '1');
+    
+    if($patient_post_id && $csr_attachment_id) {
+
+        update_field('csr_file', $csr_attachment_id , $patient_post_id);
+    } 
+    
+}
+
+add_action( 'gform_after_submission_20', 'mc_add_photo_id', 10, 2 );
+function mc_add_photo_id( $entry, $form ) {
+
+    $patient_post_id = rgar( $entry, '3' );
+    
+    $photo_attachment_id = mc_gf_save_file_to_attachment($entry , '1');
+    
+    if($patient_post_id && $photo_attachment_id) {
+
+        update_field('photo_id', $photo_attachment_id , $patient_post_id);
+    } 
+    
 }

@@ -5,17 +5,59 @@
     THEME SCRIPTS
 \*------------------------------------*/
 
+use MatthiasMullie\Minify;
+
+add_action('init', 'combine_all_js_func');
+function combine_all_js_func()
+{
+    
+    $last_minified = get_field('js_minified_time', 'option');
+    $minify_assets = get_field( 'minify_assets', 'option' );
+
+    $current_date = new DateTime('now');
+
+    if (!empty($last_minified)) {
+        $date = date_create_from_format('Y-m-d H:i:s', $last_minified);
+        $date_differnce = $date->diff($current_date);
+    }
+
+    if ($minify_assets && (empty($last_minified) || $date_differnce->days >= 1)) {
+
+        if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
+
+            //Bootstrap Minify js
+            $popper = get_theme_file_path('vendor/bootstrap/popper.min.js');
+            $bootstrap_minifier = new Minify\JS($popper);
+
+            $bootstrap = get_theme_file_path('vendor/bootstrap/bootstrap.min.js');
+            $bootstrap_minifier->add($bootstrap);
+
+            $bootstrap_minifiedPath = get_theme_file_path('js/bootstrap.combined.min.js');
+            $bootstrap_minifier->minify($bootstrap_minifiedPath);
+
+            //Main minify js
+            $slick = get_theme_file_path('vendor/slick/slick.min.js');
+            $minifier = new Minify\JS($slick);
+
+            $phonemask = get_theme_file_path('vendor/phonemask/phonemask.js');
+            $minifier->add($phonemask);
+
+            $scripts = get_theme_file_path('js/scripts.js');
+            $minifier->add($scripts);
+
+            $minifiedPath = get_theme_file_path('js/scripts.combined.min.js');
+            $minifier->minify($minifiedPath);
+
+            update_field('js_minified_time', $current_date->format('Y-m-d H:i:s'), 'option');
+        }
+    }
+    
+}
+
 function html5blank_header_scripts()
 {
 
-    wp_register_script('popper', get_template_directory_uri() . '/vendor/bootstrap/popper.min.js', array('jquery'), false, false); // Custom scripts
-    wp_enqueue_script('popper'); // Enqueue it! 
-
-    wp_register_script('bootstrap', get_template_directory_uri() . '/vendor/bootstrap/bootstrap.min.js', array('jquery'), false, false); // Custom scripts
-    wp_enqueue_script('bootstrap'); // Enqueue it! 
-
-    wp_register_script('slick', get_template_directory_uri() . '/vendor/slick/slick.min.js', array('jquery'), false, true); // Custom scripts
-    wp_enqueue_script('slick');
+    $minify_assets = get_field( 'minify_assets', 'option' );
 
     if( is_page_template( 'page-doctor-dashboard.php' ) ) {
         wp_register_script('datatable', get_template_directory_uri() . '/vendor/datatable/datatables.min.js', array('jquery'), false, true);
@@ -26,9 +68,6 @@ function html5blank_header_scripts()
         wp_register_script('fancybox', get_template_directory_uri() . '/vendor/fancybox/fancybox.umd.js', array('jquery'), false, true);
         wp_enqueue_script('fancybox');
     }
-
-    wp_register_script('phonemask', get_template_directory_uri() . '/vendor/phonemask/phonemask.js', array('jquery'), false, true);
-    wp_enqueue_script('phonemask');
 
     if( function_exists('get_field') && is_page_template( 'page-contact.php' ) ) {
         $google_map_key = get_field( 'google_map_key', 'option' );
@@ -42,9 +81,32 @@ function html5blank_header_scripts()
         wp_register_script('sweetalert2', get_template_directory_uri() . '/vendor/sweetalert2/sweetalert2.min.js', array('jquery'), true, true);
         wp_enqueue_script('sweetalert2');
     }
-    
-    wp_register_script('themescript', get_template_directory_uri() . '/js/scripts.js', array('jquery'), false, true); // Custom scripts
-    wp_enqueue_script('themescript'); // Enqueue it! 
+
+    if( $minify_assets ) {
+
+        wp_register_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.combined.min.js', array('jquery'), false, false);
+        wp_enqueue_script('bootstrap');
+
+        wp_register_script('themescript', get_template_directory_uri() . '/js/scripts.combined.min.js', array('jquery'), false, true); 
+        wp_enqueue_script('themescript');
+
+    } else {
+        wp_register_script('popper', get_template_directory_uri() . '/vendor/bootstrap/popper.min.js', array('jquery'), false, false); // Custom scripts
+        wp_enqueue_script('popper'); // Enqueue it! 
+
+        wp_register_script('bootstrap', get_template_directory_uri() . '/vendor/bootstrap/bootstrap.min.js', array('jquery'), false, false); // Custom scripts
+        wp_enqueue_script('bootstrap'); // Enqueue it! 
+
+        wp_register_script('slick', get_template_directory_uri() . '/vendor/slick/slick.min.js', array('jquery'), false, true); // Custom scripts
+        wp_enqueue_script('slick');
+
+        wp_register_script('phonemask', get_template_directory_uri() . '/vendor/phonemask/phonemask.js', array('jquery'), false, true);
+        wp_enqueue_script('phonemask');
+        
+        wp_register_script('themescript', get_template_directory_uri() . '/js/scripts.js', array('jquery'), false, true); // Custom scripts
+        wp_enqueue_script('themescript'); // Enqueue it! 
+    }
+
 
     $localize_args = array(
         'ajaxUrl' => admin_url('admin-ajax.php'),

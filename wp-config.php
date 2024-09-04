@@ -1,4 +1,5 @@
 <?php
+define( 'WP_CACHE', true );
 /**
  * The base configuration for WordPress
  *
@@ -65,7 +66,7 @@ define( 'NONCE_SALT',       'W6ss!I~#e7,;(^s+=Pe>7eZTM}T|Q@SuO_lq.=G8brt?]QrXO2=
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix = 'wp_';
+$table_prefix = 'wprl_';
 
 /**
  * For developers: WordPress debugging mode.

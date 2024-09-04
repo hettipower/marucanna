@@ -274,7 +274,7 @@ function mc_send_initial_consult_letter() {
                 </tr>
             </tbody>
         </table>";
-        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>' );
+        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The MARUCANNA Team <noreply@marucanna.co.uk>' );
 
         $letter_emails = explode(",",get_field('letter_emails' , 'option'));
         if( is_array($letter_emails) ) {
@@ -413,7 +413,7 @@ function mc_send_after_mdt_letter() {
                 </tr>
             </tbody>
         </table>";
-        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The MARUCANNA Team <noreply@marucanna.co.uk>');
 
         $letter_emails = explode(",",get_field('letter_emails' , 'option'));
         if( is_array($letter_emails) ) {
@@ -549,7 +549,7 @@ function mc_send_refusal_following_mdt_letter() {
                 </tr>
             </tbody>
         </table>";
-        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The MARUCANNA Team <noreply@marucanna.co.uk>');
 
         $letter_emails = explode(",",get_field('letter_emails' , 'option'));
         if( is_array($letter_emails) ) {
@@ -694,7 +694,7 @@ function mc_send_follow_up_letter() {
                 </tr>
             </tbody>
         </table>";
-        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The MARUCANNA Team <noreply@marucanna.co.uk>');
 
         $letter_emails = explode(",",get_field('letter_emails' , 'option'));
         if( is_array($letter_emails) ) {
@@ -831,7 +831,7 @@ function mc_send_after_followup_appointment_letter() {
                 </tr>
             </tbody>
         </table>";
-        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The MARUCANNA Team <noreply@marucanna.co.uk>');
 
         $letter_emails = explode(",",get_field('letter_emails' , 'option'));
         if( is_array($letter_emails) ) {
@@ -967,7 +967,7 @@ function mc_send_stopping_after_follow_up() {
                 </tr>
             </tbody>
         </table>";
-        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
+        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The MARUCANNA Team <noreply@marucanna.co.uk>');
 
         $letter_emails = explode(",",get_field('letter_emails' , 'option'));
         if( is_array($letter_emails) ) {

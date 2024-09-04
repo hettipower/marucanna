@@ -69,8 +69,12 @@ footer {
                 color: $white;
                 font-size: 16px;
                 font-weight: 400;
-                padding: 0 0 4px;
+                padding: 0 0 15px;
                 //border-bottom: 1px solid transparent;
+
+                @include media-breakpoint-down(md) {
+                    padding: 10px 0;
+                }
 
                 &:hover , 
                 &:focus {
@@ -106,26 +110,53 @@ footer {
     .newsletter {
         margin-bottom: 30px;
 
-        .input-group {
-            background-color: #fff;
-            border-radius: 33px;
-            overflow: hidden;
-            padding: 5px 5px;
+        .gform_wrapper {
+            form {
+                position: relative;
 
-            .form-control {
-                border: none;
-                outline: none;
-                box-shadow: none;
-            }
+                .gform_body {
+                    background-color: #fff;
+                    border-radius: 33px;
+                    overflow: hidden;
+                    padding: 5px 5px;
 
-            .btn {
-                background-color: #0b6128;
-                color: #fff;
-                border-radius: 33px !important;
-                -webkit-border-radius: 33px !important;
-                -moz-border-radius: 33px !important;
-                -ms-border-radius: 33px !important;
-                -o-border-radius: 33px !important;
+                    .gform_fields {
+                        .gfield {
+                            input:not([type="checkbox"]):not([type="radio"]) {
+                                background-color: #fff;
+                                height: 41px;
+                            }
+
+                            .validation_message {
+                                position: absolute;
+                                left: 0;
+                                top: 100%;
+                            }
+                        }
+                    }
+                }
+
+                .gform_footer {
+                    margin: 0;
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+
+                    .gform_button {
+                        background-color: #0b6128 !important;
+                        color: #fff !important;
+                        border-radius: 33px !important;
+                        -webkit-border-radius: 33px !important;
+                        -moz-border-radius: 33px !important;
+                        -ms-border-radius: 33px !important;
+                        -o-border-radius: 33px !important;
+
+                        padding: 0 27px !important;
+                        font-size: 16px !important;
+                        line-height: 41px !important;
+                        height: 41px !important;
+                    }
+                }
             }
         }
     }

@@ -11,6 +11,13 @@ header {
 	width: 100%;
 	z-index: 10;
 
+	@include media-breakpoint-down(lg) {
+		.menu-open & {
+			max-height: 100vh;
+			overflow: auto;
+		}
+	}
+
 	.navbar {
 		padding: 0;
 		margin-top: 50px;

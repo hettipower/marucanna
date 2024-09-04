@@ -296,23 +296,60 @@ $activetab = isset($_GET['activetab']) ? $_GET['activetab'] : false;
                         <h3>Documents</h3>
                         <div class="row">
 
-                            <?php if( checkRemoteFile($csr_file) ): ?>
+                            <?php if( $csr_file ): ?>
                                 <div class="col-12 col-md-3 profile-item">
                                     <div class="label">CSR file</div>
                                     <div class="value">
                                         <a href="<?php echo $csr_file; ?>" target="_blank" rel="noopener noreferrer">View File</a>
                                     </div>
                                 </div>
-                            <?php endif; ?>
-
-                            <?php if( isImageUrl($photo_id) ): ?>
+                            <?php else: ?>
                                 <div class="col-12 col-md-3 profile-item">
-                                    <div class="label">Photo ID</div>
+                                    <div class="label">CSR file</div>
                                     <div class="value">
-                                        <a href="<?php echo $photo_id; ?>" data-fancybox="photo">View File</a>
+                                        CSR file not added.
+                                        <?php
+                                            if (is_user_logged_in()):
+                                                $user = wp_get_current_user();
+                                                $allowed_roles = array( 'doctor', 'administrator' );
+                                                if ( array_intersect( $allowed_roles, $user->roles ) ) :
+                                                    $user_info = get_userdata($user->data->ID);
+                                        ?>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addCSRModal">add file</a>
+                                        <?php endif; endif; ?>
                                     </div>
                                 </div>
                             <?php endif; ?>
+
+                            <?php if( $photo_id ): ?>
+                                <div class="col-12 col-md-3 profile-item">
+                                    <div class="label">Photo ID</div>
+                                    <div class="value">
+                                        <?php if( isImageUrl($photo_id) ): ?>
+                                            <a href="<?php echo $photo_id; ?>" data-fancybox="photo">View File</a>
+                                        <?php else: ?>
+                                            <a href="<?php echo $photo_id; ?>" target="_blank" rel="noopener noreferrer">View File</a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php else: ?>
+                                <div class="col-12 col-md-3 profile-item">
+                                    <div class="label">Photo ID</div>
+                                    <div class="value">
+                                        Photo ID not added.
+                                        <?php
+                                            if (is_user_logged_in()):
+                                                $user = wp_get_current_user();
+                                                $allowed_roles = array( 'doctor', 'administrator' );
+                                                if ( array_intersect( $allowed_roles, $user->roles ) ) :
+                                                    $user_info = get_userdata($user->data->ID);
+                                        ?>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addPhotoIDModal">add file</a>
+                                        <?php endif; endif; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            
                         </div>
                     </div>
 
@@ -331,6 +368,26 @@ $activetab = isset($_GET['activetab']) ? $_GET['activetab'] : false;
                                         </div>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
+                                
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php 
+                        $consultant = get_user_meta( $user_id, 'consultant', true );
+                        if( $consultant && is_user_logged_in() ): 
+                            $consultation_date = get_field('mc_consultation_date' , $patient_post_id);
+                    ?>
+                        <div class="profile-detail">
+                            <h3>Consultation</h3>
+                            <div class="row">
+
+                                <div class="col-12 col-md-3 profile-item">
+                                    <div class="label"><?php echo $consultation_date; ?></div>
+                                    <div class="value">
+                                        <a href="<?php echo admin_url( 'admin-post.php?action=create_consultation_file_pdf&patient='.$patient_post_id ); ?>" target="_blank" rel="noopener noreferrer">View File</a>
+                                    </div>
+                                </div>
                                 
                             </div>
                         </div>
@@ -483,6 +540,7 @@ $activetab = isset($_GET['activetab']) ? $_GET['activetab'] : false;
                         $send_after_mdt = get_post_meta( $patient_post_id, 'send_after_mdt', true );
                         $send_refusal_following_mdt = get_post_meta( $patient_post_id, 'send_refusal_following_mdt', true );
                         $send_stopping_after_follow_up = get_post_meta( $patient_post_id, 'send_stopping_after_follow_up', true );
+                        $send_consent = get_post_meta( $patient_post_id, 'send_consent', true );
             ?>
                 <div class="tab-pane fade" id="pills-letters" role="tabpanel" aria-labelledby="pills-letters-tab" tabindex="0">
                     <div class="row profile-detail-wrap rounded mb-3">
@@ -491,6 +549,10 @@ $activetab = isset($_GET['activetab']) ? $_GET['activetab'] : false;
                         
                         <div class="btns-wrapper">
                             <?php
+
+                                if( !$send_consent ) {
+                                    echo '<p><button class="btn style_2" id="send_consent" data-patient="'.$patient_post_id.'" >Request Patient Consent</button></p>';
+                                }
 
                                 if( $send_initial_consult_letter ) {
                                     echo '<p><strong>Initial Consult Letter has been sent.</strong></p>';
@@ -539,6 +601,35 @@ $activetab = isset($_GET['activetab']) ? $_GET['activetab'] : false;
             $user_info = get_userdata($user->data->ID);
             
 ?>
+
+<div class="modal fade" id="addCSRModal" tabindex="-1" aria-labelledby="addCSRModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addCSRModalLabel">Add CSR File</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php echo do_shortcode('[gravityform id="19" title="false" ajax="true" field_values="patient_post_id='.$patient_post_id.'"]'); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addPhotoIDModal" tabindex="-1" aria-labelledby="addPhotoIDModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addPhotoIDModalLabel">Add Photo ID</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php echo do_shortcode('[gravityform id="20" title="false" ajax="true" field_values="patient_post_id='.$patient_post_id.'"]'); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 <?php if( $activetab ): ?>
 const triggerEl = document.querySelector('.dashboard_wrapper .nav-pills .nav-item button[data-bs-target="#<?php echo $activetab; ?>"]');
@@ -1003,6 +1094,58 @@ jQuery(document).ready(function ($) {
                     text: "Initial Consult Letter didn't send.",
                     icon: "error"
                 });
+            }
+        });
+
+
+        return false;
+    });
+
+    $('#send_consent').on('click' , function(e){
+  
+        var patient = $(this).data('patient');
+
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, send it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                var data = {
+                    action: 'sent_consent_form_action',
+                    patient: patient
+                };
+        
+                // Perform the AJAX request
+                $.post(ajaxUrl, data, function(response) {
+                    // Parse the JSON response
+                    var jsonResponse = JSON.parse(response);
+                    
+                    if( jsonResponse.status ) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Sent!",
+                            text: jsonResponse.msg,
+                            icon: "success"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(true);
+                            }
+                        });
+                    } else {
+                        swalWithBootstrapButtons.fire({
+                            title: "Error!",
+                            text: jsonResponse.msg,
+                            icon: "error"
+                        });
+                    }
+
+                });
+                
             }
         });
 

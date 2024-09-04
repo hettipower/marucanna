@@ -176,6 +176,14 @@
 			padding: 6px 24px 9px;
 		}
 
+		&.style_2 {
+			&:hover {
+				background-color: #0c8e36;
+				color: #fff;
+				border-color: #0c8e36;
+			}
+		}
+
 	}
 }
 

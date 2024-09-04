@@ -6,9 +6,16 @@
 \*------------------------------------*/
 
 function html5blank_styles(){
+
+    $minify_assets = get_field( 'minify_assets', 'option' );
     
-    wp_register_style('html5blank', get_template_directory_uri() . '/css/theme.css', array(), false, 'all');
-    wp_enqueue_style('html5blank'); // Enqueue it!
+    if( $minify_assets ) {
+        wp_register_style('html5blank-minify', get_template_directory_uri() . '/css/theme.min.css', array(), false, 'all');
+        wp_enqueue_style('html5blank-minify');
+    } else {
+        wp_register_style('html5blank', get_template_directory_uri() . '/css/theme.css', array(), false, 'all');
+        wp_enqueue_style('html5blank');
+    }
         
     
 }

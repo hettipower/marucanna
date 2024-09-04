@@ -76,11 +76,11 @@ if (is_user_logged_in()):
                     <?php 
                         foreach( $patients as $patient ): 
 
-                            $is_valid_patient = check_valid_patinet($patient->ID);
+                            /*$is_valid_patient = check_valid_patinet($patient->ID);
 
                             if( !$is_valid_patient ) {
                                 continue;
-                            }
+                            }*/
 
                             $patient_post_id = get_user_meta( $patient->ID, 'patient_info', true );
                             $name = get_field('name', $patient_post_id);
@@ -94,8 +94,14 @@ if (is_user_logged_in()):
                             $prescription_date_3 = get_field('prescription_date_3', $patient_post_id);
                             $other_prescription_data = get_field('other_prescription_data', $patient_post_id);
                             $nhs_number = get_field('nhs_number', $patient_post_id);
+                            $eligibility = get_field('eligibility' , $patient_post_id);
 
                             $patient_url = get_author_posts_url($patient->ID);
+
+                            if( $eligibility != 'Eligible' ) {
+                                continue;
+                            }
+
                     ?>
                         <tr>
                             <td style="vertical-align: middle;">
@@ -116,7 +122,7 @@ if (is_user_logged_in()):
                                 <?php if( !$consultant ): ?>
                                     <a href="<?php echo home_url('consultant?patient_id='.$patient->user_login . '&patient='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_4 small">Consultation Needed</a>
                                 <?php else: ?>
-                                    <a href="<?php echo admin_url( 'admin-post.php?action=create_consultation_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_4 small">Consultation Complete</a>
+                                    <a href="<?php echo admin_url( 'admin-post.php?action=create_consultation_file_pdf&patient='.$patient_post_id ); ?>" class="btn style_4 small" target="_blank">Consultation Complete</a>
                                 <?php endif; ?>
                                 <a href="<?php echo home_url('about-us/patient-follow-up/?patient='.$patient->ID.'&patient_post='.$patient_post_id.'&doctor='.$user->ID); ?>" class="btn style_2 small">Follow Up</a>
 

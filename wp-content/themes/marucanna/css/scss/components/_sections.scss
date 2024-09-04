@@ -375,10 +375,6 @@ section.section {
 
         .card {
             height: 100%;
-
-            @include media-breakpoint-down(md) {
-                margin-bottom: 15px;
-            }
         }
 
         .card-body {
@@ -394,6 +390,12 @@ section.section {
             p {
                 font-size: 16px;
                 margin-bottom: 0;
+            }
+        }
+
+        .col-md-4 {
+            @include media-breakpoint-down(md) {
+                margin-bottom: 15px;
             }
         }
     }
@@ -716,17 +718,21 @@ section.section {
         text-transform: uppercase;
 
         &::before {
-            color: #949494;
+            color: #000;
         }
 
         &.active {
-            color: #404040;
+            color: $theme_color2;
             font-weight: 600;
         }
 
         a {
             text-transform: uppercase;
-            color: #949494;
+            color: $theme_color;
+
+            &:hover {
+                color: $theme_color2;
+            }
         }
     }
 }

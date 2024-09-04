@@ -60,14 +60,7 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="newsletter">
                         <h6>SUBSCRIBE TO NEWSLETTER</h6>
-						<?php //echo do_shortcode( '[gravityform id="18" title="true"]' );?>
-						
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control" aria-label="newsletter">
-                                <button class="btn" type="button">SIGN UP</button>
-                            </div>
-                        </form>
+						<?php echo do_shortcode( '[gravityform id="18" title="false" ajax="true"]' );?>
                     </div>
 
                     <div class="social">
