@@ -5,6 +5,37 @@
     THEME STYLES
 \*------------------------------------*/
 
+use MatthiasMullie\Minify;
+function combine_all_css_func(){
+
+    $minify_assets = get_field( 'minify_assets', 'option' );
+    $last_minified = get_field('css_minified_time','option');
+
+    $current_date = new DateTime('now');
+
+    if (!empty($last_minified)) {
+        $date = date_create_from_format('Y-m-d H:i:s', $last_minified);
+        $date_differnce = $date->diff($current_date); 
+    }
+
+    if ($minify_assets && (empty($last_minified) || $date_differnce->days >= 1)) {
+
+        if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
+
+            $theme = get_theme_file_path('css/theme.css');
+            $minifier = new Minify\CSS($theme);
+
+            // save minified file to disk
+            $minifiedPath = get_theme_file_path('css/theme.min.css');
+            $minifier->minify($minifiedPath);
+
+            update_field('css_minified_time', $current_date->format('Y-m-d H:i:s'), 'option');
+        }
+    }
+
+}
+add_action('init' , 'combine_all_css_func');
+
 function html5blank_styles(){
 
     $minify_assets = get_field( 'minify_assets', 'option' );

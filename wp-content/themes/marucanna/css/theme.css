@@ -39370,6 +39370,11 @@ body:not(.home).sticky-header header .navbar::before {
 #mainMenuWrap .navbar-nav > li .dropdown-menu.show {
   display: grid;
 }
+@media (max-width: 767.98px) {
+  #mainMenuWrap .navbar-nav > li .dropdown-menu.show {
+    display: block;
+  }
+}
 #mainMenuWrap .navbar-nav > li .dropdown-menu li {
   position: relative;
 }
@@ -39392,6 +39397,24 @@ body:not(.home).sticky-header header .navbar::before {
   background-color: transparent !important;
   padding: 8px 0;
   white-space: normal;
+}
+@media (max-width: 767.98px) {
+  #mainMenuWrap .navbar-nav > li .dropdown-menu li a {
+    padding: 15px 0;
+    position: relative;
+  }
+  #mainMenuWrap .navbar-nav > li .dropdown-menu li a:after {
+    border: none;
+    content: "";
+    display: block;
+    position: absolute;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f054";
+    right: 2px;
+    top: 16px;
+    font-size: 12px;
+  }
 }
 #mainMenuWrap .navbar-nav > li .dropdown-menu li a:hover, #mainMenuWrap .navbar-nav > li .dropdown-menu li a:focus {
   color: #0c8e36;
