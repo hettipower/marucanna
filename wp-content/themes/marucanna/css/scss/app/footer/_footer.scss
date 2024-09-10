@@ -125,6 +125,10 @@ footer {
                             input:not([type="checkbox"]):not([type="radio"]) {
                                 background-color: #fff;
                                 height: 41px;
+
+                                @include media-breakpoint-down(md) {
+                                    text-align: left;
+                                }
                             }
 
                             .validation_message {

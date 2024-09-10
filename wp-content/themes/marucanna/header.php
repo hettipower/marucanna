@@ -87,6 +87,20 @@ if( $source_type != 'none' && isset($source_type) ) {
 					<a href="<?php echo home_url('login'); ?>/" class="btn style_2">REPEAT ORDER</a>
 				<?php endif; ?>
 			</div>
+			<div class="btn-group mobile_btns">
+				<a href="<?php echo home_url('check-eligibility'); ?>/" class="btn style_1">CHECK ELIGIBILITY</a>
+				<?php 
+					if (is_user_logged_in()): 
+						$user = wp_get_current_user();
+    					$allowed_roles = array( 'patient', 'administrator' );
+						if ( array_intersect( $allowed_roles, $user->roles ) ) :
+				?>
+					<a href="<?php echo home_url('patient-dashboard'); ?>/" class="btn style_2">Patient Dashboard</a>
+					<?php endif; ?>
+				<?php else: ?>
+					<a href="<?php echo home_url('login'); ?>/" class="btn style_2">Login</a>
+				<?php endif; ?>
+			</div>
 		</div>
 	</nav>
 </header>

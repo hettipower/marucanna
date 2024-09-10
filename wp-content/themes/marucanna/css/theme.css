@@ -39173,27 +39173,56 @@ header .navbar {
   header .navbar {
     margin-top: 0;
     background-color: #0c8e36;
-    padding: 15px 0;
+    padding: 0;
   }
 }
 header .navbar .container-fluid, header .navbar .container-sm, header .navbar .container-md, header .navbar .container-lg, header .navbar .container-xl, header .navbar .container-xxl {
   max-width: 1300px;
   position: relative;
 }
+@media (max-width: 767.98px) {
+  header .navbar .container-fluid, header .navbar .container-sm, header .navbar .container-md, header .navbar .container-lg, header .navbar .container-xl, header .navbar .container-xxl {
+    padding: 0;
+  }
+}
 header .navbar .container-fluid .navbar-toggler, header .navbar .container-sm .navbar-toggler, header .navbar .container-md .navbar-toggler, header .navbar .container-lg .navbar-toggler, header .navbar .container-xl .navbar-toggler, header .navbar .container-xxl .navbar-toggler {
   margin-left: auto;
   background-color: #9cc52b;
   border-color: #9cc52b;
   box-shadow: none !important;
+  margin-right: 15px;
 }
 header .navbar .container-fluid .navbar-toggler .navbar-toggler-icon, header .navbar .container-sm .navbar-toggler .navbar-toggler-icon, header .navbar .container-md .navbar-toggler .navbar-toggler-icon, header .navbar .container-lg .navbar-toggler .navbar-toggler-icon, header .navbar .container-xl .navbar-toggler .navbar-toggler-icon, header .navbar .container-xxl .navbar-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 255%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+header .navbar .mobile_btns {
+  display: none;
+}
+@media (max-width: 767.98px) {
+  header .navbar .mobile_btns {
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 5px;
+    width: 100%;
+  }
+  header .navbar .mobile_btns .btn {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+  }
 }
 
 .sticky-header header .navbar {
   margin-top: 0;
   background-color: #0c8e36;
   padding: 15px 0;
+}
+@media (max-width: 991.98px) {
+  .sticky-header header .navbar {
+    padding: 0;
+  }
 }
 
 body:not(.home) header .navbar::before {
@@ -39233,9 +39262,10 @@ body:not(.home).sticky-header header .navbar::before {
 }
 @media (max-width: 991.98px) {
   .navbar-brand {
-    top: -14px;
+    top: 0;
     height: 110px;
     max-width: 110px;
+    position: relative;
   }
 }
 
@@ -39264,12 +39294,12 @@ body:not(.home).sticky-header header .navbar::before {
 }
 @media (max-width: 991.98px) {
   #mainMenuWrap {
-    margin-top: 65px;
+    margin-top: 0;
   }
 }
 @media (max-width: 767.98px) {
   #mainMenuWrap {
-    margin-top: 80px;
+    margin-top: 0;
     /* .menu-main-menu-container {
     	max-height: calc(80vh);
     	overflow: auto;
@@ -39421,24 +39451,22 @@ body:not(.home).sticky-header header .navbar::before {
 }
 #mainMenuWrap .btn {
   margin-left: 20px;
+  /* @include media-breakpoint-down(md) {
+  	padding: 6px 24px 9px;
+  }
+
+  &.style_2 {
+  	&:hover {
+  		background-color: #0c8e36;
+  		color: #fff;
+  		border-color: #0c8e36;
+  	}
+  } */
 }
 @media (max-width: 991.98px) {
   #mainMenuWrap .btn {
-    margin-left: 0;
+    display: none;
   }
-  #mainMenuWrap .btn.style_1 {
-    margin-right: 5px;
-  }
-}
-@media (max-width: 767.98px) {
-  #mainMenuWrap .btn {
-    padding: 6px 24px 9px;
-  }
-}
-#mainMenuWrap .btn.style_2:hover {
-  background-color: #0c8e36;
-  color: #fff;
-  border-color: #0c8e36;
 }
 
 /*------------------------------------*\
@@ -39552,6 +39580,11 @@ footer .newsletter .gform_wrapper form .gform_body {
 footer .newsletter .gform_wrapper form .gform_body .gform_fields .gfield input:not([type=checkbox]):not([type=radio]) {
   background-color: #fff;
   height: 41px;
+}
+@media (max-width: 767.98px) {
+  footer .newsletter .gform_wrapper form .gform_body .gform_fields .gfield input:not([type=checkbox]):not([type=radio]) {
+    text-align: left;
+  }
 }
 footer .newsletter .gform_wrapper form .gform_body .gform_fields .gfield .validation_message {
   position: absolute;
@@ -41917,6 +41950,10 @@ section.section.bg_gray {
   width: 15px;
   height: 15px;
   font-size: 9px;
+}
+.single-post .blog_content li {
+  margin-bottom: 10px;
+  line-height: 1.5em;
 }
 
 .blog_item .blog-img {

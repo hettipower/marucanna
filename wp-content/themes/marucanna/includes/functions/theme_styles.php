@@ -33,6 +33,10 @@ function combine_all_css_func(){
         }
     }
 
+    if(!$minify_assets) {
+        update_field('css_minified_time', '', 'option');
+    }
+
 }
 add_action('init' , 'combine_all_css_func');
 

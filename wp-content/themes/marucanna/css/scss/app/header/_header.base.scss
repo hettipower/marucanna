@@ -26,21 +26,44 @@ header {
 		@include media-breakpoint-down(lg) {
 			margin-top: 0;
 			background-color: $theme_color;
-			padding: 15px 0;
+			padding: 0;
 		}
 		
 		.container-fluid {
 			max-width: 1300px;
 			position: relative;
 
+			@include media-breakpoint-down(md) {
+				padding: 0;
+			}
+
 			.navbar-toggler {
 				margin-left: auto;
 				background-color: $theme_color2;
 				border-color: $theme_color2;
 				box-shadow: none !important;
+				margin-right: 15px;
 
 				.navbar-toggler-icon {
 					background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 255%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+				}
+			}
+		}
+
+		.mobile_btns {
+			display: none;
+
+			@include media-breakpoint-down(md) {
+				display: flex;
+				margin-top: 5px;
+				width: 100%;
+
+				.btn {
+					border-radius: 0 ;
+					-webkit-border-radius: 0;
+					-moz-border-radius: 0;
+					-ms-border-radius: 0;
+					-o-border-radius: 0;
 				}
 			}
 		}
@@ -53,6 +76,10 @@ header {
 			margin-top: 0;
 			background-color: $theme_color;
 			padding: 15px 0;
+
+			@include media-breakpoint-down(lg) {
+				padding: 0;
+			}
 		}
 	}
 }

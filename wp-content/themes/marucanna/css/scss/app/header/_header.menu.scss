@@ -9,11 +9,11 @@
 	transition: 0.5s all ease;
 
 	@include media-breakpoint-down(lg) {
-		margin-top: 65px;
+		margin-top: 0;
 	}
 
 	@include media-breakpoint-down(md) {
-		margin-top: 80px;
+		margin-top: 0;
 
 		/* .menu-main-menu-container {
 			max-height: calc(80vh);
@@ -185,14 +185,10 @@
 		margin-left: 20px;
 
 		@include media-breakpoint-down(lg) {
-			margin-left: 0;
-
-			&.style_1 {
-				margin-right: 5px;
-			}
+			display: none;
 		}
 
-		@include media-breakpoint-down(md) {
+		/* @include media-breakpoint-down(md) {
 			padding: 6px 24px 9px;
 		}
 
@@ -202,7 +198,7 @@
 				color: #fff;
 				border-color: #0c8e36;
 			}
-		}
+		} */
 
 	}
 }

@@ -52,6 +52,9 @@ function combine_all_js_func()
         }
     }
     
+    if(!$minify_assets) {
+        update_field('js_minified_time', '', 'option');
+    }
 }
 
 function html5blank_header_scripts()

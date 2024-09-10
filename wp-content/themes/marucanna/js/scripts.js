@@ -1,4 +1,4 @@
-/*! css 1.0.0 filename.js 2024-08-23 11:18:06 AM */
+/*! css 1.0.0 filename.js 2024-09-10 11:39:00 PM */
 
 if (jQuery("body").hasClass("author") || jQuery("body").hasClass("page-template-page-patient-dashboard")) {
     Fancybox.bind("[data-fancybox]", {});
@@ -131,7 +131,7 @@ function create_gp_lists(lists) {
 function sticky_header() {
     jQuery(window).scroll(function() {
         var scrollPosition = jQuery(this).scrollTop();
-        if (scrollPosition >= 510) {
+        if (scrollPosition >= 2) {
             jQuery("body").addClass("sticky-header");
         } else {
             jQuery("body").removeClass("sticky-header");
