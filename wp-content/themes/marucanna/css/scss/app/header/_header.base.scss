@@ -43,6 +43,8 @@ header {
 				border-color: $theme_color2;
 				box-shadow: none !important;
 				margin-right: 15px;
+				margin-bottom: auto;
+  				margin-top: 6px;
 
 				.navbar-toggler-icon {
 					background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 255%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
@@ -55,15 +57,16 @@ header {
 
 			@include media-breakpoint-down(md) {
 				display: flex;
-				margin-top: 5px;
-				width: 100%;
+				margin-top: -51px;
+				flex: 0 0 68%;
+				margin-left: auto;
+				margin-bottom: 10px;
 
 				.btn {
-					border-radius: 0 ;
-					-webkit-border-radius: 0;
-					-moz-border-radius: 0;
-					-ms-border-radius: 0;
-					-o-border-radius: 0;
+					font-size: 12px;
+  					padding: 6px 6px 9px;
+					flex: 1;
+					margin: 0 2px;
 				}
 			}
 		}
