@@ -33,31 +33,27 @@
             <div id="single_sidebar" class="col-md-5 col-sm-12 float-md-end sidebar_wrap">
 			    <?php 
                     $sidebar_image = get_field( 'sidebar_image' );
-				
-				 $image_id = get_field('sidebar_image');
-    if( $image_id ) {
-        $size = 'siderbar-thumb'; // or whatever size you want    
-        $title = get_the_title( $image_id );  // 1. NOTE: use image ID here, you have no $attach_id!
+				    $image_id = get_field('sidebar_image');
+                    if( $image_id ) {
+                        $size = 'siderbar-thumb'; // or whatever size you want    
+                        $title = get_the_title( $image_id );  // 1. NOTE: use image ID here, you have no $attach_id!
 
-        // 2. set up your attributes array to pass in the title
-        $attr['title'] = $title;
+                        // 2. set up your attributes array to pass in the title
+                        $attr['title'] = $title;
 
-        // 3. Take note of the parameters for this you were passing values in the wrong positions
-       $img_html = wp_get_attachment_image( $image_id, $size, false, $attr);
+                        // 3. Take note of the parameters for this you were passing values in the wrong positions
+                    $img_html = wp_get_attachment_image( $image_id, $size, false, $attr);
 
-        // 4. do whatever you want with the image e.g. return it or display it
-        //echo $img_html;
-	}		
-				
-				
-            
-				
+                        // 4. do whatever you want with the image e.g. return it or display it
+                        //echo $img_html;
+                    }
                     if ( $sidebar_image ) { 
                 ?>
                     <div class="img_wrap">
-                    <?php echo $img_html; //echo wp_get_attachment_image( $sidebar_image, 'siderbar-thumb', );  ?>
+                        <?php echo $img_html; //echo wp_get_attachment_image( $sidebar_image, 'siderbar-thumb', );  ?>
                     </div>
 				<?php } ?>
+
 				<?php if ( have_rows( 'sidebar_content_box_rep' ) ) : while ( have_rows( 'sidebar_content_box_rep' ) ) : the_row(); ?>
                     <div class="box_content text-center">
                         <h3><?php the_sub_field( 'title' ); ?></h3>
@@ -71,6 +67,21 @@
                         <?php endif; ?>
                     </div>
 				<?php endwhile; endif; ?>
+
+                <div class="related-medications">
+                    <div class="title_wrap">
+                        <h3>Conditions we treat for <span>pain</span></h3>
+                    </div>
+                    <ul>
+                        <?php
+                            $additional_loop = new WP_Query("post_type=marucanna-conditions&paged=$paged");
+                            while ($additional_loop->have_posts()) : $additional_loop->the_post();
+                        ?>
+                            <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+                        <?php endwhile; wp_reset_postdata(); ?>
+                    </ul>
+                </div>
+
             </div>
 
             
@@ -81,8 +92,7 @@
             ?>
 
             <div class="btn_wrap">
-                <a href="<?php the_field( 'eligibility_link', 'option' ); ?>
-" class="btn style_4">CHECK ELIGIBILITY</a>
+                <a href="<?php the_field( 'eligibility_link', 'option' ); ?>" class="btn style_4">CHECK ELIGIBILITY</a>
             </div>
 
         </div>

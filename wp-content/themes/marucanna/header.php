@@ -63,6 +63,11 @@ if( $source_type != 'none' && isset($source_type) ) {
 					<img src="<?php echo $site_logo['url']; ?>" alt="<?php echo get_bloginfo( 'name' ); ?>" title="<?php echo get_bloginfo( 'name' ); ?>">
 				<?php endif; ?>
 			</a>
+
+			<div class="mobile-tel">
+				<a href="tel:<?php the_field( 'phone', 'option' ); ?>"><i class="fas fa-phone"></i> <?php the_field( 'phone', 'option' ); ?></a>
+			</div>
+
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenuWrap" aria-controls="mainMenuWrap" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>

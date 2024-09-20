@@ -178,6 +178,24 @@
 					}
 				}
 			}
+
+			&.small-submenu {
+				.dropdown-menu {
+					width: 275px;
+
+					li {
+						&:last-child {
+							&::after {
+								display: none;
+							}
+						}
+					}
+					
+					&.show {
+						display: block;
+					}
+				}
+			}
 		}
 	}
 

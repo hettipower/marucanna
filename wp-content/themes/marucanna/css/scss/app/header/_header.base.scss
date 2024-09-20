@@ -55,7 +55,7 @@ header {
 		.mobile_btns {
 			display: none;
 
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(lg) {
 				display: flex;
 				margin-top: -51px;
 				flex: 0 0 68%;
@@ -68,6 +68,23 @@ header {
 					flex: 1;
 					margin: 0 2px;
 				}
+			}
+		}
+
+		.mobile-tel {
+			display: none;
+			margin-bottom: auto;
+			margin-top: 20px;
+			text-align: center;
+			flex: 1;
+			font-size: 16px;
+
+			a {
+				color: #fff;
+			}
+
+			@include media-breakpoint-down(lg) {
+				display: inline-block;
 			}
 		}
 	}

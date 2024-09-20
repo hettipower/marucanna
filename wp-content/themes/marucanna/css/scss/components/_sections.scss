@@ -1022,6 +1022,12 @@ section.section {
                 color: #fff;
             }
         }
+
+        .related-medications {
+            ul {
+                column-count: 2;
+            }
+        }
     }
 
     .single_content {

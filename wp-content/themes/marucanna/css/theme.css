@@ -39200,7 +39200,7 @@ header .navbar .container-fluid .navbar-toggler .navbar-toggler-icon, header .na
 header .navbar .mobile_btns {
   display: none;
 }
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
   header .navbar .mobile_btns {
     display: -ms-flexbox;
     display: flex;
@@ -39216,6 +39216,23 @@ header .navbar .mobile_btns {
     -ms-flex: 1;
         flex: 1;
     margin: 0 2px;
+  }
+}
+header .navbar .mobile-tel {
+  display: none;
+  margin-bottom: auto;
+  margin-top: 20px;
+  text-align: center;
+  -ms-flex: 1;
+      flex: 1;
+  font-size: 16px;
+}
+header .navbar .mobile-tel a {
+  color: #fff;
+}
+@media (max-width: 991.98px) {
+  header .navbar .mobile-tel {
+    display: inline-block;
   }
 }
 
@@ -39453,6 +39470,15 @@ body:not(.home).sticky-header header .navbar::before {
 }
 #mainMenuWrap .navbar-nav > li .dropdown-menu li a:hover, #mainMenuWrap .navbar-nav > li .dropdown-menu li a:focus {
   color: #0c8e36;
+}
+#mainMenuWrap .navbar-nav > li.small-submenu .dropdown-menu {
+  width: 275px;
+}
+#mainMenuWrap .navbar-nav > li.small-submenu .dropdown-menu li:last-child::after {
+  display: none;
+}
+#mainMenuWrap .navbar-nav > li.small-submenu .dropdown-menu.show {
+  display: block;
 }
 #mainMenuWrap .btn {
   margin-left: 20px;
@@ -40723,6 +40749,9 @@ section.section.bg_gray {
 }
 .single-content-wrap .sidebar_wrap .box_content > h3, .single-content-wrap .sidebar_wrap .box_content > .h3 {
   color: #fff;
+}
+.single-content-wrap .sidebar_wrap .related-medications ul {
+  column-count: 2;
 }
 .single-content-wrap .single_content {
   overflow: hidden;
