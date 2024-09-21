@@ -13,6 +13,7 @@ if (is_user_logged_in()):
         $form = (isset($_GET['form'])) ? $_GET['form'] : false;
         $status = (isset($_GET['status'])) ? $_GET['status'] : false;
         $need_followup_patients = get_need_follow_up_patients();
+        $dr_name = $user->first_name . ' ' . $user->last_name;
 ?>
 
 <section class="section mc-title-section style_1" style="<?php if ( get_field( 'header_backgorund_image' ) ) { ?>background-image: url(<?php the_field( 'header_backgorund_image' ); ?>);<?php } else { ?> background-image: url(<?php bloginfo( 'template_url' ); ?>/img/single-banner.webp);<?php } ?>">
@@ -95,10 +96,15 @@ if (is_user_logged_in()):
                             $other_prescription_data = get_field('other_prescription_data', $patient_post_id);
                             $nhs_number = get_field('nhs_number', $patient_post_id);
                             $eligibility = get_field('eligibility' , $patient_post_id);
+                            $patient_status = get_field('patient_status', $patient_post_id);
 
                             $patient_url = get_author_posts_url($patient->ID);
 
                             if( $eligibility != 'Eligible' ) {
+                                continue;
+                            }
+
+                            if( $patient_status == 'inactive' ) {
                                 continue;
                             }
 
@@ -138,6 +144,7 @@ if (is_user_logged_in()):
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#prescriptionModal<?php echo $patient_post_id; ?>">Prescription</a></li>
                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#quickSummeryModal<?php echo $patient_post_id; ?>">Quick Summary</a></li>
                                         <li><a class="dropdown-item" href="<?php echo $patient_url; ?>?activetab=pills-letters" target="_blank" rel="noopener noreferrer">Letters</a></li>
+                                        <li><a class="dropdown-item" id="make_inactive" href="#" data-patient="<?php echo $patient_post_id; ?>" data-doctor="<?php echo $dr_name; ?>" >Make Patient inactive</a></li>
                                     </ul>
                                 </div>
 
@@ -292,18 +299,60 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
     </div>
 </div>
 <script>
-    var root = document.getElementsByTagName( 'html' )[0];
-    var needFollowupModalEle = document.getElementById('needFollowupModal');
-    
-    document.addEventListener('DOMContentLoaded', function () {
-        var needFollowupPopup = new bootstrap.Modal(needFollowupModalEle);
+var root = document.getElementsByTagName( 'html' )[0];
+var needFollowupModalEle = document.getElementById('needFollowupModal');
 
-        needFollowupPopup.show();
-    });
+document.addEventListener('DOMContentLoaded', function () {
+    var needFollowupPopup = new bootstrap.Modal(needFollowupModalEle);
 
-    needFollowupModalEle.addEventListener('shown.bs.modal', event => {
-        root.classList.add('moda-open-html');
+    needFollowupPopup.show();
+});
+
+needFollowupModalEle.addEventListener('shown.bs.modal', event => {
+    root.classList.add('moda-open-html');
+});
+
+jQuery(document).ready(function ($) {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn style_2",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
     });
+    var ajaxUrl = '<?php echo admin_url('admin-ajax.php'); ?>';
+
+    $('#make_inactive').on('click' , function(){
+
+        var patient = $(this).data('patient');
+        var doctor = $(this).data('doctor');
+
+        var data = {
+            action: 'make_patient_inactive',
+            patient: patient,
+            doctor: doctor
+        };
+
+        // Perform the AJAX request
+        $.post(ajaxUrl, data, function(response) {
+
+            // Parse the JSON response
+            var jsonResponse = JSON.parse(response);
+            
+            if( jsonResponse.status ) {
+                swalWithBootstrapButtons.fire({
+                    title: "",
+                    text: jsonResponse.msg,
+                    icon: "success"
+                });
+            }
+
+        });
+
+        return false;
+    });
+});
 </script>
 <?php endif; ?>
 

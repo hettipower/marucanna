@@ -1024,8 +1024,14 @@ section.section {
         }
 
         .related-medications {
+            position: relative;
+
             ul {
                 column-count: 2;
+
+                li {
+                    margin-bottom: 10px;
+                }
             }
         }
     }
@@ -1899,12 +1905,16 @@ section.section {
             font-size: 20px;
             height: 50px;
     
-            width: 100%;
+            width: 50%;
             border: none;
     
             &:hover{
                 background-color: $theme_color2;
             }
+        }
+
+        .login-submit {
+            text-align: center;
         }
     }
 }
