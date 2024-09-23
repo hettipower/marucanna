@@ -1922,30 +1922,3 @@ function mc_add_photo_id( $entry, $form ) {
     } 
     
 }
-
-add_action( 'wp_ajax_make_patient_inactive', 'mc_make_patient_inactive' );
-function mc_make_patient_inactive() {
-
-    $patient = (isset($_REQUEST['patient'])) ? (int)$_REQUEST['patient'] : false;
-    $doctor = (isset($_REQUEST['doctor'])) ? (int)$_REQUEST['doctor'] : false;
-    $admin_email = get_admin_email();
-
-    if( $patient && $doctor ) {
-
-        $patient_id = get_field('patient_id' , $patient);
-        
-        $subject = "Paiteint inactive request - $patient_id";
-        $html .= "<p>Dear Admin,</p>";
-        $html .= "<p>Dr. $doctor request to make following paiteint inactive. </p>";
-        $html .= "<p><strong>Paiteint ID : </strong> $patient_id</p>";
-        $html .= "<p>Please review</p>";
-        $headers = array('Content-Type: text/html; charset=UTF-8' , 'From: The Marucana Team <noreply@marucanna.co.uk>');
-
-        wp_mail( $admin_email, $subject, $html, $headers );
-
-    }
-
-    echo json_encode(array('status'=> true , 'msg' => 'Paiteint inactive request send successfully'));
-    die();
-
-}
