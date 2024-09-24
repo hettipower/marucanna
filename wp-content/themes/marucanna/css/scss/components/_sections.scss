@@ -270,6 +270,11 @@ section.section {
                 a {
                     display: inline-block;
                     width: 100%;
+
+                    @include media-breakpoint-down(md) {
+                        padding: 8px 0;
+                        font-size: 20px;
+                    }
                 }
             }
         }

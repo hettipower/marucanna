@@ -281,6 +281,7 @@ function mc_booking_column_header($columns) {
 		'login_time' => "Login Time",
 		'logout_time' => "Logout Time",
 		'valid' => "Valid Patient",
+		'status' => "Status",
 		'date' => "Date"
 	);
 
@@ -329,6 +330,11 @@ function mc_booking_column_content($column, $post_id) {
 		} else {
 			echo 'No';
 		}
+    }
+
+	if ($column == 'status') {
+		$patient_status = get_field('patient_status', $post_id) ? get_field('patient_status', $post_id) : 'active';
+		echo '<span style="text-transform: capitalize;">'.$patient_status.'</span>';
     }
 }
 add_action('manage_marucanna-patients_posts_custom_column', 'mc_booking_column_content', 10, 2);

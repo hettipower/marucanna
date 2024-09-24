@@ -38463,6 +38463,12 @@ section.section.bg_gray {
   display: inline-block;
   width: 100%;
 }
+@media (max-width: 767.98px) {
+  .treating-section .tab-content .content-wrap .item a {
+    padding: 8px 0;
+    font-size: 20px;
+  }
+}
 
 .why-select {
   background-size: cover;
