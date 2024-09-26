@@ -142,14 +142,25 @@ jQuery(document).ready(function($) {
         return false;
     });
 
+    var singleContentHeight = $('.single_content').outerHeight(true);
     var sidebarHeight = $('#single_sidebar').outerHeight(true);
     var containerHeight = sidebarHeight + 100;
     var windowWidth = $(window).width();
 
     if( windowWidth > 767 ) {
         $('.single_content').height(containerHeight);
+        if( singleContentHeight >= 1540 ) {
+            $('.show_single_content').show();
+        } else{
+            $('.show_single_content').hide();
+        }
     } else {
         $('.single_content').height(containerHeight + 150);
+        if( singleContentHeight >= (containerHeight + 150) ) {
+            $('.show_single_content').show();
+        } else{
+            $('.show_single_content').hide();
+        }
     }
     
 
